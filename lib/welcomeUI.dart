@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/infoUI.dart';
 
 class welcomeUI extends StatelessWidget {
   @override
@@ -27,11 +28,25 @@ class welcomeUI extends StatelessWidget {
             child: Container(
               width: 310, // Ancho del cuadrado
               height: 60, // Alto del cuadrado
-              decoration: BoxDecoration(
-                color: Color(0xFFDFDFDF),
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Center(
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            infoUI()), // Reemplaza 'ThirdPage' con el nombre de tu nueva página
+                  );
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Color(0xFFDFDFDF)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                          20.0), // Ajusta el valor según tu preferencia
+                    ),
+                  ),
+                ),
                 child: Text(
                   'Comenzar',
                   style: TextStyle(
@@ -39,7 +54,6 @@ class welcomeUI extends StatelessWidget {
                     fontSize: 30,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
-                    height: 0,
                   ),
                 ),
               ),
