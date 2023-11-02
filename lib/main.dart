@@ -6,6 +6,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key); // Agrega un constructor
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 /**class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
