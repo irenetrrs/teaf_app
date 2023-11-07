@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/info.dart';
+import 'package:teaf_app/sign.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:teaf_app/welcomeUI.dart';
+import 'package:teaf_app/signUI.dart';
 
 class infoUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF001254),
       body: Stack(
         children: [
-          // Fondo azul
-          Container(
-            decoration: BoxDecoration(color: Color(0xFF001254)),
-          ),
           //Logo
           Positioned(
             top: 20,
@@ -156,7 +154,13 @@ class infoUI extends StatelessWidget {
                   margin: EdgeInsets.symmetric(horizontal: 10),
                   child: ElevatedButton(
                     onPressed: () {
-                      // Manejar la acción de Siguiente
+                      // Manejar la acción de Atrás
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => signUI(),
+                        ),
+                      );
                     },
                     style: ButtonStyle(
                       backgroundColor:
