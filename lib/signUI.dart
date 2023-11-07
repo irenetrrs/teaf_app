@@ -86,7 +86,7 @@ class signUI extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       Container(
-                        width: 150,
+                        width: 200,
                         height: 50,
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: ElevatedButton(
@@ -110,7 +110,7 @@ class signUI extends StatelessWidget {
                             ),
                           ),
                           child: Text(
-                            'Atrás',
+                            'Iniciar sesión',
                             style: TextStyle(
                               color: Color(0xFFDFDFDF),
                               fontSize: 20,
@@ -120,6 +120,24 @@ class signUI extends StatelessWidget {
                           ),
                         ),
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Opacity(
+                        opacity: 0.60,
+                        child: Text(
+                          '¿Se te olvidó la contraseña?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w300,
+                            decoration: TextDecoration.underline,
+                            height: 0,
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
