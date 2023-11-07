@@ -86,8 +86,8 @@ class signUI extends StatelessWidget {
                       ),
                       SizedBox(height: 20),
                       Container(
-                        width: 170,
-                        height: 60,
+                        width: 150,
+                        height: 50,
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: ElevatedButton(
                           onPressed: () {
@@ -113,7 +113,7 @@ class signUI extends StatelessWidget {
                             'Atrás',
                             style: TextStyle(
                               color: Color(0xFFDFDFDF),
-                              fontSize: 30,
+                              fontSize: 20,
                               fontFamily: 'Inter',
                               fontWeight: FontWeight.w600,
                             ),
