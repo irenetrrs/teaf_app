@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/infoUI.dart';
+import 'package:teaf_app/inicioUI.dart';
 
 class signUI extends StatelessWidget {
   @override
@@ -9,11 +9,10 @@ class signUI extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Positioned(
               top: 20,
-              left: 0,
-              right: 0,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -47,6 +46,7 @@ class signUI extends StatelessWidget {
                 Container(
                   width: 315,
                   height: 440,
+                  padding: EdgeInsets.all(10.0),
                   decoration: ShapeDecoration(
                     color: Color(0xFFD9D9D9),
                     shape: RoundedRectangleBorder(
@@ -56,13 +56,78 @@ class signUI extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 50.0,
+                            width: 130.0,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Acción del botón
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color(0xFF001254)),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                'Iniciar sesión',
+                                style: TextStyle(
+                                  color: Color(0xFFDFDFDF),
+                                  fontSize: 15,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            height: 50.0,
+                            width: 130.0,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Acción del botón
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(
+                                    Color(0xCC5C6EAD)),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                'Registrarse',
+                                style: TextStyle(
+                                  color: Color(0xFFDFDFDF),
+                                  fontSize: 15,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 30),
                       Text('Bienvenido a VisualTEAF',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,
+                            fontWeight: FontWeight.bold,
                             fontSize: 21,
                             fontFamily: 'Inter',
-                            fontWeight: FontWeight.w700,
                             height: 0,
                           )),
                       SizedBox(
@@ -84,18 +149,17 @@ class signUI extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(height: 20),
+                      SizedBox(height: 40),
                       Container(
                         width: 200,
                         height: 50,
                         margin: EdgeInsets.symmetric(horizontal: 10),
                         child: ElevatedButton(
                           onPressed: () {
-                            // Manejar la acción de Atrás
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => infoUI(),
+                                builder: (context) => inicioUI(),
                               ),
                             );
                           },
