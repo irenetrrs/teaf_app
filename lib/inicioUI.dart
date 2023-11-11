@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/analisis1UI.dart';
 import 'package:teaf_app/signUI.dart';
 import 'package:teaf_app/baseUI.dart';
+import 'analisis1.dart';
 
 class inicioUI extends StatelessWidget {
   @override
@@ -94,7 +96,11 @@ class inicioUI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => signUI(),
+                        builder: (context) => Analisis1UI(
+                          edadEnMeses: 0,
+                          incrementarEdad: () {},
+                          decrementarEdad: () {},
+                        ),
                       ),
                     );
                   },

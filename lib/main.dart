@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/inicio.dart';
+import 'package:teaf_app/analisis1.dart';
+import 'package:teaf_app/analisis1UI.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key); // Agrega un constructor
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: Analisis1UI(
+        edadEnMeses: 0,
+        incrementarEdad: () {},
+        decrementarEdad: () {},
+      ),
     );
   }
 }
