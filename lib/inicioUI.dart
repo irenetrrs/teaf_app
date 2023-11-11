@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teaf_app/signUI.dart';
+import 'package:teaf_app/baseUI.dart';
 
 class inicioUI extends StatelessWidget {
   @override
@@ -12,12 +13,14 @@ class inicioUI extends StatelessWidget {
             children: [
               // Encabezado
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment
+                    .spaceBetween, // Distribuye elementos a los extremos
                 children: [
-                  // Icono de la app en el centro
-                  Expanded(
-                    child: Center(
-                      child: Container(
+                  // Logo y nombre en una Columna
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
                         width: 50,
                         height: 50,
                         decoration: BoxDecoration(
@@ -27,9 +30,19 @@ class inicioUI extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ),
+                      SizedBox(height: 10),
+                      Text(
+                        'VisualTEAF',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  // Botón de apagar en la esquina superior derecha
+                  // Icono de apagado en Align a la derecha
                   Container(
                     width: 50,
                     height: 50,
@@ -118,7 +131,7 @@ class inicioUI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => signUI(),
+                        builder: (context) => baseUI(),
                       ),
                     );
                   },
