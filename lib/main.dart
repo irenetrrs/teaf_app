@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/analisis1.dart';
 import 'package:teaf_app/analisis1UI.dart';
 
 void main() {
@@ -10,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Analisis1UI(
+      home: analisis1UI(
         edadEnMeses: 0,
         incrementarEdad: () {},
         decrementarEdad: () {},

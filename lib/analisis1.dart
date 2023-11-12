@@ -25,7 +25,7 @@ class _Analisis1State extends State<Analisis1> {
 
   @override
   Widget build(BuildContext context) {
-    return Analisis1UI(
+    return analisis1UI(
       edadEnMeses: edadEnMeses,
       incrementarEdad: incrementarEdad,
       decrementarEdad: decrementarEdad,
