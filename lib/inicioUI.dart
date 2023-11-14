@@ -167,36 +167,3 @@ class inicioUI extends StatelessWidget {
         ));
   }
 }
-          /**   //Logo
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start, children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('img/logo.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'VisualTEAF',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                    height: 0,
-                  ),
-                ),
-              ],
-            ),
-          ]),*/
-        

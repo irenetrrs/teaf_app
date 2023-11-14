@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teaf_app/infoUI.dart';
-import 'analisis3UI.dart';
+import 'solucionUI.dart';
 
 class analisis5UI extends StatelessWidget {
   @override
@@ -274,11 +274,9 @@ class analisis5UI extends StatelessWidget {
                             Container(
                               width: 70,
                               height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/52.png'),
-                                  fit: BoxFit.cover,
-                                ),
+                              child: Image.asset(
+                                'img/pregunta.png',
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ],
@@ -301,7 +299,7 @@ class analisis5UI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => analisis5UI(),
+                        builder: (context) => solucionUI(),
                       ),
                     );
                   },
