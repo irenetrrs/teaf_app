@@ -96,7 +96,7 @@ class inicioUI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => analisis1UI(
+                        builder: (context) => Analisis1UI(
                           edadEnMeses: 0,
                           incrementarEdad: () {},
                           decrementarEdad: () {},

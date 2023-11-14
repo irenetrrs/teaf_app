@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/analisis1UI.dart';
+import 'package:teaf_app/analisis3UI.dart';
+import 'infoUI.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,11 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: analisis1UI(
-        edadEnMeses: 0,
-        incrementarEdad: () {},
-        decrementarEdad: () {},
-      ),
+      home: analisis3UI(),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:teaf_app/infoUI.dart';
-import 'analisis3UI.dart';
+import 'analisis4UI.dart';
 
-class analisis2UI extends StatelessWidget {
+class analisis3UI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,152 +84,17 @@ class analisis2UI extends StatelessWidget {
               Container(
                 width: 310,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Positioned(
-                      left: 0,
-                      top: 0,
-                      child: Container(
-                        width: 310,
-                        child: Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Número de dominios afectados',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Acción cuando se presiona el botón "Sí"
-                            },
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xFFDFDFDF)),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                              fixedSize: MaterialStateProperty.all(
-                                  Size.fromHeight(50.0)),
-                            ),
-                            child: Text(
-                              '0',
-                              style: TextStyle(
-                                color: Color(0xFF68696C),
-                                fontSize: 25,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: 'Inter',
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Acción cuando se presiona el botón "No"
-                            },
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xFFDFDFDF)),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                              fixedSize: MaterialStateProperty.all(
-                                  Size.fromHeight(50.0)),
-                            ),
-                            child: Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color(0xFF68696C),
-                                fontSize: 25,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: 'Inter',
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Acción cuando se presiona el botón "No"
-                            },
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xFFDFDFDF)),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                              fixedSize: MaterialStateProperty.all(
-                                  Size.fromHeight(50.0)),
-                            ),
-                            child: Text(
-                              '≥ 2',
-                              style: TextStyle(
-                                color: Color(0xFF68696C),
-                                fontSize: 25,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: 'Inter',
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Positioned(
-                      left: 3,
                       top: 164,
                       child: Container(
                         width: 303,
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Consumo de alcohol en el embarazo',
+                              'Etnia',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -263,10 +128,10 @@ class analisis2UI extends StatelessWidget {
                                           Size.fromHeight(50.0)),
                                     ),
                                     child: Text(
-                                      'Sí',
+                                      'Caucásico',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
-                                        fontSize: 25,
+                                        fontSize: 16,
                                         fontStyle: FontStyle.italic,
                                         fontFamily: 'Inter',
                                         height: 0,
@@ -295,10 +160,10 @@ class analisis2UI extends StatelessWidget {
                                           Size.fromHeight(50.0)),
                                     ),
                                     child: Text(
-                                      'No',
+                                      'Afroamericano',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
-                                        fontSize: 25,
+                                        fontSize: 16,
                                         fontStyle: FontStyle.italic,
                                         fontFamily: 'Inter',
                                         height: 0,
@@ -315,6 +180,99 @@ class analisis2UI extends StatelessWidget {
                     SizedBox(
                       height: 20,
                     ),
+                    Positioned(
+                      left: 3,
+                      top: 164,
+                      child: Container(
+                        width: 303,
+                        height: 103.02,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Género',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Acción cuando se presiona el botón "Sí"
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Color(0xFFDFDFDF)),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                      ),
+                                      fixedSize: MaterialStateProperty.all(
+                                          Size.fromHeight(50.0)),
+                                    ),
+                                    child: Text(
+                                      'Hombre',
+                                      style: TextStyle(
+                                        color: Color(0xFF68696C),
+                                        fontSize: 22,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Inter',
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 20),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Acción cuando se presiona el botón "No"
+                                    },
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all(
+                                              Color(0xFFDFDFDF)),
+                                      shape: MaterialStateProperty.all<
+                                          RoundedRectangleBorder>(
+                                        RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                      ),
+                                      fixedSize: MaterialStateProperty.all(
+                                          Size.fromHeight(50.0)),
+                                    ),
+                                    child: Text(
+                                      'Mujer',
+                                      style: TextStyle(
+                                        color: Color(0xFF68696C),
+                                        fontSize: 22,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Inter',
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -330,7 +288,7 @@ class analisis2UI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => analisis3UI(),
+                          builder: (context) => analisis4UI(),
                         ),
                       );
                     },

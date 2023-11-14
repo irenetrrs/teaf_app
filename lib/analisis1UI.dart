@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/infoUI.dart';
 import 'analisis2UI.dart';
 
-class analisis1UI extends StatelessWidget {
+class Analisis1UI extends StatelessWidget {
   final int edadEnMeses;
   final VoidCallback incrementarEdad;
   final VoidCallback decrementarEdad;
 
-  analisis1UI({
+  Analisis1UI({
     required this.edadEnMeses,
     required this.incrementarEdad,
     required this.decrementarEdad,
@@ -99,6 +100,7 @@ class analisis1UI extends StatelessWidget {
                       top: 0,
                       child: Container(
                         width: 310,
+                        height: 20,
                         child: Stack(
                           children: [
                             Positioned(
@@ -184,6 +186,7 @@ class analisis1UI extends StatelessWidget {
                       top: 164,
                       child: Container(
                         width: 303,
+                        height: 103.02,
                         child: Column(
                           children: [
                             Row(
@@ -293,6 +296,7 @@ class analisis1UI extends StatelessWidget {
                       top: 164,
                       child: Container(
                         width: 303,
+                        height: 103.02,
                         child: Column(
                           children: [
                             Row(
