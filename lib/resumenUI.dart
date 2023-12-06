@@ -142,11 +142,13 @@ class resumenUI extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: 103,
+                          left: 90,
                           top: 14,
                           child: Image.asset(
                             'img/altura.png',
                             fit: BoxFit.cover,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -223,6 +225,8 @@ class resumenUI extends StatelessWidget {
                           child: Image.asset(
                             'img/peso.png',
                             fit: BoxFit.cover,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -277,11 +281,27 @@ class resumenUI extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: 103,
+                          left: 17,
+                          top: 37,
+                          child: Text(
+                            '5 cm',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontFamily: 'Font Awesome 5 Free',
+                              fontWeight: FontWeight.w900,
+                              height: 0,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          left: 90,
                           top: 14,
                           child: Image.asset(
                             'img/distancia.png',
                             fit: BoxFit.cover,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -352,6 +372,8 @@ class resumenUI extends StatelessWidget {
                           child: Image.asset(
                             'img/alcohol.png',
                             fit: BoxFit.cover,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -406,11 +428,13 @@ class resumenUI extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: 103,
+                          left: 90,
                           top: 14,
                           child: Image.asset(
                             'img/filtrum.png',
                             fit: BoxFit.cover,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -487,6 +511,8 @@ class resumenUI extends StatelessWidget {
                           child: Image.asset(
                             'img/labio.png',
                             fit: BoxFit.cover,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -541,11 +567,13 @@ class resumenUI extends StatelessWidget {
                           ),
                         ),
                         Positioned(
-                          left: 103,
+                          left: 90,
                           top: 14,
                           child: Image.asset(
                             'img/cerebro.png',
                             fit: BoxFit.cover,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -622,8 +650,8 @@ class resumenUI extends StatelessWidget {
                           child: Image.asset(
                             'img/perimetro.png',
                             fit: BoxFit.cover,
-                            height: 10,
-                            width: 10,
+                            height: 40,
+                            width: 40,
                           ),
                         ),
                         Positioned(
@@ -644,9 +672,13 @@ class resumenUI extends StatelessWidget {
                     ),
                   ),
                 ),
+                Row(
+                  
+                ),
               ],
             ),
           ),
+
         ]),
       ),
     );

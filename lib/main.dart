@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'analisis5UI.dart';
+import 'resumenUI.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: analisis5UI(),
+      home: resumenUI(),
     );
   }
 }
