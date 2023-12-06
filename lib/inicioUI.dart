@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teaf_app/analisis1UI.dart';
-import 'package:teaf_app/signUI.dart';
 import 'package:teaf_app/baseUI.dart';
-import 'analisis1.dart';
 
 class inicioUI extends StatelessWidget {
   @override

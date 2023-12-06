@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/welcomeUI.dart';
-import 'package:teaf_app/signUI.dart';
+import 'resumenUI.dart';
 
 class solucionUI extends StatelessWidget {
   @override
@@ -102,7 +101,7 @@ class solucionUI extends StatelessWidget {
             Container(
               width: 20,
               height: 20,
-              alignment: Alignment.centerRight,
+              alignment: Alignment.bottomRight,
               child: Image.asset(
                 'img/pregunta.png',
                 fit: BoxFit.cover,
@@ -158,7 +157,7 @@ class solucionUI extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => solucionUI(),
+                      builder: (context) => resumenUI(),
                     ),
                   );
                 },

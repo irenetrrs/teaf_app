@@ -64,7 +64,7 @@ class welcomeUI extends StatelessWidget {
             left: MediaQuery.of(context).size.width / 2 -
                 75, // centrar algo en la pantalla
             top: 500,
-            child: Container(
+            child: SizedBox(
               width: 150,
               height: 50,
               child: Stack(

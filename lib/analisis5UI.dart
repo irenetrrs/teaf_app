@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/infoUI.dart';
 import 'solucionUI.dart';
 
 class analisis5UI extends StatelessWidget {
@@ -81,7 +80,7 @@ class analisis5UI extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Container(
+            SizedBox(
               width: 310,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -89,7 +88,7 @@ class analisis5UI extends StatelessWidget {
                   Positioned(
                     left: 0,
                     top: 0,
-                    child: Container(
+                    child: SizedBox(
                       width: 310,
                       child: Stack(
                         children: [
@@ -176,7 +175,7 @@ class analisis5UI extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 10,
+                              width: 70,
                             ),
                             Container(
                               width: 70,
@@ -271,7 +270,7 @@ class analisis5UI extends StatelessWidget {
                             SizedBox(
                               width: 10,
                             ),
-                            Container(
+                            SizedBox(
                               width: 70,
                               height: 70,
                               child: Image.asset(
@@ -290,7 +289,7 @@ class analisis5UI extends StatelessWidget {
             Expanded(child: Container()),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
+              child: SizedBox(
                 width: 250,
                 height: 60,
                 child: ElevatedButton(

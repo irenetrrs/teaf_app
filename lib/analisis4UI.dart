@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/infoUI.dart';
 import 'analisis5UI.dart';
 
 class analisis4UI extends StatelessWidget {
@@ -81,7 +80,7 @@ class analisis4UI extends StatelessWidget {
               SizedBox(
                 height: 40,
               ),
-              Container(
+              SizedBox(
                 width: 310,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -89,7 +88,7 @@ class analisis4UI extends StatelessWidget {
                     Positioned(
                       left: 0,
                       top: 0,
-                      child: Container(
+                      child: SizedBox(
                         width: 350,
                         child: Stack(
                           children: [
@@ -152,7 +151,7 @@ class analisis4UI extends StatelessWidget {
                     Positioned(
                       left: 0,
                       top: 0,
-                      child: Container(
+                      child: SizedBox(
                         width: 310,
                         child: Stack(
                           children: [
@@ -215,7 +214,7 @@ class analisis4UI extends StatelessWidget {
                     Positioned(
                       left: 0,
                       top: 0,
-                      child: Container(
+                      child: SizedBox(
                         width: 310,
                         child: Stack(
                           children: [
@@ -278,7 +277,7 @@ class analisis4UI extends StatelessWidget {
                     Positioned(
                       left: 0,
                       top: 0,
-                      child: Container(
+                      child: SizedBox(
                         width: 310,
                         child: Stack(
                           children: [
@@ -341,7 +340,7 @@ class analisis4UI extends StatelessWidget {
               Expanded(child: Container()),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: Container(
+                child: SizedBox(
                   width: 250,
                   height: 60,
                   child: ElevatedButton(

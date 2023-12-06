@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/welcomeUI.dart';
-import 'package:teaf_app/signUI.dart';
 
 class baseUI extends StatelessWidget {
   @override
