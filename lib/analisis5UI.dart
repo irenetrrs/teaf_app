@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/infoUI.dart';
 import 'solucionUI.dart';
 
 class analisis5UI extends StatelessWidget {
@@ -78,7 +79,7 @@ class analisis5UI extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
             SizedBox(
               width: 310,
@@ -88,48 +89,40 @@ class analisis5UI extends StatelessWidget {
                   Positioned(
                     left: 0,
                     top: 0,
-                    child: SizedBox(
-                      width: 310,
-                      child: Stack(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Filtrum y labio superior',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                              Container(
-                                width: 20,
-                                height: 20,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('img/pregunta.png'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Positioned(
-                    left: 0,
-                    top: 0,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Filtrum',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              'Labio superior',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -144,7 +137,7 @@ class analisis5UI extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 10,
+                              width: 70,
                             ),
                             Container(
                               width: 70,
@@ -206,7 +199,7 @@ class analisis5UI extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 10,
+                              width: 70,
                             ),
                             Container(
                               width: 70,
@@ -237,7 +230,7 @@ class analisis5UI extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 10,
+                              width: 70,
                             ),
                             Container(
                               width: 70,
@@ -268,13 +261,13 @@ class analisis5UI extends StatelessWidget {
                               ),
                             ),
                             SizedBox(
-                              width: 10,
+                              width: 70,
                             ),
-                            SizedBox(
+                            Container(
                               width: 70,
                               height: 70,
                               child: Image.asset(
-                                'img/pregunta.png',
+                                'img/52.png',
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -289,7 +282,7 @@ class analisis5UI extends StatelessWidget {
             Expanded(child: Container()),
             Align(
               alignment: Alignment.bottomCenter,
-              child: SizedBox(
+              child: Container(
                 width: 250,
                 height: 60,
                 child: ElevatedButton(
