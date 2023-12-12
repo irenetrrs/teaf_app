@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/infoUI.dart';
-import 'solucionUI.dart';
+import 'solucion_ui.dart';
 
-class analisis5UI extends StatelessWidget {
+class Analisis5UI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -263,7 +262,7 @@ class analisis5UI extends StatelessWidget {
                             SizedBox(
                               width: 70,
                             ),
-                            Container(
+                            SizedBox(
                               width: 70,
                               height: 70,
                               child: Image.asset(
@@ -282,7 +281,7 @@ class analisis5UI extends StatelessWidget {
             Expanded(child: Container()),
             Align(
               alignment: Alignment.bottomCenter,
-              child: Container(
+              child: SizedBox(
                 width: 250,
                 height: 60,
                 child: ElevatedButton(
@@ -291,7 +290,7 @@ class analisis5UI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => solucionUI(),
+                        builder: (context) => SolucionUI(),
                       ),
                     );
                   },
