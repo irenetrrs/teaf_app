@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/welcomeUI.dart';
-import 'package:teaf_app/signUI.dart';
+import 'welcome_ui.dart';
+import 'sign_ui.dart';
 
 class InfoUI extends StatelessWidget {
   @override
@@ -158,7 +158,7 @@ class InfoUI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => signUI(),
+                          builder: (context) => SignUI(),
                         ),
                       );
                     },

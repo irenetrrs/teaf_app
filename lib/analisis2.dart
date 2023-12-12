@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'Analisis2UI.dart';
+import 'analisis2_ui.dart';
 
 class HomePage extends StatelessWidget {
   @override

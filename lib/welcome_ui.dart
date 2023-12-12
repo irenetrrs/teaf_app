@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/infoUI.dart';
+import 'info_ui.dart';
 
 class WelcomeUI extends StatelessWidget {
   @override

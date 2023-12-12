@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'solucionUI.dart';
+import 'solucion_ui.dart';
 
 class Analisis5UI extends StatelessWidget {
   @override
@@ -290,7 +290,7 @@ class Analisis5UI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => solucionUI(),
+                        builder: (context) => SolucionUI(),
                       ),
                     );
                   },

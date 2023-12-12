@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class resumenUI extends StatelessWidget {
+class ResumenUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,7 +88,7 @@ class resumenUI extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => resumenUI(),
+                    builder: (context) => ResumenUI(),
                   ),
                 );
               },
