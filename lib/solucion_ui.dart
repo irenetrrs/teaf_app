@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'resumenUI.dart';
+import 'resumen_ui.dart';
 
-class solucionUI extends StatelessWidget {
+class SolucionUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +120,7 @@ class solucionUI extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => solucionUI(),
+                      builder: (context) => SolucionUI(),
                     ),
                   );
                 },
@@ -157,7 +157,7 @@ class solucionUI extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => resumenUI(),
+                      builder: (context) => ResumenUI(),
                     ),
                   );
                 },
@@ -194,7 +194,7 @@ class solucionUI extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => solucionUI(),
+                      builder: (context) => SolucionUI(),
                     ),
                   );
                 },

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/analisis5UI.dart';
+import 'analisis5_ui.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: analisis5UI(),
+      body: Analisis5UI(),
     );
   }
 }

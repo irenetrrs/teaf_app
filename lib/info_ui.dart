@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/welcomeUI.dart';
-import 'package:teaf_app/signUI.dart';
+import 'welcome_ui.dart';
+import 'sign_ui.dart';
 
-class infoUI extends StatelessWidget {
+class InfoUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,7 +124,7 @@ class infoUI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => welcomeUI(),
+                          builder: (context) => WelcomeUI(),
                         ),
                       );
                     },
@@ -158,7 +158,7 @@ class infoUI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => signUI(),
+                          builder: (context) => SignUI(),
                         ),
                       );
                     },

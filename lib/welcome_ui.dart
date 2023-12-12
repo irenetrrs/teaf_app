@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/infoUI.dart';
+import 'info_ui.dart';
 
-class welcomeUI extends StatelessWidget {
+class WelcomeUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +35,7 @@ class welcomeUI extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            infoUI()), // Reemplaza 'ThirdPage' con el nombre de tu nueva página
+                            InfoUI()), // Reemplaza 'ThirdPage' con el nombre de tu nueva página
                   );
                 },
                 style: ButtonStyle(

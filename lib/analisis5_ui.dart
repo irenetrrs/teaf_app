@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/infoUI.dart';
 import 'solucionUI.dart';
 
 class analisis5UI extends StatelessWidget {
@@ -262,7 +263,7 @@ class analisis5UI extends StatelessWidget {
                             SizedBox(
                               width: 70,
                             ),
-                            SizedBox(
+                            Container(
                               width: 70,
                               height: 70,
                               child: Image.asset(
@@ -281,7 +282,7 @@ class analisis5UI extends StatelessWidget {
             Expanded(child: Container()),
             Align(
               alignment: Alignment.bottomCenter,
-              child: SizedBox(
+              child: Container(
                 width: 250,
                 height: 60,
                 child: ElevatedButton(

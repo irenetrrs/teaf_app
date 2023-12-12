@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/analisis1UI.dart';
-import 'package:teaf_app/baseUI.dart';
+import 'analisis1_ui.dart';
+import 'base_ui.dart';
 
-class inicioUI extends StatelessWidget {
+class InicioUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,7 +135,7 @@ class inicioUI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => baseUI(),
+                        builder: (context) => BaseUI(),
                       ),
                     );
                   },

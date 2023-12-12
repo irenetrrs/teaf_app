@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'analisis1UI.dart';
+import 'analisis1_ui.dart';
 
 class Analisis1 extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _Analisis1State createState() => _Analisis1State();
 }
 
