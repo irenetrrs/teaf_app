@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'resumen_ui.dart';
+import 'analisis5_ui.dart';
+import 'welcome_ui.dart';
+import 'sign_ui.dart';
 
 class SolucionUI extends StatelessWidget {
   @override
@@ -11,60 +14,101 @@ class SolucionUI extends StatelessWidget {
         child: Column(
           children: [
             // Encabezado
-            Row(
-              mainAxisAlignment: MainAxisAlignment
-                  .spaceBetween, // Distribuye elementos a los extremos
-              children: [
-                //Icono atrás
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('img/atras.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                // Logo y nombre en una Columna
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 50,
-                      height: 50,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      // Acción a realizar cuando se hace clic en el botón
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Analisis5UI(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage('img/logo.png'),
+                          image: AssetImage('img/atras.png'),
                           fit: BoxFit.cover,
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-                    Text(
-                      'VisualTEAF',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-                // Icono de apagado en Align a la derecha
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('img/off.png'),
-                      fit: BoxFit.cover,
+                      // Puedes ajustar el tamaño del contenedor según tus necesidades
+                      width: 50.0,
+                      height: 50.0,
                     ),
                   ),
-                ),
-              ],
-            ),
+                  // Logo y nombre en una Columna
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // Acción a realizar cuando se hace clic en el botón
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WelcomeUI(),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('img/logo.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              // Puedes ajustar el tamaño del contenedor según tus necesidades
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'VisualTEAF',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Icono de apagado
+                  InkWell(
+                    onTap: () {
+                      // Acción a realizar cuando se hace clic en el botón
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SignUI(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('img/off.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      // Puedes ajustar el tamaño del contenedor según tus necesidades
+                      width: 50.0,
+                      height: 50.0,
+                    ),
+                  )
+                ],
+              ),
             SizedBox(
               height: 50,
             ),

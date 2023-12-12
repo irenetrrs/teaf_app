@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'inicio_ui.dart';
+import 'info_ui.dart';
 
 class SignUI extends StatelessWidget {
   @override
@@ -17,16 +18,29 @@ class SignUI extends StatelessWidget {
                     .start, // Distribuye elementos a los extremos
                 children: [
                   //Icono atrás
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('img/atras.png'),
-                        fit: BoxFit.cover,
+                  InkWell(
+                    onTap: () {
+                      // Acción a realizar cuando se hace clic en el botón
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InfoUI(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('img/atras.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
+                      // Puedes ajustar el tamaño del contenedor según tus necesidades
+                      width: 50.0,
+                      height: 50.0,
                     ),
-                  ),
+                  )
                 ],
               ),
               // Logo y título
