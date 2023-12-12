@@ -6,7 +6,7 @@ class ResumenUI extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF001254),
       body: Padding(
-        padding: EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(children: [
           // Encabezado
           Row(

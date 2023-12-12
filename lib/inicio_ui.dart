@@ -13,9 +13,12 @@ class InicioUI extends StatelessWidget {
             children: [
               // Encabezado
               Row(
-                mainAxisAlignment: MainAxisAlignment
-                    .spaceBetween, // Distribuye elementos a los extremos
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  SizedBox(
+                    width: 50,
+                    height: 50,
+                  ),
                   // Logo y nombre en una Columna
                   Column(
                     mainAxisSize: MainAxisSize.min,
@@ -42,7 +45,7 @@ class InicioUI extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // Icono de apagado en Align a la derecha
+                  // Icono de apagado
                   Container(
                     width: 50,
                     height: 50,
