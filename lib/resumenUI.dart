@@ -672,13 +672,90 @@ class resumenUI extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  
-                ),
+                Row(),
               ],
             ),
           ),
-
+          SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    width: 74,
+                    height: 74,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 176, 176, 176),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  Positioned(
+                    left: 12,
+                    top: 12,
+                    child: Image.asset(
+                      'img/editar.png',
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 40,
+              ),
+              Stack(
+                children: [
+                  Container(
+                    width: 74,
+                    height: 74,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 176, 176, 176),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  Positioned(
+                    left: 12,
+                    top: 12,
+                    child: Image.asset(
+                      'img/descargar.png',
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 40,
+              ),
+              Stack(
+                children: [
+                  Container(
+                    width: 74,
+                    height: 74,
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(255, 176, 176, 176),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  Positioned(
+                    left: 12,
+                    top: 12,
+                    child: Image.asset(
+                      'img/papelera.png',
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ]),
       ),
     );
