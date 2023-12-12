@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:teaf_app/analisis1UI.dart';
-import 'package:teaf_app/baseUI.dart';
+import 'package:teaf_app/BaseUI.dart';
 
-class inicioUI extends StatelessWidget {
+class InicioUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

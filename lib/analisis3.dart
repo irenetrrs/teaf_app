@@ -5,7 +5,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: analisis3UI(),
+      body: Analisis3UI(),
     );
   }
 }

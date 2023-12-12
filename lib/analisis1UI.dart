@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'analisis2UI.dart';
+import 'Analisis2UI.dart';
 
 class Analisis1UI extends StatelessWidget {
   final int edadEnMeses;
@@ -412,7 +412,7 @@ class Analisis1UI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => analisis2UI(),
+                          builder: (context) => Analisis2UI(),
                         ),
                       );
                     },

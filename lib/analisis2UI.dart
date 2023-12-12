@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'analisis3UI.dart';
+import 'Analisis3UI.dart';
 
-class analisis2UI extends StatelessWidget {
+class Analisis2UI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -329,7 +329,7 @@ class analisis2UI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => analisis3UI(),
+                          builder: (context) => Analisis3UI(),
                         ),
                       );
                     },
