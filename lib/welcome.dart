@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/welcomeUI.dart';
+import 'welcome_ui.dart';
 
 class HomePage extends StatelessWidget {
   @override
