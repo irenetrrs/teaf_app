@@ -11,7 +11,6 @@ class Analisis1UI extends StatelessWidget {
   final VoidCallback decrementarEdad;
   bool seleccionSi = false;
   bool seleccionNo = false;
-  bool 
 
   Analisis1UI({
     required this.edadEnMeses,
