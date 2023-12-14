@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class LoginRegisterScreen extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _LoginRegisterScreenState createState() => _LoginRegisterScreenState();
 }
 

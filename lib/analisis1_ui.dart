@@ -4,10 +4,14 @@ import 'analisis2_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
+// ignore: must_be_immutable
 class Analisis1UI extends StatelessWidget {
   final int edadEnMeses;
   final VoidCallback incrementarEdad;
   final VoidCallback decrementarEdad;
+  bool seleccionSi = false;
+  bool seleccionNo = false;
+  bool 
 
   Analisis1UI({
     required this.edadEnMeses,

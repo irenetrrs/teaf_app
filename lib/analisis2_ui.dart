@@ -12,11 +12,11 @@ class Analisis2UI extends StatefulWidget {
 
 class _Analisis2UIState extends State<Analisis2UI> {
   // Variables para manejar el estado de los botones
-  bool isButton0Selected = false;
-  bool isButton1Selected = false;
-  bool isButton2Selected = false;
-  bool isButtonSiSelected = false;
-  bool isButtonNoSelected = false;
+  bool boton0 = false;
+  bool boton1 = false;
+  bool boton2 = false;
+  bool botonSi = false;
+  bool botonNo = false;
 
   @override
   Widget build(BuildContext context) {
@@ -192,15 +192,15 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             onPressed: () {
                               // Acción cuando se presiona el botón "Sí"
                               setState(() {
-                                isButton0Selected = true;
-                                isButton1Selected = false;
-                                isButton2Selected = false;
+                                boton0 = true;
+                                boton1 = false;
+                                boton2 = false;
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: isButton0Selected
+                              backgroundColor: boton0
                                   ? Colors
-                                      .orange // Color cuando está seleccionado
+                                      .orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -225,15 +225,15 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             onPressed: () {
                               // Acción cuando se presiona el botón "No"
                               setState(() {
-                                isButton0Selected = false;
+                                boton0 = false;
                                 isButton1Selected = true;
                                 isButton2Selected = false;
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: isButton1Selected
+                              backgroundColor: isButton1Selected
                                   ? Colors
-                                      .orange // Color cuando está seleccionado
+                                      .orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -258,7 +258,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             onPressed: () {
                               // Acción cuando se presiona el botón "No"
                               setState(() {
-                                isButton0Selected = false;
+                                boton0 = false;
                                 isButton1Selected = false;
                                 isButton2Selected = true;
                               });
@@ -266,7 +266,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: isButton2Selected
                                   ? Colors
-                                      .orange // Color cuando está seleccionado
+                                      .orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -316,20 +316,21 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        isButtonNoSelected = false;
+                                        isButtonSiSelected = true;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: isButtonSiSelected
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'Sí',
@@ -347,21 +348,22 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "No"
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        isButtonNoSelected = true;
+                                        isButtonSiSelected = false;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: isButtonNoSelected
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'No',
