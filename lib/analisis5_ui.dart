@@ -3,8 +3,17 @@ import 'package:teaf_app/analisis4_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'analisis5.dart';
 
-class Analisis5UI extends StatelessWidget {
+class Analisis5UI extends StatefulWidget {
+  @override
+  // ignore: library_private_types_in_public_api
+  _Analisis5UIState createState() => _Analisis5UIState();
+}
+
+class _Analisis5UIState extends State<Analisis5UI> {
+  AnalisisLogic analisisLogic =
+      AnalisisLogic(); // Crea una instancia de la lógica
   @override
   Widget build(BuildContext context) {
     return Scaffold(

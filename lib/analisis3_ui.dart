@@ -4,7 +4,19 @@ import 'analisis4_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
-class Analisis3UI extends StatelessWidget {
+class Analisis3UI extends StatefulWidget {
+  @override
+  // ignore: library_private_types_in_public_api
+  _Analisis3UIState createState() => _Analisis3UIState();
+}
+
+class _Analisis3UIState extends State<Analisis3UI> {
+  // Variables para manejar el estado de los botones
+  bool botoncau = false;
+  bool botonafro = false;
+  bool botonhom = false;
+  bool botonmuj = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -155,20 +167,21 @@ class Analisis3UI extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botoncau = true;
+                                        botonafro = false;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botoncau
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'Caucásico',
@@ -186,21 +199,22 @@ class Analisis3UI extends StatelessWidget {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "No"
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botoncau = false;
+                                        botonafro = true;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonafro
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'Afroamericano',
@@ -251,20 +265,21 @@ class Analisis3UI extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonhom = true;
+                                        botonmuj = false;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonhom
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'Hombre',
@@ -282,21 +297,22 @@ class Analisis3UI extends StatelessWidget {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "No"
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonhom = false;
+                                        botonmuj = true;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonmuj
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'Mujer',

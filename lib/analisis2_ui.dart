@@ -226,12 +226,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
                               // Acción cuando se presiona el botón "No"
                               setState(() {
                                 boton0 = false;
-                                isButton1Selected = true;
-                                isButton2Selected = false;
+                                boton1 = true;
+                                boton2 = false;
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: isButton1Selected
+                              backgroundColor: boton1
                                   ? Colors
                                       .orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
@@ -259,12 +259,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
                               // Acción cuando se presiona el botón "No"
                               setState(() {
                                 boton0 = false;
-                                isButton1Selected = false;
-                                isButton2Selected = true;
+                                boton1 = false;
+                                boton2 = true;
                               });
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: isButton2Selected
+                              backgroundColor: boton2
                                   ? Colors
                                       .orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
@@ -317,12 +317,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
                                       setState(() {
-                                        isButtonNoSelected = false;
-                                        isButtonSiSelected = true;
+                                        botonNo = false;
+                                        botonSi = true;
                                       });
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: isButtonSiSelected
+                                      backgroundColor: botonSi
                                           ? Colors
                                               .orange // Color cuando está botonado
                                           : Color(0xFFDFDFDF),
@@ -350,12 +350,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
                                       setState(() {
-                                        isButtonNoSelected = true;
-                                        isButtonSiSelected = false;
+                                        botonNo = true;
+                                        botonSi = false;
                                       });
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: isButtonNoSelected
+                                      backgroundColor: botonNo
                                           ? Colors
                                               .orange // Color cuando está botonado
                                           : Color(0xFFDFDFDF),

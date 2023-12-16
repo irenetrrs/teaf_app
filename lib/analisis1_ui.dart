@@ -5,7 +5,7 @@ import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
 // ignore: must_be_immutable
-class Analisis1UI extends StatelessWidget {
+class Analisis1UI extends StatefulWidget {
   final int edadEnMeses;
   final VoidCallback incrementarEdad;
   final VoidCallback decrementarEdad;
@@ -17,6 +17,23 @@ class Analisis1UI extends StatelessWidget {
     required this.incrementarEdad,
     required this.decrementarEdad,
   });
+  @override
+  // ignore: library_private_types_in_public_api
+  _Analisis1UIState createState() => _Analisis1UIState();
+}
+
+class _Analisis1UIState extends State<Analisis1UI> {
+  // Variables para manejar el estado de los botones
+
+  bool botonSi = false;
+  bool botonNo = false;
+  bool botonmenor = false;
+  bool botonmayor = false;
+
+  get decrementarEdad => null;
+
+  get edadEnMeses => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -269,20 +286,21 @@ class Analisis1UI extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonSi = true;
+                                        botonNo = false;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonSi
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'Sí',
@@ -300,21 +318,22 @@ class Analisis1UI extends StatelessWidget {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "No"
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonSi = false;
+                                        botonNo = true;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonNo
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       'No',
@@ -379,20 +398,21 @@ class Analisis1UI extends StatelessWidget {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonmenor = true;
+                                        botonmayor = false;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonmenor
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       '< 24 meses',
@@ -410,21 +430,22 @@ class Analisis1UI extends StatelessWidget {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "No"
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonmayor = true;
+                                        botonmenor = false;
+                                      });
                                     },
-                                    style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Color(0xFFDFDFDF)),
-                                      shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                        RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonmayor
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      fixedSize: MaterialStateProperty.all(
-                                          Size.fromHeight(50.0)),
+                                      fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
                                       '≥ 24 meses',
