@@ -154,92 +154,94 @@ class _Analisis1UIState extends State<Analisis1UI> {
                 height: 30,
               ),
               SizedBox(
-                width: 310,
+                width: 303,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Positioned(
-                      left: 0,
-                      top: 0,
+                      left: 3,
+                      top: 164,
                       child: SizedBox(
-                        width: 310,
-                        height: 20,
-                        child: Stack(
+                        width: 303,
+                        height: 103.02,
+                        child: Column(
                           children: [
-                            Positioned(
-                              top: 0,
-                              child: Text(
-                                'Edad',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Edad',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.w500,
+                                    height: 0,
+                                  ),
                                 ),
-                              ),
+                                InkWell(
+                                  onTap: () {
+                                    // Mostrar el pop-up al tocar la imagen
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title:
+                                              Text('Información sobre la Edad'),
+                                          content: Text(
+                                              'En los menores de 3 años de edad, el estudio neurocognitivo se basa en el retraso en el desarrollo. Además, en los menores de 6 años y en los mayores de 18 años no se puede realizar el estudio conductal.'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Aceptar'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('img/pregunta.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  width: 303.0, // Ancho del rectángulo
+                                  height: 50.0, // Alto del rectángulo
+                                  decoration: BoxDecoration(
+                                    color: Colors
+                                        .grey[300], // Color gris del rectángulo
+                                    borderRadius: BorderRadius.circular(
+                                        20.0), // Bordes redondeados
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 10.0), // Espaciado interno
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      labelText: 'Meses',
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        ElevatedButton(
-                            onPressed: decrementarEdad,
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xFFDFDFDF)),
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                              ),
-                              fixedSize: MaterialStateProperty.all(
-                                  Size.fromHeight(50.0)),
-                            ),
-                            child: Icon(
-                              Icons.remove,
-                              color: Color(0xFF68696C),
-                            )),
-                        SizedBox(width: 20),
-                        Text(
-                          'Edad en meses: \n\n$edadEnMeses',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                            height: 0,
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        ElevatedButton(
-                          onPressed: decrementarEdad,
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Color(0xFFDFDFDF)),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                            ),
-                            fixedSize: MaterialStateProperty.all(
-                                Size.fromHeight(50.0)),
-                          ),
-                          child: Icon(
-                            Icons.add,
-                            color: Color(0xFF68696C),
-                          ),
-                        ),
-                      ],
                     ),
                     SizedBox(
                       height: 30,
@@ -263,16 +265,6 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w500,
                                     height: 0,
-                                  ),
-                                ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
-                                    ),
                                   ),
                                 ),
                               ],
@@ -375,16 +367,6 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                     fontFamily: 'Inter',
                                     fontWeight: FontWeight.w500,
                                     height: 0,
-                                  ),
-                                ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
-                                    ),
                                   ),
                                 ),
                               ],

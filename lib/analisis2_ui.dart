@@ -166,13 +166,37 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                     height: 0,
                                   ),
                                 ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
+                                InkWell(
+                                  onTap: () {
+                                    // Mostrar el pop-up al tocar la imagen
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              'Información sobre dominios afectados'),
+                                          content: Text(
+                                              'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados\n /link/'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Aceptar'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('img/pregunta.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -199,8 +223,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton0
-                                  ? Colors
-                                      .orange // Color cuando está botonado
+                                  ? Colors.orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -232,8 +255,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton1
-                                  ? Colors
-                                      .orange // Color cuando está botonado
+                                  ? Colors.orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -265,8 +287,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton2
-                                  ? Colors
-                                      .orange // Color cuando está botonado
+                                  ? Colors.orange // Color cuando está botonado
                                   : Color(0xFFDFDFDF),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),

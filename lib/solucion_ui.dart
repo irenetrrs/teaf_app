@@ -14,101 +14,101 @@ class SolucionUI extends StatelessWidget {
         child: Column(
           children: [
             // Encabezado
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      // Acción a realizar cuando se hace clic en el botón
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Analisis5UI(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/atras.png'),
-                          fit: BoxFit.cover,
-                        ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    // Acción a realizar cuando se hace clic en el botón
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Analisis5UI(),
                       ),
-                      // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 50.0,
-                      height: 50.0,
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/atras.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
+                    // Puedes ajustar el tamaño del contenedor según tus necesidades
+                    width: 50.0,
+                    height: 50.0,
                   ),
-                  // Logo y nombre en una Columna
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          // Acción a realizar cuando se hace clic en el botón
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WelcomeUI(),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/logo.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              // Puedes ajustar el tamaño del contenedor según tus necesidades
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              'VisualTEAF',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
+                ),
+                // Logo y nombre en una Columna
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        // Acción a realizar cuando se hace clic en el botón
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeUI(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('img/logo.png'),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ],
-                        ),
+                            // Puedes ajustar el tamaño del contenedor según tus necesidades
+                            width: 50.0,
+                            height: 50.0,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'VisualTEAF',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  // Icono de apagado
-                  InkWell(
-                    onTap: () {
-                      // Acción a realizar cuando se hace clic en el botón
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUI(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/off.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 50.0,
-                      height: 50.0,
                     ),
-                  )
-                ],
-              ),
+                  ],
+                ),
+                // Icono de apagado
+                InkWell(
+                  onTap: () {
+                    // Acción a realizar cuando se hace clic en el botón
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SignUI(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/off.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    // Puedes ajustar el tamaño del contenedor según tus necesidades
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                )
+              ],
+            ),
             SizedBox(
               height: 50,
             ),
@@ -142,13 +142,37 @@ class SolucionUI extends StatelessWidget {
                 ),
               ),
             ),
-            Container(
-              width: 20,
-              height: 20,
-              alignment: Alignment.bottomRight,
-              child: Image.asset(
-                'img/pregunta.png',
-                fit: BoxFit.cover,
+            InkWell(
+              onTap: () {
+                // Mostrar el pop-up al tocar la imagen
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text('Información sobre el resultado'),
+                      content: Text(
+                          'Más información sobre el diagnóstico en /link/'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: Text('Aceptar'),
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Container(
+                width: 20,
+                height: 20,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('img/pregunta.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
             ),
             SizedBox(

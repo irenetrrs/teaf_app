@@ -149,13 +149,37 @@ class Analisis4UI extends StatelessWidget {
                                     height: 0,
                                   ),
                                 ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
+                                InkWell(
+                                  onTap: () {
+                                    // Mostrar el pop-up al tocar la imagen
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title:
+                                              Text('Información sobre el peso'),
+                                          content: Text(
+                                              'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados\nhttps://vimeo.com/766536749'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Aceptar'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('img/pregunta.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -212,13 +236,37 @@ class Analisis4UI extends StatelessWidget {
                                     height: 0,
                                   ),
                                 ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
+                                InkWell(
+                                  onTap: () {
+                                    // Mostrar el pop-up al tocar la imagen
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              'Información sobre la talla'),
+                                          content: Text(
+                                              'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados\nhttps://vimeo.com/766536770'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Aceptar'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('img/pregunta.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -275,13 +323,37 @@ class Analisis4UI extends StatelessWidget {
                                     height: 0,
                                   ),
                                 ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
+                                InkWell(
+                                  onTap: () {
+                                    // Mostrar el pop-up al tocar la imagen
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              'Información sobre el perímetro craneal'),
+                                          content: Text(
+                                              'Usea una cinta métrica que no se pueda estirar. Rodee firmemente la cabeza con la cinta métrica alrededor de la circunferencia más ancha posible. La parte más ancha de la frente encima de las cejas, por encima de las orejas, la parte más prominente de la nuca. \n\n https://vimeo.com/766536717'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Aceptar'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('img/pregunta.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -338,13 +410,37 @@ class Analisis4UI extends StatelessWidget {
                                     height: 0,
                                   ),
                                 ),
-                                Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/pregunta.png'),
-                                      fit: BoxFit.cover,
+                                InkWell(
+                                  onTap: () {
+                                    // Mostrar el pop-up al tocar la imagen
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                              'Información sobre la distancia palpebral'),
+                                          content: Text(
+                                              'La medida de la longitud de la hendidura palpebral se realiza entre los ángulos interno y externo del ojo, haciendo que el niño mire ligeramente hacia arriba. Semide con una regla que se sujeta en el mismo plano desde un ángulo hasta el otro.\n\nhttps://vimeo.com/766536975'),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Aceptar'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                        image: AssetImage('img/pregunta.png'),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
                                 ),
