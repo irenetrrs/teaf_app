@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'inicio_ui.dart';
 import 'analisis2_ui.dart';
 import 'welcome_ui.dart';
@@ -6,17 +7,6 @@ import 'sign_ui.dart';
 
 // ignore: must_be_immutable
 class Analisis1UI extends StatefulWidget {
-  final int edadEnMeses;
-  final VoidCallback incrementarEdad;
-  final VoidCallback decrementarEdad;
-  bool seleccionSi = false;
-  bool seleccionNo = false;
-
-  Analisis1UI({
-    required this.edadEnMeses,
-    required this.incrementarEdad,
-    required this.decrementarEdad,
-  });
   @override
   // ignore: library_private_types_in_public_api
   _Analisis1UIState createState() => _Analisis1UIState();
@@ -24,15 +14,17 @@ class Analisis1UI extends StatefulWidget {
 
 class _Analisis1UIState extends State<Analisis1UI> {
   // Variables para manejar el estado de los botones
-
+  final String padoptado = 'preguntaAdoptado';
+  final String preguntaTiempoAcogidaId = 'preguntaTiempoAcogida';
   bool botonSi = false;
   bool botonNo = false;
   bool botonmenor = false;
   bool botonmayor = false;
-
-  get decrementarEdad => null;
-
-  get edadEnMeses => null;
+  @override
+  void initState() {
+    super.initState();
+    _loadSelectionFromPrefs();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -282,6 +274,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         botonSi = true;
                                         botonNo = false;
                                       });
+                                      _saveSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonSi
@@ -315,6 +308,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         botonSi = false;
                                         botonNo = true;
                                       });
+                                      _saveSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonNo
@@ -491,5 +485,21 @@ class _Analisis1UIState extends State<Analisis1UI> {
             ],
           ),
         ));
+  }
+
+//para guardar el estado de la seleccion del boton
+  _saveSelectionToPrefs(bool selection) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('botonSeleccionado', selection);
+  }
+
+  _loadSelectionFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool savedSelection = prefs.getBool('botonSeleccionado') ?? false;
+
+    setState(() {
+      botonSi = savedSelection;
+      botonNo = !savedSelection;
+    });
   }
 }

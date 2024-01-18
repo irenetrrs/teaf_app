@@ -36,11 +36,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Analisis1UI(
-                            edadEnMeses: 0,
-                            incrementarEdad: () {},
-                            decrementarEdad: () {},
-                          ),
+                          builder: (context) => Analisis1UI(),
                         ),
                       );
                     },
