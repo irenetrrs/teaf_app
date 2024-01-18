@@ -14,8 +14,8 @@ class Analisis1UI extends StatefulWidget {
 
 class _Analisis1UIState extends State<Analisis1UI> {
   // Variables para manejar el estado de los botones
-  final String padoptado = 'preguntaAdoptado';
-  final String preguntaTiempoAcogidaId = 'preguntaTiempoAcogida';
+  final String adoptado = 'preguntaAdoptado';
+  final String tiempoacogida = 'preguntaTiempoAcogida';
   bool botonSi = false;
   bool botonNo = false;
   bool botonmenor = false;
@@ -23,7 +23,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
   @override
   void initState() {
     super.initState();
-    _loadSelectionFromPrefs();
+    _loadAdoptadoSelectionFromPrefs();
+    _loadTiempoAcogidaSelectionFromPrefs();
   }
 
   @override
@@ -274,7 +275,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         botonSi = true;
                                         botonNo = false;
                                       });
-                                      _saveSelectionToPrefs(true);
+                                      _saveAdoptadoSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonSi
@@ -303,12 +304,12 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
+                                      // Acción cuando se presiona el botón "No"
                                       setState(() {
                                         botonSi = false;
                                         botonNo = true;
                                       });
-                                      _saveSelectionToPrefs(false);
+                                      _saveAdoptadoSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonNo
@@ -373,11 +374,12 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
+                                      // Acción cuando se presiona el botón "<24"
                                       setState(() {
                                         botonmenor = true;
                                         botonmayor = false;
                                       });
+                                      _saveTiempoAcogidaSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonmenor
@@ -406,11 +408,12 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                 Expanded(
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
+                                      // Acción cuando se presiona el botón ">24"
                                       setState(() {
                                         botonmayor = true;
                                         botonmenor = false;
                                       });
+                                      _saveTiempoAcogidaSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonmayor
@@ -487,19 +490,36 @@ class _Analisis1UIState extends State<Analisis1UI> {
         ));
   }
 
-//para guardar el estado de la seleccion del boton
-  _saveSelectionToPrefs(bool selection) async {
+  //para guardar y cargar el estado de la seleccion del boton adoptado
+  _saveAdoptadoSelectionToPrefs(bool botonSi) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('botonSeleccionado', selection);
+    prefs.setBool('$adoptado-botonSi', botonSi);
   }
 
-  _loadSelectionFromPrefs() async {
+  _loadAdoptadoSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool savedSelection = prefs.getBool('botonSeleccionado') ?? false;
+    bool savedAdoptadoSelection = prefs.getBool('$adoptado-botonSi') ?? false;
 
     setState(() {
-      botonSi = savedSelection;
-      botonNo = !savedSelection;
+      botonSi = savedAdoptadoSelection;
+      botonNo = !savedAdoptadoSelection;
+    });
+  }
+
+  //para guardar y cargar el estado de la seleccion del boton tiempoacogida
+  _saveTiempoAcogidaSelectionToPrefs(bool botonmenor) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('$tiempoacogida-botonmenor', botonmenor);
+  }
+
+  _loadTiempoAcogidaSelectionFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool savedTiempoAcogidaSelection =
+        prefs.getBool('$tiempoacogida-botonmenor') ?? false;
+
+    setState(() {
+      botonmenor = savedTiempoAcogidaSelection;
+      botonmayor = !savedTiempoAcogidaSelection;
     });
   }
 }
