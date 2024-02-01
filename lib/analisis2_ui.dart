@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis1_ui.dart';
 import 'analisis3_ui.dart';
 import 'welcome_ui.dart';
@@ -12,11 +13,27 @@ class Analisis2UI extends StatefulWidget {
 
 class _Analisis2UIState extends State<Analisis2UI> {
   // Variables para manejar el estado de los botones
+  final String dominios = 'preguntaDominios';
+  final String alcohol = 'preguntaAlcohol';
   bool boton0 = false;
   bool boton1 = false;
   bool boton2 = false;
   bool botonSi = false;
   bool botonNo = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadDominiosSelectionFromPrefs();
+    _loadAlcoholSelectionFromPrefs();
+    // Establecer todas las variables de estado en false inicialmente
+    setState(() {
+      boton0 = false;
+      boton1 = false;
+      boton2 = false;
+      botonNo = false;
+      botonSi = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,6 +233,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                 boton1 = false;
                                 boton2 = false;
                               });
+                              _saveDominiosSelectionToPrefs(true, false, false);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton0
@@ -248,6 +266,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                 boton1 = true;
                                 boton2 = false;
                               });
+                              _saveDominiosSelectionToPrefs(false, true, false);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton1
@@ -280,6 +299,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                 boton1 = false;
                                 boton2 = true;
                               });
+                              _saveDominiosSelectionToPrefs(false, false, true);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton2
@@ -337,6 +357,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                         botonNo = false;
                                         botonSi = true;
                                       });
+                                      _saveAlcoholSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonSi
@@ -370,6 +391,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                         botonNo = true;
                                         botonSi = false;
                                       });
+                                      _saveAlcoholSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonNo
@@ -447,5 +469,42 @@ class _Analisis2UIState extends State<Analisis2UI> {
             ],
           ),
         ));
+  }
+
+//para guardar y cargar el estado de la seleccion del boton dominios
+  _saveDominiosSelectionToPrefs(bool boton0, bool boton1, bool boton2) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('$dominios-boton0', boton0);
+    prefs.setBool('$dominios-boton1', boton1);
+    prefs.setBool('$dominios-boton2', boton2);
+  }
+
+  _loadDominiosSelectionFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool savedBoton0 = prefs.getBool('$dominios-boton0') ?? false;
+    bool savedBoton1 = prefs.getBool('$dominios-boton1') ?? false;
+    bool savedBoton2 = prefs.getBool('$dominios-boton2') ?? false;
+
+    setState(() {
+      boton0 = savedBoton0;
+      boton1 = savedBoton1;
+      boton2 = savedBoton2;
+    });
+  }
+
+  //para guardar y cargar el estado de la seleccion del boton alcohol
+  _saveAlcoholSelectionToPrefs(bool botonSi) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('$alcohol-botonSi', botonSi);
+  }
+
+  _loadAlcoholSelectionFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool savedBotonSi = prefs.getBool('$alcohol-botonSi') ?? false;
+
+    setState(() {
+      botonSi = savedBotonSi;
+      botonNo = !savedBotonSi;
+    });
   }
 }

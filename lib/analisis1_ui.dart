@@ -25,6 +25,12 @@ class _Analisis1UIState extends State<Analisis1UI> {
     super.initState();
     _loadAdoptadoSelectionFromPrefs();
     _loadTiempoAcogidaSelectionFromPrefs();
+    setState(() {
+      botonSi = false;
+      botonNo = false;
+      botonmenor = false;
+      botonmayor = false;
+    });
   }
 
   @override

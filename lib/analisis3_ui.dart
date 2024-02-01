@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis2_ui.dart';
 import 'analisis4_ui.dart';
 import 'welcome_ui.dart';
@@ -12,10 +13,24 @@ class Analisis3UI extends StatefulWidget {
 
 class _Analisis3UIState extends State<Analisis3UI> {
   // Variables para manejar el estado de los botones
+  final String etnia = 'preguntaEtnia';
+  final String genero = 'preguntaGenero';
   bool botoncau = false;
   bool botonafro = false;
   bool botonhom = false;
   bool botonmuj = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadEtniaSelectionFromPrefs();
+    _loadGeneroSelectionFromPrefs();
+    setState(() {
+      botonafro = false;
+      botoncau = false;
+      botonhom = false;
+      botonmuj = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,6 +186,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         botoncau = true;
                                         botonafro = false;
                                       });
+                                      _saveEtniaSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botoncau
@@ -204,6 +220,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         botoncau = false;
                                         botonafro = true;
                                       });
+                                      _saveEtniaSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonafro
@@ -269,6 +286,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         botonhom = true;
                                         botonmuj = false;
                                       });
+                                      _saveGeneroSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonhom
@@ -302,6 +320,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         botonhom = false;
                                         botonmuj = true;
                                       });
+                                      _saveGeneroSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonmuj
@@ -376,5 +395,37 @@ class _Analisis3UIState extends State<Analisis3UI> {
             ],
           ),
         ));
+  }
+
+  //para guardar y cargar el estado de la seleccion del boton etnia
+  _saveEtniaSelectionToPrefs(bool botoncau) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('$etnia-botoncau', botoncau);
+  }
+
+  _loadEtniaSelectionFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool savedBotoncau = prefs.getBool('$etnia-botoncau') ?? false;
+
+    setState(() {
+      botoncau = savedBotoncau;
+      botonafro = !savedBotoncau;
+    });
+  }
+
+  //para guardar y cargar el estado de la seleccion del boton genero
+  _saveGeneroSelectionToPrefs(bool botonhom) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('$genero-botonhom', botonhom);
+  }
+
+  _loadGeneroSelectionFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool savedBotonhom = prefs.getBool('$genero-botonhom') ?? false;
+
+    setState(() {
+      botonhom = savedBotonhom;
+      botonmuj = !savedBotonhom;
+    });
   }
 }
