@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/analisis4_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'analisis4_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
-import 'analisis5.dart';
 
 class Analisis5UI extends StatefulWidget {
   @override
@@ -12,8 +12,31 @@ class Analisis5UI extends StatefulWidget {
 }
 
 class _Analisis5UIState extends State<Analisis5UI> {
-  AnalisisLogic analisisLogic =
-      AnalisisLogic(); // Crea una instancia de la lógica
+  late SharedPreferences prefs;
+  int imagenseleccionadafiltrum =
+      -1; // Índice de la imagen seleccionada en la columna 1
+  int imagenseleccionadalabio =
+      -1; // Índice de la imagen seleccionada en la columna 2
+  @override
+  void initState() {
+    super.initState();
+    initPreferences();
+  }
+
+  Future<void> initPreferences() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      imagenseleccionadafiltrum =
+          prefs.getInt('imagenseleccionadafiltrum') ?? -1;
+      imagenseleccionadalabio = prefs.getInt('imagenseleccionadalabio') ?? -1;
+    });
+  }
+
+  void savePreferences() {
+    prefs.setInt('imagenseleccionadafiltrum', imagenseleccionadafiltrum);
+    prefs.setInt('imagenseleccionadalabio', imagenseleccionadalabio);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +67,6 @@ class _Analisis5UIState extends State<Analisis5UI> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    // Puedes ajustar el tamaño del contenedor según tus necesidades
                     width: 50.0,
                     height: 50.0,
                   ),
@@ -73,7 +95,6 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            // Puedes ajustar el tamaño del contenedor según tus necesidades
                             width: 50.0,
                             height: 50.0,
                           ),
@@ -111,7 +132,6 @@ class _Analisis5UIState extends State<Analisis5UI> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    // Puedes ajustar el tamaño del contenedor según tus necesidades
                     width: 50.0,
                     height: 50.0,
                   ),
@@ -175,156 +195,77 @@ class _Analisis5UIState extends State<Analisis5UI> {
                         SizedBox(
                           height: 20,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/11.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 70,
-                            ),
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/12.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                         SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/21.png'),
-                                  fit: BoxFit.cover,
+                          width: 310,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: List.generate(
+                                  5, // Número de filas
+                                  (rowIndex) => Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: List.generate(
+                                      2, // Número de imágenes por fila
+                                      (columnIndex) {
+                                        final imageName =
+                                            columnIndex == 0 ? 'f' : 'l';
+                                        final imageNumber = rowIndex + 1;
+                                        final fullImageName =
+                                            '$imageName$imageNumber';
+                                        final isSelected = columnIndex == 0
+                                            ? imagenseleccionadafiltrum ==
+                                                rowIndex * 2 + columnIndex + 1
+                                            : imagenseleccionadalabio ==
+                                                rowIndex * 2 + columnIndex + 1;
+
+                                        return GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              if (columnIndex == 0) {
+                                                imagenseleccionadafiltrum =
+                                                    rowIndex * 2 +
+                                                        columnIndex +
+                                                        1;
+                                              } else {
+                                                imagenseleccionadalabio =
+                                                    rowIndex * 2 +
+                                                        columnIndex +
+                                                        1;
+                                              }
+                                            });
+                                            savePreferences();
+                                          },
+                                          child: Container(
+                                            width: 70,
+                                            height: 70,
+                                            margin: EdgeInsets.all(5),
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                image: AssetImage(
+                                                    'img/$fullImageName.png'),
+                                                fit: BoxFit.cover,
+                                              ),
+                                              border: Border.all(
+                                                color: isSelected
+                                                    ? Colors.orange
+                                                    : Colors.transparent,
+                                                width: 5,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              width: 70,
-                            ),
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/22.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/31.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 70,
-                            ),
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/32.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/41.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 70,
-                            ),
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/42.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 70,
-                              height: 70,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/51.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 70,
-                            ),
-                            SizedBox(
-                              width: 70,
-                              height: 70,
-                              child: Image.asset(
-                                'img/52.png',
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),
@@ -339,7 +280,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Manejar la acción de Atrás
+                    // Manejar la acción de Siguiente
                     Navigator.push(
                       context,
                       MaterialPageRoute(
