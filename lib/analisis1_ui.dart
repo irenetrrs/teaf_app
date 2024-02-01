@@ -14,17 +14,20 @@ class Analisis1UI extends StatefulWidget {
 
 class _Analisis1UIState extends State<Analisis1UI> {
   // Variables para manejar el estado de los botones
+  final String edadText = 'edad';
   final String adoptado = 'preguntaAdoptado';
   final String tiempoacogida = 'preguntaTiempoAcogida';
   bool botonSi = false;
   bool botonNo = false;
   bool botonmenor = false;
   bool botonmayor = false;
+  TextEditingController edadController = TextEditingController();
   @override
   void initState() {
     super.initState();
     _loadAdoptadoSelectionFromPrefs();
     _loadTiempoAcogidaSelectionFromPrefs();
+    _loadTextFieldsFromPrefs();
     setState(() {
       botonSi = false;
       botonNo = false;
@@ -231,8 +234,9 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 10.0), // Espaciado interno
                                   child: TextField(
+                                    controller: edadController,
                                     decoration: InputDecoration(
-                                      labelText: 'Meses',
+                                      hintText: 'Meses',
                                     ),
                                   ),
                                 ),
@@ -461,7 +465,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Manejar la acción de Atrás
+                      // Manejar la acción de Siguiente
+                      _saveTextFieldsToPrefs();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -494,6 +499,19 @@ class _Analisis1UIState extends State<Analisis1UI> {
             ],
           ),
         ));
+  }
+
+  //para guardar y cargar el dato de edad
+  _saveTextFieldsToPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(edadText, edadController.text);
+  }
+
+  _loadTextFieldsFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      edadController.text = prefs.getString(edadText) ?? '';
+    });
   }
 
   //para guardar y cargar el estado de la seleccion del boton adoptado

@@ -1,10 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis3_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
-class Analisis4UI extends StatelessWidget {
+class Analisis4UI extends StatefulWidget {
+  @override
+  // ignore: library_private_types_in_public_api
+  _Analisis4UIState createState() => _Analisis4UIState();
+}
+
+class _Analisis4UIState extends State<Analisis4UI> {
+  final String pesoText = 'peso';
+  final String tallaText = 'talla';
+  final String perimetroCranealText = 'perimetroCraneal';
+  final String distanciaPalpebralText = 'distanciaPalpebral';
+
+  TextEditingController pesoController = TextEditingController();
+  TextEditingController tallaController = TextEditingController();
+  TextEditingController perimetroCranealController = TextEditingController();
+  TextEditingController distanciaPalpebralController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTextFieldsFromPrefs();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -206,8 +229,9 @@ class Analisis4UI extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
+                            controller: pesoController,
                             decoration: InputDecoration(
-                              labelText: 'kg',
+                              hintText: 'kg',
                             ),
                           ),
                         ),
@@ -293,8 +317,9 @@ class Analisis4UI extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
+                            controller: tallaController,
                             decoration: InputDecoration(
-                              labelText: 'cm',
+                              hintText: 'cm',
                             ),
                           ),
                         ),
@@ -380,8 +405,9 @@ class Analisis4UI extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
+                            controller: perimetroCranealController,
                             decoration: InputDecoration(
-                              labelText: 'cm',
+                              hintText: 'cm',
                             ),
                           ),
                         ),
@@ -467,8 +493,9 @@ class Analisis4UI extends StatelessWidget {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
+                            controller: distanciaPalpebralController,
                             decoration: InputDecoration(
-                              labelText: 'mm',
+                              hintText: 'mm',
                             ),
                           ),
                         ),
@@ -485,7 +512,8 @@ class Analisis4UI extends StatelessWidget {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Manejar la acción de Atrás
+                      // Manejar la acción de Siguiente
+                      _saveTextFieldsToPrefs();
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -518,5 +546,27 @@ class Analisis4UI extends StatelessWidget {
             ],
           ),
         ));
+  }
+
+  // Guardar datos introducidos en Shared Preferences
+  _saveTextFieldsToPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(pesoText, pesoController.text);
+    prefs.setString(tallaText, tallaController.text);
+    prefs.setString(perimetroCranealText, perimetroCranealController.text);
+    prefs.setString(distanciaPalpebralText, distanciaPalpebralController.text);
+  }
+
+  // Cargar datos introducidos desde Shared Preferences
+  _loadTextFieldsFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      pesoController.text = prefs.getString(pesoText) ?? '';
+      tallaController.text = prefs.getString(tallaText) ?? '';
+      perimetroCranealController.text =
+          prefs.getString(perimetroCranealText) ?? '';
+      distanciaPalpebralController.text =
+          prefs.getString(distanciaPalpebralText) ?? '';
+    });
   }
 }
