@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teaf_app/inicio_ui.dart';
 import 'resumen_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
 class SolucionUI extends StatelessWidget {
+  Future<void> resetPreferences(BuildContext context) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -258,13 +265,40 @@ class SolucionUI extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  // Manejar la acción de Atrás
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SolucionUI(),
-                    ),
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Volver a Inicio'),
+                        content: Text(
+                            'Si vuelve a la página de Inicio, se eliminarán los datos introducidos durante el diagnóstico. ¿Estás seguro de volver a Inicio?'),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context)
+                                  .pop(); // Cerrar el cuadro de diálogo
+                            },
+                            child: Text('Cancelar'),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              // Resetear los valores y cerrar el cuadro de diálogo
+                              resetPreferences(context);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => InicioUI(),
+                                ),
+                              );
+                              // Puedes navegar a la pantalla de inicio o hacer cualquier otra acción necesaria después de resetear
+                            },
+                            child: Text('Aceptar'),
+                          ),
+                        ],
+                      );
+                    },
                   );
+                  // Manejar la acción de Atrás
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xFF001254)),
