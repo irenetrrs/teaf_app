@@ -12,9 +12,9 @@ class Analisis4UI extends StatefulWidget {
 }
 
 class _Analisis4UIState extends State<Analisis4UI> {
-  final String pesoText = 'peso';
-  final String tallaText = 'talla';
-  final String perimetroCranealText = 'perimetroCraneal';
+  final String pesoText = 'preguntaPeso';
+  final String tallaText = 'preguntaTalla';
+  final String perimetroCranealText = 'preguntaPerimetroCraneal';
   final String distanciaPalpebralText = 'distanciaPalpebral';
 
   TextEditingController pesoController = TextEditingController();

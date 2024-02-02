@@ -1,7 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+
+class SharedPreferencesHelper {
+  //edad
+  static Future<String> getEdadText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('edad') ?? '';
+  }
+
+//adoptado - si no
+  static Future<bool> getAdoptadoButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaAdoptado-botonSi') ?? false;
+  }
+
+//tiempo acogido - mayor menor
+  static Future<bool> getTiempoAcogidaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+
+  //dominios - 0 1 2
+  static Future<bool> getDominiosButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaDominios-boton0') ?? false;
+  }
+
+  //alcohol - si no
+  static Future<bool> getAlcoholButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaAlcohol-botonSi') ?? false;
+  }
+
+//etnia - cau afro
+  static Future<bool> getEtniaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaEtnia-botoncau') ?? false;
+  }
+
+  //genero - hom muj
+  static Future<bool> getGeneroButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaGenero-botonhom') ?? false;
+  }
+
+  //peso
+  static Future<bool> getPesoButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+
+  //talla
+  static Future<bool> getTiempoAcogidaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+
+  //perimetro craneal
+  static Future<bool> getTiempoAcogidaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+
+  //distancia palpebral
+  static Future<bool> getTiempoAcogidaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+
+  //filtrum
+  static Future<bool> getTiempoAcogidaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+
+  //labio
+  static Future<bool> getTiempoAcogidaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+}
 
 class ResumenUI extends StatelessWidget {
   @override
@@ -128,13 +210,60 @@ class ResumenUI extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: ElevatedButton(
               onPressed: () {
-                // Manejar la acción de Atrás
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ResumenUI(),
-                  ),
-                );
+                // Obtén la información de shareReference
+                SharedPreferencesHelper.getEdadText().then((edadText) {
+                  // Obtén el estado de los botones
+                  SharedPreferencesHelper.getAdoptadoButtonState()
+                      .then((adoptado) {
+                    SharedPreferencesHelper.getTiempoAcogidaButtonState()
+                        .then((tiempoAcogida) {
+                      SharedPreferencesHelper.getTDominiosButtonState()
+                          .then((tiempoAcogida) {
+                        SharedPreferencesHelper.getTiempoAcogidaButtonState()
+                            .then((tiempoAcogida) {
+                          SharedPreferencesHelper.getTiempoAcogidaButtonState()
+                              .then((tiempoAcogida) {
+                            SharedPreferencesHelper
+                                    .getTiempoAcogidaButtonState()
+                                .then((tiempoAcogida) {
+                              SharedPreferencesHelper
+                                      .getTiempoAcogidaButtonState()
+                                  .then((tiempoAcogida) {
+                                SharedPreferencesHelper
+                                        .getTiempoAcogidaButtonState()
+                                    .then((tiempoAcogida) {
+                                  // Construye el mensaje del popup
+                                  String popupMessage = 'Edad: $edadText\n'
+                                      'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
+                                      'Tiempo de Acogida: ${tiempoAcogida ? '<24 meses' : '>24 meses'}';
+
+                                  // Muestra el diálogo con el mensaje
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('Resumen'),
+                                        content: Text(popupMessage),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                            },
+                                            child: Text('Cerrar'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
+                                });
+                              });
+                            });
+                          });
+                        });
+                      });
+                    });
+                  });
+                });
               },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white),
