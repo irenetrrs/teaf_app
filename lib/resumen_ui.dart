@@ -18,7 +18,7 @@ class SharedPreferencesHelper {
     return prefs.getBool('preguntaAdoptado-botonSi') ?? false;
   }
 
-//tiempo acogido - mayor menor
+//tiempo acogida - mayor menor
   static Future<bool> getTiempoAcogidaButtonState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
@@ -49,39 +49,27 @@ class SharedPreferencesHelper {
   }
 
   //peso
-  static Future<bool> getPesoButtonState() async {
+  static Future<String> getPesoText() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+    return prefs.getString('preguntaPeso') ?? '';
   }
 
   //talla
-  static Future<bool> getTiempoAcogidaButtonState() async {
+  static Future<String> getTallaText() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+    return prefs.getString('preguntaTalla') ?? '';
   }
 
   //perimetro craneal
-  static Future<bool> getTiempoAcogidaButtonState() async {
+  static Future<String> getPerimetroCranealText() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+    return prefs.getString('preguntaPerimetroCraneal') ?? '';
   }
 
   //distancia palpebral
-  static Future<bool> getTiempoAcogidaButtonState() async {
+  static Future<String> getDistanciaPalpebralText() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
-  }
-
-  //filtrum
-  static Future<bool> getTiempoAcogidaButtonState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
-  }
-
-  //labio
-  static Future<bool> getTiempoAcogidaButtonState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+    return prefs.getString('distanciaPalpebral') ?? '';
   }
 }
 
@@ -217,44 +205,57 @@ class ResumenUI extends StatelessWidget {
                       .then((adoptado) {
                     SharedPreferencesHelper.getTiempoAcogidaButtonState()
                         .then((tiempoAcogida) {
-                      SharedPreferencesHelper.getTDominiosButtonState()
-                          .then((tiempoAcogida) {
-                        SharedPreferencesHelper.getTiempoAcogidaButtonState()
-                            .then((tiempoAcogida) {
-                          SharedPreferencesHelper.getTiempoAcogidaButtonState()
-                              .then((tiempoAcogida) {
-                            SharedPreferencesHelper
-                                    .getTiempoAcogidaButtonState()
-                                .then((tiempoAcogida) {
-                              SharedPreferencesHelper
-                                      .getTiempoAcogidaButtonState()
-                                  .then((tiempoAcogida) {
-                                SharedPreferencesHelper
-                                        .getTiempoAcogidaButtonState()
-                                    .then((tiempoAcogida) {
-                                  // Construye el mensaje del popup
-                                  String popupMessage = 'Edad: $edadText\n'
-                                      'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
-                                      'Tiempo de Acogida: ${tiempoAcogida ? '<24 meses' : '>24 meses'}';
+                      SharedPreferencesHelper.getDominiosButtonState()
+                          .then((dominios) {
+                        SharedPreferencesHelper.getAlcoholButtonState()
+                            .then((alcohol) {
+                          SharedPreferencesHelper.getEtniaButtonState()
+                              .then((etnia) {
+                            SharedPreferencesHelper.getGeneroButtonState()
+                                .then((genero) {
+                              SharedPreferencesHelper.getPesoText()
+                                  .then((pesoText) {
+                                SharedPreferencesHelper.getTallaText()
+                                    .then((tallaText) {
+                                  SharedPreferencesHelper
+                                          .getPerimetroCranealText()
+                                      .then((perimetroCranealText) {
+                                    SharedPreferencesHelper
+                                            .getDistanciaPalpebralText()
+                                        .then((distanciaPalpebralText) {
+                                      // Construye el mensaje del popup
+                                      String popupMessage =
+                                          'Edad: $edadText meses\n'
+                                          'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
+                                          'Tiempo de Acogida: ${tiempoAcogida ? '<24 meses' : '>24 meses'}\n'
+                                          'Dominios afectados: ${dominios ? '1' : '2'}\n'
+                                          'Etnia: ${etnia ? 'Caucásico' : 'Afroamericano'}\n'
+                                          'Género: ${genero ? 'Hombre' : 'Mujer'}\n'
+                                          'Peso: $pesoText kg\n'
+                                          'Talla: $tallaText cm\n'
+                                          'Perimetro Craneal: $perimetroCranealText cm\n'
+                                          'Distancia Palpebral: $distanciaPalpebralText cm\n';
 
-                                  // Muestra el diálogo con el mensaje
-                                  showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return AlertDialog(
-                                        title: Text('Resumen'),
-                                        content: Text(popupMessage),
-                                        actions: <Widget>[
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: Text('Cerrar'),
-                                          ),
-                                        ],
+                                      // Muestra el diálogo con el mensaje
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('Resumen'),
+                                            content: Text(popupMessage),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text('Cerrar'),
+                                              ),
+                                            ],
+                                          );
+                                        },
                                       );
-                                    },
-                                  );
+                                    });
+                                  });
                                 });
                               });
                             });
