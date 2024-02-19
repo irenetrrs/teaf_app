@@ -37,6 +37,11 @@ class _Analisis5UIState extends State<Analisis5UI> {
     prefs.setInt('imagenseleccionadalabio', imagenseleccionadalabio);
   }
 
+  static Future<int> getImagenSeleccionada(String tipo) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('imagenSeleccionada-$tipo') ?? -1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

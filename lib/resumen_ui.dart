@@ -36,7 +36,7 @@ class SharedPreferencesHelper {
     return prefs.getBool('preguntaAlcohol-botonSi') ?? false;
   }
 
-//etnia - cau afro
+  //etnia - cau afro
   static Future<bool> getEtniaButtonState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('preguntaEtnia-botoncau') ?? false;
@@ -342,15 +342,27 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 19,
                           top: 40,
-                          child: Text(
-                            '110cm',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<String>(
+                            future: SharedPreferencesHelper.getTallaText(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error obteniendo la altura');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'} cm',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -382,15 +394,27 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 17,
                           top: 37,
-                          child: Text(
-                            '10 kg',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<String>(
+                            future: SharedPreferencesHelper.getPesoText(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error obteniendo el peso');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'} kg',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                         Positioned(
@@ -457,15 +481,29 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 17,
                           top: 37,
-                          child: Text(
-                            '5 cm',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<String>(
+                            future: SharedPreferencesHelper
+                                .getDistanciaPalpebralText(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text(
+                                    'Error obteniendo la distancia palpebral');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'} cm',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                         Positioned(
@@ -529,15 +567,29 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 17,
                           top: 37,
-                          child: Text(
-                            'Sí',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<String>(
+                            future: SharedPreferencesHelper
+                                .getDistanciaPalpebralText(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text(
+                                    'Error obteniendo la distancia palpebral');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'} cm',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                         Positioned(
@@ -807,15 +859,29 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 17,
                           top: 37,
-                          child: Text(
-                            '40 cm',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<String>(
+                            future: SharedPreferencesHelper
+                                .getPerimetroCranealText(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text(
+                                    'Error obteniendo el perímetro craneal');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'} cm',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                         Positioned(
