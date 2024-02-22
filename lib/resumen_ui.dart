@@ -587,19 +587,18 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 17,
                           top: 37,
-                          child: FutureBuilder<String>(
-                            future: SharedPreferencesHelper
-                                .getDistanciaPalpebralText(),
+                          child: FutureBuilder<bool>(
+                            future:
+                                SharedPreferencesHelper.getAlcoholButtonState(),
                             builder: (context, snapshot) {
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
                                 return CircularProgressIndicator();
                               } else if (snapshot.hasError) {
-                                return Text(
-                                    'Error obteniendo la distancia palpebral');
+                                return Text('Error obteniendo la información');
                               } else {
                                 return Text(
-                                  '${snapshot.data ?? 'N/A'} cm',
+                                  '${snapshot.data ?? 'N/A'}',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
@@ -700,15 +699,27 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 19,
                           top: 40,
-                          child: Text(
-                            '5',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<int>(
+                            future: SharedPreferencesHelper.getFiltrum(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error obteniendo la referencia');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                       ],
@@ -740,15 +751,27 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 17,
                           top: 37,
-                          child: Text(
-                            '4',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<int>(
+                            future: SharedPreferencesHelper.getLabioSuperior(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error obteniendo la referencia');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                         Positioned(
@@ -839,15 +862,28 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 19,
                           top: 40,
-                          child: Text(
-                            '+',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontFamily: 'Font Awesome 5 Free',
-                              fontWeight: FontWeight.w900,
-                              height: 0,
-                            ),
+                          child: FutureBuilder<bool>(
+                            future: SharedPreferencesHelper
+                                .getDominiosButtonState(),
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text('Error obteniendo la información');
+                              } else {
+                                return Text(
+                                  '${snapshot.data ?? 'N/A'}',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
+                                  ),
+                                );
+                              }
+                            },
                           ),
                         ),
                       ],
