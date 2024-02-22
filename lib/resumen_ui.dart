@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
@@ -70,6 +69,17 @@ class SharedPreferencesHelper {
   static Future<String> getDistanciaPalpebralText() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('distanciaPalpebral') ?? '';
+  }
+
+  //filtrum
+  static Future<int> getFiltrum() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('imagenseleccionadafiltrum') ?? -1;
+  } //labio superior
+
+  static Future<int> getLabioSuperior() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('imagenseleccionadalabio') ?? -1;
   }
 }
 
@@ -223,37 +233,47 @@ class ResumenUI extends StatelessWidget {
                                     SharedPreferencesHelper
                                             .getDistanciaPalpebralText()
                                         .then((distanciaPalpebralText) {
-                                      // Construye el mensaje del popup
-                                      String popupMessage =
-                                          'Edad: $edadText meses\n'
-                                          'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
-                                          'Tiempo de Acogida: ${tiempoAcogida ? '<24 meses' : '>24 meses'}\n'
-                                          'Dominios afectados: ${dominios ? '1' : '2'}\n'
-                                          'Etnia: ${etnia ? 'Caucásico' : 'Afroamericano'}\n'
-                                          'Género: ${genero ? 'Hombre' : 'Mujer'}\n'
-                                          'Peso: $pesoText kg\n'
-                                          'Talla: $tallaText cm\n'
-                                          'Perimetro Craneal: $perimetroCranealText cm\n'
-                                          'Distancia Palpebral: $distanciaPalpebralText cm\n';
+                                      SharedPreferencesHelper.getFiltrum()
+                                          .then((imagenseleccionadafiltrum) {
+                                        SharedPreferencesHelper
+                                                .getLabioSuperior()
+                                            .then((imagenseleccionadalabio) {
+                                          // Construye el mensaje del popup
+                                          String popupMessage =
+                                              'Edad: $edadText meses\n'
+                                              'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
+                                              'Tiempo de Acogida: ${tiempoAcogida ? '<24 meses' : '>24 meses'}\n'
+                                              'Dominios afectados: ${dominios ? '1' : '2'}\n'
+                                              'Etnia: ${etnia ? 'Caucásico' : 'Afroamericano'}\n'
+                                              'Género: ${genero ? 'Hombre' : 'Mujer'}\n'
+                                              'Peso: $pesoText kg\n'
+                                              'Talla: $tallaText cm\n'
+                                              'Perimetro Craneal: $perimetroCranealText cm\n'
+                                              'Distancia Palpebral: $distanciaPalpebralText cm\n'
+                                              'Filtrum: $imagenseleccionadafiltrum \n'
+                                              'Labio superior: $imagenseleccionadalabio \n';
 
-                                      // Muestra el diálogo con el mensaje
-                                      showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text('Resumen'),
-                                            content: Text(popupMessage),
-                                            actions: <Widget>[
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                                child: Text('Cerrar'),
-                                              ),
-                                            ],
+                                          // Muestra el diálogo con el mensaje
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return AlertDialog(
+                                                title: Text('Resumen'),
+                                                content: Text(popupMessage),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cerrar'),
+                                                  ),
+                                                ],
+                                              );
+                                            },
                                           );
-                                        },
-                                      );
+                                        });
+                                      });
                                     });
                                   });
                                 });

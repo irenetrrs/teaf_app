@@ -37,11 +37,6 @@ class _Analisis5UIState extends State<Analisis5UI> {
     prefs.setInt('imagenseleccionadalabio', imagenseleccionadalabio);
   }
 
-  static Future<int> getImagenSeleccionada(String tipo) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('imagenSeleccionada-$tipo') ?? -1;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,25 +216,31 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                             '$imageName$imageNumber';
                                         final isSelected = columnIndex == 0
                                             ? imagenseleccionadafiltrum ==
-                                                rowIndex * 2 + columnIndex + 1
+                                                rowIndex + 1
                                             : imagenseleccionadalabio ==
-                                                rowIndex * 2 + columnIndex + 1;
+                                                rowIndex + 1;
 
                                         return GestureDetector(
                                           onTap: () {
                                             setState(() {
                                               if (columnIndex == 0) {
                                                 imagenseleccionadafiltrum =
-                                                    rowIndex * 2 +
-                                                        columnIndex +
-                                                        1;
+                                                    imagenseleccionadafiltrum ==
+                                                            rowIndex + 1
+                                                        ? -1
+                                                        : rowIndex + 1;
                                               } else {
                                                 imagenseleccionadalabio =
-                                                    rowIndex * 2 +
-                                                        columnIndex +
-                                                        1;
+                                                    imagenseleccionadalabio ==
+                                                            rowIndex + 1
+                                                        ? -1
+                                                        : rowIndex + 1;
                                               }
                                             });
+                                            print(
+                                                'Filtrum: $imagenseleccionadafiltrum');
+                                            print(
+                                                'Labio superior: $imagenseleccionadalabio');
                                             savePreferences();
                                           },
                                           child: Container(
