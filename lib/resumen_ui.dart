@@ -6,15 +6,28 @@ import 'sign_ui.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
-  static Future<bool> getDominiosButtonState() async {
+  static Future<String> getDominiosButtonState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaDominios-boton0') ?? false;
+    int selectedIndex = prefs.getInt('preguntaDominios-selectedIndex') ?? -1;
+
+    switch (selectedIndex) {
+      case 0:
+        return '0';
+      case 1:
+        return '1';
+      case 2:
+        return '≥ 2';
+      default:
+        return 'No seleccionado';
+    }
   }
 
   //alcohol - si no
-  static Future<bool> getAlcoholButtonState() async {
+  static Future<String> getAlcoholButtonState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaAlcohol-botonSi') ?? false;
+    bool savedBotonSi = prefs.getBool('preguntaAlcohol-botonSi') ?? false;
+
+    return savedBotonSi ? 'Sí' : 'No';
   }
 
   //peso
@@ -480,7 +493,7 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 17,
                           top: 37,
-                          child: FutureBuilder<bool>(
+                          child: FutureBuilder<String>(
                             future:
                                 SharedPreferencesHelper.getAlcoholButtonState(),
                             builder: (context, snapshot) {
@@ -491,7 +504,7 @@ class ResumenUI extends StatelessWidget {
                                 return Text('Error obteniendo la información');
                               } else {
                                 return Text(
-                                  '${snapshot.data ?? 'N/A'}',
+                                  snapshot.data ?? 'N/A',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
@@ -755,7 +768,7 @@ class ResumenUI extends StatelessWidget {
                         Positioned(
                           left: 19,
                           top: 40,
-                          child: FutureBuilder<bool>(
+                          child: FutureBuilder<String>(
                             future: SharedPreferencesHelper
                                 .getDominiosButtonState(),
                             builder: (context, snapshot) {
@@ -766,7 +779,7 @@ class ResumenUI extends StatelessWidget {
                                 return Text('Error obteniendo la información');
                               } else {
                                 return Text(
-                                  '${snapshot.data ?? 'N/A'}',
+                                  snapshot.data ?? 'N/A',
                                   style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
