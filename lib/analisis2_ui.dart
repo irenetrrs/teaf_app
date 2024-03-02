@@ -20,6 +20,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
   bool boton2 = false;
   bool botonSi = false;
   bool botonNo = false;
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +34,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
       botonNo = false;
       botonSi = false;
     });
+  }
+
+  // Función para obtener el estado de los botones de dominios
+  Future<bool> getDominiosButtonState(int buttonNumber) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('$dominios-boton$buttonNumber') ?? false;
   }
 
   @override

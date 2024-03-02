@@ -5,24 +5,6 @@ import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
 class SharedPreferencesHelper {
-  //edad
-  static Future<String> getEdadText() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString('edad') ?? '';
-  }
-
-//adoptado - si no
-  static Future<bool> getAdoptadoButtonState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaAdoptado-botonSi') ?? false;
-  }
-
-//tiempo acogida - mayor menor
-  static Future<bool> getTiempoAcogidaButtonState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
-  }
-
   //dominios - 0 1 2
   static Future<bool> getDominiosButtonState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -33,18 +15,6 @@ class SharedPreferencesHelper {
   static Future<bool> getAlcoholButtonState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('preguntaAlcohol-botonSi') ?? false;
-  }
-
-  //etnia - cau afro
-  static Future<bool> getEtniaButtonState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaEtnia-botoncau') ?? false;
-  }
-
-  //genero - hom muj
-  static Future<bool> getGeneroButtonState() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaGenero-botonhom') ?? false;
   }
 
   //peso
@@ -75,8 +45,9 @@ class SharedPreferencesHelper {
   static Future<int> getFiltrum() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('imagenseleccionadafiltrum') ?? -1;
-  } //labio superior
+  }
 
+  //labio superior
   static Future<int> getLabioSuperior() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('imagenseleccionadalabio') ?? -1;

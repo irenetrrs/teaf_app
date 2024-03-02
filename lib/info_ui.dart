@@ -175,7 +175,7 @@ class InfoUI extends StatelessWidget {
                       'Siguiente',
                       style: TextStyle(
                         color: Color(0xFF001254),
-                        fontSize: 30,
+                        fontSize: 27,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
                       ),
