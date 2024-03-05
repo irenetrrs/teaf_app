@@ -6,12 +6,104 @@ import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
+
+// ignore: must_be_immutable
 class SolucionUI extends StatelessWidget {
   Future<void> resetPreferences(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
   }
 
+//edad
+  static Future<String> getEdadText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('edad') ?? '';
+  }
+
+//adoptado - si no
+  static Future<bool> getAdoptadoButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaAdoptado-botonSi') ?? false;
+  }
+
+//tiempo acogida - mayor menor
+  static Future<bool> getTiempoAcogidaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaTiempoAcogida-botonmenor') ?? false;
+  }
+
+  //dominios - 0 1 2
+  static Future<int> getDominiosButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('preguntaDominios-selectedIndex') ?? -1;
+  }
+
+  static String getDominiosText(int index) {
+    switch (index) {
+      case 0:
+        return '0';
+      case 1:
+        return '1';
+      case 2:
+        return '≥ 2';
+      default:
+        return 'No seleccionado';
+    }
+  }
+
+  //alcohol - si no
+  static Future<bool> getAlcoholButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaAlcohol-botonSi') ?? false;
+  }
+
+  //etnia - cau afro
+  static Future<bool> getEtniaButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaEtnia-botoncau') ?? false;
+  }
+
+  //genero - hom muj
+  static Future<bool> getGeneroButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaGenero-botonhom') ?? false;
+  }
+
+  //peso
+  static Future<String> getPesoText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('preguntaPeso') ?? '';
+  }
+
+  //talla
+  static Future<String> getTallaText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('preguntaTalla') ?? '';
+  }
+
+  //perimetro craneal
+  static Future<String> getPerimetroCranealText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('preguntaPerimetroCraneal') ?? '';
+  }
+
+  //distancia palpebral
+  static Future<String> getDistanciaPalpebralText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('distanciaPalpebral') ?? '';
+  }
+
+  //filtrum
+  static Future<int> getFiltrum() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('imagenseleccionadafiltrum') ?? -1;
+  } //labio superior
+
+  static Future<int> getLabioSuperior() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getInt('imagenseleccionadalabio') ?? -1;
+  }
+String edad = SharedPreferences.getEdadText();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
