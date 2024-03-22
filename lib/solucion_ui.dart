@@ -6,7 +6,6 @@ import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
-
 // ignore: must_be_immutable
 class SolucionUI extends StatelessWidget {
   Future<void> resetPreferences(BuildContext context) async {
@@ -103,7 +102,39 @@ class SolucionUI extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('imagenseleccionadalabio') ?? -1;
   }
-String edad = SharedPreferences.getEdadText();
+
+// Método para obtener las respuestas y realizar el diagnóstico
+  Future<String> diagnostico() async {
+    // Obtener las respuestas
+    String edad = await getEdadText();
+    bool adoptado = await getAdoptadoButtonState();
+    bool tiempoAcogida = await getTiempoAcogidaButtonState();
+    int dominios = await getDominiosButtonState();
+    bool alcohol = await getAlcoholButtonState();
+    bool etnia = await getEtniaButtonState();
+    bool genero = await getGeneroButtonState();
+    String peso = await getPesoText();
+    String talla = await getTallaText();
+    String perimetroCraneal = await getPerimetroCranealText();
+    String distanciaPalpebral = await getDistanciaPalpebralText();
+    int filtrum = await getFiltrum();
+    int labioSuperior = await getLabioSuperior();
+
+    // Realizar el diagnóstico basado en las respuestas obtenidas
+    if (tiempoAcogida) {
+      // si el tiempo de acogida es <24meses
+      return 'INCOMPLETO';
+    } else if (!alcohol) {
+      // si no ha bebido alcohol
+      return 'NO FASD';
+    } else if (dominios >= 2) {
+      //si los dominios son >2
+      return 'ARND';
+    } else {
+      return 'ARBD';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,47 +171,49 @@ String edad = SharedPreferences.getEdadText();
                   ),
                 ),
                 // Logo y nombre en una Columna
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        // Acción a realizar cuando se hace clic en el botón
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeUI(),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('img/logo.png'),
-                                fit: BoxFit.cover,
+                Expanded(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // Acción a realizar cuando se hace clic en el botón
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WelcomeUI(),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('img/logo.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              // Puedes ajustar el tamaño del contenedor según tus necesidades
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              'VisualTEAF',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                            // Puedes ajustar el tamaño del contenedor según tus necesidades
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            'VisualTEAF',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 // Icono de apagado
                 InkWell(
@@ -215,7 +248,7 @@ String edad = SharedPreferences.getEdadText();
               'Diagnóstico',
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: 50,
+                fontSize: MediaQuery.of(context).size.width * 0.03,
                 fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
               ),
@@ -228,16 +261,56 @@ String edad = SharedPreferences.getEdadText();
               height: 200.0, // Diámetro del círculo
               decoration: BoxDecoration(
                 shape: BoxShape.circle, // Forma circular
-                color: Colors.black, // Color del círculo
               ),
               child: Center(
-                child: Text(
-                  'TEF\npositivo',
-                  style: TextStyle(
-                    color: Colors.white, // Color del texto
-                    fontSize: 25.0,
-                  ),
-                  textAlign: TextAlign.center,
+                child: FutureBuilder<String>(
+                  future:
+                      diagnostico(), // Llama a la función diagnostico() para obtener el Future<String>
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      // Si el Future está en espera, muestra un indicador de carga
+                      return CircularProgressIndicator();
+                    } else {
+                      if (snapshot.hasError) {
+                        // Si ocurre un error, muestra un mensaje de error
+                        return Text('Error: ${snapshot.error}');
+                      } else {
+                        // Si la llamada al Future es exitosa, muestra el texto resultante
+                        // y un círculo de color correspondiente al resultado del diagnóstico
+                        Color circleColor = Colors.transparent;
+                        if (snapshot.data == 'INCOMPLETO') {
+                          circleColor = Colors.orange;
+                        } else if (snapshot.data == 'NO FASD') {
+                          circleColor = Colors.blue;
+                        } else if (snapshot.data == 'ARND') {
+                          circleColor = Colors.green;
+                        } else if (snapshot.data == 'ARBD') {
+                          circleColor = Colors.red;
+                        }
+
+                        return Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: circleColor,
+                              ),
+                            ),
+                            Text(
+                              snapshot.data ?? 'Diagnóstico no disponible',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25.0,
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                    }
+                  },
                 ),
               ),
             ),
