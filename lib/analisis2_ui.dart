@@ -240,7 +240,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                 boton1 = false;
                                 boton2 = false;
                               });
-                              _saveDominiosSelectionToPrefs(0);
+                              _saveDominiosSelectionToPrefs(true, false, false);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton0
@@ -273,7 +273,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                 boton1 = true;
                                 boton2 = false;
                               });
-                              _saveDominiosSelectionToPrefs(1);
+                              _saveDominiosSelectionToPrefs(false, true, false);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton1
@@ -306,7 +306,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                 boton1 = false;
                                 boton2 = true;
                               });
-                              _saveDominiosSelectionToPrefs(2);
+                              _saveDominiosSelectionToPrefs(false, false, true);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: boton2
@@ -479,11 +479,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
   }
 
 //para guardar y cargar el estado de la seleccion del boton dominios
-_saveDominiosSelectionToPrefs(int selectedIndex) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  prefs.setInt('$dominios-selectedIndex', selectedIndex);
-}
-
+  _saveDominiosSelectionToPrefs(bool boton0, bool boton1, bool boton2) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('$dominios-boton0', boton0);
+    prefs.setBool('$dominios-boton1', boton1);
+    prefs.setBool('$dominios-boton2', boton2);
+  }
 
   _loadDominiosSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

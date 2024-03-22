@@ -31,22 +31,9 @@ class SharedPreferencesHelper {
   }
 
   //dominios - 0 1 2
-  static Future<int> getDominiosButtonState() async {
+  static Future<bool> getDominiosButtonState(int buttonNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('preguntaDominios-selectedIndex') ?? -1;
-  }
-
-  static String getDominiosText(int index) {
-    switch (index) {
-      case 0:
-        return '0';
-      case 1:
-        return '1';
-      case 2:
-        return '≥ 2';
-      default:
-        return 'No seleccionado';
-    }
+    return prefs.getBool('preguntaDominios-boton$buttonNumber') ?? false;
   }
 
   //alcohol - si no
@@ -106,8 +93,9 @@ class SharedPreferencesHelper {
     String edadText = await getEdadText();
     bool adoptado = await getAdoptadoButtonState();
     bool tiempoAcogida = await getTiempoAcogidaButtonState();
-    int dominiosIndex = await getDominiosButtonState();
-    String dominiosText = getDominiosText(dominiosIndex);
+    bool dominiosBoton0 = await getDominiosButtonState(0);
+    bool dominiosBoton1 = await getDominiosButtonState(1);
+    bool dominiosBoton2 = await getDominiosButtonState(2);
     bool alcohol = await getAlcoholButtonState();
     bool etnia = await getEtniaButtonState();
     bool genero = await getGeneroButtonState();
@@ -122,8 +110,8 @@ class SharedPreferencesHelper {
     String popupMessage = 'Edad: $edadText meses\n'
         'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
         'Tiempo de Acogida: ${tiempoAcogida ? '< 24 meses' : '> 24 meses'}\n'
-        'Dominios afectados: $dominiosText\n'
-        'Alcohol: ${alcohol ? 'Sí' : 'No'}\n'
+        'Dominios afectados: ${dominiosBoton0 ? '0 ' : ''}${dominiosBoton1 ? '1 ' : ''}${dominiosBoton2 ? '≥ 2' : ''}\n'
+        'Alcohol: $alcohol\n'
         'Etnia: ${etnia ? 'Caucásico' : 'Afroamericano'}\n'
         'Género: ${genero ? 'Hombre' : 'Mujer'}\n'
         'Peso: $pesoText kg\n'
