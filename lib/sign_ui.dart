@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'analisis1_ui.dart';
 
 class SignUI extends StatefulWidget {
   @override
@@ -26,7 +27,7 @@ class _SignUIState extends State<SignUI> {
               Container(
                 width: 315,
                 height: 440,
-                padding: EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(20.0),
                 decoration: ShapeDecoration(
                   color: Color(0xFFD9D9D9),
                   shape: RoundedRectangleBorder(
@@ -48,7 +49,14 @@ class _SignUIState extends State<SignUI> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Color(0xFF001254)),
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                // Si showLoginFields es true, el botón está pulsado, de lo contrario, está desactivado
+                                return showLoginFields
+                                    ? Color.fromARGB(255, 15, 39, 127)
+                                    : Color(0xCC5C6EAD);
+                              },
+                            ),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -75,7 +83,14 @@ class _SignUIState extends State<SignUI> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.all(Color(0xCC5C6EAD)),
+                                MaterialStateProperty.resolveWith<Color>(
+                              (Set<MaterialState> states) {
+                                // Si showLoginFields es false, el botón está pulsado, de lo contrario, está desactivado
+                                return !showLoginFields
+                                    ? Color.fromARGB(255, 15, 39, 127)
+                                    : Color(0xCC5C6EAD);
+                              },
+                            ),
                             shape: MaterialStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
@@ -128,22 +143,43 @@ class _SignUIState extends State<SignUI> {
                       // Campos de registro
                       TextField(
                         decoration: InputDecoration(
-                          labelText: 'Nuevo Email',
+                          labelText: 'Nombre y apellidos',
                         ),
                       ),
                       TextField(
                         decoration: InputDecoration(
-                          labelText: 'Nueva Contraseña',
+                          labelText: 'Email',
+                        ),
+                      ),
+                      TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Contraseña',
                         ),
                       ),
                     },
                     SizedBox(height: 40),
-                    // Botón de acción (iniciar sesión o registrarse)
+                    // Botón de acción con los botones de inciar sesion y registrarse
                     ElevatedButton(
                       onPressed: () {
-                        // Lógica para iniciar sesión o registrarse
+                        if (showLoginFields) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Analisis1UI(),
+                            ),
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Analisis1UI(),
+                            ),
+                          );
+                        }
                       },
                       style: ButtonStyle(
+                        minimumSize: MaterialStateProperty.all(
+                            Size(double.infinity, 50)),
                         backgroundColor:
                             MaterialStateProperty.all(Color(0xFF001254)),
                         shape:
@@ -165,18 +201,21 @@ class _SignUIState extends State<SignUI> {
                     ),
                     SizedBox(height: 20),
                     // Texto de "¿Se te olvidó la contraseña?"
-                    Opacity(
-                      opacity: 0.60,
-                      child: Text(
-                        '¿Se te olvidó la contraseña?',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w300,
-                          decoration: TextDecoration.underline,
-                          height: 0,
+                    Visibility(
+                      visible: showLoginFields,
+                      child: Opacity(
+                        opacity: 0.60,
+                        child: Text(
+                          '¿Se te olvidó la contraseña?',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w300,
+                            decoration: TextDecoration.underline,
+                            height: 0,
+                          ),
                         ),
                       ),
                     ),
