@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'analisis1_ui.dart';
+import 'package:teaf_app/inicio_ui.dart';
+import 'package:teaf_app/solucion_ui.dart';
 
 class SignUI extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _SignUIState createState() => _SignUIState();
 }
 
@@ -158,21 +160,22 @@ class _SignUIState extends State<SignUI> {
                       ),
                     },
                     SizedBox(height: 40),
-                    // Botón de acción con los botones de inciar sesion y registrarse
+                    // redireccionamiento cuando pulsamos 'iniciar sesion'
                     ElevatedButton(
                       onPressed: () {
                         if (showLoginFields) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Analisis1UI(),
+                              builder: (context) => InicioUI(),
                             ),
                           );
                         } else {
+                          //redireccionamiento cuando pulsamos 'registrarse'
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => Analisis1UI(),
+                              builder: (context) => SolucionUI(),
                             ),
                           );
                         }
@@ -205,16 +208,22 @@ class _SignUIState extends State<SignUI> {
                       visible: showLoginFields,
                       child: Opacity(
                         opacity: 0.60,
-                        child: Text(
-                          '¿Se te olvidó la contraseña?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w300,
-                            decoration: TextDecoration.underline,
-                            height: 0,
+                        child: GestureDetector(
+                          onTap: () {
+                            // Aquí colocas la acción que deseas realizar cuando se haga clic en el texto
+                            _showForgotPasswordDialog(context);
+                          },
+                          child: Text(
+                            '¿Se te olvidó la contraseña?',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w300,
+                              decoration: TextDecoration.underline,
+                              height: 0,
+                            ),
                           ),
                         ),
                       ),
@@ -228,4 +237,26 @@ class _SignUIState extends State<SignUI> {
       ),
     );
   }
+}
+
+//pop up para recuperar la contraseña
+void _showForgotPasswordDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Recuperar Contraseña"),
+        content: Text(
+            "Aquí puedes agregar los campos para recuperar tu contraseña."),
+        actions: <Widget>[
+          TextButton(
+            child: Text("Cerrar"),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
+  );
 }
