@@ -139,7 +139,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                 'Evaluación',
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 50,
+                  fontSize: MediaQuery.of(context).size.width * 0.03,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                 ),
