@@ -157,6 +157,9 @@ class SharedPreferencesHelper {
 
 class _Analisis5UIState extends State<Analisis5UI> {
   late SharedPreferences prefs;
+  late bool isCaucasian;
+  late List<String> filtrumImages;
+  late List<String> labioSuperiorImages;
   int imagenseleccionadafiltrum =
       -1; // Índice de la imagen seleccionada en la columna 1
   int imagenseleccionadalabio =
@@ -169,6 +172,14 @@ class _Analisis5UIState extends State<Analisis5UI> {
 
   Future<void> initPreferences() async {
     prefs = await SharedPreferences.getInstance();
+    isCaucasian = await SharedPreferencesHelper
+        .getEtniaButtonState(); // Obtiene el valor de etnia
+    filtrumImages = isCaucasian
+        ? ['fc1', 'fc2', 'fc3', 'fc4', 'fc5'] // Imágenes para caucásicos
+        : ['fa1', 'fa2', 'fa3', 'fa4', 'fa5']; // Imágenes para afroamericanos
+    labioSuperiorImages = isCaucasian
+        ? ['lc1', 'lc2', 'lc3', 'lc4', 'lc5'] // Imágenes para caucásicos
+        : ['la1', 'la2', 'la3', 'la4', 'la5']; // Imágenes para afroamericanos
     setState(() {
       imagenseleccionadafiltrum =
           prefs.getInt('imagenseleccionadafiltrum') ?? -1;
@@ -327,7 +338,9 @@ class _Analisis5UIState extends State<Analisis5UI> {
                             5,
                             (index) {
                               final reversedIndex = 5 - index;
-                              final imageName = 'f$reversedIndex';
+                              final imageName = isCaucasian
+                                  ? filtrumImages[index]
+                                  : labioSuperiorImages[index];
                               final isSelected =
                                   imagenseleccionadafiltrum == reversedIndex;
 
@@ -385,7 +398,9 @@ class _Analisis5UIState extends State<Analisis5UI> {
                             5,
                             (index) {
                               final reversedIndex = 5 - index;
-                              final imageName = 'l$reversedIndex';
+                              final imageName = isCaucasian
+                                  ? filtrumImages[index]
+                                  : labioSuperiorImages[index];
                               final isSelected =
                                   imagenseleccionadalabio == reversedIndex;
 
