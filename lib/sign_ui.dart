@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/analisis3_ui.dart';
 import 'package:teaf_app/info_ui.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'package:teaf_app/solucion_ui.dart';
@@ -123,17 +122,6 @@ class _SignUIState extends State<SignUI> {
             SizedBox(
               height: 50,
             ),
-            Text(
-              'Inicio sesión',
-              style: TextStyle(
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: MediaQuery.of(context).size.width * 0.03,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            // Espacio
-            SizedBox(height: 20),
             // Contenedor para los campos de inicio de sesión o registro
             Container(
               width: 315,
@@ -221,7 +209,7 @@ class _SignUIState extends State<SignUI> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 40),
                   // Texto correspondiente al tipo de acción (iniciar sesión o registrarse)
                   Text(
                     showLoginFields

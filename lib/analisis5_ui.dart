@@ -124,6 +124,7 @@ class SharedPreferencesHelper {
     // Muestra el diálogo con el mensaje
     // ignore: use_build_context_synchronously
     showDialog(
+      // ignore: use_build_context_synchronously
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -296,8 +297,134 @@ class _Analisis5UIState extends State<Analisis5UI> {
             SizedBox(
               height: 20,
             ),
+
             ///cuerpo
-            
+            Expanded(
+              child: SingleChildScrollView(
+                  child: Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Filtrum',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: List.generate(
+                            5,
+                            (index) {
+                              final reversedIndex = 5 - index;
+                              final imageName = 'f$reversedIndex';
+                              final isSelected =
+                                  imagenseleccionadafiltrum == reversedIndex;
+
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    imagenseleccionadafiltrum =
+                                        isSelected ? -1 : reversedIndex;
+                                  });
+                                  savePreferences();
+                                },
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  margin: EdgeInsets.symmetric(vertical: 5),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage('img/$imageName.png'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? Colors.orange
+                                          : Colors.transparent,
+                                      width: 5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 50),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Labio superior',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: List.generate(
+                            5,
+                            (index) {
+                              final reversedIndex = 5 - index;
+                              final imageName = 'l$reversedIndex';
+                              final isSelected =
+                                  imagenseleccionadalabio == reversedIndex;
+
+                              return GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    imagenseleccionadalabio =
+                                        isSelected ? -1 : reversedIndex;
+                                  });
+                                  savePreferences();
+                                },
+                                child: Container(
+                                  height: 70,
+                                  width: 70,
+                                  margin: EdgeInsets.symmetric(vertical: 5),
+                                  decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      image: AssetImage('img/$imageName.png'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? Colors.orange
+                                          : Colors.transparent,
+                                      width: 5,
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )),
+            ),
             Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(
