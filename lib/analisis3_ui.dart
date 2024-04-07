@@ -237,7 +237,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                       'Afroamericano',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
-                                        fontSize: 16,
+                                        fontSize: 13,
                                         fontStyle: FontStyle.italic,
                                         fontFamily: 'Inter',
                                         height: 0,
@@ -405,12 +405,17 @@ class _Analisis3UIState extends State<Analisis3UI> {
 
   _loadEtniaSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool savedBotoncau = prefs.getBool('$etnia-botoncau') ?? false;
+    bool? savedBotoncau = prefs.getBool('$etnia-botoncau');
 
-    setState(() {
-      botoncau = savedBotoncau;
-      botonafro = !savedBotoncau;
-    });
+    if (savedBotoncau != null) {
+      setState(() {
+        botoncau = savedBotoncau;
+        botonafro = !savedBotoncau;
+      });
+    } else {
+      botonafro = false;
+      botoncau = false;
+    }
   }
 
   //para guardar y cargar el estado de la seleccion del boton genero
@@ -421,11 +426,15 @@ class _Analisis3UIState extends State<Analisis3UI> {
 
   _loadGeneroSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool savedBotonhom = prefs.getBool('$genero-botonhom') ?? false;
-
-    setState(() {
-      botonhom = savedBotonhom;
-      botonmuj = !savedBotonhom;
-    });
+    bool? savedBotonhom = prefs.getBool('$genero-botonhom');
+    if (savedBotonhom != null) {
+      setState(() {
+        botonhom = savedBotonhom;
+        botonmuj = !savedBotonhom;
+      });
+    } else {
+      botonhom = false;
+      botonmuj = false;
+    }
   }
 }

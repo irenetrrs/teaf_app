@@ -406,7 +406,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                       '< 24 meses',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
-                                        fontSize: 20,
+                                        fontSize: 16,
                                         fontStyle: FontStyle.italic,
                                         fontFamily: 'Inter',
                                         height: 0,
@@ -440,7 +440,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                       '≥ 24 meses',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
-                                        fontSize: 20,
+                                        fontSize: 16,
                                         fontStyle: FontStyle.italic,
                                         fontFamily: 'Inter',
                                         height: 0,
@@ -522,12 +522,19 @@ class _Analisis1UIState extends State<Analisis1UI> {
 
   _loadAdoptadoSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool savedAdoptadoSelection = prefs.getBool('$adoptado-botonSi') ?? false;
+    bool? savedAdoptadoSelection = prefs.getBool('$adoptado-botonSi');
 
-    setState(() {
-      botonSi = savedAdoptadoSelection;
-      botonNo = !savedAdoptadoSelection;
-    });
+    if (savedAdoptadoSelection != null) {
+      setState(() {
+        botonSi = savedAdoptadoSelection;
+        botonNo = !savedAdoptadoSelection;
+      });
+    } else {
+      setState(() {
+        botonSi = false; // Si no hay datos guardados, establecer como falso
+        botonNo = false; // Si no hay datos guardados, establecer como falso
+      });
+    }
   }
 
   //para guardar y cargar el estado de la seleccion del boton tiempoacogida
@@ -538,12 +545,19 @@ class _Analisis1UIState extends State<Analisis1UI> {
 
   _loadTiempoAcogidaSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool savedTiempoAcogidaSelection =
-        prefs.getBool('$tiempoacogida-botonmenor') ?? false;
+    bool? savedTiempoAcogidaSelection =
+        prefs.getBool('$tiempoacogida-botonmenor');
 
-    setState(() {
-      botonmenor = savedTiempoAcogidaSelection;
-      botonmayor = !savedTiempoAcogidaSelection;
-    });
+    if (savedTiempoAcogidaSelection != null) {
+      setState(() {
+        botonmenor = savedTiempoAcogidaSelection;
+        botonmayor = !savedTiempoAcogidaSelection;
+      });
+    } else {
+      setState(() {
+        botonmenor = false; // Si no hay datos guardados, establecer como falso
+        botonmayor = false; // Si no hay datos guardados, establecer como falso
+      });
+    }
   }
 }

@@ -507,11 +507,16 @@ class _Analisis2UIState extends State<Analisis2UI> {
 
   _loadAlcoholSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool savedBotonSi = prefs.getBool('$alcohol-botonSi') ?? false;
+    bool? savedBotonSi = prefs.getBool('$alcohol-botonSi');
 
-    setState(() {
-      botonSi = savedBotonSi;
-      botonNo = !savedBotonSi;
-    });
+    if (savedBotonSi != null) {
+      setState(() {
+        botonSi = savedBotonSi;
+        botonNo = !savedBotonSi;
+      });
+    } else {
+      botonNo = false;
+      botonSi = false;
+    }
   }
 }
