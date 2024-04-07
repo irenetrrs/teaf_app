@@ -243,49 +243,20 @@ class _SignUIState extends State<SignUI> {
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Nombre y apellidos',
-                        labelStyle: TextStyle(
-                            fontSize:
-                                12), // Ajusta el tamaño de fuente del texto de etiqueta
                       ),
-                      style: TextStyle(
-                          fontSize:
-                              14), // Ajusta el tamaño de fuente del texto de entrada
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Nº Colegiado',
-                        labelStyle: TextStyle(
-                            fontSize:
-                                12), // Ajusta el tamaño de fuente del texto de etiqueta
-                      ),
-                      style: TextStyle(
-                          fontSize:
-                              14), // Ajusta el tamaño de fuente del texto de entrada
                     ),
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Email',
-                        labelStyle: TextStyle(
-                            fontSize:
-                                12), // Ajusta el tamaño de fuente del texto de etiqueta
                       ),
-                      style: TextStyle(
-                          fontSize:
-                              14), // Ajusta el tamaño de fuente del texto de entrada
                     ),
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Contraseña',
-                        labelStyle: TextStyle(
-                            fontSize:
-                                12), // Ajusta el tamaño de fuente del texto de etiqueta
                       ),
-                      style: TextStyle(
-                          fontSize:
-                              14), // Ajusta el tamaño de fuente del texto de entrada
                     ),
                   },
-                  SizedBox(height: 30),
+                  SizedBox(height: 40),
                   // redireccionamiento cuando pulsamos 'iniciar sesion'
                   ElevatedButton(
                     onPressed: () {
