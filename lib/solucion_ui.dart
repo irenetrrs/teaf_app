@@ -23,6 +23,7 @@ class _SolucionUIState extends State<SolucionUI> {
   void initState() {
     super.initState();
     loadFemaleCSV();
+    loadMaleCSV();
   }
 
   Future<void> loadMaleCSV() async {
