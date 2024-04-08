@@ -15,19 +15,21 @@ class SolucionUI extends StatefulWidget {
   _SolucionUIState createState() => _SolucionUIState();
 }
 
+////////////////FUNCIÓN PARA OBTENER LA ALTURA A PARTIR DEL CSV//////////////////
 class _SolucionUIState extends State<SolucionUI> {
   List<Map<String, dynamic>> csvData = [];
 
   @override
   void initState() {
     super.initState();
-    loadCSV();
+    loadFemaleCSV();
   }
 
-  Future<void> loadCSV() async {
+  Future<void> loadMaleCSV() async {
+    //MALE
     try {
-      String rawData = await rootBundle.loadString('data/femaleheight.csv');
-      print(rawData);
+      String rawData = await rootBundle.loadString('data/maleheight.csv');
+      //print(rawData);
       List<List<dynamic>> csvList = CsvToListConverter().convert(rawData);
 
       // Obtener los encabezados de columna desde la primera fila
@@ -50,14 +52,48 @@ class _SolucionUIState extends State<SolucionUI> {
 
       setState(() {
         csvData = data;
-        print(csvData.length);
+        //print(csvData.length);
       });
     } catch (e) {
       print("Error loading CSV: $e");
     }
   }
 
-  String? getHeightForAge(String age) {
+  Future<void> loadFemaleCSV() async {
+    //FEMALE
+    try {
+      String rawData = await rootBundle.loadString('data/femaleheight.csv');
+      //print(rawData);
+      List<List<dynamic>> csvList = CsvToListConverter().convert(rawData);
+
+      // Obtener los encabezados de columna desde la primera fila
+      List<String> headers =
+          List<String>.from(csvList[0].map((e) => e.toString()));
+
+      // Remover la fila de encabezados del resto de los datos
+      csvList.removeAt(0);
+
+      List<Map<String, dynamic>> data = [];
+
+      // Convertir cada fila de la lista CSV a un mapa usando los encabezados como claves
+      for (var row in csvList) {
+        Map<String, dynamic> rowData = {};
+        for (int i = 0; i < row.length; i++) {
+          rowData[headers[i]] = row[i];
+        }
+        data.add(rowData);
+      }
+
+      setState(() {
+        csvData = data;
+        //print(csvData.length);
+      });
+    } catch (e) {
+      print("Error loading CSV: $e");
+    }
+  }
+
+  String? getHeightFromFemaleAge(String age) {
     // Convertir la edad proporcionada por el usuario a double
     double userAge = double.tryParse(age) ?? -1;
 
@@ -65,7 +101,7 @@ class _SolucionUIState extends State<SolucionUI> {
 
     // Iterar sobre cada fila en csvData
     for (var row in csvData) {
-      print('CSV Row: $row'); // Impresión de la fila completa del CSV
+      //print('CSV Row: $row'); // Impresión de la fila completa del CSV
 
       // Obtener el valor de edad de la fila actual y convertirlo a String
       String rowAgeString = row['Age (in months)'].toString();
@@ -77,10 +113,11 @@ class _SolucionUIState extends State<SolucionUI> {
       double rowAge = double.tryParse(rowAgeString) ?? -1;
 
       // Impresión de la edad y altura para verificar si se están leyendo correctamente
-      print('Row Age: $rowAge, Height: $height');
+      //print('Row Age: $rowAge, Height: $height');
 
       // Verificar si la edad de la fila actual coincide con la edad proporcionada
       if (rowAge == userAge) {
+        print(height);
         // Devolver la altura correspondiente si se encuentra una coincidencia exacta
         return height;
       }
@@ -89,6 +126,41 @@ class _SolucionUIState extends State<SolucionUI> {
     // Si no se encuentra una coincidencia exacta, devolver null
     return null;
   }
+
+  String? getHeightFromMaleAge(String age) {
+    // Convertir la edad proporcionada por el usuario a double
+    double userAge = double.tryParse(age) ?? -1;
+
+    print('User Age: $userAge');
+
+    // Iterar sobre cada fila en csvData
+    for (var row in csvData) {
+      //print('CSV Row: $row'); // Impresión de la fila completa del CSV
+
+      // Obtener el valor de edad de la fila actual y convertirlo a String
+      String rowAgeString = row['Age (in months)'].toString();
+      // Obtener la altura correspondiente a la edad actual
+      String? height =
+          row['10th Percentile Stature (in centimeters)'].toString();
+
+      // Convertir el valor de edad a double
+      double rowAge = double.tryParse(rowAgeString) ?? -1;
+
+      // Impresión de la edad y altura para verificar si se están leyendo correctamente
+      //print('Row Age: $rowAge, Height: $height');
+
+      // Verificar si la edad de la fila actual coincide con la edad proporcionada
+      if (rowAge == userAge) {
+        print(height);
+        // Devolver la altura correspondiente si se encuentra una coincidencia exacta
+        return height;
+      }
+    }
+
+    // Si no se encuentra una coincidencia exacta, devolver null
+    return null;
+  }
+///////////////////////////////////////////////////////////////////////////
 
   Future<void> resetPreferences(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -437,16 +509,7 @@ class _SolucionUIState extends State<SolucionUI> {
               height: 60,
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
-                onPressed: () async {
-                  String edad = await getEdadText();
-                  String? altura = getHeightForAge(edad);
-                  if (altura != null) {
-                    print(
-                        'La altura correspondiente a la edad $edad es $altura');
-                  } else {
-                    print('No se encontró una altura para la edad $edad');
-                  }
-                },
+                onPressed: () async {},
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xFF001254)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
