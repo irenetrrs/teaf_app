@@ -5,9 +5,91 @@ import 'resumen_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:csv/csv.dart';
 
 // ignore: must_be_immutable
-class SolucionUI extends StatelessWidget {
+class SolucionUI extends StatefulWidget {
+  @override
+  // ignore: library_private_types_in_public_api
+  _SolucionUIState createState() => _SolucionUIState();
+}
+
+class _SolucionUIState extends State<SolucionUI> {
+  List<Map<String, dynamic>> csvData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    loadCSV();
+  }
+
+  Future<void> loadCSV() async {
+    try {
+      String rawData = await rootBundle.loadString('data/femaleheight.csv');
+      print(rawData);
+      List<List<dynamic>> csvList = CsvToListConverter().convert(rawData);
+
+      // Obtener los encabezados de columna desde la primera fila
+      List<String> headers =
+          List<String>.from(csvList[0].map((e) => e.toString()));
+
+      // Remover la fila de encabezados del resto de los datos
+      csvList.removeAt(0);
+
+      List<Map<String, dynamic>> data = [];
+
+      // Convertir cada fila de la lista CSV a un mapa usando los encabezados como claves
+      for (var row in csvList) {
+        Map<String, dynamic> rowData = {};
+        for (int i = 0; i < row.length; i++) {
+          rowData[headers[i]] = row[i];
+        }
+        data.add(rowData);
+      }
+
+      setState(() {
+        csvData = data;
+        print(csvData.length);
+      });
+    } catch (e) {
+      print("Error loading CSV: $e");
+    }
+  }
+
+  String? getHeightForAge(String age) {
+    // Convertir la edad proporcionada por el usuario a double
+    double userAge = double.tryParse(age) ?? -1;
+
+    print('User Age: $userAge');
+
+    // Iterar sobre cada fila en csvData
+    for (var row in csvData) {
+      print('CSV Row: $row'); // Impresión de la fila completa del CSV
+
+      // Obtener el valor de edad de la fila actual y convertirlo a String
+      String rowAgeString = row['Age (in months)'].toString();
+      // Obtener la altura correspondiente a la edad actual
+      String? height =
+          row['10th Percentile Stature (in centimeters)'].toString();
+
+      // Convertir el valor de edad a double
+      double rowAge = double.tryParse(rowAgeString) ?? -1;
+
+      // Impresión de la edad y altura para verificar si se están leyendo correctamente
+      print('Row Age: $rowAge, Height: $height');
+
+      // Verificar si la edad de la fila actual coincide con la edad proporcionada
+      if (rowAge == userAge) {
+        // Devolver la altura correspondiente si se encuentra una coincidencia exacta
+        return height;
+      }
+    }
+
+    // Si no se encuentra una coincidencia exacta, devolver null
+    return null;
+  }
+
   Future<void> resetPreferences(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
@@ -355,14 +437,15 @@ class SolucionUI extends StatelessWidget {
               height: 60,
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
-                onPressed: () {
-                  // Manejar la acción de Atrás
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SolucionUI(),
-                    ),
-                  );
+                onPressed: () async {
+                  String edad = await getEdadText();
+                  String? altura = getHeightForAge(edad);
+                  if (altura != null) {
+                    print(
+                        'La altura correspondiente a la edad $edad es $altura');
+                  } else {
+                    print('No se encontró una altura para la edad $edad');
+                  }
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xFF001254)),
