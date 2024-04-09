@@ -17,148 +17,96 @@ class SolucionUI extends StatefulWidget {
 
 ////////////////FUNCIÓN PARA OBTENER LA ALTURA A PARTIR DEL CSV//////////////////
 class _SolucionUIState extends State<SolucionUI> {
-  List<Map<String, dynamic>> csvData = [];
+  List<Map<String, dynamic>> maleHeightData = [];
+  List<Map<String, dynamic>> femaleHeightData = [];
+  List<Map<String, dynamic>> maleWeightData = [];
+  List<Map<String, dynamic>> femaleWeightData = [];
 
   @override
   void initState() {
     super.initState();
-    loadFemaleCSV();
-    loadMaleCSV();
+    loadData();
   }
 
-  Future<void> loadMaleCSV() async {
-    //MALE
+  Future<void> loadData() async {
     try {
-      String rawData = await rootBundle.loadString('data/maleheight.csv');
-      //print(rawData);
-      List<List<dynamic>> csvList = CsvToListConverter().convert(rawData);
+      String maleRawDataHeight =
+          await rootBundle.loadString('data/maleheight.csv');
+      String femaleRawDataHeight =
+          await rootBundle.loadString('data/femaleheight.csv');
+      String maleRawDataWeight =
+          await rootBundle.loadString('data/maleweight.csv');
+      String femaleRawDataWeight =
+          await rootBundle.loadString('data/femaleweight.csv');
 
-      // Obtener los encabezados de columna desde la primera fila
-      List<String> headers =
-          List<String>.from(csvList[0].map((e) => e.toString()));
-
-      // Remover la fila de encabezados del resto de los datos
-      csvList.removeAt(0);
-
-      List<Map<String, dynamic>> data = [];
-
-      // Convertir cada fila de la lista CSV a un mapa usando los encabezados como claves
-      for (var row in csvList) {
-        Map<String, dynamic> rowData = {};
-        for (int i = 0; i < row.length; i++) {
-          rowData[headers[i]] = row[i];
-        }
-        data.add(rowData);
-      }
+      maleHeightData = _parseCSV(maleRawDataHeight);
+      femaleHeightData = _parseCSV(femaleRawDataHeight);
+      maleHeightData = _parseCSV(maleRawDataWeight);
+      femaleHeightData = _parseCSV(femaleRawDataWeight);
 
       setState(() {
-        csvData = data;
-        //print(csvData.length);
+        // Notify the UI that data has been loaded
       });
     } catch (e) {
       print("Error loading CSV: $e");
     }
   }
 
-  Future<void> loadFemaleCSV() async {
-    //FEMALE
-    try {
-      String rawData = await rootBundle.loadString('data/femaleheight.csv');
-      //print(rawData);
-      List<List<dynamic>> csvList = CsvToListConverter().convert(rawData);
+  List<Map<String, dynamic>> _parseCSV(String rawData) {
+    List<List<dynamic>> csvList = CsvToListConverter().convert(rawData);
+    List<String> headers =
+        List<String>.from(csvList[0].map((e) => e.toString()));
+    csvList.removeAt(0);
 
-      // Obtener los encabezados de columna desde la primera fila
-      List<String> headers =
-          List<String>.from(csvList[0].map((e) => e.toString()));
+    List<Map<String, dynamic>> data = [];
 
-      // Remover la fila de encabezados del resto de los datos
-      csvList.removeAt(0);
-
-      List<Map<String, dynamic>> data = [];
-
-      // Convertir cada fila de la lista CSV a un mapa usando los encabezados como claves
-      for (var row in csvList) {
-        Map<String, dynamic> rowData = {};
-        for (int i = 0; i < row.length; i++) {
-          rowData[headers[i]] = row[i];
-        }
-        data.add(rowData);
+    for (var row in csvList) {
+      Map<String, dynamic> rowData = {};
+      for (int i = 0; i < row.length; i++) {
+        rowData[headers[i]] = row[i];
       }
-
-      setState(() {
-        csvData = data;
-        //print(csvData.length);
-      });
-    } catch (e) {
-      print("Error loading CSV: $e");
+      data.add(rowData);
     }
+
+    return data;
   }
 
-  String? getHeightFromFemaleAge(String age) {
-    // Convertir la edad proporcionada por el usuario a double
+  String? getHeightFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
 
-    print('User Age: $userAge');
+    List<Map<String, dynamic>> selectedData =
+        (gender.toLowerCase() == 'male') ? maleHeightData : femaleHeightData;
 
-    // Iterar sobre cada fila en csvData
-    for (var row in csvData) {
-      //print('CSV Row: $row'); // Impresión de la fila completa del CSV
-
-      // Obtener el valor de edad de la fila actual y convertirlo a String
+    for (var row in selectedData) {
       String rowAgeString = row['Age (in months)'].toString();
-      // Obtener la altura correspondiente a la edad actual
       String? height =
           row['10th Percentile Stature (in centimeters)'].toString();
-
-      // Convertir el valor de edad a double
       double rowAge = double.tryParse(rowAgeString) ?? -1;
 
-      // Impresión de la edad y altura para verificar si se están leyendo correctamente
-      //print('Row Age: $rowAge, Height: $height');
-
-      // Verificar si la edad de la fila actual coincide con la edad proporcionada
       if (rowAge == userAge) {
-        print(height);
-        // Devolver la altura correspondiente si se encuentra una coincidencia exacta
         return height;
       }
     }
 
-    // Si no se encuentra una coincidencia exacta, devolver null
     return null;
   }
 
-  String? getHeightFromMaleAge(String age) {
-    // Convertir la edad proporcionada por el usuario a double
+  String? getWeightFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
 
-    print('User Age: $userAge');
+    List<Map<String, dynamic>> selectedData =
+        (gender.toLowerCase() == 'male') ? maleWeightData : femaleWeightData;
 
-    // Iterar sobre cada fila en csvData
-    for (var row in csvData) {
-      //print('CSV Row: $row'); // Impresión de la fila completa del CSV
-
-      // Obtener el valor de edad de la fila actual y convertirlo a String
+    for (var row in selectedData) {
       String rowAgeString = row['Age (in months)'].toString();
-      // Obtener la altura correspondiente a la edad actual
-      String? height =
-          row['10th Percentile Stature (in centimeters)'].toString();
-
-      // Convertir el valor de edad a double
+      String? weight = row['10th Percentile Weight (in kilograms)'].toString();
       double rowAge = double.tryParse(rowAgeString) ?? -1;
 
-      // Impresión de la edad y altura para verificar si se están leyendo correctamente
-      //print('Row Age: $rowAge, Height: $height');
-
-      // Verificar si la edad de la fila actual coincide con la edad proporcionada
       if (rowAge == userAge) {
-        print(height);
-        // Devolver la altura correspondiente si se encuentra una coincidencia exacta
-        return height;
+        return weight;
       }
     }
 
-    // Si no se encuentra una coincidencia exacta, devolver null
     return null;
   }
 ///////////////////////////////////////////////////////////////////////////
