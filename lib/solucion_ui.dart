@@ -33,8 +33,8 @@ class _SolucionUIState extends State<SolucionUI> {
       // Si el número es entero
       return number +
           0.5; // Redondear al siguiente más cercano por arriba que sea .5
-    } else if (number == 25) {
-      return 25;
+    } else if (number == 24) {
+      return 24;
     } else {
       return number; // Si el número ya tiene decimales, no es necesario redondear}
     }
@@ -91,14 +91,13 @@ class _SolucionUIState extends State<SolucionUI> {
 
     // Redondear la edad al siguiente más cercano por arriba que sea .5
     num roundedAge = roundToNearestHalf(userAge);
-    print('Edad redondeada $roundedAge');
+    //print('Edad redondeada $roundedAge');
     List<Map<String, dynamic>> selectedData =
         (gender.toLowerCase() == 'male') ? maleHeightData : femaleHeightData;
-
+    //print(selectedData);
     for (var row in selectedData) {
       String rowAgeString = row['Age (in months)'].toString();
       double rowAge = double.tryParse(rowAgeString) ?? -1;
-
       if (rowAge == roundedAge) {
         return row['10th Percentile Stature (in centimeters)'].toString();
       }
@@ -108,18 +107,18 @@ class _SolucionUIState extends State<SolucionUI> {
   }
 
   String? getWeightFromAgeAndGender(String age, String gender) {
+    
     double userAge = double.tryParse(age) ?? -1;
 
     // Redondear la edad al siguiente más cercano por arriba que sea .5
     num roundedAge = roundToNearestHalf(userAge);
-    print('Edad redondeada $roundedAge');
+    //print('Edad redondeada $roundedAge');
     List<Map<String, dynamic>> selectedData =
         (gender.toLowerCase() == 'male') ? maleWeightData : femaleWeightData;
-
+    //print(selectedData);
     for (var row in selectedData) {
       String rowAgeString = row['Age (in months)'].toString();
       double rowAge = double.tryParse(rowAgeString) ?? -1;
-
       if (rowAge == roundedAge) {
         return row['10th Percentile Weight (in kilograms)'].toString();
       }
@@ -248,15 +247,17 @@ class _SolucionUIState extends State<SolucionUI> {
     String generopaciente = esMasculino ? 'male' : 'female';
 
     // Obtener la altura y el peso según la edad y el género del paciente
-    String? altura = getHeightFromAgeAndGender(edad, generopaciente);
+    String? talla_correspondiente = getHeightFromAgeAndGender(edad, generopaciente);
 
-    String? pesoCorrespondiente =
+    String? peso_correspondiente =
         getWeightFromAgeAndGender(edad, generopaciente);
-    print('Edad y género $edad$generopaciente');
-    print('Altura $altura');
-    print('Peso $pesoCorrespondiente');
-    print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
-    print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
+        double peso_paciente = double.tryParse(peso) ?? -1;
+        double peso_tabla = double.tryParse(peso_correspondiente) ?? -1;
+        double talla_paciente = double.tryParse(talla) ?? -1;
+        double altura_tabla = double.tryParse(talla_correspondiente!) ?? -1;
+    if(peso_paciente<=peso_correspondiente){}
+    //print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
+    //print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
     // Realizar el diagnóstico basado en las respuestas obtenidas
     if (tiempoAcogida) {
       // si el tiempo de acogida es <24meses
