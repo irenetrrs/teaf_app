@@ -340,7 +340,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                               final reversedIndex = 5 - index;
                               final imageName = isCaucasian
                                   ? filtrumImages[index]
-                                  : labioSuperiorImages[index];
+                                  : filtrumImages[index];
                               final isSelected =
                                   imagenseleccionadafiltrum == reversedIndex;
 
@@ -399,8 +399,10 @@ class _Analisis5UIState extends State<Analisis5UI> {
                             (index) {
                               final reversedIndex = 5 - index;
                               final imageName = isCaucasian
-                                  ? filtrumImages[index]
-                                  : labioSuperiorImages[index];
+                                  ? labioSuperiorImages[
+                                      index] // Aquí debes usar labioSuperiorImages
+                                  : labioSuperiorImages[index]; // También aquí
+
                               final isSelected =
                                   imagenseleccionadalabio == reversedIndex;
 
