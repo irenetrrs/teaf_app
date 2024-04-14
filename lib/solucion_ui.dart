@@ -22,6 +22,7 @@ class _SolucionUIState extends State<SolucionUI> {
   List<Map<String, dynamic>> maleWeightData = [];
   List<Map<String, dynamic>> femaleWeightData = [];
   int percentiles = 0;
+  int rasgos = 0;
 
   @override
   void initState() {
@@ -274,6 +275,9 @@ class _SolucionUIState extends State<SolucionUI> {
       percentiles = percentiles + 1;
     }
     print(percentiles);
+    if (filtrum >= 4 || labioSuperior >= 4) {
+      rasgos = rasgos + 1;
+    }
     //print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
     //print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
     // Realizar el diagnóstico basado en las respuestas obtenidas

@@ -175,11 +175,11 @@ class _Analisis5UIState extends State<Analisis5UI> {
     isCaucasian = await SharedPreferencesHelper
         .getEtniaButtonState(); // Obtiene el valor de etnia
     filtrumImages = isCaucasian
-        ? ['fc1', 'fc2', 'fc3', 'fc4', 'fc5'] // Imágenes para caucásicos
-        : ['fa1', 'fa2', 'fa3', 'fa4', 'fa5']; // Imágenes para afroamericanos
+        ? ['fc5', 'fc4', 'fc3', 'fc2', 'fc1'] // Imágenes para caucásicos
+        : ['fa5', 'fa4', 'fa3', 'fa2', 'fa1']; // Imágenes para afroamericanos
     labioSuperiorImages = isCaucasian
-        ? ['lc1', 'lc2', 'lc3', 'lc4', 'lc5'] // Imágenes para caucásicos
-        : ['la1', 'la2', 'la3', 'la4', 'la5']; // Imágenes para afroamericanos
+        ? ['lc5', 'lc4', 'lc3', 'lc2', 'lc1'] // Imágenes para caucásicos
+        : ['la5', 'la4', 'la3', 'la2', 'la1']; // Imágenes para afroamericanos
     setState(() {
       imagenseleccionadafiltrum =
           prefs.getInt('imagenseleccionadafiltrum') ?? -1;
