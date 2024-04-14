@@ -1,7 +1,21 @@
 import 'package:flutter/material.dart';
 import 'info_ui.dart';
 
-class WelcomeUI extends StatelessWidget {
+class WelcomeUI extends StatefulWidget {
+  @override
+  _WelcomeUIState createState() => _WelcomeUIState();
+}
+
+class _WelcomeUIState extends State<WelcomeUI> {
+  String selectedLanguage =
+      ''; // Variable para almacenar el idioma seleccionado
+
+  void changeLanguage(String languageCode) {
+    setState(() {
+      selectedLanguage = languageCode;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,33 +83,51 @@ class WelcomeUI extends StatelessWidget {
               height: 50,
               child: Stack(
                 children: [
+                  // Botón para seleccionar español
                   Positioned(
                     left: 0,
                     top: 0,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/esp.png'),
-                          fit: BoxFit.fill,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedLanguage = 'es'; // Cambia el idioma a español
+                          print("español");
+                        });
+                      },
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('img/esp.png'),
+                            fit: BoxFit.fill,
+                          ),
+                          shape: BoxShape.circle,
                         ),
-                        shape: BoxShape.circle,
                       ),
                     ),
                   ),
+                  // Botón para seleccionar inglés
                   Positioned(
                     left: 100,
                     top: 0,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/ing.png'),
-                          fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedLanguage = 'en'; // Cambia el idioma a inglés
+                          print("inglés");
+                        });
+                      },
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('img/ing.png'),
+                            fit: BoxFit.cover,
+                          ),
+                          shape: BoxShape.circle,
                         ),
-                        shape: BoxShape.circle,
                       ),
                     ),
                   ),

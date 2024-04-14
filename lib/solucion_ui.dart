@@ -274,10 +274,11 @@ class _SolucionUIState extends State<SolucionUI> {
     if (talla_paciente <= talla_tabla) {
       percentiles = percentiles + 1;
     }
-    print(percentiles);
+    //print(percentiles);
     if (filtrum >= 4 || labioSuperior >= 4) {
       rasgos = rasgos + 1;
     }
+
     //print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
     //print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
     // Realizar el diagnóstico basado en las respuestas obtenidas
@@ -290,6 +291,8 @@ class _SolucionUIState extends State<SolucionUI> {
     } else if (dominios >= 2) {
       //si los dominios son >2
       return 'ARND';
+    } else if (percentiles >= 1) { //falta &&perimetrocraneal
+      return 'FAS';
     } else {
       return 'ARBD';
     }
