@@ -21,6 +21,7 @@ class _SolucionUIState extends State<SolucionUI> {
   List<Map<String, dynamic>> femaleHeightData = [];
   List<Map<String, dynamic>> maleWeightData = [];
   List<Map<String, dynamic>> femaleWeightData = [];
+  int percentiles = 0;
 
   @override
   void initState() {
@@ -107,7 +108,6 @@ class _SolucionUIState extends State<SolucionUI> {
   }
 
   String? getWeightFromAgeAndGender(String age, String gender) {
-    
     double userAge = double.tryParse(age) ?? -1;
 
     // Redondear la edad al siguiente más cercano por arriba que sea .5
@@ -247,15 +247,33 @@ class _SolucionUIState extends State<SolucionUI> {
     String generopaciente = esMasculino ? 'male' : 'female';
 
     // Obtener la altura y el peso según la edad y el género del paciente
-    String? talla_correspondiente = getHeightFromAgeAndGender(edad, generopaciente);
+    String? talla_correspondiente =
+        getHeightFromAgeAndGender(edad, generopaciente);
 
-    String? peso_correspondiente =
+    String? peso_correspondiente_string =
         getWeightFromAgeAndGender(edad, generopaciente);
-        double peso_paciente = double.tryParse(peso) ?? -1;
-        double peso_tabla = double.tryParse(peso_correspondiente) ?? -1;
-        double talla_paciente = double.tryParse(talla) ?? -1;
-        double altura_tabla = double.tryParse(talla_correspondiente!) ?? -1;
-    if(peso_paciente<=peso_correspondiente){}
+    double? peso_correspondiente;
+    if (peso_correspondiente_string != null) {
+      peso_correspondiente = double.tryParse(peso_correspondiente_string);
+    }
+
+    double peso_paciente = double.tryParse(peso) ?? -1;
+    double peso_tabla = peso_correspondiente ?? -1;
+    double talla_paciente = double.tryParse(talla) ?? -1;
+    double talla_tabla = double.tryParse(talla_correspondiente!) ?? -1;
+    print(peso_paciente);
+    print(peso_tabla);
+    print(talla_paciente);
+    print(talla_tabla);
+
+    //lógica con los percentiles
+    if (peso_paciente <= peso_tabla) {
+      percentiles = percentiles + 1;
+    }
+    if (talla_paciente <= talla_tabla) {
+      percentiles = percentiles + 1;
+    }
+    print(percentiles);
     //print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
     //print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
     // Realizar el diagnóstico basado en las respuestas obtenidas
