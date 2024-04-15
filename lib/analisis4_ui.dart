@@ -1,9 +1,12 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis3_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Analisis4UI extends StatefulWidget {
   @override
@@ -21,6 +24,22 @@ class _Analisis4UIState extends State<Analisis4UI> {
   TextEditingController tallaController = TextEditingController();
   TextEditingController perimetroCranealController = TextEditingController();
   TextEditingController distanciaPalpebralController = TextEditingController();
+
+  List<String> urls = [
+    'https://vimeo.com/766536749', //peso
+    'https://vimeo.com/766536770', //talla
+    'https://vimeo.com/766536717', //perímetro craneal
+    'https://vimeo.com/766536975', //distancia palpebral
+  ];
+
+  _launchURL(String url) async {
+    Uri _url = Uri.parse(url);
+    if (await launchUrl(_url)) {
+      await launchUrl(_url);
+    } else {
+      throw 'Could not launch $_url';
+    }
+  }
 
   @override
   void initState() {
@@ -181,16 +200,44 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                         return AlertDialog(
                                           title:
                                               Text('Información sobre el peso'),
-                                          content: Text(
-                                              'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados\nhttps://vimeo.com/766536749'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Aceptar'),
-                                            ),
-                                          ],
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  'Visualice el siguiente vídeo para obtener más información sobre cómo medir el peso:'),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  _launchURL(urls[
+                                                      0]); // Llama a la función para abrir el enlace
+                                                },
+                                                child: Text(
+                                                  'Vimeo - Peso',
+                                                  style: TextStyle(
+                                                    color: const Color.fromARGB(
+                                                        255,
+                                                        4,
+                                                        60,
+                                                        105), // Estilo para que parezca un enlace
+                                                  ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                children: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cerrar'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       },
                                     );
@@ -269,16 +316,44 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                         return AlertDialog(
                                           title: Text(
                                               'Información sobre la talla'),
-                                          content: Text(
-                                              'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados\nhttps://vimeo.com/766536770'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Aceptar'),
-                                            ),
-                                          ],
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  'Visualice el siguiente vídeo para obtener más información sobre cómo medir la estatura:'),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  _launchURL(urls[
+                                                      1]); // Llama a la función para abrir el enlace
+                                                },
+                                                child: Text(
+                                                  'Vimeo - Talla',
+                                                  style: TextStyle(
+                                                    color: const Color.fromARGB(
+                                                        255,
+                                                        4,
+                                                        60,
+                                                        105), // Estilo para que parezca un enlace
+                                                  ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                children: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cerrar'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       },
                                     );
@@ -357,16 +432,44 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                         return AlertDialog(
                                           title: Text(
                                               'Información sobre el perímetro craneal'),
-                                          content: Text(
-                                              'Usea una cinta métrica que no se pueda estirar. Rodee firmemente la cabeza con la cinta métrica alrededor de la circunferencia más ancha posible. La parte más ancha de la frente encima de las cejas, por encima de las orejas, la parte más prominente de la nuca. \n\n https://vimeo.com/766536717'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Aceptar'),
-                                            ),
-                                          ],
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  'Use una cinta métrica que no se pueda estirar. Rodee firmemente la cabeza con la cinta métrica alrededor de la circunferencia más ancha posible. La parte más ancha de la frente encima de las cejas, por encima de las orejas, la parte más prominente de la nuca. Visualice el siguiente vídeo para obtener más información sobre cómo medir el perímetro craneal:'),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  _launchURL(urls[
+                                                      2]); // Llama a la función para abrir el enlace
+                                                },
+                                                child: Text(
+                                                  'Vimeo - Perímetro Craneal',
+                                                  style: TextStyle(
+                                                    color: const Color.fromARGB(
+                                                        255,
+                                                        4,
+                                                        60,
+                                                        105), // Estilo para que parezca un enlace
+                                                  ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                children: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cerrar'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       },
                                     );
@@ -445,16 +548,44 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                         return AlertDialog(
                                           title: Text(
                                               'Información sobre la distancia palpebral'),
-                                          content: Text(
-                                              'La medida de la longitud de la hendidura palpebral se realiza entre los ángulos interno y externo del ojo, haciendo que el niño mire ligeramente hacia arriba. Semide con una regla que se sujeta en el mismo plano desde un ángulo hasta el otro.\n\nhttps://vimeo.com/766536975'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Aceptar'),
-                                            ),
-                                          ],
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  'Visualice el siguiente vídeo para obtener más información sobre cómo medir la distancia palpebral:'),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  _launchURL(urls[
+                                                      3]); // Llama a la función para abrir el enlace
+                                                },
+                                                child: Text(
+                                                  'Vimeo - Distancia Palpebral',
+                                                  style: TextStyle(
+                                                    color: const Color.fromARGB(
+                                                        255,
+                                                        4,
+                                                        60,
+                                                        105), // Estilo para que parezca un enlace
+                                                  ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                children: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cerrar'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       },
                                     );

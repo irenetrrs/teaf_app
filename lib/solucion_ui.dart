@@ -7,6 +7,7 @@ import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class SolucionUI extends StatefulWidget {
@@ -23,6 +24,14 @@ class _SolucionUIState extends State<SolucionUI> {
   List<Map<String, dynamic>> femaleWeightData = [];
   int percentiles = 0;
   int rasgos = 0;
+  _launchURL(String url) async {
+    Uri _url = Uri.parse(url);
+    if (await launchUrl(_url)) {
+      await launchUrl(_url);
+    } else {
+      throw 'Could not launch $_url';
+    }
+  }
 
   @override
   void initState() {
@@ -291,7 +300,8 @@ class _SolucionUIState extends State<SolucionUI> {
     } else if (dominios >= 2) {
       //si los dominios son >2
       return 'ARND';
-    } else if (percentiles >= 1) { //falta &&perimetrocraneal
+    } else if (percentiles >= 1) {
+      //falta &&perimetrocraneal
       return 'FAS';
     } else {
       return 'ARBD';
@@ -485,16 +495,39 @@ class _SolucionUIState extends State<SolucionUI> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text('Información sobre el resultado'),
-                      content: Text(
-                          'Más información sobre el diagnóstico en /link/'),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: Text('Aceptar'),
-                        ),
-                      ],
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              'Visite el link para obtener más información sobre el diagnóstico:'),
+                          GestureDetector(
+                            onTap: () {
+                              _launchURL(
+                                  'https://cursoteaf.com/'); // Llama a la función para abrir el enlace
+                            },
+                            child: Text(
+                              'Cursos TEAF',
+                              style: TextStyle(
+                                color: const Color.fromARGB(255, 4, 60,
+                                    105), // Estilo para que parezca un enlace
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment
+                                .end, // Esto alineará el botón "Cerrar" a la derecha
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('Cerrar'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     );
                   },
                 );

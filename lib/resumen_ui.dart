@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teaf_app/analisis1_ui.dart';
+import 'package:teaf_app/inicio_ui.dart';
 import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
@@ -875,27 +877,37 @@ class ResumenUI extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      width: 74,
-                      height: 74,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 176, 176, 176),
-                        borderRadius: BorderRadius.circular(20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Analisis1UI(),
                       ),
-                    ),
-                    Positioned(
-                      left: 12,
-                      top: 12,
-                      child: Image.asset(
-                        'img/editar.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 74,
+                        height: 74,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 176, 176, 176),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
-                    ),
-                  ],
+                      Positioned(
+                        left: 12,
+                        top: 12,
+                        child: Image.asset(
+                          'img/editar.png',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   width: 40,
@@ -925,27 +937,37 @@ class ResumenUI extends StatelessWidget {
                 SizedBox(
                   width: 40,
                 ),
-                Stack(
-                  children: [
-                    Container(
-                      width: 74,
-                      height: 74,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 176, 176, 176),
-                        borderRadius: BorderRadius.circular(20),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InicioUI(),
                       ),
-                    ),
-                    Positioned(
-                      left: 12,
-                      top: 12,
-                      child: Image.asset(
-                        'img/papelera.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 74,
+                        height: 74,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 176, 176, 176),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
-                    ),
-                  ],
+                      Positioned(
+                        left: 12,
+                        top: 12,
+                        child: Image.asset(
+                          'img/papelera.png',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
