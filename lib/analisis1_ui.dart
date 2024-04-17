@@ -39,7 +39,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFF001254),
+        backgroundColor: Color.fromARGB(255, 60, 152, 209),
         body: Padding(
           padding: EdgeInsets.all(20.0),
           child: Column(

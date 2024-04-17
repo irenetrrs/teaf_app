@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:teaf_app/analisis2_ui.dart';
+import 'package:teaf_app/analisis5_ui.dart';
 import 'analisis4_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 
-class Analisis3UI extends StatefulWidget {
+class Analisis6UI extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
-  _Analisis3UIState createState() => _Analisis3UIState();
+  _Analisis6UIState createState() => _Analisis6UIState();
 }
 
-class _Analisis3UIState extends State<Analisis3UI> {
+class _Analisis6UIState extends State<Analisis6UI> {
   // Variables para manejar el estado de los botones
-  final String etnia = 'preguntaEtnia';
-  final String genero = 'preguntaGenero';
-  bool botoncau = false;
-  bool botonafro = false;
-  bool botonhom = false;
-  bool botonmuj = false;
+  final String anomalias = 'preguntaAnomalías';
+  final String recurrente = 'preguntaRecurrente';
+  bool botonanomaliassi = false;
+  bool botonanomaliasno = false;
+  bool botonrecurrentesi = false;
+  bool botonrecurrenteno = false;
   @override
   void initState() {
     super.initState();
-    _loadEtniaSelectionFromPrefs();
+    _loadAnomaliasSelectionFromPrefs();
     _loadGeneroSelectionFromPrefs();
     setState(() {
-      botonafro = false;
-      botoncau = false;
-      botonhom = false;
-      botonmuj = false;
+      botonanomaliassi = false;
+      botonanomaliasno = false;
+      botonrecurrentesi = false;
+      botonrecurrenteno = false;
     });
   }
 
@@ -50,7 +50,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Analisis2UI(),
+                          builder: (context) => Analisis5UI(),
                         ),
                       );
                     },
@@ -164,7 +164,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Etnia',
+                              'Malformaciones craneales',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -183,13 +183,13 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
                                       setState(() {
-                                        botoncau = true;
-                                        botonafro = false;
+                                        botonanomaliassi = true;
+                                        botonanomaliasno = false;
                                       });
                                       _saveEtniaSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: botoncau
+                                      backgroundColor: botonanomaliassi
                                           ? Colors
                                               .orange // Color cuando está botonado
                                           : Color(0xFFDFDFDF),
@@ -200,7 +200,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                       fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
-                                      'Caucásico',
+                                      'Sí',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
                                         fontSize: 16,
@@ -217,13 +217,13 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
                                       setState(() {
-                                        botoncau = false;
-                                        botonafro = true;
+                                        botonanomaliassi = false;
+                                        botonanomaliasno = true;
                                       });
                                       _saveEtniaSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonafro
+                                      backgroundColor: botonanomaliasno
                                           ? Colors
                                               .orange // Color cuando está botonado
                                           : Color(0xFFDFDFDF),
@@ -234,7 +234,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                       fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
-                                      'Afroamericano',
+                                      'No',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
                                         fontSize: 13,
@@ -264,7 +264,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Género',
+                              'Recurrente',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
@@ -283,13 +283,13 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
                                       setState(() {
-                                        botonhom = true;
-                                        botonmuj = false;
+                                        botonrecurrentesi = true;
+                                        botonrecurrenteno = false;
                                       });
                                       _saveGeneroSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonhom
+                                      backgroundColor: botonrecurrentesi
                                           ? Colors
                                               .orange // Color cuando está botonado
                                           : Color(0xFFDFDFDF),
@@ -300,7 +300,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                       fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
-                                      'Hombre',
+                                      'Sí',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
                                         fontSize: 22,
@@ -317,13 +317,13 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                     onPressed: () {
                                       // Acción cuando se presiona el botón "Sí"
                                       setState(() {
-                                        botonhom = false;
-                                        botonmuj = true;
+                                        botonrecurrentesi = false;
+                                        botonrecurrenteno = true;
                                       });
                                       _saveGeneroSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonmuj
+                                      backgroundColor: botonrecurrenteno
                                           ? Colors
                                               .orange // Color cuando está botonado
                                           : Color(0xFFDFDFDF),
@@ -334,7 +334,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                       fixedSize: Size.fromHeight(50.0),
                                     ),
                                     child: Text(
-                                      'Mujer',
+                                      'No',
                                       style: TextStyle(
                                         color: Color(0xFF68696C),
                                         fontSize: 22,
@@ -397,29 +397,29 @@ class _Analisis3UIState extends State<Analisis3UI> {
         ));
   }
 
-  //para guardar y cargar el estado de la seleccion del boton etnia
-  _saveEtniaSelectionToPrefs(bool botoncau) async {
+  //para guardar y cargar el estado de la seleccion del boton anomalias
+  _saveAnomaliasSelectionToPrefs(bool botoncau) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('$etnia-botoncau', botoncau);
+    prefs.setBool('$anomalias-botonanomaliassi', botonanomaliassi);
   }
 
-  _loadEtniaSelectionFromPrefs() async {
+  _loadAnomaliasSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? savedBotoncau = prefs.getBool('$etnia-botoncau');
+    bool? savedBotonanomalias = prefs.getBool('$anomalias-botonanomaliassi');
 
-    if (savedBotoncau != null) {
+    if (savedBotonanomalias != null) {
       setState(() {
-        botoncau = savedBotoncau;
-        botonafro = !savedBotoncau;
+        botonanomaliassi = savedBotonanomalias;
+        botonanomaliasno = !savedBotonanomalias;
       });
     } else {
-      botonafro = false;
-      botoncau = false;
+      botonanomaliasno = false;
+      botonanomaliassi = false;
     }
   }
 
   //para guardar y cargar el estado de la seleccion del boton genero
-  _saveGeneroSelectionToPrefs(bool botonhom) async {
+  _saveRecurrenteSelectionToPrefs(bool botonhom) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('$genero-botonhom', botonhom);
   }
