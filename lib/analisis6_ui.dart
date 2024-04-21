@@ -186,7 +186,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         botonanomaliassi = true;
                                         botonanomaliasno = false;
                                       });
-                                      _saveEtniaSelectionToPrefs(true);
+                                      _saveAnomaliasSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonanomaliassi
@@ -220,7 +220,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         botonanomaliassi = false;
                                         botonanomaliasno = true;
                                       });
-                                      _saveEtniaSelectionToPrefs(false);
+                                      _saveAnomaliasSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonanomaliasno
@@ -286,7 +286,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         botonrecurrentesi = true;
                                         botonrecurrenteno = false;
                                       });
-                                      _saveGeneroSelectionToPrefs(true);
+                                      _saveRecurrenteSelectionToPrefs(true);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonrecurrentesi
@@ -320,7 +320,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         botonrecurrentesi = false;
                                         botonrecurrenteno = true;
                                       });
-                                      _saveGeneroSelectionToPrefs(false);
+                                      _saveRecurrenteSelectionToPrefs(false);
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonrecurrenteno
@@ -398,7 +398,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
   }
 
   //para guardar y cargar el estado de la seleccion del boton anomalias
-  _saveAnomaliasSelectionToPrefs(bool botoncau) async {
+  _saveAnomaliasSelectionToPrefs(bool botonanomaliassi) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('$anomalias-botonanomaliassi', botonanomaliassi);
   }
@@ -418,23 +418,23 @@ class _Analisis6UIState extends State<Analisis6UI> {
     }
   }
 
-  //para guardar y cargar el estado de la seleccion del boton genero
-  _saveRecurrenteSelectionToPrefs(bool botonhom) async {
+  //para guardar y cargar el estado de la seleccion del boton recurrente
+  _saveRecurrenteSelectionToPrefs(bool botonrecurrentesi) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('$genero-botonhom', botonhom);
+    prefs.setBool('$recurrente-preguntaAnomalías', botonrecurrentesi);
   }
 
   _loadGeneroSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? savedBotonhom = prefs.getBool('$genero-botonhom');
-    if (savedBotonhom != null) {
+    bool? savedBotonrecurrente = prefs.getBool('$recurrente-preguntaAnomalías');
+    if (savedBotonrecurrente != null) {
       setState(() {
-        botonhom = savedBotonhom;
-        botonmuj = !savedBotonhom;
+        botonrecurrentesi = savedBotonrecurrente;
+        botonrecurrenteno = !savedBotonrecurrente;
       });
     } else {
-      botonhom = false;
-      botonmuj = false;
+      botonrecurrentesi = false;
+      botonrecurrenteno = false;
     }
   }
 }

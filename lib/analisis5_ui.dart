@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'analisis4_ui.dart';
+import 'analisis6_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
@@ -449,7 +450,13 @@ class _Analisis5UIState extends State<Analisis5UI> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    SharedPreferencesHelper.showResumenDialog(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Analisis6UI(),
+                        ),
+                      );
+                    //SharedPreferencesHelper.showResumenDialog(context);
                     // Manejar la acción de Siguiente
                     /*Navigator.push(
                       context,
