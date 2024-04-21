@@ -4,6 +4,7 @@ import 'package:teaf_app/analisis1_ui.dart';
 import 'analisis3_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Analisis2UI extends StatefulWidget {
   @override
@@ -20,6 +21,15 @@ class _Analisis2UIState extends State<Analisis2UI> {
   bool boton2 = false;
   bool botonSi = false;
   bool botonNo = false;
+
+  _launchURL(String url) async {
+    Uri url0 = Uri.parse(url);
+    if (await launchUrl(url0)) {
+      await launchUrl(url0);
+    } else {
+      throw 'Could not launch $url0';
+    }
+  }
 
   @override
   void initState() {
@@ -194,17 +204,45 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title: Text(
-                                              'Información sobre dominios afectados'),
-                                          content: Text(
-                                              'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados\n /link/'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Aceptar'),
-                                            ),
-                                          ],
+                                              'Información sobre los dominios'),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                  'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados:'),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  _launchURL(
+                                                      'https://vimeo.com/845544703'); // Llama a la función para abrir el enlace
+                                                },
+                                                child: Text(
+                                                  'Vimeo - Peso',
+                                                  style: TextStyle(
+                                                    color: const Color.fromARGB(
+                                                        255,
+                                                        4,
+                                                        60,
+                                                        105), // Estilo para que parezca un enlace
+                                                  ),
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment
+                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                children: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text('Cerrar'),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         );
                                       },
                                     );

@@ -450,13 +450,13 @@ class _Analisis5UIState extends State<Analisis5UI> {
                 height: 60,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.push(
+                    /*Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => Analisis6UI(),
                         ),
-                      );
-                    //SharedPreferencesHelper.showResumenDialog(context);
+                      );*/
+                    SharedPreferencesHelper.showResumenDialog(context);
                     // Manejar la acción de Siguiente
                     /*Navigator.push(
                       context,

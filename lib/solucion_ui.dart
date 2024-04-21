@@ -16,12 +16,14 @@ class SolucionUI extends StatefulWidget {
   _SolucionUIState createState() => _SolucionUIState();
 }
 
-////////////////FUNCIÓN PARA OBTENER LA ALTURA A PARTIR DEL CSV//////////////////
 class _SolucionUIState extends State<SolucionUI> {
   List<Map<String, dynamic>> maleHeightData = [];
   List<Map<String, dynamic>> femaleHeightData = [];
   List<Map<String, dynamic>> maleWeightData = [];
   List<Map<String, dynamic>> femaleWeightData = [];
+  List<Map<String, dynamic>> distanciaPalpebralData = [];
+  List<Map<String, dynamic>> perimetroCranealHombresData = [];
+  List<Map<String, dynamic>> perimetroCranealMujeresData = [];
   int percentiles = 0;
   int rasgos = 0;
   _launchURL(String url) async {
@@ -51,6 +53,16 @@ class _SolucionUIState extends State<SolucionUI> {
     }
   }
 
+  double roundToNearest(double number) {
+    if (number % 1 != 0) {
+      // Si el número es entero
+      return number +
+          0.5; // Redondear al siguiente más cercano por arriba que sea .5
+    } else {
+      return number; // Si el número ya tiene decimales, no es necesario redondear}
+    }
+  }
+
   Future<void> loadData() async {
     try {
       String maleRawDataHeight =
@@ -61,11 +73,20 @@ class _SolucionUIState extends State<SolucionUI> {
           await rootBundle.loadString('data/maleweight.csv');
       String femaleRawDataWeight =
           await rootBundle.loadString('data/femaleweight.csv');
+      String distanciaPalpebralRawData =
+          await rootBundle.loadString('data/distanciapalpebral.csv');
+      String perimetroCranealHombresRawData =
+          await rootBundle.loadString('data/perimetrocranealhombres.csv');
+      String perimetroCranealMujeresRawData =
+          await rootBundle.loadString('data/perimetrocranealmujeres.csv');
 
       maleHeightData = _parseCSV(maleRawDataHeight);
       femaleHeightData = _parseCSV(femaleRawDataHeight);
       maleWeightData = _parseCSV(maleRawDataWeight);
       femaleWeightData = _parseCSV(femaleRawDataWeight);
+      distanciaPalpebralData = _parseCSV(distanciaPalpebralRawData);
+      perimetroCranealHombresData = _parseCSV(perimetroCranealHombresRawData);
+      perimetroCranealMujeresData = _parseCSV(perimetroCranealMujeresRawData);
       //print(maleRawDataWeight);
       //print(femaleRawDataWeight);
       //print(maleRawDataHeight);
@@ -97,6 +118,7 @@ class _SolucionUIState extends State<SolucionUI> {
     return data;
   }
 
+////////////////FUNCIÓN PARA OBTENER LA ALTURA A PARTIR DEL CSV//////////////////
   String? getHeightFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
 
@@ -116,7 +138,9 @@ class _SolucionUIState extends State<SolucionUI> {
 
     return null;
   }
+///////////////////////////////////////////////////////////////////////////
 
+////////////////FUNCIÓN PARA OBTENER EL PESO A PARTIR DEL CSV//////////////////
   String? getWeightFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
 
@@ -131,6 +155,49 @@ class _SolucionUIState extends State<SolucionUI> {
       double rowAge = double.tryParse(rowAgeString) ?? -1;
       if (rowAge == roundedAge) {
         return row['10th Percentile Weight (in kilograms)'].toString();
+      }
+    }
+
+    return null;
+  }
+///////////////////////////////////////////////////////////////////////////
+
+////////////////FUNCIÓN PARA OBTENER LA DIST PALPEBRAL A PARTIR DEL CSV//////////////////
+  String? getDistanceFromAge(String age) {
+    double userAge = double.tryParse(age) ?? -1;
+
+    // Redondear la edad al siguiente más cercano por arriba que sea .5
+    num roundedAge = roundToNearest(userAge);
+    print('Edad redondeada $roundedAge');
+
+    for (var row in distanciaPalpebralData) {
+      String rowAgeString = row['Age (in months)'].toString();
+      double rowAge = double.tryParse(rowAgeString) ?? -1;
+      if (rowAge == roundedAge) {
+        return row['Length (in milimeters)'].toString();
+      }
+    }
+
+    return null;
+  }
+//////////////////////////////////////////////////////////////////////////////
+
+///////////////////FUNCIÓN PARA OBTENER EL PER CRANEAL A PARTIR DEL CSV//////////////////
+  String? getPerimeterFromAgeAndGender(String age, String gender) {
+    double userAge = double.tryParse(age) ?? -1;
+
+    // Redondear la edad al siguiente más cercano por arriba que sea .5
+    num roundedAge = roundToNearest(userAge);
+    //print('Edad redondeada $roundedAge');
+    List<Map<String, dynamic>> selectedData = (gender.toLowerCase() == 'male')
+        ? perimetroCranealHombresData
+        : perimetroCranealMujeresData;
+    //print(selectedData);
+    for (var row in selectedData) {
+      String rowAgeString = row['Age (in months)'].toString();
+      double rowAge = double.tryParse(rowAgeString) ?? -1;
+      if (rowAge == roundedAge) {
+        return row['Head Circumference (in milimetres)'].toString();
       }
     }
 
@@ -226,11 +293,24 @@ class _SolucionUIState extends State<SolucionUI> {
   static Future<int> getFiltrum() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('imagenseleccionadafiltrum') ?? -1;
-  } //labio superior
+  }
 
+  //labio superior
   static Future<int> getLabioSuperior() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('imagenseleccionadalabio') ?? -1;
+  }
+
+  //anomalias
+  static Future<bool> getAnomalias() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaAnomalías-botonanomaliassi') ?? false;
+  }
+
+  //recurrente
+  static Future<bool> getRecurrente() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaRecurrente-botonrecurrentesi') ?? false;
   }
 
 // Método para obtener las respuestas y realizar el diagnóstico
@@ -249,45 +329,92 @@ class _SolucionUIState extends State<SolucionUI> {
     String distanciaPalpebral = await getDistanciaPalpebralText();
     int filtrum = await getFiltrum();
     int labioSuperior = await getLabioSuperior();
+    bool anomalias = await getAnomalias();
+    bool recurrente = await getRecurrente();
 
-    bool esMasculino =
-        await getGeneroButtonState(); // Obtener el género como booleano
+    // Obtener el género como booleano
+    bool esMasculino = await getGeneroButtonState();
 
     // Convertir el valor booleano a una cadena 'male' o 'female'
     String generopaciente = esMasculino ? 'male' : 'female';
 
     // Obtener la altura y el peso según la edad y el género del paciente
-    String? tallaCorrespondiente =
+    String? tallaCorrespondienteString =
         getHeightFromAgeAndGender(edad, generopaciente);
 
     String? pesoCorrespondienteString =
         getWeightFromAgeAndGender(edad, generopaciente);
+
     double? pesoCorrespondiente;
+    double? tallaCorrespondiente;
     if (pesoCorrespondienteString != null) {
       pesoCorrespondiente = double.tryParse(pesoCorrespondienteString);
+    }
+    if (tallaCorrespondienteString != null) {
+      tallaCorrespondiente = double.tryParse(tallaCorrespondienteString);
+    }
+
+    // Obtener la dist palpebral segun la edad del paciente
+    String? distanciaPalpebralCorrespondienteString = getDistanceFromAge(edad);
+    double? distanciaPalpebralCorrespondiente;
+    if (distanciaPalpebralCorrespondienteString != null) {
+      distanciaPalpebralCorrespondiente =
+          double.tryParse(distanciaPalpebralCorrespondienteString);
+    }
+
+    // Obtener el perimetro craneal segun la edad y el genero del paciente
+    String? perimetroCorrespondienteString =
+        getPerimeterFromAgeAndGender(edad, generopaciente);
+    double? perimetroCorrespondiente;
+    if (perimetroCorrespondienteString != null) {
+      perimetroCorrespondiente =
+          double.tryParse(perimetroCorrespondienteString);
     }
 
     double pesoPaciente = double.tryParse(peso) ?? -1;
     double pesoTabla = pesoCorrespondiente ?? -1;
     double tallaPaciente = double.tryParse(talla) ?? -1;
-    double tallaTabla = double.tryParse(tallaCorrespondiente!) ?? -1;
-    print(pesoPaciente);
-    print(pesoTabla);
-    print(tallaPaciente);
-    print(tallaTabla);
+    double tallaTabla = tallaCorrespondiente ?? -1;
+    double distanciaPalpebralPaciente =
+        double.tryParse(distanciaPalpebral) ?? -1;
+    double distanciaPalpebralTabla = distanciaPalpebralCorrespondiente ?? -1;
+    double perimetroCranealPaciente = double.tryParse(perimetroCraneal) ?? -1;
+    double perimetroCranealTabla = perimetroCorrespondiente ?? -1;
+
+    print('pesoPaciente $pesoPaciente');
+    print('pesoTabla $pesoTabla');
+    print('tallaPaciente $tallaPaciente');
+    print('tallaTabla $tallaTabla');
+    print('distanciaPalpebralPaciente $distanciaPalpebralPaciente');
+    print('distanciaPalpebralTabla $distanciaPalpebralTabla');
+    print('perimetroCranealPaciente $perimetroCranealPaciente');
+    print('perimetroCranealTabla $perimetroCranealTabla');
 
     //lógica con los percentiles
     if (pesoPaciente <= pesoTabla) {
-      percentiles = percentiles + 1;
+      percentiles += 1;
     }
     if (tallaPaciente <= tallaTabla) {
-      percentiles = percentiles + 1;
+      percentiles += 1;
     }
-    //print(percentiles);
-    if (filtrum >= 4 || labioSuperior >= 4) {
-      rasgos = rasgos + 1;
+    if (anomalias = true) {
+      percentiles += 1;
+    }
+    if (recurrente = true) {
+      percentiles += 1;
+    }
+    if (perimetroCranealPaciente <= perimetroCranealTabla) {
+      percentiles += 1;
     }
 
+    //print(percentiles);
+    //lógica rasgos
+    if (filtrum >= 4 || labioSuperior >= 4) {
+      rasgos += 1;
+    }
+    if (distanciaPalpebralPaciente <= distanciaPalpebralTabla) {
+      rasgos += 1;
+    }
     //print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
     //print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
     // Realizar el diagnóstico basado en las respuestas obtenidas
