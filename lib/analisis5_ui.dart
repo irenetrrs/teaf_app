@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'analisis4_ui.dart';
-import 'analisis6_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
