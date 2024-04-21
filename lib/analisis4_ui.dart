@@ -31,11 +31,11 @@ class _Analisis4UIState extends State<Analisis4UI> {
   ];
 
   _launchURL(String url) async {
-    Uri _url = Uri.parse(url);
-    if (await launchUrl(_url)) {
-      await launchUrl(_url);
+    Uri url0 = Uri.parse(url);
+    if (await launchUrl(url0)) {
+      await launchUrl(url0);
     } else {
-      throw 'Could not launch $_url';
+      throw 'Could not launch $url0';
     }
   }
 

@@ -25,11 +25,11 @@ class _SolucionUIState extends State<SolucionUI> {
   int percentiles = 0;
   int rasgos = 0;
   _launchURL(String url) async {
-    Uri _url = Uri.parse(url);
-    if (await launchUrl(_url)) {
-      await launchUrl(_url);
+    Uri url0 = Uri.parse(url);
+    if (await launchUrl(url0)) {
+      await launchUrl(url0);
     } else {
-      throw 'Could not launch $_url';
+      throw 'Could not launch $url0';
     }
   }
 
@@ -257,30 +257,30 @@ class _SolucionUIState extends State<SolucionUI> {
     String generopaciente = esMasculino ? 'male' : 'female';
 
     // Obtener la altura y el peso según la edad y el género del paciente
-    String? talla_correspondiente =
+    String? tallaCorrespondiente =
         getHeightFromAgeAndGender(edad, generopaciente);
 
-    String? peso_correspondiente_string =
+    String? pesoCorrespondienteString =
         getWeightFromAgeAndGender(edad, generopaciente);
-    double? peso_correspondiente;
-    if (peso_correspondiente_string != null) {
-      peso_correspondiente = double.tryParse(peso_correspondiente_string);
+    double? pesoCorrespondiente;
+    if (pesoCorrespondienteString != null) {
+      pesoCorrespondiente = double.tryParse(pesoCorrespondienteString);
     }
 
-    double peso_paciente = double.tryParse(peso) ?? -1;
-    double peso_tabla = peso_correspondiente ?? -1;
-    double talla_paciente = double.tryParse(talla) ?? -1;
-    double talla_tabla = double.tryParse(talla_correspondiente!) ?? -1;
-    print(peso_paciente);
-    print(peso_tabla);
-    print(talla_paciente);
-    print(talla_tabla);
+    double pesoPaciente = double.tryParse(peso) ?? -1;
+    double pesoTabla = pesoCorrespondiente ?? -1;
+    double tallaPaciente = double.tryParse(talla) ?? -1;
+    double tallaTabla = double.tryParse(tallaCorrespondiente!) ?? -1;
+    print(pesoPaciente);
+    print(pesoTabla);
+    print(tallaPaciente);
+    print(tallaTabla);
 
     //lógica con los percentiles
-    if (peso_paciente <= peso_tabla) {
+    if (pesoPaciente <= pesoTabla) {
       percentiles = percentiles + 1;
     }
-    if (talla_paciente <= talla_tabla) {
+    if (tallaPaciente <= tallaTabla) {
       percentiles = percentiles + 1;
     }
     //print(percentiles);
