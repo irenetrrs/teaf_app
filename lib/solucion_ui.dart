@@ -321,7 +321,7 @@ class _SolucionUIState extends State<SolucionUI> {
     bool tiempoAcogida = await getTiempoAcogidaButtonState();
     int dominios = await getDominiosButtonState();
     bool alcohol = await getAlcoholButtonState();
-    bool etnia = await getEtniaButtonState();
+    //bool etnia = await getEtniaButtonState();
     bool genero = await getGeneroButtonState();
     String peso = await getPesoText();
     String talla = await getTallaText();
@@ -332,11 +332,8 @@ class _SolucionUIState extends State<SolucionUI> {
     bool anomalias = await getAnomalias();
     bool recurrente = await getRecurrente();
 
-    // Obtener el género como booleano
-    bool esMasculino = await getGeneroButtonState();
-
     // Convertir el valor booleano a una cadena 'male' o 'female'
-    String generopaciente = esMasculino ? 'male' : 'female';
+    String generopaciente = genero ? 'male' : 'female';
 
     // Obtener la altura y el peso según la edad y el género del paciente
     String? tallaCorrespondienteString =

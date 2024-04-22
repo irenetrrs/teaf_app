@@ -155,309 +155,315 @@ class _Analisis1UIState extends State<Analisis1UI> {
               SizedBox(
                 height: 30,
               ),
-              SizedBox(
-                width: 303,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Positioned(
-                      left: 3,
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        height: 103.02,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Edad',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Positioned(
+                        left: 3,
+                        top: 164,
+                        child: SizedBox(
+                          width: 303,
+                          height: 103.02,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Edad',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
+                                    ),
                                   ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // Mostrar el pop-up al tocar la imagen
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title:
-                                              Text('Información sobre la Edad'),
-                                          content: Text(
-                                              'En los menores de 3 años de edad, el estudio neurocognitivo se basa en el retraso en el desarrollo. Además, en los menores de 6 años y en los mayores de 18 años no se puede realizar el estudio conductal.'),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              child: Text('Aceptar'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
+                                  InkWell(
+                                    onTap: () {
+                                      // Mostrar el pop-up al tocar la imagen
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text(
+                                                'Información sobre la Edad'),
+                                            content: Text(
+                                                'En los menores de 3 años de edad, el estudio neurocognitivo se basa en el retraso en el desarrollo. Además, en los menores de 6 años y en los mayores de 18 años no se puede realizar el estudio conductal.'),
+                                            actions: <Widget>[
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: Text('Aceptar'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage('img/pregunta.png'),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 303.0, // Ancho del rectángulo
+                                    height: 50.0, // Alto del rectángulo
                                     decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('img/pregunta.png'),
-                                        fit: BoxFit.cover,
+                                      color: Colors.grey[
+                                          300], // Color gris del rectángulo
+                                      borderRadius: BorderRadius.circular(
+                                          20.0), // Bordes redondeados
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 10.0), // Espaciado interno
+                                    child: TextField(
+                                      controller: edadController,
+                                      decoration: InputDecoration(
+                                        hintText: 'Meses',
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  width: 303.0, // Ancho del rectángulo
-                                  height: 50.0, // Alto del rectángulo
-                                  decoration: BoxDecoration(
-                                    color: Colors
-                                        .grey[300], // Color gris del rectángulo
-                                    borderRadius: BorderRadius.circular(
-                                        20.0), // Bordes redondeados
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 10.0), // Espaciado interno
-                                  child: TextField(
-                                    controller: edadController,
-                                    decoration: InputDecoration(
-                                      hintText: 'Meses',
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Positioned(
-                      left: 3,
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        height: 103.02,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  '¿Adoptado/Acogido?',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonSi = true;
-                                        botonNo = false;
-                                      });
-                                      _saveAdoptadoSelectionToPrefs(true);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonSi
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Sí',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 25,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
+                      SizedBox(
+                        height: 30,
+                      ),
+                      Positioned(
+                        left: 3,
+                        top: 164,
+                        child: SizedBox(
+                          width: 303,
+                          height: 103.02,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    '¿Adoptado/Acogido?',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
                                     ),
                                   ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "No"
-                                      setState(() {
-                                        botonSi = false;
-                                        botonNo = true;
-                                      });
-                                      _saveAdoptadoSelectionToPrefs(false);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonNo
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botonSi = true;
+                                          botonNo = false;
+                                        });
+                                        _saveAdoptadoSelectionToPrefs(true);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonSi
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
                                       ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'No',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 25,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
+                                      child: Text(
+                                        'Sí',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 25,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "No"
+                                        setState(() {
+                                          botonSi = false;
+                                          botonNo = true;
+                                        });
+                                        _saveAdoptadoSelectionToPrefs(false);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonNo
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
+                                      ),
+                                      child: Text(
+                                        'No',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 25,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Positioned(
-                      left: 3,
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        height: 103.02,
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Tiempo de acogida',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "<24"
-                                      setState(() {
-                                        botonmenor = true;
-                                        botonmayor = false;
-                                      });
-                                      _saveTiempoAcogidaSelectionToPrefs(true);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonmenor
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      '< 24 meses',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Positioned(
+                        left: 3,
+                        top: 164,
+                        child: SizedBox(
+                          width: 303,
+                          height: 103.02,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Tiempo de acogida',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.w500,
+                                      height: 0,
                                     ),
                                   ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón ">24"
-                                      setState(() {
-                                        botonmayor = true;
-                                        botonmenor = false;
-                                      });
-                                      _saveTiempoAcogidaSelectionToPrefs(false);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonmayor
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "<24"
+                                        setState(() {
+                                          botonmenor = true;
+                                          botonmayor = false;
+                                        });
+                                        _saveTiempoAcogidaSelectionToPrefs(
+                                            true);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonmenor
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
                                       ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      '≥ 24 meses',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
+                                      child: Text(
+                                        '< 24 meses',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón ">24"
+                                        setState(() {
+                                          botonmayor = true;
+                                          botonmenor = false;
+                                        });
+                                        _saveTiempoAcogidaSelectionToPrefs(
+                                            false);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonmayor
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
+                                      ),
+                                      child: Text(
+                                        '≥ 24 meses',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              Expanded(child: Container()),
+              SizedBox(height: 20),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(
