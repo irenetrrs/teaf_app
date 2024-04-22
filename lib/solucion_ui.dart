@@ -421,40 +421,53 @@ class _SolucionUIState extends State<SolucionUI> {
     //print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
     //print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
     // Realizar el diagnóstico basado en las respuestas obtenidas
-    if (rasgos >= 2) {
-      if (dominios >= 1) {
-        if (pesoPaciente <= pesoTabla ||
-            tallaPaciente <= tallaTabla &&
-                perimetroCranealPaciente <= perimetroCranealTabla ||
-            percentiles >= 1) {
-          return 'FAS';
+    if (adoptado && tiempoAcogida) {
+      //si es adoptado y con un tiempo de acogida <24meses
+      return 'Incomplete';
+    } else {
+      if (alcohol) {
+        //si ha consumido alcohol
+        if (rasgos >= 2) {
+          if (dominios >= 1) {
+            if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
+                (perimetroCranealPaciente <= perimetroCranealTabla ||
+                    percentiles >= 1)) {
+              return 'FAS';
+            } else {
+              return 'pFAS';
+            }
+          } else {
+            //preguntas malformaciones
+          }
+        } else {
+          if (dominios < 2) {
+            //pregunta malformaciones
+          } else {
+            return 'ARND';
+          }
         }
       } else {
-        //pregunta mayor malformaciones
-      }
-    } else {
-      if (dominios < 2) {
-        //pregunta mayor malformaciones
-      } else {
-        return 'ARND';
+        if (rasgos >= 2) {
+          if (dominios >= 1) {
+            if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
+                (perimetroCranealPaciente <= perimetroCranealTabla ||
+                    percentiles >= 1)) {
+              return 'FAS';
+            } else if ((pesoPaciente > pesoTabla ||
+                    tallaPaciente > tallaTabla) &&
+                (perimetroCranealPaciente > perimetroCranealTabla ||
+                    percentiles < 1)) {
+              return 'NO FASD';
+            } else {
+              return 'pFAS';
+            }
+          }
+        } else {
+          return 'NO FASD';
+        }
       }
     }
-
-    if (tiempoAcogida) {
-      // si el tiempo de acogida es <24meses
-      return 'INCOMPLETO';
-    } else if (!alcohol) {
-      // si no ha bebido alcohol
-      return 'NO FASD';
-    } else if (dominios >= 2) {
-      //si los dominios son >2
-      return 'ARND';
-    } else if (percentiles >= 1) {
-      //falta &&perimetrocraneal
-      return 'FAS';
-    } else {
-      return 'ARBD';
-    }
+    return 'Error';
   }
 
   @override
@@ -600,14 +613,18 @@ class _SolucionUIState extends State<SolucionUI> {
                         // Si la llamada al Future es exitosa, muestra el texto resultante
                         // y un círculo de color correspondiente al resultado del diagnóstico
                         Color circleColor = Colors.transparent;
-                        if (snapshot.data == 'INCOMPLETO') {
+                        if (snapshot.data == 'Incomplete') {
                           circleColor = Colors.orange;
-                        } else if (snapshot.data == 'NO FASD') {
+                        } else if (snapshot.data == 'FAS') {
                           circleColor = Colors.blue;
-                        } else if (snapshot.data == 'ARND') {
+                        } else if (snapshot.data == 'pFAS') {
                           circleColor = Colors.green;
-                        } else if (snapshot.data == 'ARBD') {
+                        } else if (snapshot.data == 'ARND') {
                           circleColor = Colors.red;
+                        } else if (snapshot.data == 'Error') {
+                          circleColor = Colors.black;
+                        } else if (snapshot.data == 'NO FASD') {
+                          circleColor = Colors.white;
                         }
 
                         return Stack(
