@@ -151,8 +151,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
               SizedBox(
                 height: 50,
               ),
-              SizedBox(
-                width: 310,
+              Expanded(
+                child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -353,8 +353,10 @@ class _Analisis3UIState extends State<Analisis3UI> {
                     ),
                   ],
                 ),
+              ),),
+              SizedBox(
+                height: 20,
               ),
-              Expanded(child: Container()),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(
