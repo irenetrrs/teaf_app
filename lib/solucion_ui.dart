@@ -390,23 +390,25 @@ class _SolucionUIState extends State<SolucionUI> {
     print('perimetroCranealPaciente $perimetroCranealPaciente');
     print('perimetroCranealTabla $perimetroCranealTabla');
 
-    //lógica con los percentiles
-    if (pesoPaciente <= pesoTabla) {
+    //lógica con los percentiles -- pero creo que no hace falta sumarlos si no compararlos
+    /*if (pesoPaciente <= pesoTabla) {
       percentiles += 1;
     }
     if (tallaPaciente <= tallaTabla) {
       percentiles += 1;
     }
-    if (anomalias = true) {
-      percentiles += 1;
-    }
-    if (recurrente = true) {
-      percentiles += 1;
-    }
     if (perimetroCranealPaciente <= perimetroCranealTabla) {
       percentiles += 1;
     }
+    */
+    if (recurrente = true) {
+      percentiles += 1;
+    }
+    if (anomalias = true) {
+      percentiles += 1;
+    }
 
+    print('percentiles $percentiles');
     //print(percentiles);
     //lógica rasgos
     if (filtrum >= 4 || labioSuperior >= 4) {
@@ -415,9 +417,29 @@ class _SolucionUIState extends State<SolucionUI> {
     if (distanciaPalpebralPaciente <= distanciaPalpebralTabla) {
       rasgos += 1;
     }
+    print('rasgos $rasgos');
     //print('Prueba altura ${getHeightFromAgeAndGender('60.5', 'male')}');
     //print('Prueba peso ${getWeightFromAgeAndGender('60.5', 'male')}');
     // Realizar el diagnóstico basado en las respuestas obtenidas
+    if (rasgos >= 2) {
+      if (dominios >= 1) {
+        if (pesoPaciente <= pesoTabla ||
+            tallaPaciente <= tallaTabla &&
+                perimetroCranealPaciente <= perimetroCranealTabla ||
+            percentiles >= 1) {
+          return 'FAS';
+        }
+      } else {
+        //pregunta mayor malformaciones
+      }
+    } else {
+      if (dominios < 2) {
+        //pregunta mayor malformaciones
+      } else {
+        return 'ARND';
+      }
+    }
+
     if (tiempoAcogida) {
       // si el tiempo de acogida es <24meses
       return 'INCOMPLETO';
