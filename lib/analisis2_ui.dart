@@ -171,23 +171,228 @@ class _Analisis2UIState extends State<Analisis2UI> {
               SizedBox(
                 height: 50,
               ),
-              SizedBox(
-                width: 310,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: SizedBox(
-                        width: 310,
-                        child: Stack(
+              Expanded(
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    width: 310,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          child: SizedBox(
+                            width: 310,
+                            child: Stack(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Número de dominios afectados',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // Mostrar el pop-up al tocar la imagen
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
+                                                  'Información sobre los dominios'),
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                      'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados:'),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      _launchURL(
+                                                          'https://vimeo.com/845544703'); // Llama a la función para abrir el enlace
+                                                    },
+                                                    child: Text(
+                                                      'Vimeo - Dominios Afectados',
+                                                      style: TextStyle(
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255,
+                                                            4,
+                                                            60,
+                                                            105), // Estilo para que parezca un enlace
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text('Cerrar'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image:
+                                                AssetImage('img/pregunta.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Acción cuando se presiona el botón "Sí"
+                                  setState(() {
+                                    boton0 = true;
+                                    boton1 = false;
+                                    boton2 = false;
+                                  });
+                                  _saveDominiosSelectionToPrefs(
+                                      true, false, false);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: boton0
+                                      ? Colors
+                                          .orange // Color cuando está botonado
+                                      : Color(0xFFDFDFDF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  fixedSize: Size.fromHeight(50.0),
+                                ),
+                                child: Text(
+                                  '0',
+                                  style: TextStyle(
+                                    color: Color(0xFF68696C),
+                                    fontSize: 25,
+                                    fontStyle: FontStyle.italic,
+                                    fontFamily: 'Inter',
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Acción cuando se presiona el botón "No"
+                                  setState(() {
+                                    boton0 = false;
+                                    boton1 = true;
+                                    boton2 = false;
+                                  });
+                                  _saveDominiosSelectionToPrefs(
+                                      false, true, false);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: boton1
+                                      ? Colors
+                                          .orange // Color cuando está botonado
+                                      : Color(0xFFDFDFDF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  fixedSize: Size.fromHeight(50.0),
+                                ),
+                                child: Text(
+                                  '1',
+                                  style: TextStyle(
+                                    color: Color(0xFF68696C),
+                                    fontSize: 25,
+                                    fontStyle: FontStyle.italic,
+                                    fontFamily: 'Inter',
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 20),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  // Acción cuando se presiona el botón "No"
+                                  setState(() {
+                                    boton0 = false;
+                                    boton1 = false;
+                                    boton2 = true;
+                                  });
+                                  _saveDominiosSelectionToPrefs(
+                                      false, false, true);
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: boton2
+                                      ? Colors
+                                          .orange // Color cuando está botonado
+                                      : Color(0xFFDFDFDF),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                  fixedSize: Size.fromHeight(50.0),
+                                ),
+                                child: Text(
+                                  '≥ 2',
+                                  style: TextStyle(
+                                    color: Color(0xFF68696C),
+                                    fontSize: 25,
+                                    fontStyle: FontStyle.italic,
+                                    fontFamily: 'Inter',
+                                    height: 0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Positioned(
+                          left: 3,
+                          top: 164,
+                          child: SizedBox(
+                            width: 303,
+                            child: Column(
                               children: [
                                 Text(
-                                  'Número de dominios afectados',
+                                  'Consumo de alcohol en el embarazo',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -196,284 +401,93 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                     height: 0,
                                   ),
                                 ),
-                                InkWell(
-                                  onTap: () {
-                                    // Mostrar el pop-up al tocar la imagen
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                              'Información sobre los dominios'),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                  'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados:'),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  _launchURL(
-                                                      'https://vimeo.com/845544703'); // Llama a la función para abrir el enlace
-                                                },
-                                                child: Text(
-                                                  'Vimeo - Peso',
-                                                  style: TextStyle(
-                                                    color: const Color.fromARGB(
-                                                        255,
-                                                        4,
-                                                        60,
-                                                        105), // Estilo para que parezca un enlace
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
-                                                children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text('Cerrar'),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          // Acción cuando se presiona el botón "Sí"
+                                          setState(() {
+                                            botonNo = false;
+                                            botonSi = true;
+                                          });
+                                          _saveAlcoholSelectionToPrefs(true);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: botonSi
+                                              ? Colors
+                                                  .orange // Color cuando está botonado
+                                              : Color(0xFFDFDFDF),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
                                           ),
-                                        );
-                                      },
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('img/pregunta.png'),
-                                        fit: BoxFit.cover,
+                                          fixedSize: Size.fromHeight(50.0),
+                                        ),
+                                        child: Text(
+                                          'Sí',
+                                          style: TextStyle(
+                                            color: Color(0xFF68696C),
+                                            fontSize: 25,
+                                            fontStyle: FontStyle.italic,
+                                            fontFamily: 'Inter',
+                                            height: 0,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                    SizedBox(width: 20),
+                                    Expanded(
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          // Acción cuando se presiona el botón "Sí"
+                                          setState(() {
+                                            botonNo = true;
+                                            botonSi = false;
+                                          });
+                                          _saveAlcoholSelectionToPrefs(false);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: botonNo
+                                              ? Colors
+                                                  .orange // Color cuando está botonado
+                                              : Color(0xFFDFDFDF),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                          ),
+                                          fixedSize: Size.fromHeight(50.0),
+                                        ),
+                                        child: Text(
+                                          'No',
+                                          style: TextStyle(
+                                            color: Color(0xFF68696C),
+                                            fontSize: 25,
+                                            fontStyle: FontStyle.italic,
+                                            fontFamily: 'Inter',
+                                            height: 0,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Acción cuando se presiona el botón "Sí"
-                              setState(() {
-                                boton0 = true;
-                                boton1 = false;
-                                boton2 = false;
-                              });
-                              _saveDominiosSelectionToPrefs(true, false, false);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: boton0
-                                  ? Colors.orange // Color cuando está botonado
-                                  : Color(0xFFDFDFDF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              fixedSize: Size.fromHeight(50.0),
-                            ),
-                            child: Text(
-                              '0',
-                              style: TextStyle(
-                                color: Color(0xFF68696C),
-                                fontSize: 25,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: 'Inter',
-                                height: 0,
-                              ),
-                            ),
                           ),
                         ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Acción cuando se presiona el botón "No"
-                              setState(() {
-                                boton0 = false;
-                                boton1 = true;
-                                boton2 = false;
-                              });
-                              _saveDominiosSelectionToPrefs(false, true, false);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: boton1
-                                  ? Colors.orange // Color cuando está botonado
-                                  : Color(0xFFDFDFDF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              fixedSize: Size.fromHeight(50.0),
-                            ),
-                            child: Text(
-                              '1',
-                              style: TextStyle(
-                                color: Color(0xFF68696C),
-                                fontSize: 25,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: 'Inter',
-                                height: 0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 20),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              // Acción cuando se presiona el botón "No"
-                              setState(() {
-                                boton0 = false;
-                                boton1 = false;
-                                boton2 = true;
-                              });
-                              _saveDominiosSelectionToPrefs(false, false, true);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: boton2
-                                  ? Colors.orange // Color cuando está botonado
-                                  : Color(0xFFDFDFDF),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              fixedSize: Size.fromHeight(50.0),
-                            ),
-                            child: Text(
-                              '≥ 2',
-                              style: TextStyle(
-                                color: Color(0xFF68696C),
-                                fontSize: 25,
-                                fontStyle: FontStyle.italic,
-                                fontFamily: 'Inter',
-                                height: 0,
-                              ),
-                            ),
-                          ),
+                        SizedBox(
+                          height: 20,
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Positioned(
-                      left: 3,
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        child: Column(
-                          children: [
-                            Text(
-                              'Consumo de alcohol en el embarazo',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonNo = false;
-                                        botonSi = true;
-                                      });
-                                      _saveAlcoholSelectionToPrefs(true);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonSi
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Sí',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 25,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonNo = true;
-                                        botonSi = false;
-                                      });
-                                      _saveAlcoholSelectionToPrefs(false);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonNo
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'No',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 25,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                  ],
+                  ),
                 ),
               ),
-              Expanded(child: Container()),
+              SizedBox(height: 20),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(
