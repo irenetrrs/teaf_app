@@ -645,13 +645,28 @@ class _Analisis4UIState extends State<Analisis4UI> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Manejar la acción de Siguiente
-                      _saveTextFieldsToPrefs();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Analisis5UI(),
-                        ),
-                      );
+                      if (pesoController.text.isNotEmpty &&
+                          tallaController.text.isNotEmpty &&
+                          perimetroCranealController.text.isNotEmpty &&
+                          distanciaPalpebralController.text.isNotEmpty) {
+                        _saveTextFieldsToPrefs();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Analisis5UI(),
+                          ),
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: "Por favor, rellene todos los campos",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 2,
+                          backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor:

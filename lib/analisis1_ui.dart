@@ -478,9 +478,11 @@ class _Analisis1UIState extends State<Analisis1UI> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      if ((botonSi || botonNo) && (botonmayor || botonmenor)) {
+                      if (edadController.text.isNotEmpty &&
+                          (botonSi || botonNo) &&
+                          (botonmayor || botonmenor)) {
                         // Manejar la acción de Siguiente
-                        //print('edad: $edadText');
+                        print('edad: $edadController');
                         _saveTextFieldsToPrefs();
                         Navigator.push(
                           context,

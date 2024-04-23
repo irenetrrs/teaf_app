@@ -621,7 +621,7 @@ class _SolucionUIState extends State<SolucionUI> {
                         } else if (snapshot.data == 'Error') {
                           circleColor = Colors.black;
                         } else if (snapshot.data == 'NO FASD') {
-                          circleColor = Colors.white;
+                          circleColor = Colors.grey;
                         }
 
                         return Stack(
