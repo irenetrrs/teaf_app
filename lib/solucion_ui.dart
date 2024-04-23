@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/inicio_ui.dart';
@@ -8,6 +10,8 @@ import 'sign_ui.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
 
 // ignore: must_be_immutable
 class SolucionUI extends StatefulWidget {
@@ -469,6 +473,49 @@ class _SolucionUIState extends State<SolucionUI> {
     return 'Error';
   }
 
+  Future<void> generatePDF() async {
+/**  Future<void> _saveAsFile(
+    BuildContext context,
+    LayoutCallback build,
+    PdfPageFormat pageFormat,
+  ) async {
+    final bytes = await build(pageFormat);
+
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final appDocPath = appDocDir.path;
+    final file = File('$appDocPath/document.pdf');
+    print('Save as file ${file.path} ...');
+    await file.writeAsBytes(bytes);
+    await OpenFile.open(file.path);
+  } */
+
+    // Crear un documento PDF
+    final pdf = pw.Document();
+
+    // Agregar contenido al PDF
+    pdf.addPage(
+      pw.Page(
+        build: (context) {
+          return pw.Center(
+            child: pw.Text('Hola, este es un PDF generado desde Flutter.'),
+          );
+        },
+      ),
+    );
+
+    // Obtener el directorio del escritorio
+    final directory = await getExternalStorageDirectory();
+    final filePath =
+        '${directory!.path}/mi_pdf.pdf'; // Ruta del archivo PDF en el directorio del escritorio
+
+    // Guardar el PDF en el directorio del escritorio
+    final File file = File(filePath);
+    await file.writeAsBytes(await pdf.save());
+
+    // Mostrar mensaje de éxito
+    print('PDF guardado en: $filePath');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -716,7 +763,9 @@ class _SolucionUIState extends State<SolucionUI> {
               height: 60,
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
-                onPressed: () async {},
+                onPressed: () async {
+                  generatePDF();
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xFF001254)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
