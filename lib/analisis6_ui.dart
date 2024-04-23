@@ -4,6 +4,7 @@ import 'package:teaf_app/analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'solucion_ui.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Analisis6UI extends StatefulWidget {
   @override
@@ -312,210 +313,213 @@ class _Analisis6UIState extends State<Analisis6UI> {
               SizedBox(
                 height: 50,
               ),
-              SizedBox(
-                width: 310,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Positioned(
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Malformaciones craneales',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Positioned(
+                        top: 164,
+                        child: SizedBox(
+                          width: 303,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Malformaciones craneales',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonanomaliassi = true;
-                                        botonanomaliasno = false;
-                                      });
-                                      _saveAnomaliasSelectionToPrefs(true);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonanomaliassi
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botonanomaliassi = true;
+                                          botonanomaliasno = false;
+                                        });
+                                        _saveAnomaliasSelectionToPrefs(true);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonanomaliassi
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
                                       ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Sí',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 22,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonanomaliassi = false;
-                                        botonanomaliasno = true;
-                                      });
-                                      _saveAnomaliasSelectionToPrefs(false);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonanomaliasno
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'No',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 22,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
+                                      child: Text(
+                                        'Sí',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 22,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botonanomaliassi = false;
+                                          botonanomaliasno = true;
+                                        });
+                                        _saveAnomaliasSelectionToPrefs(false);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonanomaliasno
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
+                                      ),
+                                      child: Text(
+                                        'No',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 22,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Positioned(
-                      left: 3,
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        height: 103.02,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Recurrente',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Positioned(
+                        left: 3,
+                        top: 164,
+                        child: SizedBox(
+                          width: 303,
+                          height: 103.02,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Recurrente',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonrecurrentesi = true;
-                                        botonrecurrenteno = false;
-                                      });
-                                      _saveRecurrenteSelectionToPrefs(true);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonrecurrentesi
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botonrecurrentesi = true;
+                                          botonrecurrenteno = false;
+                                        });
+                                        _saveRecurrenteSelectionToPrefs(true);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonrecurrentesi
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
                                       ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Sí',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 22,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "No"
-                                      setState(() {
-                                        botonrecurrentesi = false;
-                                        botonrecurrenteno = true;
-                                      });
-                                      _saveRecurrenteSelectionToPrefs(false);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonrecurrenteno
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'No',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 22,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
+                                      child: Text(
+                                        'Sí',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 22,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "No"
+                                        setState(() {
+                                          botonrecurrentesi = false;
+                                          botonrecurrenteno = true;
+                                        });
+                                        _saveRecurrenteSelectionToPrefs(false);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonrecurrenteno
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
+                                      ),
+                                      child: Text(
+                                        'No',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 22,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-              Expanded(child: Container()),
+              SizedBox(
+                height: 30,
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(
@@ -524,7 +528,20 @@ class _Analisis6UIState extends State<Analisis6UI> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Manejar la acción de Siguiente
-                      SharedPreferencesHelper.showResumenDialog(context);
+                      if ((botonanomaliasno || botonanomaliassi) &&
+                          (botonrecurrenteno || botonrecurrentesi)) {
+                        SharedPreferencesHelper.showResumenDialog(context);
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: "Por favor, rellene todos los campos",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 2,
+                          backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor:

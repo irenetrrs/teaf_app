@@ -4,6 +4,7 @@ import 'analisis4_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Analisis5UI extends StatefulWidget {
   @override
@@ -455,14 +456,27 @@ class _Analisis5UIState extends State<Analisis5UI> {
                           builder: (context) => Analisis6UI(),
                         ),
                       );*/
-                    SharedPreferencesHelper.showResumenDialog(context);
-                    // Manejar la acción de Siguiente
-                    /*Navigator.push(
+                    if (imagenseleccionadafiltrum != -1 &&
+                        imagenseleccionadalabio != -1) {
+                      SharedPreferencesHelper.showResumenDialog(context);
+                      // Manejar la acción de Siguiente
+                      /*Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => SolucionUI(),
                       ),
                     );*/
+                    } else {
+                      Fluttertoast.showToast(
+                        msg: "Por favor, rellene todos los campos",
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 2,
+                        backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    }
                   },
                   style: ButtonStyle(
                     backgroundColor:

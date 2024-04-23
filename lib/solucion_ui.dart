@@ -725,7 +725,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   ),
                 ),
                 child: Text(
-                  'Descargar datos',
+                  'Guardar paciente',
                   style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 25,

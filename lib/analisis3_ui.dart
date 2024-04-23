@@ -4,6 +4,7 @@ import 'package:teaf_app/analisis2_ui.dart';
 import 'analisis4_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Analisis3UI extends StatefulWidget {
   @override
@@ -153,207 +154,208 @@ class _Analisis3UIState extends State<Analisis3UI> {
               ),
               Expanded(
                 child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Positioned(
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Etnia',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Positioned(
+                        top: 164,
+                        child: SizedBox(
+                          width: 303,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Etnia',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botoncau = true;
-                                        botonafro = false;
-                                      });
-                                      _saveEtniaSelectionToPrefs(true);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botoncau
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botoncau = true;
+                                          botonafro = false;
+                                        });
+                                        _saveEtniaSelectionToPrefs(true);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botoncau
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
                                       ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Caucásico',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 16,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botoncau = false;
-                                        botonafro = true;
-                                      });
-                                      _saveEtniaSelectionToPrefs(false);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonafro
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Afroamericano',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 13,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
+                                      child: Text(
+                                        'Caucásico',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 16,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botoncau = false;
+                                          botonafro = true;
+                                        });
+                                        _saveEtniaSelectionToPrefs(false);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonafro
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
+                                      ),
+                                      child: Text(
+                                        'Afroamericano',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 13,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Positioned(
-                      left: 3,
-                      top: 164,
-                      child: SizedBox(
-                        width: 303,
-                        height: 103.02,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Género',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w500,
-                                height: 0,
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Positioned(
+                        left: 3,
+                        top: 164,
+                        child: SizedBox(
+                          width: 303,
+                          height: 103.02,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Género',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                  height: 0,
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonhom = true;
-                                        botonmuj = false;
-                                      });
-                                      _saveGeneroSelectionToPrefs(true);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonhom
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botonhom = true;
+                                          botonmuj = false;
+                                        });
+                                        _saveGeneroSelectionToPrefs(true);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonhom
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
                                       ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Hombre',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 22,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 20),
-                                Expanded(
-                                  child: ElevatedButton(
-                                    onPressed: () {
-                                      // Acción cuando se presiona el botón "Sí"
-                                      setState(() {
-                                        botonhom = false;
-                                        botonmuj = true;
-                                      });
-                                      _saveGeneroSelectionToPrefs(false);
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: botonmuj
-                                          ? Colors
-                                              .orange // Color cuando está botonado
-                                          : Color(0xFFDFDFDF),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20.0),
-                                      ),
-                                      fixedSize: Size.fromHeight(50.0),
-                                    ),
-                                    child: Text(
-                                      'Mujer',
-                                      style: TextStyle(
-                                        color: Color(0xFF68696C),
-                                        fontSize: 22,
-                                        fontStyle: FontStyle.italic,
-                                        fontFamily: 'Inter',
-                                        height: 0,
+                                      child: Text(
+                                        'Hombre',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 22,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  SizedBox(width: 20),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        // Acción cuando se presiona el botón "Sí"
+                                        setState(() {
+                                          botonhom = false;
+                                          botonmuj = true;
+                                        });
+                                        _saveGeneroSelectionToPrefs(false);
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: botonmuj
+                                            ? Colors
+                                                .orange // Color cuando está botonado
+                                            : Color(0xFFDFDFDF),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20.0),
+                                        ),
+                                        fixedSize: Size.fromHeight(50.0),
+                                      ),
+                                      child: Text(
+                                        'Mujer',
+                                        style: TextStyle(
+                                          color: Color(0xFF68696C),
+                                          fontSize: 22,
+                                          fontStyle: FontStyle.italic,
+                                          fontFamily: 'Inter',
+                                          height: 0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),),
+              ),
               SizedBox(
                 height: 20,
               ),
@@ -364,13 +366,25 @@ class _Analisis3UIState extends State<Analisis3UI> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Manejar la acción de Atrás
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Analisis4UI(),
-                        ),
-                      );
+                      if ((botonafro || botoncau) && (botonhom || botonmuj)) {
+                        // Manejar la acción de Atrás
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Analisis4UI(),
+                          ),
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: "Por favor, rellene todos los campos",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 2,
+                          backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor:

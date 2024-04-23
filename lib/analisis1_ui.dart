@@ -4,6 +4,8 @@ import 'inicio_ui.dart';
 import 'analisis2_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 // ignore: must_be_immutable
 class Analisis1UI extends StatefulWidget {
@@ -14,7 +16,7 @@ class Analisis1UI extends StatefulWidget {
 
 class _Analisis1UIState extends State<Analisis1UI> {
   // Variables para manejar el estado de los botones
-  final String edadText = 'edad';
+  final String? edadText = 'edad';
   final String adoptado = 'preguntaAdoptado';
   final String tiempoacogida = 'preguntaTiempoAcogida';
   bool botonSi = false;
@@ -239,6 +241,11 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                       decoration: InputDecoration(
                                         hintText: 'Meses',
                                       ),
+                                      keyboardType: TextInputType
+                                          .number, // Especificar el tipo de teclado como numérico
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.digitsOnly,
+                                      ], // Aplicar la restricción de solo números enteros positivos
                                     ),
                                   ),
                                 ],
@@ -471,14 +478,27 @@ class _Analisis1UIState extends State<Analisis1UI> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Manejar la acción de Siguiente
-                      _saveTextFieldsToPrefs();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Analisis2UI(),
-                        ),
-                      );
+                      if ((botonSi || botonNo) && (botonmayor || botonmenor)) {
+                        // Manejar la acción de Siguiente
+                        //print('edad: $edadText');
+                        _saveTextFieldsToPrefs();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Analisis2UI(),
+                          ),
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: "Por favor, rellene todos los campos",
+                          toastLength: Toast.LENGTH_LONG,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 2,
+                          backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
+                      }
                     },
                     style: ButtonStyle(
                       backgroundColor:
@@ -510,13 +530,13 @@ class _Analisis1UIState extends State<Analisis1UI> {
   //para guardar y cargar el dato de edad
   _saveTextFieldsToPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(edadText, edadController.text);
+    prefs.setString(edadText!, edadController.text);
   }
 
   _loadTextFieldsFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      edadController.text = prefs.getString(edadText) ?? '';
+      edadController.text = prefs.getString(edadText!) ?? '';
     });
   }
 

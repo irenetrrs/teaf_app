@@ -5,6 +5,7 @@ import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Analisis4UI extends StatefulWidget {
   @override
@@ -633,7 +634,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
                   ],
                 ),
               ),
-              Expanded(child: Container()),
+              SizedBox(
+                height: 30,
+              ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: SizedBox(
