@@ -5,6 +5,7 @@ import 'package:teaf_app/inicio_ui.dart';
 import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -53,6 +54,15 @@ class SharedPreferencesHelper {
   static Future<int> getLabioSuperior() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getInt('imagenseleccionadalabio') ?? -1;
+  }
+}
+
+_launchURL(String url) async {
+  Uri url0 = Uri.parse(url);
+  if (await launchUrl(url0)) {
+    await launchUrl(url0);
+  } else {
+    throw 'Could not launch $url0';
   }
 }
 
@@ -181,7 +191,9 @@ class ResumenUI extends StatelessWidget {
               height: 60,
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  _launchURL('https://cursoteaf.com/');
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Colors.white),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(

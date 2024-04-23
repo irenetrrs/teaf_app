@@ -329,7 +329,9 @@ class _SolucionUIState extends State<SolucionUI> {
     String distanciaPalpebral = await getDistanciaPalpebralText();
     int filtrum = await getFiltrum();
     int labioSuperior = await getLabioSuperior();
+    // ignore: unused_local_variable
     bool anomalias = await getAnomalias();
+    // ignore: unused_local_variable
     bool recurrente = await getRecurrente();
 
     // Convertir el valor booleano a una cadena 'male' o 'female'
