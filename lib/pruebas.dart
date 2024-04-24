@@ -1,98 +1,81 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:open_file/open_file.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
 
-class LoginRegisterScreen extends StatefulWidget {
-  @override
-  // ignore: library_private_types_in_public_api
-  _LoginRegisterScreenState createState() => _LoginRegisterScreenState();
-}
-
-class _LoginRegisterScreenState extends State<LoginRegisterScreen> {
-  int _currentPage = 0;
-  PageController _pageController = PageController();
-
+class MyApp2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('App de Inicio de Sesión / Registro'),
-      ),
-      body: Column(
-        children: [
-          Container(
-            color: Colors.grey,
-            height: 50,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      _pageController.animateToPage(0,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease);
-                    },
-                    child: Container(
-                      color:
-                          _currentPage == 0 ? Colors.blue : Colors.transparent,
-                      alignment: Alignment.center,
-                      child: Text('Iniciar Sesión',
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      _pageController.animateToPage(1,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.ease);
-                    },
-                    child: Container(
-                      color:
-                          _currentPage == 1 ? Colors.blue : Colors.transparent,
-                      alignment: Alignment.center,
-                      child: Text('Registro',
-                          style: TextStyle(color: Colors.white)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Generar PDF'),
+        ),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () async {
+              await generatePDF(context);
+            },
+            child: Text('Generar PDF'),
           ),
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (int page) {
-                setState(() {
-                  _currentPage = page;
-                });
-              },
-              children: [
-                LoginPage(),
-                RegisterPage(),
-              ],
-            ),
+        ),
+      ),
+    );
+  }
+}
+
+Future<void> generatePDF(BuildContext context) async {
+  final pdf = pw.Document();
+
+  // Agrega contenido al PDF
+  pdf.addPage(pw.Page(
+    build: (pw.Context context) {
+      return pw.Center(
+        child: pw.Text("¡Hola, mundo!"),
+      );
+    },
+  ));
+
+  // Obtiene la ruta del directorio temporal
+  final output = await getTemporaryDirectory();
+
+  // Crea el archivo PDF
+  final file = File("${output.path}/example.pdf");
+
+  // Escribe el contenido del PDF al archivo
+  await file.writeAsBytes(await pdf.save());
+
+  // Muestra un mensaje al usuario con un botón para abrir manualmente el archivo
+  // ignore: use_build_context_synchronously
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('PDF generado'),
+        content:
+            Text('El PDF se ha generado correctamente. ¿Deseas abrirlo ahora?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancelar'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              OpenFile.open(file.path);
+            },
+            child: Text('Abrir PDF'),
           ),
         ],
-      ),
-    );
-  }
+      );
+    },
+  );
 }
 
-class LoginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Formulario de Inicio de Sesión'),
-    );
-  }
-}
-
-class RegisterPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Formulario de Registro'),
-    );
-  }
+void main() {
+  runApp(MyApp2());
 }
