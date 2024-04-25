@@ -37,6 +37,8 @@ class _SolucionUIState extends State<SolucionUI> {
     super.initState();
   }
 
+  DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
+
   /*Future<void> generatePDF(BuildContext context) async {
     final pdf = pw.Document();
 
@@ -88,7 +90,7 @@ class _SolucionUIState extends State<SolucionUI> {
   }*/
 
   @override
-  Future<Widget> build(BuildContext context) async {
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 60, 152, 209),
       body: Padding(
@@ -216,8 +218,8 @@ class _SolucionUIState extends State<SolucionUI> {
               ),
               child: Center(
                 child: FutureBuilder<String>(
-                  future: DiagnosticoHelper
-                      .realizarDiagnostico(), // Llama a la función diagnostico() para obtener el Future<String>
+                  future: diagnosticoHelper
+                      .diagnostico(), // Llama a la función diagnostico() para obtener el Future<String>
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       // Si el Future está en espera, muestra un indicador de carga

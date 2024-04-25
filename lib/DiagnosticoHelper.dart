@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:teaf_app/inicio_ui.dart';
-import 'resumen_ui.dart';
-import 'analisis5_ui.dart';
-import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class DiagnosticoHelper {
   List<Map<String, dynamic>> maleHeightData = [];
@@ -20,10 +14,9 @@ class DiagnosticoHelper {
   int percentiles = 0;
   int rasgos = 0;
 
-  
-
-  Future<void> initState() async {
-    await loadData();
+  DiagnosticoHelper() {
+    // Llama al método loadData() en el constructor para cargar los datos al iniciar la instancia
+    loadData();
   }
 
 //////////////////Redondear la entrada del usuario///////////////////////////////////////////////
@@ -189,7 +182,7 @@ class DiagnosticoHelper {
 ///////////////////////////////////////////////////////////////////////////
   ///
 //////////////////////Obtener las respuestas del usuario///////////////////////////////
-  Future<void> resetPreferences(BuildContext context) async {
+  static Future<void> resetPreferences(BuildContext context) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.clear();
   }
@@ -323,7 +316,7 @@ class DiagnosticoHelper {
         await obtenerPesoCorrespondiente(edad, generoPaciente) ?? -1;
     double tallaPaciente = double.tryParse(talla) ?? -1;
     double tallaTabla =
-        await obtenerPesoCorrespondiente(edad, generoPaciente) ?? -1;
+        await obtenerTallaCorrespondiente(edad, generoPaciente) ?? -1;
     double distanciaPalpebralPaciente =
         double.tryParse(distanciaPalpebral) ?? -1;
     double distanciaPalpebralTabla =
@@ -332,6 +325,16 @@ class DiagnosticoHelper {
     double perimetroCranealTabla =
         await obtenerPerimetroCranealCorrespondiente(edad, generoPaciente) ??
             -1;
+    print(generoPaciente);
+    print(pesoPaciente);
+    print(pesoTabla);
+    print(tallaPaciente);
+    print(tallaTabla);
+    print(distanciaPalpebralPaciente);
+    print(distanciaPalpebralTabla);
+    print(perimetroCranealPaciente);
+    print(perimetroCranealTabla);
+
     realizarDiagnostico(
         adoptado,
         tiempoAcogida,
