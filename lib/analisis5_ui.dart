@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teaf_app/analisis6_ui.dart';
 import 'analisis4_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'DiagnosticoHelper.dart';
 
 class Analisis5UI extends StatefulWidget {
   @override
@@ -157,6 +159,7 @@ class SharedPreferencesHelper {
 }
 
 class _Analisis5UIState extends State<Analisis5UI> {
+  DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late SharedPreferences prefs;
   late bool isCaucasian;
   late List<String> filtrumImages;
@@ -195,6 +198,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
 
   @override
   Widget build(BuildContext context) {
+    DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 60, 152, 209),
       body: Padding(
@@ -449,23 +453,36 @@ class _Analisis5UIState extends State<Analisis5UI> {
                 width: 250,
                 height: 60,
                 child: ElevatedButton(
-                  onPressed: () {
-                    /*Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Analisis6UI(),
-                        ),
-                      );*/
+                  onPressed: () async {
+                    // Verificar si se ha seleccionado una imagen para Filtrum y Labio superior
                     if (imagenseleccionadafiltrum != -1 &&
                         imagenseleccionadalabio != -1) {
-                      SharedPreferencesHelper.showResumenDialog(context);
-                      // Manejar la acción de Siguiente
-                      /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SolucionUI(),
-                      ),
-                    );*/
+                      // Obtener datos del paciente
+                      String perimetroUsuario = await SharedPreferencesHelper
+                          .getPerimetroCranealText();
+                      String edad = await SharedPreferencesHelper.getEdadText();
+                      String generoPaciente =
+                          await SharedPreferencesHelper.getGeneroButtonState()
+                              ? 'Hombre'
+                              : 'Mujer';
+
+                      // Verificar el perímetro craneal del usuario
+                      bool perimetroValido =
+                          await diagnosticoHelper.verificarPerimetroCraneal(
+                              perimetroUsuario, edad, generoPaciente);
+
+                      if (perimetroValido) {
+                        // ignore: use_build_context_synchronously
+                        SharedPreferencesHelper.showResumenDialog(context);
+                      } else {
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Analisis6UI(),
+                          ),
+                        );
+                      }
                     } else {
                       Fluttertoast.showToast(
                         msg: "Por favor, rellene todos los campos",

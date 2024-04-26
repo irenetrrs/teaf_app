@@ -411,6 +411,20 @@ class DiagnosticoHelper {
         : null;
   }
 
+  Future<bool> verificarPerimetroCraneal(
+      String perimetroUsuario, String edad, String generoPaciente) async {
+    // Obtener el perimetro craneal de la tabla
+    double perimetroTabla =
+        await obtenerPerimetroCranealCorrespondiente(edad, generoPaciente) ??
+            -1;
+
+    // Convertir el perimetro craneal del usuario a un valor numérico
+    double perimetroUsuarioNum = double.tryParse(perimetroUsuario) ?? 0;
+
+    // Comparar el perimetro craneal del usuario con el de la tabla
+    return perimetroUsuarioNum < perimetroTabla;
+  }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
   // Función para realizar el diagnóstico basado en las respuestas obtenidas
   String realizarDiagnostico(

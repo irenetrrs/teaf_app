@@ -6,7 +6,7 @@ import 'sign_ui.dart';
 import 'solucion_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class Analisis6UI extends StatefulWidget {
+class Analisis7UI extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _Analisis6UIState createState() => _Analisis6UIState();
@@ -127,7 +127,7 @@ class SharedPreferencesHelper {
         'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
         'Tiempo de Acogida: ${tiempoAcogida ? '< 24 meses' : '> 24 meses'}\n'
         'Dominios afectados: ${dominiosBoton0 ? '0 ' : ''}${dominiosBoton1 ? '1 ' : ''}${dominiosBoton2 ? '≥ 2' : ''}\n'
-        'Alcohol: ${alcohol ? 'Sí' : 'No'}\n'
+        'Alcohol: $alcohol\n'
         'Etnia: ${etnia ? 'Caucásico' : 'Afroamericano'}\n'
         'Género: ${genero ? 'Hombre' : 'Mujer'}\n'
         'Peso: $pesoText kg\n'
@@ -173,24 +173,18 @@ class SharedPreferencesHelper {
   }
 }
 
-class _Analisis6UIState extends State<Analisis6UI> {
+class _Analisis6UIState extends State<Analisis7UI> {
   // Variables para manejar el estado de los botones
-  final String anomalias = 'preguntaAnomalías';
-  final String recurrente = 'preguntaRecurrente';
-  bool botonanomaliassi = false;
-  bool botonanomaliasno = false;
-  bool botonrecurrentesi = false;
-  bool botonrecurrenteno = false;
+  final String malformaciones = 'preguntaMalformaciones';
+  bool botonmalformacionessi = false;
+  bool botonmalformacionesno = false;
   @override
   void initState() {
     super.initState();
-    _loadAnomaliasSelectionFromPrefs();
-    _loadRecurrenteSelectionFromPrefs();
+    _loadMalformacionesSelectionFromPrefs();
     setState(() {
-      botonanomaliassi = false;
-      botonanomaliasno = false;
-      botonrecurrentesi = false;
-      botonrecurrenteno = false;
+      botonmalformacionessi = false;
+      botonmalformacionesno = false;
     });
   }
 
@@ -326,7 +320,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Malformaciones craneales (RM)',
+                                '¿Malformaciones mayores?',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -345,13 +339,14 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                       onPressed: () {
                                         // Acción cuando se presiona el botón "Sí"
                                         setState(() {
-                                          botonanomaliassi = true;
-                                          botonanomaliasno = false;
+                                          botonmalformacionessi = true;
+                                          botonmalformacionesno = false;
                                         });
-                                        _saveAnomaliasSelectionToPrefs(true);
+                                        _saveMalformacionesSelectionToPrefs(
+                                            true);
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonanomaliassi
+                                        backgroundColor: botonmalformacionessi
                                             ? Colors
                                                 .orange // Color cuando está botonado
                                             : Color(0xFFDFDFDF),
@@ -379,13 +374,14 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                       onPressed: () {
                                         // Acción cuando se presiona el botón "Sí"
                                         setState(() {
-                                          botonanomaliassi = false;
-                                          botonanomaliasno = true;
+                                          botonmalformacionessi = false;
+                                          botonmalformacionesno = true;
                                         });
-                                        _saveAnomaliasSelectionToPrefs(false);
+                                        _saveMalformacionesSelectionToPrefs(
+                                            false);
                                       },
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonanomaliasno
+                                        backgroundColor: botonmalformacionesno
                                             ? Colors
                                                 .orange // Color cuando está botonado
                                             : Color(0xFFDFDFDF),
@@ -416,103 +412,6 @@ class _Analisis6UIState extends State<Analisis6UI> {
                       SizedBox(
                         height: 20,
                       ),
-                      Positioned(
-                        left: 3,
-                        top: 164,
-                        child: SizedBox(
-                          width: 303,
-                          height: 103.02,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Fiebre recurrente',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "Sí"
-                                        setState(() {
-                                          botonrecurrentesi = true;
-                                          botonrecurrenteno = false;
-                                        });
-                                        _saveRecurrenteSelectionToPrefs(true);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonrecurrentesi
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
-                                      ),
-                                      child: Text(
-                                        'Sí',
-                                        style: TextStyle(
-                                          color: Color(0xFF68696C),
-                                          fontSize: 22,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(width: 20),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "No"
-                                        setState(() {
-                                          botonrecurrentesi = false;
-                                          botonrecurrenteno = true;
-                                        });
-                                        _saveRecurrenteSelectionToPrefs(false);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonrecurrenteno
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
-                                      ),
-                                      child: Text(
-                                        'No',
-                                        style: TextStyle(
-                                          color: Color(0xFF68696C),
-                                          fontSize: 22,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
                     ],
                   ),
                 ),
@@ -528,8 +427,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                   child: ElevatedButton(
                     onPressed: () {
                       // Manejar la acción de Siguiente
-                      if ((botonanomaliasno || botonanomaliassi) &&
-                          (botonrecurrenteno || botonrecurrentesi)) {
+                      if ((botonmalformacionessi || botonmalformacionesno)) {
                         SharedPreferencesHelper.showResumenDialog(context);
                       } else {
                         Fluttertoast.showToast(
@@ -571,44 +469,25 @@ class _Analisis6UIState extends State<Analisis6UI> {
   }
 
   //para guardar y cargar el estado de la seleccion del boton anomalias
-  _saveAnomaliasSelectionToPrefs(bool botonanomaliassi) async {
+  _saveMalformacionesSelectionToPrefs(bool botonmalformacionessi) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('$anomalias-botonanomaliassi', botonanomaliassi);
+    prefs.setBool(
+        '$malformaciones-botonmalformacionessi', botonmalformacionessi);
   }
 
-  _loadAnomaliasSelectionFromPrefs() async {
+  _loadMalformacionesSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? savedBotonanomalias = prefs.getBool('$anomalias-botonanomaliassi');
+    bool? savedBotonmalformaciones =
+        prefs.getBool('$malformaciones-botonmalformacionessi');
 
-    if (savedBotonanomalias != null) {
+    if (savedBotonmalformaciones != null) {
       setState(() {
-        botonanomaliassi = savedBotonanomalias;
-        botonanomaliasno = !savedBotonanomalias;
+        botonmalformacionessi = savedBotonmalformaciones;
+        botonmalformacionesno = !savedBotonmalformaciones;
       });
     } else {
-      botonanomaliasno = false;
-      botonanomaliassi = false;
-    }
-  }
-
-  //para guardar y cargar el estado de la seleccion del boton recurrente
-  _saveRecurrenteSelectionToPrefs(bool botonrecurrentesi) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('$recurrente-botonrecurrentesi', botonrecurrentesi);
-  }
-
-  // Para cargar el estado del botón "Recurrente"
-  _loadRecurrenteSelectionFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? savedBotonrecurrente = prefs.getBool('$recurrente-botonrecurrentesi');
-    if (savedBotonrecurrente != null) {
-      setState(() {
-        botonrecurrentesi = savedBotonrecurrente;
-        botonrecurrenteno = !savedBotonrecurrente;
-      });
-    } else {
-      botonrecurrentesi = false;
-      botonrecurrenteno = false;
+      botonmalformacionesno = false;
+      botonmalformacionessi = false;
     }
   }
 }
