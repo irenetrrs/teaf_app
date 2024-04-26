@@ -206,22 +206,9 @@ class DiagnosticoHelper {
   }
 
   //dominios - 0 1 2
-  static Future<int> getDominiosButtonState() async {
+  static Future<bool> getDominiosButtonState(int buttonNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getInt('preguntaDominios-selectedIndex') ?? -1;
-  }
-
-  static String getDominiosText(int index) {
-    switch (index) {
-      case 0:
-        return '0';
-      case 1:
-        return '1';
-      case 2:
-        return '≥ 2';
-      default:
-        return 'No seleccionado';
-    }
+    return prefs.getBool('preguntaDominios-boton$buttonNumber') ?? false;
   }
 
   //alcohol - si no
@@ -298,7 +285,9 @@ class DiagnosticoHelper {
     String edad = await getEdadText();
     bool adoptado = await getAdoptadoButtonState();
     bool tiempoAcogida = await getTiempoAcogidaButtonState();
-    int dominios = await getDominiosButtonState();
+    bool dominiosBoton0 = await getDominiosButtonState(0);
+    bool dominiosBoton1 = await getDominiosButtonState(1);
+    bool dominiosBoton2 = await getDominiosButtonState(2);
     bool alcohol = await getAlcoholButtonState();
     bool genero = await getGeneroButtonState();
     String peso = await getPesoText();
@@ -325,6 +314,29 @@ class DiagnosticoHelper {
     double perimetroCranealTabla =
         await obtenerPerimetroCranealCorrespondiente(edad, generoPaciente) ??
             -1;
+//esto creo que lo puedo sacar a otra funcion
+    int dominios = 0;
+    if (dominiosBoton0) {
+      dominios = 0;
+    }
+    if (dominiosBoton1) {
+      dominios = 1;
+    }
+    if (dominiosBoton2) {
+      dominios = 2;
+    }
+    if (filtrum >= 4) {
+      rasgos += 1;
+    }
+    if (labioSuperior >= 4) {
+      rasgos += 1;
+    }
+    if (distanciaPalpebralPaciente <= distanciaPalpebralTabla) {
+      rasgos += 1;
+    }
+
+    print('dominios $dominios');
+    print('rasgos $rasgos');
     print(generoPaciente);
     print(pesoPaciente);
     print(pesoTabla);
@@ -335,7 +347,7 @@ class DiagnosticoHelper {
     print(perimetroCranealPaciente);
     print(perimetroCranealTabla);
 
-    realizarDiagnostico(
+    return realizarDiagnostico(
         adoptado,
         tiempoAcogida,
         alcohol,
@@ -353,7 +365,6 @@ class DiagnosticoHelper {
         tallaTabla,
         distanciaPalpebralTabla,
         perimetroCranealTabla);
-    return 'Error';
   }
 
 // Convertir el valor booleano a una cadena 'male' o 'female'
@@ -433,6 +444,8 @@ class DiagnosticoHelper {
             } else {
               return 'pFAS';
             }
+          } else {
+            //preguntas malformaciones
           }
         } else {
           if (dominios < 2) {
@@ -456,6 +469,8 @@ class DiagnosticoHelper {
             } else {
               return 'pFAS';
             }
+          } else {
+            return 'NO FASD';
           }
         } else {
           return 'NO FASD';

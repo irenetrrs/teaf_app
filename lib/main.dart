@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'welcome_ui.dart';
+import 'DiagnosticoHelper.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,9 +11,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: WelcomeUI(),
+      // Agregar el callback de post-frame para llamar a loadData()
+      builder: (context, child) {
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          DiagnosticoHelper diagnosticohelper = DiagnosticoHelper();
+          diagnosticohelper.loadData();
+        });
+        return child!;
+      },
     );
   }
 }
+
+
 
 /**class MyApp extends StatelessWidget {
   const MyApp({super.key});

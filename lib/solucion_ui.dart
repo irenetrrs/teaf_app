@@ -35,6 +35,7 @@ class _SolucionUIState extends State<SolucionUI> {
   @override
   void initState() {
     super.initState();
+    diagnosticoHelper.loadData();
   }
 
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
@@ -91,6 +92,8 @@ class _SolucionUIState extends State<SolucionUI> {
 
   @override
   Widget build(BuildContext context) {
+    DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 60, 152, 209),
       body: Padding(
@@ -218,34 +221,14 @@ class _SolucionUIState extends State<SolucionUI> {
               ),
               child: Center(
                 child: FutureBuilder<String>(
-                  future: diagnosticoHelper
-                      .diagnostico(), // Llama a la función diagnostico() para obtener el Future<String>
+                  future: diagnosticoHelper.diagnostico(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      // Si el Future está en espera, muestra un indicador de carga
                       return CircularProgressIndicator();
                     } else {
                       if (snapshot.hasError) {
-                        // Si ocurre un error, muestra un mensaje de error
                         return Text('Error: ${snapshot.error}');
                       } else {
-                        // Si la llamada al Future es exitosa, muestra el texto resultante
-                        // y un círculo de color correspondiente al resultado del diagnóstico
-                        Color circleColor = Colors.transparent;
-                        if (snapshot.data == 'Incomplete') {
-                          circleColor = Colors.orange;
-                        } else if (snapshot.data == 'FAS') {
-                          circleColor = Colors.blue;
-                        } else if (snapshot.data == 'pFAS') {
-                          circleColor = Colors.green;
-                        } else if (snapshot.data == 'ARND') {
-                          circleColor = Colors.red;
-                        } else if (snapshot.data == 'Error') {
-                          circleColor = Colors.black;
-                        } else if (snapshot.data == 'NO FASD') {
-                          circleColor = Colors.grey;
-                        }
-
                         return Stack(
                           alignment: Alignment.center,
                           children: [
@@ -254,14 +237,16 @@ class _SolucionUIState extends State<SolucionUI> {
                               height: 200,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: circleColor,
+                                color: Colors.blue, // Color del círculo
                               ),
-                            ),
-                            Text(
-                              snapshot.data ?? 'Diagnóstico no disponible',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
+                              child: Center(
+                                child: Text(
+                                  snapshot.data ?? 'Diagnóstico no disponible',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25.0,
+                                  ),
+                                ),
                               ),
                             ),
                           ],

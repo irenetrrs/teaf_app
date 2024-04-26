@@ -482,7 +482,6 @@ class _Analisis1UIState extends State<Analisis1UI> {
                           (botonSi || botonNo) &&
                           (botonmayor || botonmenor)) {
                         // Manejar la acción de Siguiente
-                        print('edad: $edadController');
                         _saveTextFieldsToPrefs();
                         Navigator.push(
                           context,
