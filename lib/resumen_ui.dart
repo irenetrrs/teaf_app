@@ -6,6 +6,7 @@ import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'DiagnosticoHelper.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -69,6 +70,7 @@ _launchURL(String url) async {
 class ResumenUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 60, 152, 209),
       body: SingleChildScrollView(
@@ -190,27 +192,41 @@ class ResumenUI extends StatelessWidget {
               width: 250,
               height: 60,
               margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton(
-                onPressed: () {
-                  _launchURL('https://cursoteaf.com/');
+              child: FutureBuilder<String>(
+                future: diagnosticoHelper.diagnostico(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Si el Future está en espera, muestra un indicador de carga
+                    return CircularProgressIndicator();
+                  } else {
+                    // Si la llamada al Future es exitosa, muestra el texto resultante
+                    // del diagnóstico sin cambiar la forma del botón
+                    return ElevatedButton(
+                      onPressed: () {
+                        _launchURL('https://cursoteaf.com/');
+                      },
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        snapshot.data ?? 'Diagnóstico no disponible',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    );
+                  }
                 },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.white),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  'TEAF negativo',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
               ),
             ),
             SizedBox(

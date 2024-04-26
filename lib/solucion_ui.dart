@@ -1,14 +1,11 @@
 //import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'resumen_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:csv/csv.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'DiagnosticoHelper.dart';
 /*import 'package:pdf/widgets.dart' as pw;
@@ -229,6 +226,24 @@ class _SolucionUIState extends State<SolucionUI> {
                       if (snapshot.hasError) {
                         return Text('Error: ${snapshot.error}');
                       } else {
+                        // Definir circleColor y cambiarlo según el resultado del diagnóstico
+                        Color circleColor = Colors.transparent;
+
+                        if (snapshot.data == 'Incomplete') {
+                          circleColor = Colors.orange;
+                        } else if (snapshot.data == 'FAS') {
+                          circleColor = Colors.purple;
+                        } else if (snapshot.data == 'pFAS') {
+                          circleColor = Colors.green;
+                        } else if (snapshot.data == 'ARND') {
+                          circleColor = Colors.red;
+                        } else if (snapshot.data == 'Error') {
+                          circleColor = Colors.black;
+                        } else if (snapshot.data == 'NO FASD') {
+                          circleColor = Colors.grey;
+                        }
+
+                        // Devolver el widget del círculo con el color cambiado
                         return Stack(
                           alignment: Alignment.center,
                           children: [
@@ -237,16 +252,14 @@ class _SolucionUIState extends State<SolucionUI> {
                               height: 200,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: Colors.blue, // Color del círculo
+                                color: circleColor,
                               ),
-                              child: Center(
-                                child: Text(
-                                  snapshot.data ?? 'Diagnóstico no disponible',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25.0,
-                                  ),
-                                ),
+                            ),
+                            Text(
+                              snapshot.data ?? 'Diagnóstico no disponible',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25.0,
                               ),
                             ),
                           ],
