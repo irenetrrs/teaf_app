@@ -298,7 +298,7 @@ class _Analisis6UIState extends State<Analisis7UI> {
               Text(
                 'Evaluación',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
+                  color: Colors.white,
                   fontSize: 50,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
@@ -435,7 +435,7 @@ class _Analisis6UIState extends State<Analisis7UI> {
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,
-                          backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                          backgroundColor: Color(0xFF262f36),
                           textColor: Colors.white,
                           fontSize: 16.0,
                         );
@@ -443,7 +443,7 @@ class _Analisis6UIState extends State<Analisis7UI> {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Color(0xFF001254)),
+                          MaterialStateProperty.all(Color(0xFF262f36)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side: BorderSide(color: Colors.white, width: 2.0),
@@ -454,7 +454,7 @@ class _Analisis6UIState extends State<Analisis7UI> {
                     child: Text(
                       'Siguiente',
                       style: TextStyle(
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: Colors.white,
                         fontSize: 25,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,

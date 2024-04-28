@@ -8,9 +8,7 @@ import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'DiagnosticoHelper.dart';
-/*import 'package:pdf/widgets.dart' as pw;
-import 'package:path_provider/path_provider.dart';
-import 'package:open_file/open_file.dart';*/
+
 
 // ignore: must_be_immutable
 class SolucionUI extends StatefulWidget {
@@ -37,55 +35,6 @@ class _SolucionUIState extends State<SolucionUI> {
 
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
 
-  /*Future<void> generatePDF(BuildContext context) async {
-    final pdf = pw.Document();
-
-    // Agrega contenido al PDF
-    pdf.addPage(pw.Page(
-      build: (pw.Context context) {
-        return pw.Center(
-          child: pw.Text("¡Hola, mundo!"),
-        );
-      },
-    ));
-
-    // Obtiene la ruta del directorio temporal
-    final output = await getTemporaryDirectory();
-
-    // Crea el archivo PDF
-    final file = File("${output.path}/example.pdf");
-
-    // Escribe el contenido del PDF al archivo
-    await file.writeAsBytes(await pdf.save());
-
-    // Muestra un mensaje al usuario con un botón para abrir manualmente el archivo
-    // ignore: use_build_context_synchronously
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('PDF generado'),
-          content: Text(
-              'El PDF se ha generado correctamente. ¿Deseas abrirlo ahora?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancelar'),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                OpenFile.open(file.path);
-              },
-              child: Text('Abrir PDF'),
-            ),
-          ],
-        );
-      },
-    );
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -338,7 +287,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   //generatePDF(context);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF001254)),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       side: BorderSide(color: Colors.white, width: 2.0),
@@ -375,7 +324,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   );
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF001254)),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       side: BorderSide(color: Colors.white, width: 2.0),
@@ -439,7 +388,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   // Manejar la acción de Atrás
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF001254)),
+                  backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       side: BorderSide(color: Colors.white, width: 2.0),

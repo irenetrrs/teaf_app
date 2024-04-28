@@ -293,7 +293,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error obteniendo la altura');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} cm',
@@ -345,7 +345,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error obteniendo el peso');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} kg',
@@ -433,8 +433,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(
-                                      'Error obteniendo la distancia palpebral');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} cm',
@@ -519,8 +518,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(
-                                      'Error obteniendo la información');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -631,7 +629,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error obteniendo la referencia');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -684,7 +682,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error obteniendo la referencia');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -796,8 +794,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(
-                                      'Error obteniendo la información');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -850,8 +847,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(
-                                      'Error obteniendo el perímetro craneal');
+                                  return Text('Error');
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} cm',

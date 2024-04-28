@@ -34,7 +34,6 @@ flutter:
   assets:
     - img/
     - data/
-    - data/maleheight.csv
-    - data/femaleheight.csv
-    - data/maleweight.csv
-    - data/femaleweight.csv
+    - i18n/en.json
+    - i18n/es.json
+

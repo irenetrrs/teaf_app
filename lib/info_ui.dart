@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class InfoUI extends StatelessWidget {
   @override
@@ -138,9 +141,9 @@ class InfoUI extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Atrás',
+                      AppLocalizations.of(context)!.translate('Back')!,
                       style: TextStyle(
-                        color: Color(0xFF001254),
+                        color: Color(0xFF262f36),
                         fontSize: 30,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,
@@ -174,7 +177,7 @@ class InfoUI extends StatelessWidget {
                     child: Text(
                       'Siguiente',
                       style: TextStyle(
-                        color: Color(0xFF001254),
+                        color: Color(0xFF262f36),
                         fontSize: 27,
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.w600,

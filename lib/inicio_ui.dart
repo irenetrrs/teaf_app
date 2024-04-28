@@ -145,7 +145,7 @@ class InicioUI extends StatelessWidget {
                   child: Text(
                     'Empezar análisis',
                     style: TextStyle(
-                      color: Color(0xFF001254),
+                      color: Color(0xFF262f36),
                       fontSize: 25,
                       fontFamily: 'Inter',
                       fontWeight: FontWeight.w600,
@@ -172,7 +172,7 @@ class InicioUI extends StatelessWidget {
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF001254)),
+                        MaterialStateProperty.all(Color(0xFF262f36)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         side: BorderSide(color: Colors.white, width: 2.0),

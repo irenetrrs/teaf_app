@@ -662,7 +662,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,
-                          backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                          backgroundColor: Color(0xFF262f36),
                           textColor: Colors.white,
                           fontSize: 16.0,
                         );
@@ -670,7 +670,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Color(0xFF001254)),
+                          MaterialStateProperty.all(Color(0xFF262f36)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side: BorderSide(color: Colors.white, width: 2.0),

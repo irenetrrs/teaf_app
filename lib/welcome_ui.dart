@@ -1,5 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'info_ui.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'My App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: WelcomeUI(),
+    );
+  }
+}
 
 class WelcomeUI extends StatefulWidget {
   @override
@@ -8,17 +34,10 @@ class WelcomeUI extends StatefulWidget {
 }
 
 class _WelcomeUIState extends State<WelcomeUI> {
-  String selectedLanguage =
-      ''; // Variable para almacenar el idioma seleccionado
-
-  void changeLanguage(String languageCode) {
-    setState(() {
-      selectedLanguage = languageCode;
-    });
-  }
-
+  late AppLanguageProvider appLanguage;
   @override
   Widget build(BuildContext context) {
+    appLanguage = Provider.of<AppLanguageProvider>(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -31,8 +50,8 @@ class _WelcomeUIState extends State<WelcomeUI> {
               ),
             ),
             child: Container(
-              color: Color.fromARGB(197, 2, 0,
-                  67), // 0x80 establece la opacidad a aproximadamente 50%
+              color: Color.fromARGB(200, 49, 61,
+                  70), // 0x80 establece la opacidad a aproximadamente 50%
             ),
           ),
           // Cuadrado y texto más abajo en el centro
@@ -48,9 +67,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            InfoUI()), // Reemplaza 'ThirdPage' con el nombre de tu nueva página
+                    MaterialPageRoute(builder: (context) => InfoUI()),
                   );
                 },
                 style: ButtonStyle(
@@ -63,9 +80,9 @@ class _WelcomeUIState extends State<WelcomeUI> {
                   ),
                 ),
                 child: Text(
-                  'Comenzar',
+                  AppLocalizations.of(context)!.translate('Welcome')!,
                   style: TextStyle(
-                    color: Color(0xFF001254),
+                    color: Color(0xFF262f36),
                     fontSize: 30,
                     fontFamily: 'Inter',
                     fontWeight: FontWeight.w600,
@@ -90,10 +107,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                     top: 0,
                     child: GestureDetector(
                       onTap: () {
-                        setState(() {
-                          selectedLanguage = 'es'; // Cambia el idioma a español
-                          print("español");
-                        });
+                        appLanguage.changeLanguage(const Locale("es"));
                       },
                       child: Container(
                         width: 50,
@@ -114,10 +128,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                     top: 0,
                     child: GestureDetector(
                       onTap: () {
-                        setState(() {
-                          selectedLanguage = 'en'; // Cambia el idioma a inglés
-                          print("inglés");
-                        });
+                        appLanguage.changeLanguage(const Locale("en"));
                       },
                       child: Container(
                         width: 50,
