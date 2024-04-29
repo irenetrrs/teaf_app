@@ -25,8 +25,10 @@ class _Analisis2UIState extends State<Analisis2UI> {
 
   _launchURL(String url) async {
     Uri url0 = Uri.parse(url);
-    if (await launchUrl(url0)) {
-      await launchUrl(url0);
+    // ignore: deprecated_member_use
+    if (await canLaunch(url0.toString())) {
+      // ignore: deprecated_member_use
+      await launch(url0.toString());
     } else {
       throw 'Could not launch $url0';
     }

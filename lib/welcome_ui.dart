@@ -5,27 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'My App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: WelcomeUI(),
-    );
-  }
-}
 
 class WelcomeUI extends StatefulWidget {
   @override
