@@ -3,8 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis2_ui.dart';
 import 'analisis4_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class Analisis3UI extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class Analisis3UI extends StatefulWidget {
 }
 
 class _Analisis3UIState extends State<Analisis3UI> {
+  late AppLanguageProvider appLanguage;
   // Variables para manejar el estado de los botones
   final String etnia = 'preguntaEtnia';
   final String genero = 'preguntaGenero';
@@ -98,7 +100,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'VisualTEAF',
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -118,7 +121,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUI(),
+                          builder: (context) => WelcomeUI(),
                         ),
                       );
                     },
@@ -141,7 +144,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                 height: 50,
               ),
               Text(
-                'Evaluación',
+                AppLocalizations.of(context)!.translate('evaluation')!,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 50,
@@ -165,7 +168,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Etnia',
+                                AppLocalizations.of(context)!
+                                    .translate('ethnicity')!,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -201,7 +205,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'Caucásico',
+                                        AppLocalizations.of(context)!
+                                            .translate('caucasian')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 16,
@@ -235,7 +240,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'Afroamericano',
+                                        AppLocalizations.of(context)!
+                                            .translate('african')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 13,
@@ -265,7 +271,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Género',
+                                AppLocalizations.of(context)!
+                                    .translate('gender')!,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -301,7 +308,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'Hombre',
+                                        AppLocalizations.of(context)!
+                                            .translate('male')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -335,7 +343,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'Mujer',
+                                        AppLocalizations.of(context)!
+                                            .translate('female')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -397,7 +406,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
                       ),
                     ),
                     child: Text(
-                      'Siguiente',
+                      AppLocalizations.of(context)!.translate('next')!,
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 25,

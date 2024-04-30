@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'welcome_ui.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -17,8 +17,9 @@ Future<void> main() async {
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  AppLanguageProvider? appLanguage;
-  MyApp({super.key, required this.appLanguage});
+   final AppLanguageProvider appLanguage;
+
+  MyApp({required this.appLanguage});
 
   // This widget is the root of your application.
   @override
@@ -35,8 +36,8 @@ class MyApp extends StatelessWidget {
           home: WelcomeUI(),
           locale: model.appLocal,
           supportedLocales: const [
-            Locale('en', 'US'),
-            Locale('ne', 'NP'),
+            Locale('es', 'ES'),
+            Locale('en', 'EN'),
           ],
           localizationsDelegates: const [
             AppLocalizations.delegate,

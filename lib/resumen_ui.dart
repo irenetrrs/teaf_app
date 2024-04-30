@@ -4,9 +4,10 @@ import 'package:teaf_app/analisis1_ui.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -58,18 +59,20 @@ class SharedPreferencesHelper {
   }
 }
 
-  _launchURL(String url) async {
-    Uri url0 = Uri.parse(url);
+_launchURL(String url) async {
+  Uri url0 = Uri.parse(url);
+  // ignore: deprecated_member_use
+  if (await canLaunch(url0.toString())) {
     // ignore: deprecated_member_use
-    if (await canLaunch(url0.toString())) {
-      // ignore: deprecated_member_use
-      await launch(url0.toString());
-    } else {
-      throw 'Could not launch $url0';
-    }
+    await launch(url0.toString());
+  } else {
+    throw 'Could not launch $url0';
   }
+}
 
+// ignore: must_be_immutable
 class ResumenUI extends StatelessWidget {
+  late AppLanguageProvider appLanguage;
   @override
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
@@ -136,7 +139,7 @@ class ResumenUI extends StatelessWidget {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            'VisualTEAF',
+                            AppLocalizations.of(context)!.translate('appName')!,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -156,7 +159,7 @@ class ResumenUI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignUI(),
+                        builder: (context) => WelcomeUI(),
                       ),
                     );
                   },
@@ -179,7 +182,7 @@ class ResumenUI extends StatelessWidget {
               height: 50,
             ),
             Text(
-              'Resumen',
+              AppLocalizations.of(context)!.translate('resume')!,
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 50,
@@ -275,7 +278,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'Altura',
+                              AppLocalizations.of(context)!
+                                  .translate('height')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -377,7 +381,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'Peso',
+                              AppLocalizations.of(context)!
+                                  .translate('weight')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -465,7 +470,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'Distancia',
+                              AppLocalizations.of(context)!
+                                  .translate('papebral_distance')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -550,7 +556,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'Alcohol',
+                              AppLocalizations.of(context)!
+                                  .translate('alcohol')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -611,7 +618,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'Filtrum',
+                              AppLocalizations.of(context)!
+                                  .translate('filtrum')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -714,7 +722,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'Labio superior',
+                              AppLocalizations.of(context)!
+                                  .translate('upper_lip')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -775,7 +784,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'Neuroconductual',
+                              AppLocalizations.of(context)!
+                                  .translate('neurobehavioral')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,
@@ -879,7 +889,8 @@ class ResumenUI extends StatelessWidget {
                             left: 13,
                             top: 10,
                             child: Text(
-                              'P. Craneal',
+                              AppLocalizations.of(context)!
+                                  .translate('head_circumference_short')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,

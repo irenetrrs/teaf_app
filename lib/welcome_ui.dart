@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'info_ui.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
-
 
 class WelcomeUI extends StatefulWidget {
   @override
@@ -146,7 +144,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'VisualTEAF',
+                  AppLocalizations.of(context)!.translate('appName')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 50,

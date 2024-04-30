@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis5_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'solucion_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class Analisis6UI extends StatefulWidget {
   @override
@@ -146,14 +147,18 @@ class SharedPreferencesHelper {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Resumen'),
+          title: Text(
+            AppLocalizations.of(context)!.translate('resume')!,
+          ),
           content: Text(popupMessage),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Editar'),
+              child: Text(
+                AppLocalizations.of(context)!.translate('edit')!,
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -164,7 +169,9 @@ class SharedPreferencesHelper {
                   ),
                 );
               },
-              child: Text('Continuar'),
+              child: Text(
+                AppLocalizations.of(context)!.translate('continue')!,
+              ),
             ),
           ],
         );
@@ -174,6 +181,7 @@ class SharedPreferencesHelper {
 }
 
 class _Analisis6UIState extends State<Analisis6UI> {
+  late AppLanguageProvider appLanguage;
   // Variables para manejar el estado de los botones
   final String anomalias = 'preguntaAnomalías';
   final String recurrente = 'preguntaRecurrente';
@@ -259,7 +267,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'VisualTEAF',
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -279,7 +288,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUI(),
+                          builder: (context) => WelcomeUI(),
                         ),
                       );
                     },
@@ -302,7 +311,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                 height: 50,
               ),
               Text(
-                'Evaluación',
+                AppLocalizations.of(context)!.translate('evaluation')!,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 50,
@@ -326,7 +335,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Malformaciones craneales (RM)',
+                                AppLocalizations.of(context)!
+                                    .translate('cranial_malformations')!,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -362,7 +372,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'Sí',
+                                        AppLocalizations.of(context)!
+                                            .translate('yes')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -396,7 +407,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'No',
+                                        AppLocalizations.of(context)!
+                                            .translate('no')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -426,7 +438,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Fiebre recurrente',
+                                AppLocalizations.of(context)!
+                                    .translate('recurrent_fever')!,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -462,7 +475,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'Sí',
+                                        AppLocalizations.of(context)!
+                                            .translate('yes')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -496,7 +510,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'No',
+                                        AppLocalizations.of(context)!
+                                            .translate('no')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -554,7 +569,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                       ),
                     ),
                     child: Text(
-                      'Siguiente',
+                      AppLocalizations.of(context)!.translate('next')!,
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 25,

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/sign_ui.dart';
 import 'welcome_ui.dart';
 import 'analisis1_ui.dart';
 import 'base_ui.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
+// ignore: must_be_immutable
 class InicioUI extends StatelessWidget {
+  late AppLanguageProvider appLanguage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +54,7 @@ class InicioUI extends StatelessWidget {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'VisualTEAF',
+                              AppLocalizations.of(context)!.translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -71,7 +74,7 @@ class InicioUI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUI(),
+                          builder: (context) => WelcomeUI(),
                         ),
                       );
                     },
@@ -143,7 +146,7 @@ class InicioUI extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Empezar análisis',
+                    AppLocalizations.of(context)!.translate('startAnalysis')!,
                     style: TextStyle(
                       color: Color(0xFF262f36),
                       fontSize: 25,
@@ -181,7 +184,7 @@ class InicioUI extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Pacientes',
+                    AppLocalizations.of(context)!.translate('patient')!,
                     style: TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                       fontSize: 25,

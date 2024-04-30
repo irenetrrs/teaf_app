@@ -4,9 +4,10 @@ import 'package:teaf_app/analisis6_ui.dart';
 import 'analisis4_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class Analisis5UI extends StatefulWidget {
   @override
@@ -131,14 +132,14 @@ class SharedPreferencesHelper {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Resumen'),
+          title: Text(AppLocalizations.of(context)!.translate('summary')!,),
           content: Text(popupMessage),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text('Editar'),
+              child: Text(AppLocalizations.of(context)!.translate('edit')!,),
             ),
             TextButton(
               onPressed: () {
@@ -149,7 +150,7 @@ class SharedPreferencesHelper {
                   ),
                 );
               },
-              child: Text('Continuar'),
+              child: Text(AppLocalizations.of(context)!.translate('continue')!,),
             ),
           ],
         );
@@ -159,6 +160,7 @@ class SharedPreferencesHelper {
 }
 
 class _Analisis5UIState extends State<Analisis5UI> {
+  late AppLanguageProvider appLanguage;
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late SharedPreferences prefs;
   late bool isCaucasian;
@@ -260,7 +262,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                           ),
                           SizedBox(height: 10),
                           Text(
-                            'VisualTEAF',
+                            AppLocalizations.of(context)!.translate('appName')!,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -280,7 +282,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignUI(),
+                        builder: (context) => WelcomeUI(),
                       ),
                     );
                   },
@@ -302,7 +304,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
               height: 50,
             ),
             Text(
-              'Evaluación',
+              AppLocalizations.of(context)!.translate('evaluation')!,
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 50,
@@ -327,7 +329,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Filtrum',
+                          AppLocalizations.of(context)!.translate('filtrum')!,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -387,7 +389,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Labio superior',
+                          AppLocalizations.of(context)!.translate('upper_lip')!,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -506,7 +508,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                     ),
                   ),
                   child: Text(
-                    'Siguiente',
+                    AppLocalizations.of(context)!.translate('next')!,
                     style: TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                       fontSize: 25,

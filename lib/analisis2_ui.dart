@@ -3,9 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis1_ui.dart';
 import 'analisis3_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class Analisis2UI extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class Analisis2UI extends StatefulWidget {
 }
 
 class _Analisis2UIState extends State<Analisis2UI> {
+  late AppLanguageProvider appLanguage;
   // Variables para manejar el estado de los botones
   final String dominios = 'preguntaDominios';
   final String alcohol = 'preguntaAlcohol';
@@ -120,7 +122,8 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'VisualTEAF',
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -140,7 +143,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUI(),
+                          builder: (context) => WelcomeUI(),
                         ),
                       );
                     },
@@ -163,7 +166,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                 height: 50,
               ),
               Text(
-                'Evaluación',
+                AppLocalizations.of(context)!.translate('evaluation')!,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 50,
@@ -193,7 +196,8 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      'Número de dominios afectados',
+                                      AppLocalizations.of(context)!
+                                          .translate('domains')!,
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
@@ -210,21 +214,30 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                               title: Text(
-                                                  'Información sobre los dominios'),
+                                                AppLocalizations.of(context)!
+                                                    .translate('infoDomains')!,
+                                              ),
                                               content: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                      'Visualice el siguiente vídeo para obtener más información sobre los dominios afectados:'),
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .translate(
+                                                            'infoDomainsText')!,
+                                                  ),
                                                   GestureDetector(
                                                     onTap: () {
                                                       _launchURL(
                                                           'https://vimeo.com/845544703'); // Llama a la función para abrir el enlace
                                                     },
                                                     child: Text(
-                                                      'Vimeo - Dominios Afectados',
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .translate(
+                                                              'videoDomains')!,
                                                       style: TextStyle(
                                                         color: const Color
                                                             .fromARGB(
@@ -281,7 +294,6 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {
-                                  // Acción cuando se presiona el botón "Sí"
                                   setState(() {
                                     boton0 = true;
                                     boton1 = false;
@@ -301,7 +313,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                   fixedSize: Size.fromHeight(50.0),
                                 ),
                                 child: Text(
-                                  '0',
+                                  AppLocalizations.of(context)!.translate('0')!,
                                   style: TextStyle(
                                     color: Color(0xFF68696C),
                                     fontSize: 25,
@@ -336,7 +348,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                   fixedSize: Size.fromHeight(50.0),
                                 ),
                                 child: Text(
-                                  '1',
+                                  AppLocalizations.of(context)!.translate('1')!,
                                   style: TextStyle(
                                     color: Color(0xFF68696C),
                                     fontSize: 25,
@@ -371,7 +383,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                   fixedSize: Size.fromHeight(50.0),
                                 ),
                                 child: Text(
-                                  '≥ 2',
+                                  AppLocalizations.of(context)!.translate('2')!,
                                   style: TextStyle(
                                     color: Color(0xFF68696C),
                                     fontSize: 25,
@@ -395,7 +407,8 @@ class _Analisis2UIState extends State<Analisis2UI> {
                             child: Column(
                               children: [
                                 Text(
-                                  'Consumo de alcohol en el embarazo',
+                                  AppLocalizations.of(context)!
+                                      .translate('alcohol_consume')!,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -431,7 +444,8 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                           fixedSize: Size.fromHeight(50.0),
                                         ),
                                         child: Text(
-                                          'Sí',
+                                          AppLocalizations.of(context)!
+                                              .translate('yes')!,
                                           style: TextStyle(
                                             color: Color(0xFF68696C),
                                             fontSize: 25,
@@ -465,7 +479,8 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                           fixedSize: Size.fromHeight(50.0),
                                         ),
                                         child: Text(
-                                          'No',
+                                          AppLocalizations.of(context)!
+                                              .translate('no')!,
                                           style: TextStyle(
                                             color: Color(0xFF68696C),
                                             fontSize: 25,
@@ -530,7 +545,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                       ),
                     ),
                     child: Text(
-                      'Siguiente',
+                      AppLocalizations.of(context)!.translate('next')!,
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 25,

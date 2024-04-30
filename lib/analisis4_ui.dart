@@ -3,9 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis3_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class Analisis4UI extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class Analisis4UI extends StatefulWidget {
 }
 
 class _Analisis4UIState extends State<Analisis4UI> {
+  late AppLanguageProvider appLanguage;
   final String pesoText = 'preguntaPeso';
   final String tallaText = 'preguntaTalla';
   final String perimetroCranealText = 'preguntaPerimetroCraneal';
@@ -113,7 +115,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'VisualTEAF',
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -133,7 +136,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUI(),
+                          builder: (context) => WelcomeUI(),
                         ),
                       );
                     },
@@ -156,7 +159,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                 height: 50,
               ),
               Text(
-                'Evaluación',
+                AppLocalizations.of(context)!.translate('evaluation')!,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: MediaQuery.of(context).size.width * 0.03,
@@ -183,7 +186,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Peso',
+                                  AppLocalizations.of(context)!
+                                      .translate('weight')!,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -199,22 +203,29 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title:
-                                              Text('Información sobre el peso'),
+                                          title: Text(
+                                            AppLocalizations.of(context)!
+                                                .translate('weight_info')!,
+                                          ),
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  'Visualice el siguiente vídeo para obtener más información sobre cómo medir el peso:'),
+                                                AppLocalizations.of(context)!
+                                                    .translate(
+                                                        'watch_weight_video')!,
+                                              ),
                                               GestureDetector(
                                                 onTap: () {
                                                   _launchURL(urls[
                                                       0]); // Llama a la función para abrir el enlace
                                                 },
                                                 child: Text(
-                                                  'Vimeo - Peso',
+                                                  AppLocalizations.of(context)!
+                                                      .translate(
+                                                          'vimeo_weight')!,
                                                   style: TextStyle(
                                                     color: const Color.fromARGB(
                                                         255,
@@ -299,7 +310,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Talla',
+                                  AppLocalizations.of(context)!
+                                      .translate('height')!,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -316,21 +328,28 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title: Text(
-                                              'Información sobre la talla'),
+                                            AppLocalizations.of(context)!
+                                                .translate('height_info')!,
+                                          ),
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  'Visualice el siguiente vídeo para obtener más información sobre cómo medir la estatura:'),
+                                                AppLocalizations.of(context)!
+                                                    .translate(
+                                                        'watch_height_video')!,
+                                              ),
                                               GestureDetector(
                                                 onTap: () {
                                                   _launchURL(urls[
                                                       1]); // Llama a la función para abrir el enlace
                                                 },
                                                 child: Text(
-                                                  'Vimeo - Talla',
+                                                  AppLocalizations.of(context)!
+                                                      .translate(
+                                                          'vimeo_height')!,
                                                   style: TextStyle(
                                                     color: const Color.fromARGB(
                                                         255,
@@ -415,7 +434,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Perímetro craneal',
+                                  AppLocalizations.of(context)!
+                                      .translate('head_circumference')!,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -432,21 +452,29 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title: Text(
-                                              'Información sobre el perímetro craneal'),
+                                            AppLocalizations.of(context)!
+                                                .translate(
+                                                    'head_circumference_info')!,
+                                          ),
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  'Use una cinta métrica que no se pueda estirar. Rodee firmemente la cabeza con la cinta métrica alrededor de la circunferencia más ancha posible. La parte más ancha de la frente encima de las cejas, por encima de las orejas, la parte más prominente de la nuca. Visualice el siguiente vídeo para obtener más información sobre cómo medir el perímetro craneal:'),
+                                                AppLocalizations.of(context)!
+                                                    .translate(
+                                                        'measure_head_circumference')!,
+                                              ),
                                               GestureDetector(
                                                 onTap: () {
                                                   _launchURL(urls[
                                                       2]); // Llama a la función para abrir el enlace
                                                 },
                                                 child: Text(
-                                                  'Vimeo - Perímetro Craneal',
+                                                  AppLocalizations.of(context)!
+                                                      .translate(
+                                                          'vimeo_head_circunference')!,
                                                   style: TextStyle(
                                                     color: const Color.fromARGB(
                                                         255,
@@ -531,7 +559,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  'Distancia palpebral',
+                                  AppLocalizations.of(context)!
+                                      .translate('palpebral_distance')!,
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
@@ -548,21 +577,29 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                       builder: (BuildContext context) {
                                         return AlertDialog(
                                           title: Text(
-                                              'Información sobre la distancia palpebral'),
+                                            AppLocalizations.of(context)!
+                                                .translate(
+                                                    'palpebral_distance_info')!,
+                                          ),
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                  'Visualice el siguiente vídeo para obtener más información sobre cómo medir la distancia palpebral:'),
+                                                AppLocalizations.of(context)!
+                                                    .translate(
+                                                        'watch_palpebral_video')!,
+                                              ),
                                               GestureDetector(
                                                 onTap: () {
                                                   _launchURL(urls[
                                                       3]); // Llama a la función para abrir el enlace
                                                 },
                                                 child: Text(
-                                                  'Vimeo - Distancia Palpebral',
+                                                  AppLocalizations.of(context)!
+                                                      .translate(
+                                                          'vimeo_palpebral')!,
                                                   style: TextStyle(
                                                     color: const Color.fromARGB(
                                                         255,
@@ -681,7 +718,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                       ),
                     ),
                     child: Text(
-                      'Siguiente',
+                      AppLocalizations.of(context)!.translate('next')!,
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 25,

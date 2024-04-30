@@ -7,13 +7,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:teaf_app/app_language_provider.dart';
 
 import 'package:teaf_app/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+// Crear una instancia de AppLanguageProvider
+    var appLanguageProvider = AppLanguageProvider();
+    
+    // Inicializar el idioma (esto simula lo que ocurre en MyApp)
+    await appLanguageProvider.fetchLocale();
+    
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp(appLanguage: null,));
+    await tester.pumpWidget(MyApp(appLanguage: appLanguageProvider));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

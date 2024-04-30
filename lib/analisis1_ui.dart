@@ -3,9 +3,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'inicio_ui.dart';
 import 'analisis2_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 // ignore: must_be_immutable
 class Analisis1UI extends StatefulWidget {
@@ -15,6 +16,7 @@ class Analisis1UI extends StatefulWidget {
 }
 
 class _Analisis1UIState extends State<Analisis1UI> {
+  late AppLanguageProvider appLanguage;
   // Variables para manejar el estado de los botones
   final String? edadText = 'edad';
   final String adoptado = 'preguntaAdoptado';
@@ -103,7 +105,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'VisualTEAF',
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -123,7 +126,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUI(),
+                          builder: (context) => WelcomeUI(),
                         ),
                       );
                     },
@@ -146,7 +149,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                 height: 50,
               ),
               Text(
-                'Evaluación',
+                AppLocalizations.of(context)!.translate('evaluation')!,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                   fontSize: 50,
@@ -175,7 +178,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Edad',
+                                    AppLocalizations.of(context)!
+                                        .translate('age')!,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -192,9 +196,13 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         builder: (BuildContext context) {
                                           return AlertDialog(
                                             title: Text(
-                                                'Información sobre la Edad'),
+                                              AppLocalizations.of(context)!
+                                                  .translate('infoAge')!,
+                                            ),
                                             content: Text(
-                                                'En los menores de 3 años de edad, el estudio neurocognitivo se basa en el retraso en el desarrollo. Además, en los menores de 6 años y en los mayores de 18 años no se puede realizar el estudio conductal.'),
+                                              AppLocalizations.of(context)!
+                                                  .translate('infoAgeText')!,
+                                            ),
                                             actions: <Widget>[
                                               TextButton(
                                                 onPressed: () {
@@ -270,7 +278,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '¿Adoptado/Acogido?',
+                                    AppLocalizations.of(context)!
+                                        .translate('adopted')!,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -308,7 +317,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'Sí',
+                                        AppLocalizations.of(context)!
+                                            .translate('yes')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 25,
@@ -342,7 +352,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        'No',
+                                        AppLocalizations.of(context)!
+                                            .translate('no')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 25,
@@ -375,7 +386,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Tiempo de acogida',
+                                    AppLocalizations.of(context)!
+                                        .translate('receptionTime')!,
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -414,7 +426,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        '< 24 meses',
+                                        AppLocalizations.of(context)!
+                                            .translate('less24')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 16,
@@ -449,7 +462,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        '≥ 24 meses',
+                                        AppLocalizations.of(context)!
+                                            .translate('more24')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 16,
@@ -512,7 +526,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                       ),
                     ),
                     child: Text(
-                      'Siguiente',
+                      AppLocalizations.of(context)!.translate('next')!,
                       style: TextStyle(
                         color: Color.fromARGB(255, 255, 255, 255),
                         fontSize: 25,
