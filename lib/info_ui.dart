@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/inicio_ui.dart';
 import 'welcome_ui.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
@@ -141,7 +142,7 @@ class InfoUI extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!.translate('Back')!,
+                      AppLocalizations.of(context)!.translate('back')!,
                       style: TextStyle(
                         color: Color(0xFF262f36),
                         fontSize: 30,
@@ -161,7 +162,7 @@ class InfoUI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => WelcomeUI(),
+                          builder: (context) => InicioUI(),
                         ),
                       );
                     },

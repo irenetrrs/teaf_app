@@ -5,7 +5,7 @@ import 'analisis4_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 

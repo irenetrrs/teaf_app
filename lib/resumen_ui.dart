@@ -5,7 +5,7 @@ import 'package:teaf_app/inicio_ui.dart';
 import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
@@ -182,7 +182,7 @@ class ResumenUI extends StatelessWidget {
               height: 50,
             ),
             Text(
-              AppLocalizations.of(context)!.translate('resume')!,
+              AppLocalizations.of(context)!.translate('summary')!,
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 50,
@@ -471,7 +471,7 @@ class ResumenUI extends StatelessWidget {
                             top: 10,
                             child: Text(
                               AppLocalizations.of(context)!
-                                  .translate('papebral_distance')!,
+                                  .translate('palpebral_distance')!,
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 12,

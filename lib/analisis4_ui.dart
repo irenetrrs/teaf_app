@@ -474,7 +474,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                 child: Text(
                                                   AppLocalizations.of(context)!
                                                       .translate(
-                                                          'vimeo_head_circunference')!,
+                                                          'vimeo_head_circumference')!,
                                                   style: TextStyle(
                                                     color: const Color.fromARGB(
                                                         255,

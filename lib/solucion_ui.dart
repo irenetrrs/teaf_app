@@ -6,7 +6,7 @@ import 'resumen_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
@@ -339,7 +339,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.translate('resume')!,
+                  AppLocalizations.of(context)!.translate('summary')!,
                   style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 25,

@@ -57,7 +57,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.translate('Welcome')!,
+                  AppLocalizations.of(context)!.translate('welcome')!,
                   style: TextStyle(
                     color: Color(0xFF262f36),
                     fontSize: 30,

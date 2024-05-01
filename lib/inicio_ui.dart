@@ -54,7 +54,8 @@ class InicioUI extends StatelessWidget {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              AppLocalizations.of(context)!.translate('appName')!,
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,

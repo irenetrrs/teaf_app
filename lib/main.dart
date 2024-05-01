@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'welcome_ui.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'package:provider/provider.dart';
