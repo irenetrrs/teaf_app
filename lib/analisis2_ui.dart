@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis1_ui.dart';
 import 'analisis3_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'app_language_provider.dart';
