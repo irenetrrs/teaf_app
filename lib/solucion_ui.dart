@@ -5,10 +5,10 @@ import 'package:teaf_app/inicio_ui.dart';
 import 'resumen_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'diagnostico_helper.dart';
-
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 // ignore: must_be_immutable
 class SolucionUI extends StatefulWidget {
@@ -34,7 +34,7 @@ class _SolucionUIState extends State<SolucionUI> {
   }
 
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
-
+  late AppLanguageProvider appLanguage;
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,8 @@ class _SolucionUIState extends State<SolucionUI> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              'VisualTEAF',
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -125,7 +126,7 @@ class _SolucionUIState extends State<SolucionUI> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignUI(),
+                        builder: (context) => WelcomeUI(),
                       ),
                     );
                   },
@@ -148,7 +149,7 @@ class _SolucionUIState extends State<SolucionUI> {
               height: 50,
             ),
             Text(
-              'Diagnóstico',
+              AppLocalizations.of(context)!.translate('diagnosis')!,
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: MediaQuery.of(context).size.width * 0.03,
@@ -226,20 +227,25 @@ class _SolucionUIState extends State<SolucionUI> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text('Información sobre el resultado'),
+                      title: Text(
+                        AppLocalizations.of(context)!.translate('result_info')!,
+                      ),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                              'Visite el link para obtener más información sobre el diagnóstico:'),
+                            AppLocalizations.of(context)!
+                                .translate('visit_link_diagnosis')!,
+                          ),
                           GestureDetector(
                             onTap: () {
                               _launchURL(
                                   'https://cursoteaf.com/'); // Llama a la función para abrir el enlace
                             },
                             child: Text(
-                              'Cursos TEAF',
+                              AppLocalizations.of(context)!
+                                  .translate('TEAF_courses')!,
                               style: TextStyle(
                                 color: const Color.fromARGB(255, 4, 60,
                                     105), // Estilo para que parezca un enlace
@@ -296,7 +302,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   ),
                 ),
                 child: Text(
-                  'Guardar paciente',
+                  AppLocalizations.of(context)!.translate('save_patient')!,
                   style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 25,
@@ -333,7 +339,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   ),
                 ),
                 child: Text(
-                  'Resumen',
+                  AppLocalizations.of(context)!.translate('summary')!,
                   style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 25,
@@ -356,16 +362,24 @@ class _SolucionUIState extends State<SolucionUI> {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('Volver a Inicio'),
+                        title: Text(
+                          AppLocalizations.of(context)!
+                              .translate('back_to_home')!,
+                        ),
                         content: Text(
-                            'Si vuelve a la página de Inicio, se eliminarán los datos introducidos durante el diagnóstico. ¿Estás seguro de volver a Inicio?'),
+                          AppLocalizations.of(context)!
+                              .translate('data_loss_confirmation')!,
+                        ),
                         actions: <Widget>[
                           TextButton(
                             onPressed: () {
                               Navigator.of(context)
                                   .pop(); // Cerrar el cuadro de diálogo
                             },
-                            child: Text('Cancelar'),
+                            child: Text(
+                              AppLocalizations.of(context)!
+                                  .translate('cancel')!,
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
@@ -397,7 +411,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   ),
                 ),
                 child: Text(
-                  'Inicio',
+                  AppLocalizations.of(context)!.translate('home')!,
                   style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 25,
