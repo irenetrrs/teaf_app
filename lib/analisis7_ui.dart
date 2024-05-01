@@ -147,7 +147,7 @@ class SharedPreferencesHelper {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context)!.translate('resume')!,),
+          title: Text(AppLocalizations.of(context)!.translate('summary')!,),
           content: Text(popupMessage),
           actions: <Widget>[
             TextButton(
