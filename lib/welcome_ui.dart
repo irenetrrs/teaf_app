@@ -79,7 +79,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.translate('Welcome')!,
+                  AppLocalizations.of(context)!.translate('welcome')!,
                   style: TextStyle(
                     color: Color(0xFF262f36),
                     fontSize: 30,
@@ -166,7 +166,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'VisualTEAF',
+                  AppLocalizations.of(context)!.translate('appName')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 50,

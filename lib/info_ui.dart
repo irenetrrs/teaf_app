@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/inicio_ui.dart';
 import 'welcome_ui.dart';
-import 'sign_ui.dart';
+import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
+// ignore: must_be_immutable
 class InfoUI extends StatelessWidget {
+  late AppLanguageProvider appLanguage;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +35,7 @@ class InfoUI extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'VisualTEAF',
+                  AppLocalizations.of(context)!.translate('appName')!,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -52,7 +55,7 @@ class InfoUI extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.all(20.0), // Agrega un margen a su alrededor
               child: Text(
-                '¡Bienvenido!',
+                AppLocalizations.of(context)!.translate('welcome')!,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 40,
@@ -77,7 +80,7 @@ class InfoUI extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Esta App es una herramienta para ayudar a los profesionales sanitarios a realizar la valoración de los criterios diagnósticos del Trastorno del Espectro Alcohólico Fetal (TEAF) de acuerdo con las guías internacionales (Hoyme, 2016).\n\nEsta App está realizada por VisualTEAF y el Grup de Recerca Infància i Entorn (GRIE), Hospital Clínic-Maternitat, ICGON, FCRB, IDIBAPS, BCNatal, RICORS (RD21/0012/0017), Barcelona.\n\n© Visual TEAF 2023',
+                      AppLocalizations.of(context)!.translate('introText')!,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -139,7 +142,7 @@ class InfoUI extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      AppLocalizations.of(context)!.translate('Back')!,
+                      AppLocalizations.of(context)!.translate('back')!,
                       style: TextStyle(
                         color: Color(0xFF262f36),
                         fontSize: 30,
@@ -159,7 +162,7 @@ class InfoUI extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SignUI(),
+                          builder: (context) => InicioUI(),
                         ),
                       );
                     },
@@ -173,7 +176,7 @@ class InfoUI extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      'Siguiente',
+                      AppLocalizations.of(context)!.translate('next')!,
                       style: TextStyle(
                         color: Color(0xFF262f36),
                         fontSize: 27,

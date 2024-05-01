@@ -6,7 +6,7 @@ import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 
 class Analisis5UI extends StatefulWidget {
   @override
