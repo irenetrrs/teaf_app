@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis5_ui.dart';
@@ -142,7 +144,6 @@ class SharedPreferencesHelper {
     // Muestra el diálogo con el mensaje
     // ignore: use_build_context_synchronously
     showDialog(
-      // ignore: use_build_context_synchronously
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(

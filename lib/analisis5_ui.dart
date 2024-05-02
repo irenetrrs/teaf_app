@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis6_ui.dart';
@@ -127,9 +129,7 @@ class SharedPreferencesHelper {
         '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n';
 
     // Muestra el diálogo con el mensaje
-    // ignore: use_build_context_synchronously
     showDialog(
-      // ignore: use_build_context_synchronously
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
@@ -481,10 +481,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                               perimetroUsuario, edad, generoPaciente);
 
                       if (perimetroValido) {
-                        // ignore: use_build_context_synchronously
                         SharedPreferencesHelper.showResumenDialog(context);
                       } else {
-                        // ignore: use_build_context_synchronously
                         Navigator.push(
                           context,
                           MaterialPageRoute(
