@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
+import 'patient_ui1.dart';
 
 class DiagnosticoHelper {
   List<Map<String, dynamic>> maleHeightData = [];
@@ -493,4 +494,57 @@ class DiagnosticoHelper {
     }
     return 'Error';
   }
+
+  Future<void> savePatient(BuildContext context, String name) async {
+  // Obtener las respuestas del usuario
+  String edad = await getEdadText();
+  bool adoptado = await getAdoptadoButtonState();
+  bool tiempoAcogida = await getTiempoAcogidaButtonState();
+  bool alcohol = await getAlcoholButtonState();
+  bool genero = await getGeneroButtonState();
+  String peso = await getPesoText();
+  String talla = await getTallaText();
+  String perimetroCraneal = await getPerimetroCranealText();
+  String distanciaPalpebral = await getDistanciaPalpebralText();
+  int filtrum = await getFiltrum();
+  int labioSuperior = await getLabioSuperior();
+
+  String generoPaciente = getGeneroPaciente(genero);
+  double pesoPaciente = double.tryParse(peso) ?? -1;
+  double tallaPaciente = double.tryParse(talla) ?? -1;
+  double distanciaPalpebralPaciente =
+      double.tryParse(distanciaPalpebral) ?? -1;
+  double perimetroCranealPaciente = double.tryParse(perimetroCraneal) ?? -1;
+
+  try {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> patientList = prefs.getStringList('patient_list') ?? []; // Obtener la lista de pacientes o una lista vacía
+    patientList.add(name); // Agregar el nombre del paciente a la lista
+    await prefs.setStringList('patient_list', patientList); // Guardar la lista de pacientes actualizada
+
+    // Guardar los detalles del paciente usando el nombre como clave
+    await prefs.setString('${name}_age', edad);
+    await prefs.setString('${name}_gender', generoPaciente);
+    await prefs.setBool('${name}_adoptado', adoptado);
+    await prefs.setBool('${name}_tiempoacogida', tiempoAcogida);
+    await prefs.setBool('${name}_alcohol', alcohol);
+    await prefs.setDouble('${name}_peso', pesoPaciente);
+    await prefs.setDouble('${name}_talla', tallaPaciente);
+    await prefs.setDouble('${name}_perimetro', perimetroCranealPaciente);
+    await prefs.setDouble('${name}_distancia', distanciaPalpebralPaciente);
+    await prefs.setInt('${name}_filtrum', filtrum);
+    await prefs.setInt('${name}_labio', labioSuperior);
+  } catch (e) {
+    print("Error al guardar paciente en SharedPreferences: $e");
+  }
+
+  // Navegar a la pantalla PatientUI después de guardar el paciente
+  // ignore: use_build_context_synchronously
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => PatientUI()),
+  );
+}
+
+
 }

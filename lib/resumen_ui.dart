@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis1_ui.dart';
 import 'package:teaf_app/inicio_ui.dart';
+import 'package:teaf_app/patient_ui.dart';
 import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
+import 'dialog.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -221,7 +223,9 @@ class ResumenUI extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        snapshot.data ?? AppLocalizations.of(context)!.translate('diagnosis_not_available')!,
+                        snapshot.data ??
+                            AppLocalizations.of(context)!
+                                .translate('diagnosis_not_available')!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 25,
@@ -299,7 +303,10 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
+                                  return Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('error')!,
+                                  );
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} cm',
@@ -351,7 +358,10 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
+                                  return Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('error')!,
+                                  );
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} kg',
@@ -692,7 +702,10 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
+                                  return Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('error')!,
+                                  );
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -806,7 +819,10 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
+                                  return Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('error')!,
+                                  );
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -859,7 +875,10 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
+                                  return Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('error')!,
+                                  );
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} cm',
@@ -916,12 +935,26 @@ class ResumenUI extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Analisis1UI(),
-                      ),
-                    );
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return MyDialog();
+                      },
+                    ).then((value) {
+                      // El cuadro de diálogo ha sido cerrado, puedes manejar el valor devuelto aquí
+                      if (value != null) {
+                        // Aquí puedes hacer algo con el valor devuelto, como guardarlo en algún lugar
+                        print('El nombre introducido es: $value');
+                        // Navegar a la página PatientDetails
+                        diagnosticoHelper.savePatient(context, value);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PatientDetailsScreen(patientName: value),
+                          ),
+                        );
+                      }
+                    });
                   },
                   child: Stack(
                     children: [

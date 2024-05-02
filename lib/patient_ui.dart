@@ -1,116 +1,67 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/analisis2_ui.dart';
-import 'package:teaf_app/inicio_ui.dart';
-import 'welcome_ui.dart';
-import 'app_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class PatientUI extends StatelessWidget {
+class PatientDetailsScreen extends StatelessWidget {
+  final String patientName;
+
+  const PatientDetailsScreen({Key? key, required this.patientName})
+      : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 60, 152, 209),
-        body: Padding(
-            padding: EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                // Encabezado
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        // Acción a realizar cuando se hace clic en el botón
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => InicioUI(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('img/atras.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        // Puedes ajustar el tamaño del contenedor según tus necesidades
-                        width: 50.0,
-                        height: 50.0,
-                      ),
-                    ),
-                    // Logo y nombre en una Columna
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            // Acción a realizar cuando se hace clic en el botón
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => WelcomeUI(),
-                              ),
-                            );
-                          },
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: EdgeInsets.all(10.0),
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage('img/logo.png'),
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                // Puedes ajustar el tamaño del contenedor según tus necesidades
-                                width: 50.0,
-                                height: 50.0,
-                              ),
-                              SizedBox(height: 10),
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .translate('appName')!,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    // Icono de apagado
-                    InkWell(
-                      onTap: () {
-                        // Acción a realizar cuando se hace clic en el botón
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeUI(),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: EdgeInsets.all(10.0),
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('img/off.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        // Puedes ajustar el tamaño del contenedor según tus necesidades
-                        width: 50.0,
-                        height: 50.0,
-                      ),
-                    )
-                  ],
-                ),
-              ],
-            )));
+      appBar: AppBar(
+        title: Text('Patient Details'),
+      ),
+      body: FutureBuilder<String>(
+        future: _loadPatientDetails(patientName),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasData) {
+            // Aquí puedes mostrar los detalles del paciente
+            return Center(child: Text(snapshot.data!));
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            return Center(
+                child: Text('No se encontraron detalles para el paciente'));
+          }
+        },
+      ),
+    );
+  }
+
+  Future<String> _loadPatientDetails(String patientName) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Recupera los detalles del paciente asociados al nombre
+    String? age = prefs.getString('${patientName}_age');
+    String? gender = prefs.getString('${patientName}_gender');
+    bool? adoptado = prefs.getBool('${patientName}_adoptado');
+    bool? tiempoacogida = prefs.getBool('${patientName}_tiempoacogida');
+    bool? alcohol = prefs.getBool('${patientName}_alcohol');
+    double? peso = prefs.getDouble('${patientName}_peso');
+    double? talla = prefs.getDouble('${patientName}_talla');
+    double? perimetro = prefs.getDouble('${patientName}_perimetro');
+    double? distancia = prefs.getDouble('${patientName}_distancia');
+    int? filtrum = prefs.getInt('${patientName}_filtrum');
+    int? labio = prefs.getInt('${patientName}_labio');
+
+    // Construir una cadena con los detalles del paciente
+    return '''
+      Name: $patientName
+      Age: $age
+      Gender: $gender
+      Adopted: $adoptado
+      Tiempo Acogida: $tiempoacogida
+      Alcohol: $alcohol
+      Peso: $peso
+      Talla: $talla
+      Perimetro: $perimetro
+      Distancia: $distancia
+      Filtrum: $filtrum
+      Labio: $labio
+    ''';
   }
 }
