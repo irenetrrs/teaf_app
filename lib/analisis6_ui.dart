@@ -124,22 +124,20 @@ class SharedPreferencesHelper {
     bool recurrente = await getRecurrente();
 
     // Construye el mensaje del popup
-    String popupMessage = 'Edad: $edadText meses\n'
-        'Adoptado: ${adoptado ? 'Sí' : 'No'}\n'
-        'Tiempo de Acogida: ${tiempoAcogida ? '< 24 meses' : '> 24 meses'}\n'
-        'Dominios afectados: ${dominiosBoton0 ? '0 ' : ''}${dominiosBoton1 ? '1 ' : ''}${dominiosBoton2 ? '≥ 2' : ''}\n'
-        'Alcohol: ${alcohol ? 'Sí' : 'No'}\n'
-        'Etnia: ${etnia ? 'Caucásico' : 'Afroamericano'}\n'
-        'Género: ${genero ? 'Hombre' : 'Mujer'}\n'
-        'Peso: $pesoText kg\n'
-        'Talla: $tallaText cm\n'
-        'Perimetro Craneal: $perimetroCranealText cm\n'
-        'Distancia Palpebral: $distanciaPalpebralText cm\n'
-        'Filtrum: $imagenseleccionadafiltrum \n'
-        'Labio superior: $imagenseleccionadalabio \n'
-        'Malformaciones craneales: ${anomalias ? 'Sí' : 'No'}\n'
-        'Recurrente: ${recurrente ? 'Sí' : 'No'}\n';
-
+    String popupMessage =
+        '${AppLocalizations.of(context)!.translate('age')}: $edadText ${AppLocalizations.of(context)!.translate('months')}\n'
+        '${AppLocalizations.of(context)!.translate('adopted')}: ${adoptado ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('receptionTime')}: ${tiempoAcogida ? '${AppLocalizations.of(context)!.translate('less24')}' : '${AppLocalizations.of(context)!.translate('more24')}'}\n'
+        '${AppLocalizations.of(context)!.translate('domains')}: ${dominiosBoton0 ? '${AppLocalizations.of(context)!.translate('0')}' : ''}${dominiosBoton1 ? '${AppLocalizations.of(context)!.translate('1')}' : ''}${dominiosBoton2 ? '${AppLocalizations.of(context)!.translate('2')}' : ''}\n'
+        '${AppLocalizations.of(context)!.translate('alcohol')}: $alcohol\n'
+        '${AppLocalizations.of(context)!.translate('ethnicity')}: ${etnia ? '${AppLocalizations.of(context)!.translate('caucasian')}' : '${AppLocalizations.of(context)!.translate('african')}'}\n'
+        '${AppLocalizations.of(context)!.translate('gender')}: ${genero ? '${AppLocalizations.of(context)!.translate('male')}' : '${AppLocalizations.of(context)!.translate('female')}'}\n'
+        '${AppLocalizations.of(context)!.translate('weight')}: $pesoText kg\n'
+        '${AppLocalizations.of(context)!.translate('height')}: $tallaText cm\n'
+        '${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetroCranealText cm\n'
+        '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText cm\n'
+        '${AppLocalizations.of(context)!.translate('filtrum')}: $imagenseleccionadafiltrum \n'
+        '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n';
     // Muestra el diálogo con el mensaje
     // ignore: use_build_context_synchronously
     showDialog(
