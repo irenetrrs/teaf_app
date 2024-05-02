@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'patient_details_ui.dart'; // Importa la pantalla de detalles del paciente
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'patient_details_ui.dart';
 import 'inicio_ui.dart';
-import 'analisis2_ui.dart';
 import 'welcome_ui.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
 class PatientUI extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _PatientUIState createState() => _PatientUIState();
 }
 

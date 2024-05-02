@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:pdf/pdf.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/inicio_ui.dart';
@@ -15,7 +14,6 @@ import 'package:open_file/open_file.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'dialog.dart';
-import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 
 class SharedPreferencesHelper {
