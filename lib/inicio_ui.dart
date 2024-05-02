@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/patient_details_ui.dart';
 import 'welcome_ui.dart';
 import 'analisis1_ui.dart';
-import 'base_ui.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'patients_ui.dart';
