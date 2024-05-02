@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'patient_ui.dart';
+import 'patient_details_ui.dart'; // Importa la pantalla de detalles del paciente
 
 class PatientUI extends StatefulWidget {
   @override
@@ -8,17 +8,19 @@ class PatientUI extends StatefulWidget {
 }
 
 class _PatientUIState extends State<PatientUI> {
-  List<String> patientList = [];
+  List<String> patientList = []; // Lista de pacientes
 
   @override
   void initState() {
     super.initState();
-    _loadPatientList();
+    _loadPatientList(); // Carga la lista de pacientes al iniciar
   }
 
+  // Función para cargar la lista de pacientes
   Future<void> _loadPatientList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      // Actualiza el estado con la lista de pacientes guardados
       patientList = prefs.getStringList('patient_list') ?? [];
     });
   }
@@ -27,22 +29,24 @@ class _PatientUIState extends State<PatientUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Patients'),
+        title: Text('Lista de Pacientes'),
       ),
       body: ListView.builder(
         itemCount: patientList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(patientList[index]),
+            title: Text(patientList[index]), // Muestra el nombre del paciente
             onTap: () {
-              // Navegar a los detalles del paciente cuando se hace clic en el nombre
+              // Navega a la pantalla de detalles del paciente cuando se toca un paciente
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      PatientDetailsScreen(patientName: patientList[index]),
+                  builder: (context) => PatientDetailsScreen(patientName: patientList[index]),
                 ),
-              );
+              ).then((value) {
+                // Actualiza la lista de pacientes después de volver de la pantalla de detalles
+                _loadPatientList();
+              });
             },
           );
         },

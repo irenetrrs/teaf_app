@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:teaf_app/patient_ui.dart';
+import 'package:teaf_app/patient_details_ui.dart';
 import 'welcome_ui.dart';
 import 'analisis1_ui.dart';
 import 'base_ui.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
+import 'patients_ui.dart';
 
 // ignore: must_be_immutable
 class InicioUI extends StatelessWidget {
@@ -146,7 +147,7 @@ class InicioUI extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => WelcomeUI(),
+                        builder: (context) => PatientUI(),
                       ),
                     );
                   },

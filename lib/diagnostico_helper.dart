@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
-import 'patient_ui1.dart';
+import 'patients_ui.dart';
 
 class DiagnosticoHelper {
   List<Map<String, dynamic>> maleHeightData = [];
