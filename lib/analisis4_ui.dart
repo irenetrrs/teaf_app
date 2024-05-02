@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'diagnostico_helper.dart';
 import 'package:teaf_app/analisis3_ui.dart';
+import 'package:teaf_app/analisis6_ui.dart';
 import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -12,6 +14,24 @@ class Analisis4UI extends StatefulWidget {
   @override
   // ignore: library_private_types_in_public_api
   _Analisis4UIState createState() => _Analisis4UIState();
+}
+
+class SharedPreferencesHelper {
+  //edad
+  static Future<String> getEdadText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('edad') ?? '';
+  } //genero - hom muj
+
+  static Future<bool> getGeneroButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaGenero-botonhom') ?? false;
+  } //perimetro craneal
+
+  static Future<String> getPerimetroCranealText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('preguntaPerimetroCraneal') ?? '';
+  }
 }
 
 class _Analisis4UIState extends State<Analisis4UI> {
@@ -52,6 +72,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
 
   @override
   Widget build(BuildContext context) {
+    DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 60, 152, 209),
         body: Padding(
@@ -690,19 +711,44 @@ class _Analisis4UIState extends State<Analisis4UI> {
                   width: 250,
                   height: 60,
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      String perimetroUsuario = await SharedPreferencesHelper
+                          .getPerimetroCranealText();
+                      String edad = await SharedPreferencesHelper.getEdadText();
+                      String generoPaciente =
+                          await SharedPreferencesHelper.getGeneroButtonState()
+                              ? 'Hombre'
+                              : 'Mujer';
+
+                      // Verificar el perímetro craneal del usuario
+                      bool perimetroValido =
+                          await diagnosticoHelper.verificarPerimetroCraneal(
+                              perimetroUsuario, edad, generoPaciente);
+                      print(perimetroUsuario);
+                      print(perimetroValido);
                       // Manejar la acción de Siguiente
                       if (pesoController.text.isNotEmpty &&
                           tallaController.text.isNotEmpty &&
                           perimetroCranealController.text.isNotEmpty &&
                           distanciaPalpebralController.text.isNotEmpty) {
-                        _saveTextFieldsToPrefs();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Analisis5UI(),
-                          ),
-                        );
+                        if (!perimetroValido) {
+                          // ignore: use_build_context_synchronously
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Analisis6UI(),
+                            ),
+                          );
+                        } else {
+                          _saveTextFieldsToPrefs();
+                          // ignore: use_build_context_synchronously
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Analisis5UI(),
+                            ),
+                          );
+                        }
                       } else {
                         Fluttertoast.showToast(
                           msg: "Por favor, rellene todos los campos",

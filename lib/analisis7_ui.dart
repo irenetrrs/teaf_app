@@ -106,6 +106,13 @@ class SharedPreferencesHelper {
     return prefs.getBool('preguntaRecurrente-botonrecurrentesi') ?? false;
   }
 
+  //malformaciones
+  static Future<bool> getMalformaciones() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaMalformaciones-botonmalformacionessi') ??
+        false;
+  }
+
   static Future<void> showResumenDialog(BuildContext context) async {
     String edadText = await getEdadText();
     bool adoptado = await getAdoptadoButtonState();
@@ -124,6 +131,7 @@ class SharedPreferencesHelper {
     int imagenseleccionadalabio = await getLabioSuperior();
     bool anomalias = await getAnomalias();
     bool recurrente = await getRecurrente();
+    bool malformaciones = await getMalformaciones();
 
     // Construye el mensaje del popup
     String popupMessage =
@@ -139,7 +147,10 @@ class SharedPreferencesHelper {
         '${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetroCranealText cm\n'
         '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText cm\n'
         '${AppLocalizations.of(context)!.translate('filtrum')}: $imagenseleccionadafiltrum \n'
-        '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n';
+        '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n'
+        '${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('major_malformations')}: ${malformaciones ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n';
 
     // Muestra el diálogo con el mensaje
     // ignore: use_build_context_synchronously
@@ -148,7 +159,7 @@ class SharedPreferencesHelper {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(
-            AppLocalizations.of(context)!.translate('resume')!,
+            AppLocalizations.of(context)!.translate('summary')!,
           ),
           content: Text(popupMessage),
           actions: <Widget>[

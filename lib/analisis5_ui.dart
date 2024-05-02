@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis6_ui.dart';
+import 'package:teaf_app/analisis7_ui.dart';
 import 'analisis4_ui.dart';
 import 'solucion_ui.dart';
 import 'welcome_ui.dart';
@@ -95,6 +96,18 @@ class SharedPreferencesHelper {
     return prefs.getInt('imagenseleccionadalabio') ?? -1;
   }
 
+  //anomalias
+  static Future<bool> getAnomalias() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaAnomalías-botonanomaliassi') ?? false;
+  }
+
+  //recurrente
+  static Future<bool> getRecurrente() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaRecurrente-botonrecurrentesi') ?? false;
+  }
+
   static Future<void> showResumenDialog(BuildContext context) async {
     String edadText = await getEdadText();
     bool adoptado = await getAdoptadoButtonState();
@@ -111,7 +124,8 @@ class SharedPreferencesHelper {
     String distanciaPalpebralText = await getDistanciaPalpebralText();
     int imagenseleccionadafiltrum = await getFiltrum();
     int imagenseleccionadalabio = await getLabioSuperior();
-
+    bool anomalias = await getAnomalias();
+    bool recurrente = await getRecurrente();
     // Construye el mensaje del popup
     String popupMessage =
         '${AppLocalizations.of(context)!.translate('age')}: $edadText ${AppLocalizations.of(context)!.translate('months')}\n'
@@ -126,7 +140,9 @@ class SharedPreferencesHelper {
         '${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetroCranealText cm\n'
         '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText cm\n'
         '${AppLocalizations.of(context)!.translate('filtrum')}: $imagenseleccionadafiltrum \n'
-        '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n';
+        '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n'
+        '${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n';
 
     // Muestra el diálogo con el mensaje
     showDialog(
@@ -466,29 +482,23 @@ class _Analisis5UIState extends State<Analisis5UI> {
                     // Verificar si se ha seleccionado una imagen para Filtrum y Labio superior
                     if (imagenseleccionadafiltrum != -1 &&
                         imagenseleccionadalabio != -1) {
-                      // Obtener datos del paciente
-                      String perimetroUsuario = await SharedPreferencesHelper
-                          .getPerimetroCranealText();
-                      String edad = await SharedPreferencesHelper.getEdadText();
-                      String generoPaciente =
-                          await SharedPreferencesHelper.getGeneroButtonState()
-                              ? 'Hombre'
-                              : 'Mujer';
-
-                      // Verificar el perímetro craneal del usuario
-                      bool perimetroValido =
-                          await diagnosticoHelper.verificarPerimetroCraneal(
-                              perimetroUsuario, edad, generoPaciente);
-
-                      if (perimetroValido) {
-                        SharedPreferencesHelper.showResumenDialog(context);
-                      } else {
+                      //comprobamos el valor de rasgos y dominios
+                      Map<String, int> resultados =
+                          await diagnosticoHelper.rasgosYDominios();
+                      int? rasgos = resultados['rasgos'];
+                      print('rasgos: $rasgos');
+                      int? dominios = resultados['dominios'];
+                      print('dominios: $dominios');
+                      if ((rasgos! >= 2 && dominios == 0) ||
+                          (rasgos < 2 && dominios! < 2)) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Analisis6UI(),
+                            builder: (context) => Analisis7UI(),
                           ),
                         );
+                      } else {
+                        SharedPreferencesHelper.showResumenDialog(context);
                       }
                     } else {
                       Fluttertoast.showToast(

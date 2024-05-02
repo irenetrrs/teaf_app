@@ -277,6 +277,13 @@ class DiagnosticoHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool('preguntaRecurrente-botonrecurrentesi') ?? false;
   }
+
+  //malformaciones
+  static Future<bool> getMalformaciones() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaMalformaciones-botonmalformacionessi') ??
+        false;
+  }
   ////////////////////////////////////////////////////////////////
   ///
   ////////////////////Método para obtener las respuestas//////////
@@ -299,6 +306,7 @@ class DiagnosticoHelper {
     int labioSuperior = await getLabioSuperior();
     bool anomalias = await getAnomalias();
     bool recurrente = await getRecurrente();
+    bool malformaciones = await getMalformaciones();
 
     String generoPaciente = getGeneroPaciente(genero);
     double pesoPaciente = double.tryParse(peso) ?? -1;
@@ -365,7 +373,8 @@ class DiagnosticoHelper {
         pesoTabla,
         tallaTabla,
         distanciaPalpebralTabla,
-        perimetroCranealTabla);
+        perimetroCranealTabla,
+        malformaciones);
   }
 
 // Convertir el valor booleano a una cadena 'male' o 'female'
@@ -445,7 +454,8 @@ class DiagnosticoHelper {
       double pesoTabla,
       double tallaTabla,
       double distanciaPalpebralTabla,
-      double perimetroCranealTabla) {
+      double perimetroCranealTabla,
+      bool malformaciones) {
     if (adoptado && tiempoAcogida) {
       return 'Incomplete';
     } else {
@@ -460,11 +470,19 @@ class DiagnosticoHelper {
               return 'pFAS';
             }
           } else {
-            //preguntas malformaciones
+            if (malformaciones) {
+              return 'ARBD';
+            } else {
+              return 'NO FASD';
+            }
           }
         } else {
           if (dominios < 2) {
-            //pregunta malformaciones
+            if (malformaciones) {
+              return 'ARBD';
+            } else {
+              return 'NO FASD';
+            }
           } else {
             return 'ARND';
           }
@@ -492,59 +510,99 @@ class DiagnosticoHelper {
         }
       }
     }
-    return 'Error';
   }
 
+/////////////Para guardar la info del paciente
   Future<void> savePatient(BuildContext context, String name) async {
-  // Obtener las respuestas del usuario
-  String edad = await getEdadText();
-  bool adoptado = await getAdoptadoButtonState();
-  bool tiempoAcogida = await getTiempoAcogidaButtonState();
-  bool alcohol = await getAlcoholButtonState();
-  bool genero = await getGeneroButtonState();
-  String peso = await getPesoText();
-  String talla = await getTallaText();
-  String perimetroCraneal = await getPerimetroCranealText();
-  String distanciaPalpebral = await getDistanciaPalpebralText();
-  int filtrum = await getFiltrum();
-  int labioSuperior = await getLabioSuperior();
+    // Obtener las respuestas del usuario
+    String edad = await getEdadText();
+    bool adoptado = await getAdoptadoButtonState();
+    bool tiempoAcogida = await getTiempoAcogidaButtonState();
+    bool alcohol = await getAlcoholButtonState();
+    bool genero = await getGeneroButtonState();
+    String peso = await getPesoText();
+    String talla = await getTallaText();
+    String perimetroCraneal = await getPerimetroCranealText();
+    String distanciaPalpebral = await getDistanciaPalpebralText();
+    int filtrum = await getFiltrum();
+    int labioSuperior = await getLabioSuperior();
 
-  String generoPaciente = getGeneroPaciente(genero);
-  double pesoPaciente = double.tryParse(peso) ?? -1;
-  double tallaPaciente = double.tryParse(talla) ?? -1;
-  double distanciaPalpebralPaciente =
-      double.tryParse(distanciaPalpebral) ?? -1;
-  double perimetroCranealPaciente = double.tryParse(perimetroCraneal) ?? -1;
+    String generoPaciente = getGeneroPaciente(genero);
+    double pesoPaciente = double.tryParse(peso) ?? -1;
+    double tallaPaciente = double.tryParse(talla) ?? -1;
+    double distanciaPalpebralPaciente =
+        double.tryParse(distanciaPalpebral) ?? -1;
+    double perimetroCranealPaciente = double.tryParse(perimetroCraneal) ?? -1;
 
-  try {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> patientList = prefs.getStringList('patient_list') ?? []; // Obtener la lista de pacientes o una lista vacía
-    patientList.add(name); // Agregar el nombre del paciente a la lista
-    await prefs.setStringList('patient_list', patientList); // Guardar la lista de pacientes actualizada
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      List<String> patientList = prefs.getStringList('patient_list') ??
+          []; // Obtener la lista de pacientes o una lista vacía
+      patientList.add(name); // Agregar el nombre del paciente a la lista
+      await prefs.setStringList('patient_list',
+          patientList); // Guardar la lista de pacientes actualizada
 
-    // Guardar los detalles del paciente usando el nombre como clave
-    await prefs.setString('${name}_age', edad);
-    await prefs.setString('${name}_gender', generoPaciente);
-    await prefs.setBool('${name}_adoptado', adoptado);
-    await prefs.setBool('${name}_tiempoacogida', tiempoAcogida);
-    await prefs.setBool('${name}_alcohol', alcohol);
-    await prefs.setDouble('${name}_peso', pesoPaciente);
-    await prefs.setDouble('${name}_talla', tallaPaciente);
-    await prefs.setDouble('${name}_perimetro', perimetroCranealPaciente);
-    await prefs.setDouble('${name}_distancia', distanciaPalpebralPaciente);
-    await prefs.setInt('${name}_filtrum', filtrum);
-    await prefs.setInt('${name}_labio', labioSuperior);
-  } catch (e) {
-    print("Error al guardar paciente en SharedPreferences: $e");
+      // Guardar los detalles del paciente usando el nombre como clave
+      await prefs.setString('${name}_age', edad);
+      await prefs.setString('${name}_gender', generoPaciente);
+      await prefs.setBool('${name}_adoptado', adoptado);
+      await prefs.setBool('${name}_tiempoacogida', tiempoAcogida);
+      await prefs.setBool('${name}_alcohol', alcohol);
+      await prefs.setDouble('${name}_peso', pesoPaciente);
+      await prefs.setDouble('${name}_talla', tallaPaciente);
+      await prefs.setDouble('${name}_perimetro', perimetroCranealPaciente);
+      await prefs.setDouble('${name}_distancia', distanciaPalpebralPaciente);
+      await prefs.setInt('${name}_filtrum', filtrum);
+      await prefs.setInt('${name}_labio', labioSuperior);
+    } catch (e) {
+      print("Error al guardar paciente en SharedPreferences: $e");
+    }
+
+    // Navegar a la pantalla PatientUI después de guardar el paciente
+    // ignore: use_build_context_synchronously
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => PatientUI()),
+    );
   }
 
-  // Navegar a la pantalla PatientUI después de guardar el paciente
-  // ignore: use_build_context_synchronously
-  Navigator.pushReplacement(
-    context,
-    MaterialPageRoute(builder: (context) => PatientUI()),
-  );
-}
+  Future<Map<String, int>> rasgosYDominios() async {
+    // Obtener las respuestas del usuario
+    String edad = await getEdadText();
+    bool dominiosBoton0 = await getDominiosButtonState(0);
+    bool dominiosBoton1 = await getDominiosButtonState(1);
+    bool dominiosBoton2 = await getDominiosButtonState(2);
+    String distanciaPalpebral = await getDistanciaPalpebralText();
+    int filtrum = await getFiltrum();
+    int labioSuperior = await getLabioSuperior();
 
+    double distanciaPalpebralPaciente =
+        double.tryParse(distanciaPalpebral) ?? -1;
+    double distanciaPalpebralTabla =
+        await obtenerDistanciaPalpebralCorrespondiente(edad) ?? -1;
 
+    int rasgos = 0;
+    if (filtrum >= 4) {
+      rasgos += 1;
+    }
+    if (labioSuperior >= 4) {
+      rasgos += 1;
+    }
+    if (distanciaPalpebralPaciente <= distanciaPalpebralTabla) {
+      rasgos += 1;
+    }
+
+    int dominios = 0;
+    if (dominiosBoton0) {
+      dominios = 0;
+    }
+    if (dominiosBoton1) {
+      dominios = 1;
+    }
+    if (dominiosBoton2) {
+      dominios = 2;
+    }
+
+    return {'rasgos': rasgos, 'dominios': dominios};
+  }
 }

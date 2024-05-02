@@ -191,6 +191,8 @@ class _SolucionUIState extends State<SolucionUI> {
                           circleColor = Colors.black;
                         } else if (snapshot.data == 'NO FASD') {
                           circleColor = Colors.grey;
+                        } else if (snapshot.data == 'ARBD') {
+                          circleColor = Colors.pink;
                         }
 
                         // Devolver el widget del círculo con el color cambiado
