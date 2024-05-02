@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'patient_details_ui.dart'; // Importa la pantalla de detalles del paciente
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'inicio_ui.dart';
+import 'analisis2_ui.dart';
+import 'welcome_ui.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class PatientUI extends StatefulWidget {
   @override
@@ -28,28 +36,162 @@ class _PatientUIState extends State<PatientUI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Lista de Pacientes'),
-      ),
-      body: ListView.builder(
-        itemCount: patientList.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(patientList[index]), // Muestra el nombre del paciente
-            onTap: () {
-              // Navega a la pantalla de detalles del paciente cuando se toca un paciente
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PatientDetailsScreen(patientName: patientList[index]),
+      backgroundColor: Color.fromARGB(255, 60, 152, 209),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            // Encabezado
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Botón de regreso
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InicioUI(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/atras.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
                 ),
-              ).then((value) {
-                // Actualiza la lista de pacientes después de volver de la pantalla de detalles
-                _loadPatientList();
-              });
-            },
-          );
-        },
+                // Logo y nombre
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeUI(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('img/logo.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            width: 50.0,
+                            height: 50.0,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            AppLocalizations.of(context)!.translate('appName')!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // Icono de apagado
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WelcomeUI(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/off.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                )
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              'Pacientes',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 50,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: patientList.map((patientName) {
+                    return Container(
+                      width: 303, // Ancho del contenedor
+                      margin: EdgeInsets.symmetric(
+                          vertical: 10), // Espacio entre elementos
+                      decoration: BoxDecoration(
+                        color:
+                            Color(0xFF001254), // Color de fondo del contenedor
+                        borderRadius:
+                            BorderRadius.circular(10), // Bordes redondeados
+                      ),
+                      child: ListTile(
+                        title: Text(
+                          patientName,
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PatientDetailsScreen(
+                                patientName: patientName,
+                              ),
+                            ),
+                          ).then((value) {
+                            _loadPatientList();
+                          });
+                        },
+                      ),
+                    );
+                  }).toList(),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:teaf_app/patients_ui.dart';
+import 'welcome_ui.dart';
+import 'app_localizations.dart';
 
 class PatientDetailsScreen extends StatelessWidget {
   final String patientName;
@@ -11,59 +14,200 @@ class PatientDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 60, 152, 209),
-      appBar: AppBar(
-        title: Text('Detalles del paciente'),
-      ),
-      body: FutureBuilder<String>(
-        future: _loadPatientDetails(patientName),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasData) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            // Encabezado
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: Center(child: Text(snapshot.data!)),
-                ),
-                SizedBox(
-                    height: 20), // Agrega un espacio entre el texto y el botón
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _deletePatient(context, patientName);
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
-                          Colors.red), // Cambia el color del botón a rojo
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
+                // Botón de regreso
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PatientUI(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/atras.png'),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    child: Text(
-                      'Eliminar paciente', // Establece un texto fijo para el botón
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    width: 50.0,
+                    height: 50.0,
                   ),
                 ),
+                // Logo y nombre
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeUI(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('img/logo.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            width: 50.0,
+                            height: 50.0,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            AppLocalizations.of(context)!.translate('appName')!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // Icono de apagado
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WelcomeUI(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/off.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    width: 50.0,
+                    height: 50.0,
+                  ),
+                )
               ],
-            );
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else {
-            return Center(
-                child: Text('No se encontraron detalles para el paciente'));
-          }
-        },
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              'Detalles',
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 50,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: FutureBuilder<String>(
+                future: _loadPatientDetails(patientName),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasData) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              snapshot.data!,
+                              style: TextStyle(
+                                color: Colors.white, // Color del texto
+                                fontSize: 20, // Tamaño de fuente
+                                fontFamily: 'Roboto', // Tipo de fuente
+                              ),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: SizedBox(
+                            width: 250,
+                            height: 60,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _deletePatient(context, patientName);
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: MaterialStateProperty.all(Color(
+                                    0xFF001254)), // Color de fondo del botón
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        20.0), // Bordes redondeados
+                                    side: BorderSide(
+                                        color: Colors.white,
+                                        width:
+                                            2.0), // Borde blanco con ancho 2.0
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                'Eliminar',
+                                style: TextStyle(
+                                  color: Colors
+                                      .white, // Color del texto en el botón
+                                  fontSize:
+                                      18, // Tamaño de fuente del texto en el botón
+                                  fontFamily:
+                                      'Roboto', // Tipo de fuente del texto en el botón
+                                  fontWeight: FontWeight.bold, // Negrita
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    return Center(
+                      child: Text(
+                        'No se encontraron detalles para el paciente',
+                        style: TextStyle(
+                          color: Colors.black, // Color del texto
+                          fontSize: 20, // Tamaño de fuente
+                          fontFamily: 'Roboto', // Tipo de fuente
+                          fontWeight: FontWeight.bold, // Negrita
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -85,18 +229,18 @@ class PatientDetailsScreen extends StatelessWidget {
 
     // Construir una cadena con los detalles del paciente
     return '''
-    Nombre: $patientName
-    Edad: $age
-    Género: $gender
-    Adoptado: $adoptado
+    Name: $patientName
+    Age: $age
+    Gender: $gender
+    Adopted: $adoptado
     Tiempo Acogida: $tiempoacogida
     Alcohol: $alcohol
     Peso: $peso
     Talla: $talla
-    Perímetro Craneal: $perimetro
-    Distancia Palpebral: $distancia
+    Perimetro: $perimetro
+    Distancia: $distancia
     Filtrum: $filtrum
-    Labio Superior: $labio
+    Labio: $labio
   ''';
   }
 
