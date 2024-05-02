@@ -247,7 +247,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                     child: TextField(
                                       controller: edadController,
                                       decoration: InputDecoration(
-                                        hintText: 'Meses',
+                                        hintText: AppLocalizations.of(context)!
+                                                  .translate('months')!,
                                       ),
                                       keyboardType: TextInputType
                                           .number, // Especificar el tipo de teclado como numérico
@@ -505,7 +506,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                         );
                       } else {
                         Fluttertoast.showToast(
-                          msg: "Por favor, rellene todos los campos",
+                          msg: AppLocalizations.of(context)!
+                                            .translate('please')!,
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,

@@ -244,7 +244,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text('Cerrar'),
+                                                    child: Text(AppLocalizations
+                                                            .of(context)!
+                                                        .translate('close')!),
                                                   ),
                                                 ],
                                               ),
@@ -368,7 +370,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text('Cerrar'),
+                                                    child: Text(AppLocalizations
+                                                            .of(context)!
+                                                        .translate('close')!),
                                                   ),
                                                 ],
                                               ),
@@ -493,7 +497,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text('Cerrar'),
+                                                    child: Text(AppLocalizations
+                                                            .of(context)!
+                                                        .translate('close')!),
                                                   ),
                                                 ],
                                               ),
@@ -618,7 +624,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text('Cerrar'),
+                                                    child: Text(AppLocalizations
+                                                            .of(context)!
+                                                        .translate('close')!),
                                                   ),
                                                 ],
                                               ),

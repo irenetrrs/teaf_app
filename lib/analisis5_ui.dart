@@ -132,14 +132,18 @@ class SharedPreferencesHelper {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context)!.translate('summary')!,),
+          title: Text(
+            AppLocalizations.of(context)!.translate('summary')!,
+          ),
           content: Text(popupMessage),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(AppLocalizations.of(context)!.translate('edit')!,),
+              child: Text(
+                AppLocalizations.of(context)!.translate('edit')!,
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -150,7 +154,9 @@ class SharedPreferencesHelper {
                   ),
                 );
               },
-              child: Text(AppLocalizations.of(context)!.translate('continue')!,),
+              child: Text(
+                AppLocalizations.of(context)!.translate('continue')!,
+              ),
             ),
           ],
         );
@@ -487,7 +493,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                       }
                     } else {
                       Fluttertoast.showToast(
-                        msg: "Por favor, rellene todos los campos",
+                        msg: AppLocalizations.of(context)!.translate('please')!,
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 2,

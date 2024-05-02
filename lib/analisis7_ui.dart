@@ -147,14 +147,18 @@ class SharedPreferencesHelper {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context)!.translate('resume')!,),
+          title: Text(
+            AppLocalizations.of(context)!.translate('resume')!,
+          ),
           content: Text(popupMessage),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text(AppLocalizations.of(context)!.translate('edit')!,),
+              child: Text(
+                AppLocalizations.of(context)!.translate('edit')!,
+              ),
             ),
             TextButton(
               onPressed: () {
@@ -165,7 +169,9 @@ class SharedPreferencesHelper {
                   ),
                 );
               },
-              child: Text(AppLocalizations.of(context)!.translate('continue')!,),
+              child: Text(
+                AppLocalizations.of(context)!.translate('continue')!,
+              ),
             ),
           ],
         );
@@ -255,7 +261,8 @@ class _Analisis6UIState extends State<Analisis7UI> {
                             ),
                             SizedBox(height: 10),
                             Text(
-                              AppLocalizations.of(context)!.translate('appName')!,
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 15,
@@ -322,7 +329,8 @@ class _Analisis6UIState extends State<Analisis7UI> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                AppLocalizations.of(context)!.translate('major_malformations')!,
+                                AppLocalizations.of(context)!
+                                    .translate('major_malformations')!,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
@@ -359,7 +367,8 @@ class _Analisis6UIState extends State<Analisis7UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        AppLocalizations.of(context)!.translate('yes')!,
+                                        AppLocalizations.of(context)!
+                                            .translate('yes')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -394,7 +403,8 @@ class _Analisis6UIState extends State<Analisis7UI> {
                                         fixedSize: Size.fromHeight(50.0),
                                       ),
                                       child: Text(
-                                        AppLocalizations.of(context)!.translate('no')!,
+                                        AppLocalizations.of(context)!
+                                            .translate('no')!,
                                         style: TextStyle(
                                           color: Color(0xFF68696C),
                                           fontSize: 22,
@@ -433,7 +443,8 @@ class _Analisis6UIState extends State<Analisis7UI> {
                         SharedPreferencesHelper.showResumenDialog(context);
                       } else {
                         Fluttertoast.showToast(
-                          msg: "Por favor, rellene todos los campos",
+                          msg: AppLocalizations.of(context)!
+                              .translate('please')!,
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,

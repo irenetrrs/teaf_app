@@ -221,7 +221,7 @@ class ResumenUI extends StatelessWidget {
                         ),
                       ),
                       child: Text(
-                        snapshot.data ?? 'Diagnóstico no disponible',
+                        snapshot.data ?? AppLocalizations.of(context)!.translate('diagnosis_not_available')!,
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 25,
@@ -299,7 +299,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error');
+                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} cm',
@@ -351,7 +351,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error');
+                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} kg',
@@ -692,7 +692,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error');
+                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -806,7 +806,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error');
+                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'}',
@@ -859,7 +859,7 @@ class ResumenUI extends StatelessWidget {
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
                                 } else if (snapshot.hasError) {
-                                  return Text('Error');
+                                  return Text(AppLocalizations.of(context)!.translate('error')!,);
                                 } else {
                                   return Text(
                                     '${snapshot.data ?? 'N/A'} cm',

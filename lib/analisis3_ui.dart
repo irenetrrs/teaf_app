@@ -385,7 +385,8 @@ class _Analisis3UIState extends State<Analisis3UI> {
                         );
                       } else {
                         Fluttertoast.showToast(
-                          msg: "Por favor, rellene todos los campos",
+                          msg: AppLocalizations.of(context)!
+                              .translate('please')!,
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,

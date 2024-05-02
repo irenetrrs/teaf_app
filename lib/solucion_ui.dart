@@ -206,7 +206,9 @@ class _SolucionUIState extends State<SolucionUI> {
                               ),
                             ),
                             Text(
-                              snapshot.data ?? 'Diagnóstico no disponible',
+                              snapshot.data ??
+                                  AppLocalizations.of(context)!
+                                      .translate('diagnosis_not_available')!,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 25.0,

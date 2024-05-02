@@ -75,6 +75,8 @@
     "error": "Error",
     "alcohol": "Alcohol",
     "neurobehavioral": "Neuroconductual",
-    "head_circumference_short": "P. Craneal"
-	
+    "head_circumference_short": "P. Craneal",
+    "diagnosis_not_available": "Diagnóstico no disponible",
+    "months": "Meses",
+    "please": "Por favor, rellene todos los campos"
 }

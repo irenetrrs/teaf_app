@@ -214,19 +214,21 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                           builder: (BuildContext context) {
                                             return AlertDialog(
                                               title: Text(
-                                                    AppLocalizations.of(context)!
+                                                AppLocalizations.of(context)!
                                                     .translate('infoDomains')!,
-                                              ),content: Column(
+                                              ),
+                                              content: Column(
                                                 mainAxisSize: MainAxisSize.min,
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                      AppLocalizations.of(
+                                                    AppLocalizations.of(
                                                             context)!
                                                         .translate(
                                                             'infoDomainsText')!,
-                                                  ),GestureDetector(
+                                                  ),
+                                                  GestureDetector(
                                                     onTap: () {
                                                       _launchURL(
                                                           'https://vimeo.com/845544703'); // Llama a la función para abrir el enlace
@@ -256,7 +258,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                                           Navigator.of(context)
                                                               .pop();
                                                         },
-                                                        child: Text('Cerrar'),
+                                                        child: Text(
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .translate(
+                                                                  'close')!,
+                                                        ),
                                                       ),
                                                     ],
                                                   ),
@@ -346,7 +353,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                   fixedSize: Size.fromHeight(50.0),
                                 ),
                                 child: Text(
-                                 AppLocalizations.of(context)!.translate('1')!,
+                                  AppLocalizations.of(context)!.translate('1')!,
                                   style: TextStyle(
                                     color: Color(0xFF68696C),
                                     fontSize: 25,
@@ -522,7 +529,8 @@ class _Analisis2UIState extends State<Analisis2UI> {
                         );
                       } else {
                         Fluttertoast.showToast(
-                          msg: "Por favor, rellene todos los campos",
+                          msg: AppLocalizations.of(context)!
+                              .translate('please')!,
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,

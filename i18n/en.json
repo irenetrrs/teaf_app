@@ -75,5 +75,8 @@
     "error": "Error",
     "alcohol": "Alcohol",
     "neurobehavioral": "Neurobehavioral",
-    "head_circumference_short": "Head Circumference"
+    "head_circumference_short": "Head Circumference",
+    "diagnosis_not_available": "Diagnosis not available",
+    "months": "Months",
+    "please": "Please, fill in all fields"
 }

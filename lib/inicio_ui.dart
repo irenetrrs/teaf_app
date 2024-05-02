@@ -97,32 +97,7 @@ class InicioUI extends StatelessWidget {
               SizedBox(
                 height: 80,
               ),
-              Container(
-                width: 180,
-                height: 180,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('img/user.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Irene Torres\n100429210',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
-                  height: 0,
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
+
               Container(
                 width: 250,
                 height: 60,

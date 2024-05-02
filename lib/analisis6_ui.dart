@@ -548,7 +548,8 @@ class _Analisis6UIState extends State<Analisis6UI> {
                         SharedPreferencesHelper.showResumenDialog(context);
                       } else {
                         Fluttertoast.showToast(
-                          msg: "Por favor, rellene todos los campos",
+                          msg: AppLocalizations.of(context)!
+                              .translate('please')!,
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,
