@@ -18,9 +18,26 @@ import 'package:path_provider/path_provider.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
-  static Future<bool> getDominiosButtonState() async {
+  static Future<bool> getDominiosButtonState(int buttonNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool('preguntaDominios-boton0') ?? false;
+    return prefs.getBool('preguntaDominios-boton$buttonNumber') ?? false;
+  }
+
+  static Future<int> dominios() async {
+    bool dominiosBoton0 = await getDominiosButtonState(0);
+    bool dominiosBoton1 = await getDominiosButtonState(1);
+    bool dominiosBoton2 = await getDominiosButtonState(2);
+    int dominios = 0;
+    if (dominiosBoton0) {
+      dominios = 0;
+    }
+    if (dominiosBoton1) {
+      dominios = 1;
+    }
+    if (dominiosBoton2) {
+      dominios = 2;
+    }
+    return dominios;
   }
 
   //alcohol - si no
@@ -832,9 +849,8 @@ class ResumenUI extends StatelessWidget {
                           Positioned(
                             left: 19,
                             top: 40,
-                            child: FutureBuilder<bool>(
-                              future: SharedPreferencesHelper
-                                  .getDominiosButtonState(),
+                            child: FutureBuilder<int>(
+                              future: SharedPreferencesHelper.dominios(),
                               builder: (context, snapshot) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
