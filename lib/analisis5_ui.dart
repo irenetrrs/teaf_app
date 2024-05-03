@@ -311,27 +311,11 @@ class _Analisis5UIState extends State<Analisis5UI> {
                 ),
                 // Icono de apagado
                 InkWell(
-                  onTap: () {
-                    // Acción a realizar cuando se hace clic en el botón
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WelcomeUI(),
-                      ),
-                    );
-                  },
                   child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('img/off.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    width: 50.0,
-                    height: 50.0,
+                    child: diagnosticoHelper.buildLanguageMenu(
+                        context), // Llama a la función para construir el menú de idiomas
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(

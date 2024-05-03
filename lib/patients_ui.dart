@@ -4,6 +4,7 @@ import 'patient_details_ui.dart';
 import 'inicio_ui.dart';
 import 'welcome_ui.dart';
 import 'app_localizations.dart';
+import 'diagnostico_helper.dart';
 
 class PatientUI extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class PatientUI extends StatefulWidget {
 }
 
 class _PatientUIState extends State<PatientUI> {
+  DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   List<Map<String, dynamic>> patients =
       []; // Lista de pacientes con diagnósticos
 
@@ -114,26 +116,12 @@ class _PatientUIState extends State<PatientUI> {
                 ),
                 // Icono de apagado
                 InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WelcomeUI(),
-                      ),
-                    );
-                  },
                   child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('img/off.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    width: 50.0,
-                    height: 50.0,
+                     
+                    child: diagnosticoHelper.buildLanguageMenu(
+                        context), // Llama a la función para construir el menú de idiomas
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(

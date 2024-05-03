@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
+import 'diagnostico_helper.dart';
 
 class Analisis2UI extends StatefulWidget {
   @override
@@ -15,6 +16,7 @@ class Analisis2UI extends StatefulWidget {
 }
 
 class _Analisis2UIState extends State<Analisis2UI> {
+  DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late AppLanguageProvider appLanguage;
   // Variables para manejar el estado de los botones
   final String dominios = 'preguntaDominios';
@@ -138,28 +140,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
                   ),
                   // Icono de apagado
                   InkWell(
-                    onTap: () {
-                      // Acción a realizar cuando se hace clic en el botón
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WelcomeUI(),
-                        ),
-                      );
-                    },
                     child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/off.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 50.0,
-                      height: 50.0,
+                       
+                      child: diagnosticoHelper.buildLanguageMenu(
+                          context), // Llama a la función para construir el menú de idiomas
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(

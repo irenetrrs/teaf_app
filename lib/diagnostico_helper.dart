@@ -3,6 +3,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
 import 'patients_ui.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
+import 'package:provider/provider.dart';
 
 class DiagnosticoHelper {
   List<Map<String, dynamic>> maleHeightData = [];
@@ -611,5 +614,35 @@ class DiagnosticoHelper {
     }
 
     return {'rasgos': rasgos, 'dominios': dominios};
+  }
+
+//////////////menu desplegable
+  Widget buildLanguageMenu(BuildContext context) {
+    // Obtén una instancia de AppLanguageProvider
+    AppLanguageProvider appLanguage = Provider.of<AppLanguageProvider>(context);
+
+    // Función para construir cada elemento del menú desplegable
+    PopupMenuItem<String> buildMenuItem(String language) {
+      return PopupMenuItem<String>(
+        value: language,
+        child: Text(language),
+      );
+    }
+
+    // Devuelve el menú desplegable
+    return PopupMenuButton<String>(
+      onSelected: (String selectedLanguage) {
+        if (selectedLanguage == 'Español') {
+          appLanguage.changeLanguage(const Locale("es"));
+        } else {
+          appLanguage.changeLanguage(const Locale("en"));
+        }
+        print('Selected language: $selectedLanguage');
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+        buildMenuItem('Español'),
+        buildMenuItem('Inglés'),
+      ],
+    );
   }
 }

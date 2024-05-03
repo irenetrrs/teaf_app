@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
+import 'diagnostico_helper.dart';
 
 // ignore: must_be_immutable
 class Analisis1UI extends StatefulWidget {
@@ -26,6 +27,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
   bool botonmenor = false;
   bool botonmayor = false;
   TextEditingController edadController = TextEditingController();
+
+  DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   @override
   void initState() {
     super.initState();
@@ -121,28 +124,12 @@ class _Analisis1UIState extends State<Analisis1UI> {
                   ),
                   // Icono de apagado
                   InkWell(
-                    onTap: () {
-                      // Acción a realizar cuando se hace clic en el botón
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WelcomeUI(),
-                        ),
-                      );
-                    },
                     child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/off.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 50.0,
-                      height: 50.0,
+                       
+                      child: diagnosticoHelper.buildLanguageMenu(
+                          context), // Llama a la función para construir el menú de idiomas
                     ),
-                  )
+                  ),
                 ],
               ),
               SizedBox(
