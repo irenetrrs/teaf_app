@@ -506,20 +506,35 @@ class DiagnosticoHelper {
     bool tiempoAcogida = await getTiempoAcogidaButtonState();
     bool alcohol = await getAlcoholButtonState();
     bool genero = await getGeneroButtonState();
+    bool dominiosBoton0 = await getDominiosButtonState(0);
+    bool dominiosBoton1 = await getDominiosButtonState(1);
+    bool dominiosBoton2 = await getDominiosButtonState(2);
     String peso = await getPesoText();
     String talla = await getTallaText();
     String perimetroCraneal = await getPerimetroCranealText();
     String distanciaPalpebral = await getDistanciaPalpebralText();
     int filtrum = await getFiltrum();
     int labioSuperior = await getLabioSuperior();
+    bool anomalias = await getAnomalias();
+    bool recurrente = await getRecurrente();
+    bool malformaciones = await getMalformaciones();
+    String resultadoDiagnostico = await diagnostico();
 
-    String generoPaciente = getGeneroPaciente(genero);
     double pesoPaciente = double.tryParse(peso) ?? -1;
     double tallaPaciente = double.tryParse(talla) ?? -1;
     double distanciaPalpebralPaciente =
         double.tryParse(distanciaPalpebral) ?? -1;
     double perimetroCranealPaciente = double.tryParse(perimetroCraneal) ?? -1;
-
+    int dominios = 0;
+    if (dominiosBoton0) {
+      dominios = 0;
+    }
+    if (dominiosBoton1) {
+      dominios = 1;
+    }
+    if (dominiosBoton2) {
+      dominios = 2;
+    }
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       List<String> patientList = prefs.getStringList('patient_list') ??
@@ -529,8 +544,9 @@ class DiagnosticoHelper {
           patientList); // Guardar la lista de pacientes actualizada
 
       // Guardar los detalles del paciente usando el nombre como clave
+      await prefs.setString('${name}_diagnostico', resultadoDiagnostico);
       await prefs.setString('${name}_age', edad);
-      await prefs.setString('${name}_gender', generoPaciente);
+      await prefs.setBool('${name}_gender', genero);
       await prefs.setBool('${name}_adoptado', adoptado);
       await prefs.setBool('${name}_tiempoacogida', tiempoAcogida);
       await prefs.setBool('${name}_alcohol', alcohol);
@@ -538,8 +554,12 @@ class DiagnosticoHelper {
       await prefs.setDouble('${name}_talla', tallaPaciente);
       await prefs.setDouble('${name}_perimetro', perimetroCranealPaciente);
       await prefs.setDouble('${name}_distancia', distanciaPalpebralPaciente);
+      await prefs.setInt('${name}_dominios', dominios);
       await prefs.setInt('${name}_filtrum', filtrum);
       await prefs.setInt('${name}_labio', labioSuperior);
+      await prefs.setBool('${name}_anomalias', anomalias);
+      await prefs.setBool('${name}_recurrente', recurrente);
+      await prefs.setBool('${name}_malformaciones', malformaciones);
     } catch (e) {
       print("Error al guardar paciente en SharedPreferences: $e");
     }
@@ -552,6 +572,7 @@ class DiagnosticoHelper {
     );
   }
 
+/////////////////////RASGOS Y DOMINIOS/////////////////////////////////
   Future<Map<String, int>> rasgosYDominios() async {
     // Obtener las respuestas del usuario
     String edad = await getEdadText();

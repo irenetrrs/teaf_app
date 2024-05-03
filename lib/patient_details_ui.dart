@@ -216,7 +216,7 @@ class PatientDetailsScreen extends StatelessWidget {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // Recupera los detalles del paciente asociados al nombre
     String? age = prefs.getString('${patientName}_age');
-    String? gender = prefs.getString('${patientName}_gender');
+    bool? gender = prefs.getBool('${patientName}_gender');
     bool? adoptado = prefs.getBool('${patientName}_adoptado');
     bool? tiempoacogida = prefs.getBool('${patientName}_tiempoacogida');
     bool? alcohol = prefs.getBool('${patientName}_alcohol');
@@ -226,7 +226,10 @@ class PatientDetailsScreen extends StatelessWidget {
     double? distancia = prefs.getDouble('${patientName}_distancia');
     int? filtrum = prefs.getInt('${patientName}_filtrum');
     int? labio = prefs.getInt('${patientName}_labio');
-
+    int? dominios = prefs.getInt('${patientName}_dominios');
+    bool? anomalias = prefs.getBool('${patientName}_anomalias');
+    bool? recurrente = prefs.getBool('${patientName}_recurrente');
+    bool? malformaciones = prefs.getBool('${patientName}_malformaciones');
     // Construir una cadena con los detalles del paciente
     return '''
     Name: $patientName
@@ -237,10 +240,14 @@ class PatientDetailsScreen extends StatelessWidget {
     Alcohol: $alcohol
     Peso: $peso
     Talla: $talla
+    Dominios: $dominios
     Perimetro: $perimetro
     Distancia: $distancia
     Filtrum: $filtrum
     Labio: $labio
+    Anomalias: $anomalias
+    Recurrente: $recurrente
+    Malformaciones: $malformaciones
   ''';
   }
 
@@ -260,6 +267,10 @@ class PatientDetailsScreen extends StatelessWidget {
     await prefs.remove('${patientName}_distancia');
     await prefs.remove('${patientName}_filtrum');
     await prefs.remove('${patientName}_labio');
+    await prefs.remove('${patientName}_dominios');
+    await prefs.remove('${patientName}_anomalias');
+    await prefs.remove('${patientName}_recurrente');
+    await prefs.remove('${patientName}_malformaciones');
 
     // Volver a la pantalla anterior después de eliminar al paciente
     // ignore: use_build_context_synchronously

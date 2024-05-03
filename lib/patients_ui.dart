@@ -12,7 +12,8 @@ class PatientUI extends StatefulWidget {
 }
 
 class _PatientUIState extends State<PatientUI> {
-  List<String> patientList = []; // Lista de pacientes
+  List<Map<String, dynamic>> patients =
+      []; // Lista de pacientes con diagnósticos
 
   @override
   void initState() {
@@ -23,9 +24,16 @@ class _PatientUIState extends State<PatientUI> {
   // Función para cargar la lista de pacientes
   Future<void> _loadPatientList() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> patientList = prefs.getStringList('patient_list') ?? [];
+    List<Map<String, dynamic>> loadedPatients = [];
+    for (String name in patientList) {
+      // Obtener el diagnóstico asociado con el paciente
+      String diagnostico = prefs.getString('${name}_diagnostico') ?? '';
+      loadedPatients.add({'name': name, 'diagnostico': diagnostico});
+    }
     setState(() {
-      // Actualiza el estado con la lista de pacientes guardados
-      patientList = prefs.getStringList('patient_list') ?? [];
+      // Actualizar el estado con la lista de pacientes y diagnósticos
+      patients = loadedPatients;
     });
   }
 
@@ -147,7 +155,7 @@ class _PatientUIState extends State<PatientUI> {
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: patientList.map((patientName) {
+                  children: patients.map((patient) {
                     return Container(
                       width: 303, // Ancho del contenedor
                       margin: EdgeInsets.symmetric(
@@ -160,7 +168,7 @@ class _PatientUIState extends State<PatientUI> {
                       ),
                       child: ListTile(
                         title: Text(
-                          patientName,
+                          patient['name'],
                           style: TextStyle(
                             color: const Color.fromARGB(255, 255, 255, 255),
                             fontSize: 20,
@@ -168,12 +176,21 @@ class _PatientUIState extends State<PatientUI> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+                        subtitle: Text(
+                          patient[
+                              'diagnostico'], // Aquí se muestra el diagnóstico
+                          style: TextStyle(
+                            color: const Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 16,
+                            fontFamily: 'Inter',
+                          ),
+                        ),
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => PatientDetailsScreen(
-                                patientName: patientName,
+                                patientName: patient['name'],
                               ),
                             ),
                           ).then((value) {
