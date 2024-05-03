@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'diagnostico_helper.dart';
 import 'package:teaf_app/analisis3_ui.dart';
@@ -311,11 +312,15 @@ class _Analisis4UIState extends State<Analisis4UI> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
-                            controller: pesoController,
-                            decoration: InputDecoration(
-                              hintText: 'kg',
-                            ),
-                          ),
+                              controller: pesoController,
+                              decoration: InputDecoration(
+                                hintText: 'kg',
+                              ),
+                              keyboardType: TextInputType
+                                  .number, // Especificar el tipo de teclado como numérico
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly,
+                              ]),
                         ),
                       ],
                     ),
@@ -437,11 +442,15 @@ class _Analisis4UIState extends State<Analisis4UI> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
-                            controller: tallaController,
-                            decoration: InputDecoration(
-                              hintText: 'cm',
-                            ),
-                          ),
+                              controller: tallaController,
+                              decoration: InputDecoration(
+                                hintText: 'cm',
+                              ),
+                              keyboardType: TextInputType
+                                  .number, // Especificar el tipo de teclado como numérico
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly,
+                              ]),
                         ),
                       ],
                     ),
@@ -564,11 +573,15 @@ class _Analisis4UIState extends State<Analisis4UI> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
-                            controller: perimetroCranealController,
-                            decoration: InputDecoration(
-                              hintText: 'cm',
-                            ),
-                          ),
+                              controller: perimetroCranealController,
+                              decoration: InputDecoration(
+                                hintText: 'cm',
+                              ),
+                              keyboardType: TextInputType
+                                  .number, // Especificar el tipo de teclado como numérico
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly,
+                              ]),
                         ),
                       ],
                     ),
@@ -691,11 +704,15 @@ class _Analisis4UIState extends State<Analisis4UI> {
                           padding: EdgeInsets.symmetric(
                               horizontal: 10.0), // Espaciado interno
                           child: TextField(
-                            controller: distanciaPalpebralController,
-                            decoration: InputDecoration(
-                              hintText: 'mm',
-                            ),
-                          ),
+                              controller: distanciaPalpebralController,
+                              decoration: InputDecoration(
+                                hintText: 'mm',
+                              ),
+                              keyboardType: TextInputType
+                                  .number, // Especificar el tipo de teclado como numérico
+                              inputFormatters: <TextInputFormatter>[
+                                FilteringTextInputFormatter.digitsOnly,
+                              ]),
                         ),
                       ],
                     ),
@@ -726,27 +743,48 @@ class _Analisis4UIState extends State<Analisis4UI> {
                               perimetroUsuario, edad, generoPaciente);
                       print(perimetroUsuario);
                       print(perimetroValido);
+                      int? peso = int.tryParse(pesoController.text);
+                      int? talla = int.tryParse(tallaController.text);
+                      int? percra =
+                          int.tryParse(perimetroCranealController.text);
+                      int? distpal =
+                          int.tryParse(distanciaPalpebralController.text);
                       // Manejar la acción de Siguiente
                       if (pesoController.text.isNotEmpty &&
                           tallaController.text.isNotEmpty &&
                           perimetroCranealController.text.isNotEmpty &&
                           distanciaPalpebralController.text.isNotEmpty) {
-                        if (!perimetroValido) {
-                          // ignore: use_build_context_synchronously
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Analisis6UI(),
-                            ),
-                          );
+                        if (peso! > 0 &&
+                            talla! > 0 &&
+                            percra! > 0 &&
+                            distpal! > 0) {
+                          if (!perimetroValido) {
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Analisis6UI(),
+                              ),
+                            );
+                          } else {
+                            _saveTextFieldsToPrefs();
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Analisis5UI(),
+                              ),
+                            );
+                          }
                         } else {
-                          _saveTextFieldsToPrefs();
-                          // ignore: use_build_context_synchronously
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Analisis5UI(),
-                            ),
+                          Fluttertoast.showToast(
+                            msg: "Por favor, introduce un valor mayor de 0",
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Color(0xFF262f36),
+                            textColor: Colors.white,
+                            fontSize: 16.0,
                           );
                         }
                       } else {

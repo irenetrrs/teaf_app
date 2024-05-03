@@ -33,15 +33,6 @@ class DiagnosticoHelper {
     }
   }
 
-  double roundToNearest(double number) {
-    if (number % 1 != 0) {
-      // Si el número es entero
-      return number +
-          0.5; // Redondear al siguiente más cercano por arriba que sea .5
-    } else {
-      return number; // Si el número ya tiene decimales, no es necesario redondear}
-    }
-  }
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
   List<Map<String, dynamic>> _parseCSV(String rawData) {
@@ -141,15 +132,13 @@ class DiagnosticoHelper {
 ////////////////FUNCIÓN PARA OBTENER LA DIST PALPEBRAL A PARTIR DEL CSV//////////////////
   String? getDistanceFromAge(String age) {
     double userAge = double.tryParse(age) ?? -1;
-
-    // Redondear la edad al siguiente más cercano por arriba que sea .5
-    num roundedAge = roundToNearest(userAge);
-    print('Edad redondeada $roundedAge');
-
+    if (userAge > 168) {
+      userAge = 168;
+    }
     for (var row in distanciaPalpebralData) {
       String rowAgeString = row['Age (in months)'].toString();
       double rowAge = double.tryParse(rowAgeString) ?? -1;
-      if (rowAge == roundedAge) {
+      if (rowAge == userAge) {
         return row['Length (in milimeters)'].toString();
       }
     }
@@ -162,9 +151,6 @@ class DiagnosticoHelper {
   String? getPerimeterFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
 
-    // Redondear la edad al siguiente más cercano por arriba que sea .5
-    num roundedAge = roundToNearest(userAge);
-    //print('Edad redondeada $roundedAge');
     List<Map<String, dynamic>> selectedData = (gender.toLowerCase() == 'male')
         ? perimetroCranealHombresData
         : perimetroCranealMujeresData;
@@ -172,7 +158,7 @@ class DiagnosticoHelper {
     for (var row in selectedData) {
       String rowAgeString = row['Age (in months)'].toString();
       double rowAge = double.tryParse(rowAgeString) ?? -1;
-      if (rowAge == roundedAge) {
+      if (rowAge == userAge) {
         return row['Head Circumference (in milimetres)'].toString();
       }
     }

@@ -248,7 +248,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                       controller: edadController,
                                       decoration: InputDecoration(
                                         hintText: AppLocalizations.of(context)!
-                                                  .translate('months')!,
+                                            .translate('months')!,
                                       ),
                                       keyboardType: TextInputType
                                           .number, // Especificar el tipo de teclado como numérico
@@ -493,21 +493,40 @@ class _Analisis1UIState extends State<Analisis1UI> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
+                      int?
+                          edad; // Obtén el valor del controlador como un String
+                      String texto = edadController
+                          .text; // Intenta convertir el texto a un entero
+                      edad = int.tryParse(texto);
+                      print(edad);
                       if (edadController.text.isNotEmpty &&
                           (botonSi || botonNo) &&
                           (botonmayor || botonmenor)) {
-                        // Manejar la acción de Siguiente
-                        _saveTextFieldsToPrefs();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Analisis2UI(),
-                          ),
-                        );
+                        if (edad! <= 240 && edad >= 24) {
+                          // Manejar la acción de Siguiente
+                          _saveTextFieldsToPrefs();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Analisis2UI(),
+                            ),
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                            msg:
+                                'Por favor, introduce un valor entre 24 y 240 meses',
+                            toastLength: Toast.LENGTH_LONG,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 2,
+                            backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                            textColor: Colors.white,
+                            fontSize: 16.0,
+                          );
+                        }
                       } else {
                         Fluttertoast.showToast(
                           msg: AppLocalizations.of(context)!
-                                            .translate('please')!,
+                              .translate('please')!,
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,
