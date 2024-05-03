@@ -3,6 +3,18 @@ import 'package:teaf_app/inicio_ui.dart';
 import 'welcome_ui.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+_launchURL(String url) async {
+  Uri url0 = Uri.parse(url);
+  // ignore: deprecated_member_use
+  if (await canLaunch(url0.toString())) {
+    // ignore: deprecated_member_use
+    await launch(url0.toString());
+  } else {
+    throw 'Could not launch $url0';
+  }
+}
 
 // ignore: must_be_immutable
 class InfoUI extends StatelessWidget {
@@ -93,15 +105,31 @@ class InfoUI extends StatelessWidget {
                       mainAxisAlignment:
                           MainAxisAlignment.spaceEvenly, // Espaciado uniforme
                       children: [
-                        Image.asset(
-                          'img/ministerio.png', // Reemplaza con la ruta de tu primera imagen
-                          width: 150, // Ancho de la primera imagen
-                          height: 150, // Alto de la primera imagen
+                        GestureDetector(
+                          onTap: () {
+                            // Aquí colocas la lógica para abrir el enlace
+                            // Por ejemplo, puedes usar la función launch de 'url_launcher' package
+                            // Asegúrate de haber importado 'package:url_launcher/url_launcher.dart'
+                            _launchURL('https://www.sanidad.gob.es/');
+                          },
+                          child: Image.asset(
+                            'img/ministerio.png', // Reemplaza con la ruta de tu primera imagen
+                            width: 150, // Ancho de la primera imagen
+                            height: 150, // Alto de la primera imagen
+                          ),
                         ),
-                        Image.asset(
-                          'img/uc3m.png', // Reemplaza con la ruta de tu segunda imagen
-                          width: 150, // Ancho de la segunda imagen
-                          height: 150, // Alto de la segunda imagen
+                        GestureDetector(
+                          onTap: () {
+                            // Aquí colocas la lógica para abrir el enlace
+                            // Por ejemplo, puedes usar la función launch de 'url_launcher' package
+                            // Asegúrate de haber importado 'package:url_launcher/url_launcher.dart'
+                            _launchURL('https://www.uc3m.es/');
+                          },
+                          child: Image.asset(
+                            'img/uc3m.png', // Reemplaza con la ruta de tu segunda imagen
+                            width: 150, // Ancho de la segunda imagen
+                            height: 150, // Alto de la segunda imagen
+                          ),
                         ),
                       ],
                     )

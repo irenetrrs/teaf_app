@@ -358,9 +358,9 @@ class _Analisis5UIState extends State<Analisis5UI> {
               },
               child: Image.asset(
                 'img/creditos.png',
+                width: 400,
               ),
             ),
-
             SizedBox(
               height: 10,
             ),
@@ -368,135 +368,168 @@ class _Analisis5UIState extends State<Analisis5UI> {
             ///cuerpo
             Expanded(
               child: SingleChildScrollView(
-                  child: Padding(
-                padding: EdgeInsets.all(20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.translate('filtrum')!,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: List.generate(
-                            5,
-                            (index) {
-                              final reversedIndex = 5 - index;
-                              final imageName = isCaucasian
-                                  ? filtrumImages[index]
-                                  : filtrumImages[index];
-                              final isSelected =
-                                  imagenseleccionadafiltrum == reversedIndex;
-
-                              return GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    imagenseleccionadafiltrum =
-                                        isSelected ? -1 : reversedIndex;
-                                  });
-                                  savePreferences();
-                                },
-                                child: Container(
-                                  height: 80,
-                                  width: 120,
-                                  margin: EdgeInsets.symmetric(vertical: 5),
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/$imageName.png'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    border: Border.all(
-                                      color: isSelected
-                                          ? Colors.orange
-                                          : Colors.transparent,
-                                      width: 5,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                child: Padding(
+                  padding: EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .translate('filtrum')!,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(width: 50),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppLocalizations.of(context)!.translate('upper_lip')!,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: List.generate(
-                            5,
-                            (index) {
-                              final reversedIndex = 5 - index;
-                              final imageName = isCaucasian
-                                  ? labioSuperiorImages[
-                                      index] // Aquí debes usar labioSuperiorImages
-                                  : labioSuperiorImages[index]; // También aquí
+                              ),
+                              SizedBox(height: 10),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: List.generate(
+                                  5,
+                                  (index) {
+                                    final reversedIndex = 5 - index;
+                                    final imageName = isCaucasian
+                                        ? filtrumImages[index]
+                                        : filtrumImages[index];
+                                    final isSelected =
+                                        imagenseleccionadafiltrum ==
+                                            reversedIndex;
 
-                              final isSelected =
-                                  imagenseleccionadalabio == reversedIndex;
-
-                              return GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    imagenseleccionadalabio =
-                                        isSelected ? -1 : reversedIndex;
-                                  });
-                                  savePreferences();
-                                },
-                                child: Container(
-                                  height: 80,
-                                  width: 120,
-                                  margin: EdgeInsets.symmetric(vertical: 5),
-                                  decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                      image: AssetImage('img/$imageName.png'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                    border: Border.all(
-                                      color: isSelected
-                                          ? Colors.orange
-                                          : Colors.transparent,
-                                      width: 5,
-                                    ),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          imagenseleccionadafiltrum =
+                                              isSelected ? -1 : reversedIndex;
+                                        });
+                                        savePreferences();
+                                      },
+                                      child: Container(
+                                        height: 80,
+                                        width: 120,
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 5),
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                'img/$imageName.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? Colors.orange
+                                                : Colors.transparent,
+                                            width: 5,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
+                              ),
+                            ],
                           ),
+                          SizedBox(width: 50),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .translate('upper_lip')!,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              SizedBox(height: 10),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: List.generate(
+                                  5,
+                                  (index) {
+                                    final reversedIndex = 5 - index;
+                                    final imageName = isCaucasian
+                                        ? labioSuperiorImages[
+                                            index] // Aquí debes usar labioSuperiorImages
+                                        : labioSuperiorImages[
+                                            index]; // También aquí
+
+                                    final isSelected =
+                                        imagenseleccionadalabio ==
+                                            reversedIndex;
+
+                                    return GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          imagenseleccionadalabio =
+                                              isSelected ? -1 : reversedIndex;
+                                        });
+                                        savePreferences();
+                                      },
+                                      child: Container(
+                                        height: 80,
+                                        width: 120,
+                                        margin:
+                                            EdgeInsets.symmetric(vertical: 5),
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                                'img/$imageName.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          border: Border.all(
+                                            color: isSelected
+                                                ? Colors.orange
+                                                : Colors.transparent,
+                                            width: 5,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          // Aquí colocas la lógica para abrir el enlace
+                          // Por ejemplo, puedes usar la función launch de 'url_launcher' package
+                          // Asegúrate de haber importado 'package:url_launcher/url_launcher.dart'
+                          _launchURL('https://fasdpn.org/');
+                        },
+                        child: Image.asset(
+                          'img/creditos2.png',
+                          width: 350,
                         ),
-                      ],
-                    ),
-                  ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  ),
                 ),
-              )),
+              ),
             ),
             Align(
               alignment: Alignment.bottomCenter,
