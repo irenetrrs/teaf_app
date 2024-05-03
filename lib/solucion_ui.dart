@@ -51,29 +51,6 @@ class _SolucionUIState extends State<SolucionUI> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InkWell(
-                  onTap: () {
-                    // Acción a realizar cuando se hace clic en el botón
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Analisis5UI(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('img/atras.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    // Puedes ajustar el tamaño del contenedor según tus necesidades
-                    width: 50.0,
-                    height: 50.0,
-                  ),
-                ),
                 // Logo y nombre en una Columna
                 Expanded(
                   child: Column(

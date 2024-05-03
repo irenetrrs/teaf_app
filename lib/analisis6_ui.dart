@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/analisis5_ui.dart';
+import 'package:teaf_app/analisis4_ui.dart';
 import 'welcome_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'app_language_provider.dart';
@@ -56,7 +57,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Analisis5UI(),
+                          builder: (context) => Analisis4UI(),
                         ),
                       );
                     },
