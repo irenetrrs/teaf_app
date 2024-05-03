@@ -621,15 +621,31 @@ class DiagnosticoHelper {
     AppLanguageProvider appLanguage = Provider.of<AppLanguageProvider>(context);
 
     // Función para construir cada elemento del menú desplegable
-    PopupMenuItem<String> buildMenuItem(String language) {
+    PopupMenuItem<String> buildMenuItem(String language, String flagImage) {
       return PopupMenuItem<String>(
         value: language,
-        child: Text(language),
+        child: Row(
+          children: [
+            Image.asset(
+              flagImage,
+              width: 24, // Ajusta el ancho de la bandera según sea necesario
+              height: 24, // Ajusta la altura de la bandera según sea necesario
+            ),
+            SizedBox(width: 10), // Espacio entre la bandera y el texto
+            Text(language),
+          ],
+        ),
       );
     }
 
     // Devuelve el menú desplegable
     return PopupMenuButton<String>(
+      // Icono del lenguaje que al hacer clic muestra el menú desplegable
+      icon: Icon(
+        Icons.language,
+        size: 30, // Cambia el tamaño del icono
+        color: Colors.white, // Cambia el color del icono
+      ),
       onSelected: (String selectedLanguage) {
         if (selectedLanguage == 'Español') {
           appLanguage.changeLanguage(const Locale("es"));
@@ -639,8 +655,10 @@ class DiagnosticoHelper {
         print('Selected language: $selectedLanguage');
       },
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-        buildMenuItem('Español'),
-        buildMenuItem('Inglés'),
+        buildMenuItem('Español',
+            'img/esp.png'), // Ruta de la imagen de la bandera de Español
+        buildMenuItem('Inglés',
+            'img/ing.png'), // Ruta de la imagen de la bandera de Inglés
       ],
     );
   }
