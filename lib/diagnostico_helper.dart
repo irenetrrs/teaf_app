@@ -4,7 +4,6 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
 import 'patients_ui.dart';
 import 'app_language_provider.dart';
-import 'app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class DiagnosticoHelper {

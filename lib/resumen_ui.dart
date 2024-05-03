@@ -195,7 +195,6 @@ class ResumenUI extends StatelessWidget {
                 // Icono de apagado
                 InkWell(
                   child: Container(
-                     
                     child: diagnosticoHelper.buildLanguageMenu(
                         context), // Llama a la función para construir el menú de idiomas
                   ),
@@ -292,7 +291,7 @@ class ResumenUI extends StatelessWidget {
                           ),
                           Positioned(
                             left: 90,
-                            top: 14,
+                            top: 25,
                             child: Image.asset(
                               'img/altura.png',
                               fit: BoxFit.cover,
@@ -490,7 +489,7 @@ class ResumenUI extends StatelessWidget {
                           ),
                           Positioned(
                             left: 90,
-                            top: 14,
+                            top: 25,
                             child: Image.asset(
                               'img/distancia.png',
                               fit: BoxFit.cover,
@@ -511,14 +510,6 @@ class ResumenUI extends StatelessWidget {
                                 fontWeight: FontWeight.w900,
                                 height: 0,
                               ),
-                            ),
-                          ),
-                          Positioned(
-                            left: 19,
-                            top: 40,
-                            child: Image.asset(
-                              'img/distancia.png',
-                              fit: BoxFit.cover,
                             ),
                           ),
                         ],
@@ -807,7 +798,7 @@ class ResumenUI extends StatelessWidget {
                           ),
                           Positioned(
                             left: 90,
-                            top: 14,
+                            top: 25,
                             child: Image.asset(
                               'img/cerebro.png',
                               fit: BoxFit.cover,
@@ -917,7 +908,7 @@ class ResumenUI extends StatelessWidget {
                           ),
                           Positioned(
                             left: 90,
-                            top: 14,
+                            top: 25,
                             child: Image.asset(
                               'img/perimetro.png',
                               fit: BoxFit.cover,
@@ -991,7 +982,7 @@ class ResumenUI extends StatelessWidget {
                         left: 12,
                         top: 12,
                         child: Image.asset(
-                          'img/editar.png',
+                          'img/save.png',
                           width: 50,
                           height: 50,
                           fit: BoxFit.cover,

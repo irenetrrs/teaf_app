@@ -1,6 +1,7 @@
 //import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:teaf_app/analisis1_ui.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'resumen_ui.dart';
 import 'analisis5_ui.dart';
@@ -122,7 +123,6 @@ class _SolucionUIState extends State<SolucionUI> {
                 // Icono de apagado
                 InkWell(
                   child: Container(
-                     
                     child: diagnosticoHelper.buildLanguageMenu(
                         context), // Llama a la función para construir el menú de idiomas
                   ),
@@ -278,7 +278,12 @@ class _SolucionUIState extends State<SolucionUI> {
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
                 onPressed: () async {
-                  //generatePDF(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Analisis1UI(),
+                    ),
+                  );
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)),
@@ -290,7 +295,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   ),
                 ),
                 child: Text(
-                  AppLocalizations.of(context)!.translate('save_patient')!,
+                  AppLocalizations.of(context)!.translate('edit')!,
                   style: TextStyle(
                     color: Color.fromARGB(255, 255, 255, 255),
                     fontSize: 25,

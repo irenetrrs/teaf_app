@@ -73,7 +73,6 @@ class InicioUI extends StatelessWidget {
                   // Icono de apagado
                   InkWell(
                     child: Container(
-                       
                       child: diagnosticoHelper.buildLanguageMenu(
                           context), // Llama a la función para construir el menú de idiomas
                     ),
@@ -83,7 +82,19 @@ class InicioUI extends StatelessWidget {
               SizedBox(
                 height: 80,
               ),
-
+              Container(
+                width: 180,
+                height: 180,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('img/user.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 40,
+              ),
               Container(
                 width: 250,
                 height: 60,
