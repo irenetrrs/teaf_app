@@ -48,51 +48,52 @@ class _SolucionUIState extends State<SolucionUI> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                ),
                 // Logo y nombre en una Columna
-                Expanded(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          // Acción a realizar cuando se hace clic en el botón
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WelcomeUI(),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/logo.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              // Puedes ajustar el tamaño del contenedor según tus necesidades
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              AppLocalizations.of(context)!
-                                  .translate('appName')!,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        // Acción a realizar cuando se hace clic en el botón
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeUI(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('img/logo.png'),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ],
-                        ),
+                            // Puedes ajustar el tamaño del contenedor según tus necesidades
+                            width: 50.0,
+                            height: 50.0,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            AppLocalizations.of(context)!.translate('appName')!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 // Icono de idiomas
                 InkWell(

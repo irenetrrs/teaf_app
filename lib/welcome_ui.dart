@@ -6,12 +6,12 @@ import 'app_localizations.dart';
 
 class WelcomeUI extends StatefulWidget {
   @override
-  // ignore: library_private_types_in_public_api
   _WelcomeUIState createState() => _WelcomeUIState();
 }
 
 class _WelcomeUIState extends State<WelcomeUI> {
   late AppLanguageProvider appLanguage;
+
   @override
   Widget build(BuildContext context) {
     appLanguage = Provider.of<AppLanguageProvider>(context);
@@ -34,11 +34,10 @@ class _WelcomeUIState extends State<WelcomeUI> {
           // Cuadrado y texto más abajo en el centro
           Positioned(
             top: 380,
-            left: MediaQuery.of(context).size.width / 2 -
-                155, // centrar algo en la pantalla
+            left: MediaQuery.of(context).size.width / 2 - 155,
             child: Container(
-              width: 310, // Ancho del cuadrado
-              height: 60, // Alto del cuadrado
+              width: 310,
+              height: 60,
               margin: EdgeInsets.symmetric(horizontal: 10),
               child: ElevatedButton(
                 onPressed: () {
@@ -51,8 +50,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                   backgroundColor: MaterialStateProperty.all(Color(0xFFDFDFDF)),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(
-                          20.0), // Ajusta el valor según tu preferencia
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
                   ),
                 ),
@@ -70,8 +68,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
           ),
           // Idiomas
           Positioned(
-            left: MediaQuery.of(context).size.width / 2 -
-                75, // centrar algo en la pantalla
+            left: MediaQuery.of(context).size.width / 2 - 75,
             top: 500,
             child: SizedBox(
               width: 150,
@@ -126,9 +123,9 @@ class _WelcomeUIState extends State<WelcomeUI> {
           ),
           // Texto "VisualTEAF" encima del fondo
           Positioned(
-            left: MediaQuery.of(context).size.width / 2 -
-                120, // centrar en el eje horizontal
-            top: 80,
+            left: MediaQuery.of(context).size.width / 2 - 120,
+            top: MediaQuery.of(context).size.height / 2 -
+                250, // Aquí se centra verticalmente
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
