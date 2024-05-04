@@ -75,7 +75,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 60, 152, 209),
+        backgroundColor: Color.fromARGB(255, 53, 133, 182),
         body: Padding(
           padding: EdgeInsets.all(20.0),
           child: Column(
@@ -151,10 +151,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
                       ),
                     ],
                   ),
-                  // Icono de apagado
+                  // Icono de idiomas
                   InkWell(
                     child: Container(
-                      
                       child: diagnosticoHelper.buildLanguageMenu(
                           context), // Llama a la función para construir el menú de idiomas
                     ),
@@ -176,531 +175,567 @@ class _Analisis4UIState extends State<Analisis4UI> {
               SizedBox(
                 height: 40,
               ),
-              SizedBox(
-                width: 310,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: SizedBox(
-                        width: 350,
-                        child: Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Expanded(
+                child: SingleChildScrollView(
+                  child: SizedBox(
+                    width: 310,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          child: SizedBox(
+                            width: 350,
+                            child: Stack(
                               children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('weight')!,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // Mostrar el pop-up al tocar la imagen
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            AppLocalizations.of(context)!
-                                                .translate('weight_info')!,
-                                          ),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('weight')!,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // Mostrar el pop-up al tocar la imagen
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
                                                 AppLocalizations.of(context)!
-                                                    .translate(
-                                                        'watch_weight_video')!,
+                                                    .translate('weight_info')!,
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  _launchURL(urls[
-                                                      0]); // Llama a la función para abrir el enlace
-                                                },
-                                                child: Text(
-                                                  AppLocalizations.of(context)!
-                                                      .translate(
-                                                          'vimeo_weight')!,
-                                                  style: TextStyle(
-                                                    color: const Color.fromARGB(
-                                                        255,
-                                                        4,
-                                                        60,
-                                                        105), // Estilo para que parezca un enlace
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .translate(
+                                                            'watch_weight_video')!,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      _launchURL(urls[
+                                                          0]); // Llama a la función para abrir el enlace
                                                     },
-                                                    child: Text(AppLocalizations
-                                                            .of(context)!
-                                                        .translate('close')!),
+                                                    child: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .translate(
+                                                              'vimeo_weight')!,
+                                                      style: TextStyle(
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255,
+                                                            4,
+                                                            60,
+                                                            105), // Estilo para que parezca un enlace
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .translate(
+                                                                    'close')!),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
+                                            );
+                                          },
                                         );
                                       },
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('img/pregunta.png'),
-                                        fit: BoxFit.cover,
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image:
+                                                AssetImage('img/pregunta.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 310.0, // Ancho del rectángulo
+                              height: 30.0, // Alto del rectángulo
+                              decoration: BoxDecoration(
+                                color: Colors
+                                    .grey[300], // Color gris del rectángulo
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Bordes redondeados
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.0), // Espaciado interno
+                              child: TextField(
+                                  controller: pesoController,
+                                  decoration: InputDecoration(
+                                    hintText: 'kg',
+                                  ),
+                                  keyboardType: TextInputType
+                                      .number, // Especificar el tipo de teclado como numérico
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ]),
+                            ),
                           ],
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 310.0, // Ancho del rectángulo
-                          height: 30.0, // Alto del rectángulo
-                          decoration: BoxDecoration(
-                            color:
-                                Colors.grey[300], // Color gris del rectángulo
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Bordes redondeados
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0), // Espaciado interno
-                          child: TextField(
-                              controller: pesoController,
-                              decoration: InputDecoration(
-                                hintText: 'kg',
-                              ),
-                              keyboardType: TextInputType
-                                  .number, // Especificar el tipo de teclado como numérico
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly,
-                              ]),
+                        SizedBox(
+                          height: 20,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: SizedBox(
-                        width: 310,
-                        child: Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          child: SizedBox(
+                            width: 310,
+                            child: Stack(
                               children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('height')!,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // Mostrar el pop-up al tocar la imagen
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            AppLocalizations.of(context)!
-                                                .translate('height_info')!,
-                                          ),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('height')!,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // Mostrar el pop-up al tocar la imagen
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
                                                 AppLocalizations.of(context)!
-                                                    .translate(
-                                                        'watch_height_video')!,
+                                                    .translate('height_info')!,
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  _launchURL(urls[
-                                                      1]); // Llama a la función para abrir el enlace
-                                                },
-                                                child: Text(
-                                                  AppLocalizations.of(context)!
-                                                      .translate(
-                                                          'vimeo_height')!,
-                                                  style: TextStyle(
-                                                    color: const Color.fromARGB(
-                                                        255,
-                                                        4,
-                                                        60,
-                                                        105), // Estilo para que parezca un enlace
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .translate(
+                                                            'watch_height_video')!,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      _launchURL(urls[
+                                                          1]); // Llama a la función para abrir el enlace
                                                     },
-                                                    child: Text(AppLocalizations
-                                                            .of(context)!
-                                                        .translate('close')!),
+                                                    child: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .translate(
+                                                              'vimeo_height')!,
+                                                      style: TextStyle(
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255,
+                                                            4,
+                                                            60,
+                                                            105), // Estilo para que parezca un enlace
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .translate(
+                                                                    'close')!),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
+                                            );
+                                          },
                                         );
                                       },
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('img/pregunta.png'),
-                                        fit: BoxFit.cover,
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image:
+                                                AssetImage('img/pregunta.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 310.0, // Ancho del rectángulo
+                              height: 30.0, // Alto del rectángulo
+                              decoration: BoxDecoration(
+                                color: Colors
+                                    .grey[300], // Color gris del rectángulo
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Bordes redondeados
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.0), // Espaciado interno
+                              child: TextField(
+                                  controller: tallaController,
+                                  decoration: InputDecoration(
+                                    hintText: 'cm',
+                                  ),
+                                  keyboardType: TextInputType
+                                      .number, // Especificar el tipo de teclado como numérico
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ]),
+                            ),
                           ],
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 310.0, // Ancho del rectángulo
-                          height: 30.0, // Alto del rectángulo
-                          decoration: BoxDecoration(
-                            color:
-                                Colors.grey[300], // Color gris del rectángulo
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Bordes redondeados
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0), // Espaciado interno
-                          child: TextField(
-                              controller: tallaController,
-                              decoration: InputDecoration(
-                                hintText: 'cm',
-                              ),
-                              keyboardType: TextInputType
-                                  .number, // Especificar el tipo de teclado como numérico
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly,
-                              ]),
+                        SizedBox(
+                          height: 20,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: SizedBox(
-                        width: 310,
-                        child: Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          child: SizedBox(
+                            width: 310,
+                            child: Stack(
                               children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('head_circumference')!,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // Mostrar el pop-up al tocar la imagen
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            AppLocalizations.of(context)!
-                                                .translate(
-                                                    'head_circumference_info')!,
-                                          ),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('head_circumference')!,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // Mostrar el pop-up al tocar la imagen
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
                                                 AppLocalizations.of(context)!
                                                     .translate(
-                                                        'measure_head_circumference')!,
+                                                        'head_circumference_info')!,
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  _launchURL(urls[
-                                                      2]); // Llama a la función para abrir el enlace
-                                                },
-                                                child: Text(
-                                                  AppLocalizations.of(context)!
-                                                      .translate(
-                                                          'vimeo_head_circumference')!,
-                                                  style: TextStyle(
-                                                    color: const Color.fromARGB(
-                                                        255,
-                                                        4,
-                                                        60,
-                                                        105), // Estilo para que parezca un enlace
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .translate(
+                                                            'measure_head_circumference')!,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      _launchURL(urls[
+                                                          2]); // Llama a la función para abrir el enlace
                                                     },
-                                                    child: Text(AppLocalizations
-                                                            .of(context)!
-                                                        .translate('close')!),
+                                                    child: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .translate(
+                                                              'vimeo_head_circumference')!,
+                                                      style: TextStyle(
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255,
+                                                            4,
+                                                            60,
+                                                            105), // Estilo para que parezca un enlace
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .translate(
+                                                                    'close')!),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
+                                            );
+                                          },
                                         );
                                       },
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('img/pregunta.png'),
-                                        fit: BoxFit.cover,
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image:
+                                                AssetImage('img/pregunta.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 310.0, // Ancho del rectángulo
+                              height: 30.0, // Alto del rectángulo
+                              decoration: BoxDecoration(
+                                color: Colors
+                                    .grey[300], // Color gris del rectángulo
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Bordes redondeados
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.0), // Espaciado interno
+                              child: TextField(
+                                  controller: perimetroCranealController,
+                                  decoration: InputDecoration(
+                                    hintText: 'cm',
+                                  ),
+                                  keyboardType: TextInputType
+                                      .number, // Especificar el tipo de teclado como numérico
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ]),
+                            ),
                           ],
                         ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 310.0, // Ancho del rectángulo
-                          height: 30.0, // Alto del rectángulo
-                          decoration: BoxDecoration(
-                            color:
-                                Colors.grey[300], // Color gris del rectángulo
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Bordes redondeados
-                          ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0), // Espaciado interno
-                          child: TextField(
-                              controller: perimetroCranealController,
-                              decoration: InputDecoration(
-                                hintText: 'cm',
-                              ),
-                              keyboardType: TextInputType
-                                  .number, // Especificar el tipo de teclado como numérico
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly,
-                              ]),
+                        SizedBox(
+                          height: 20,
                         ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Positioned(
-                      left: 0,
-                      top: 0,
-                      child: SizedBox(
-                        width: 310,
-                        child: Stack(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          child: SizedBox(
+                            width: 310,
+                            child: Stack(
                               children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('palpebral_distance')!,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.w500,
-                                    height: 0,
-                                  ),
-                                ),
-                                InkWell(
-                                  onTap: () {
-                                    // Mostrar el pop-up al tocar la imagen
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text(
-                                            AppLocalizations.of(context)!
-                                                .translate(
-                                                    'palpebral_distance_info')!,
-                                          ),
-                                          content: Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('palpebral_distance')!,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'Inter',
+                                        fontWeight: FontWeight.w500,
+                                        height: 0,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        // Mostrar el pop-up al tocar la imagen
+                                        showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return AlertDialog(
+                                              title: Text(
                                                 AppLocalizations.of(context)!
                                                     .translate(
-                                                        'watch_palpebral_video')!,
+                                                        'palpebral_distance_info')!,
                                               ),
-                                              GestureDetector(
-                                                onTap: () {
-                                                  _launchURL(urls[
-                                                      3]); // Llama a la función para abrir el enlace
-                                                },
-                                                child: Text(
-                                                  AppLocalizations.of(context)!
-                                                      .translate(
-                                                          'vimeo_palpebral')!,
-                                                  style: TextStyle(
-                                                    color: const Color.fromARGB(
-                                                        255,
-                                                        4,
-                                                        60,
-                                                        105), // Estilo para que parezca un enlace
-                                                  ),
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment
-                                                    .end, // Esto alineará el botón "Cerrar" a la derecha
+                                              content: Column(
+                                                mainAxisSize: MainAxisSize.min,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                            context)!
+                                                        .translate(
+                                                            'watch_palpebral_video')!,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () {
+                                                      _launchURL(urls[
+                                                          3]); // Llama a la función para abrir el enlace
                                                     },
-                                                    child: Text(AppLocalizations
-                                                            .of(context)!
-                                                        .translate('close')!),
+                                                    child: Text(
+                                                      AppLocalizations.of(
+                                                              context)!
+                                                          .translate(
+                                                              'vimeo_palpebral')!,
+                                                      style: TextStyle(
+                                                        color: const Color
+                                                            .fromARGB(
+                                                            255,
+                                                            4,
+                                                            60,
+                                                            105), // Estilo para que parezca un enlace
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .end, // Esto alineará el botón "Cerrar" a la derecha
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child: Text(
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .translate(
+                                                                    'close')!),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
+                                            );
+                                          },
                                         );
                                       },
-                                    );
-                                  },
-                                  child: Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                        image: AssetImage('img/pregunta.png'),
-                                        fit: BoxFit.cover,
+                                      child: Container(
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image:
+                                                AssetImage('img/pregunta.png'),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ],
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 310.0, // Ancho del rectángulo
-                          height: 30.0, // Alto del rectángulo
-                          decoration: BoxDecoration(
-                            color:
-                                Colors.grey[300], // Color gris del rectángulo
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Bordes redondeados
                           ),
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0), // Espaciado interno
-                          child: TextField(
-                              controller: distanciaPalpebralController,
-                              decoration: InputDecoration(
-                                hintText: 'mm',
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 310.0, // Ancho del rectángulo
+                              height: 30.0, // Alto del rectángulo
+                              decoration: BoxDecoration(
+                                color: Colors
+                                    .grey[300], // Color gris del rectángulo
+                                borderRadius: BorderRadius.circular(
+                                    20.0), // Bordes redondeados
                               ),
-                              keyboardType: TextInputType
-                                  .number, // Especificar el tipo de teclado como numérico
-                              inputFormatters: <TextInputFormatter>[
-                                FilteringTextInputFormatter.digitsOnly,
-                              ]),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 10.0), // Espaciado interno
+                              child: TextField(
+                                  controller: distanciaPalpebralController,
+                                  decoration: InputDecoration(
+                                    hintText: 'mm',
+                                  ),
+                                  keyboardType: TextInputType
+                                      .number, // Especificar el tipo de teclado como numérico
+                                  inputFormatters: <TextInputFormatter>[
+                                    FilteringTextInputFormatter.digitsOnly,
+                                  ]),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
+                  ),
                 ),
               ),
               SizedBox(

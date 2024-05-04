@@ -244,7 +244,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 60, 152, 209),
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -317,7 +317,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                     ),
                   ],
                 ),
-                // Icono de apagado
+                // Icono de idiomas
                 InkWell(
                   child: Container(
                     child: diagnosticoHelper.buildLanguageMenu(

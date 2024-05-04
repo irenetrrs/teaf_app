@@ -62,7 +62,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 60, 152, 209),
+        backgroundColor: Color.fromARGB(255, 53, 133, 182),
         body: Padding(
           padding: EdgeInsets.all(20.0),
           child: Column(
@@ -138,7 +138,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                       ),
                     ],
                   ),
-                  // Icono de apagado
+                  // Icono de idiomas
                   InkWell(
                     child: Container(
                        

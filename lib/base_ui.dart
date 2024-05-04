@@ -5,7 +5,7 @@ class BaseUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 60, 152, 209),
+        backgroundColor: Color.fromARGB(255, 53, 133, 182),
         body: Stack(children: [
           //Logo
           Positioned(

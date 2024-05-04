@@ -117,7 +117,7 @@ class ResumenUI extends StatelessWidget {
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 60, 152, 209),
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -192,7 +192,7 @@ class ResumenUI extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Icono de apagado
+                // Icono de idiomas
                 InkWell(
                   child: Container(
                     child: diagnosticoHelper.buildLanguageMenu(
@@ -234,11 +234,13 @@ class ResumenUI extends StatelessWidget {
                         _launchURL('https://cursoteaf.com/');
                       },
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.white),
+                        backgroundColor: MaterialStateProperty.all(
+                            Color.fromARGB(255, 182, 223, 255)),
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: Color(0xFF262f36), width: 2.0),
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),

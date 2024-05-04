@@ -1,5 +1,3 @@
-//import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:teaf_app/analisis1_ui.dart';
 import 'package:teaf_app/inicio_ui.dart';
@@ -41,7 +39,7 @@ class _SolucionUIState extends State<SolucionUI> {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
 
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 60, 152, 209),
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -96,7 +94,7 @@ class _SolucionUIState extends State<SolucionUI> {
                     ],
                   ),
                 ),
-                // Icono de apagado
+                // Icono de idiomas
                 InkWell(
                   child: Container(
                     child: diagnosticoHelper.buildLanguageMenu(
@@ -138,21 +136,17 @@ class _SolucionUIState extends State<SolucionUI> {
                       } else {
                         // Definir circleColor y cambiarlo según el resultado del diagnóstico
                         Color circleColor = Colors.transparent;
+                        Color textColor = Colors.transparent;
 
                         if (snapshot.data == 'Incomplete') {
                           circleColor = Colors.orange;
-                        } else if (snapshot.data == 'FAS') {
-                          circleColor = Colors.purple;
-                        } else if (snapshot.data == 'pFAS') {
-                          circleColor = Colors.green;
-                        } else if (snapshot.data == 'ARND') {
-                          circleColor = Colors.red;
+                          textColor = Color(0xFF262f36);
                         } else if (snapshot.data == 'Error') {
                           circleColor = Colors.black;
-                        } else if (snapshot.data == 'NO FASD') {
-                          circleColor = Colors.grey;
-                        } else if (snapshot.data == 'ARBD') {
-                          circleColor = Colors.pink;
+                          textColor = Colors.white;
+                        } else {
+                          circleColor = Color.fromARGB(255, 182, 223, 255);
+                          textColor = Color(0xFF262f36);
                         }
 
                         // Devolver el widget del círculo con el color cambiado
@@ -165,6 +159,10 @@ class _SolucionUIState extends State<SolucionUI> {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: circleColor,
+                                border: Border.all(
+                                  color: Color(0xFF262f36),
+                                  width: 2,
+                                ),
                               ),
                             ),
                             Text(
@@ -172,8 +170,9 @@ class _SolucionUIState extends State<SolucionUI> {
                                   AppLocalizations.of(context)!
                                       .translate('diagnosis_not_available')!,
                               style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 25.0,
+                                color: textColor,
+                                fontSize: 30.0,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -184,65 +183,74 @@ class _SolucionUIState extends State<SolucionUI> {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {
-                // Mostrar el pop-up al tocar la imagen
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text(
-                        AppLocalizations.of(context)!.translate('result_info')!,
-                      ),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            AppLocalizations.of(context)!
-                                .translate('visit_link_diagnosis')!,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              _launchURL(
-                                  'https://cursoteaf.com/'); // Llama a la función para abrir el enlace
-                            },
-                            child: Text(
+            SizedBox(
+              width: 250,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      // Mostrar el pop-up al tocar la imagen
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
                               AppLocalizations.of(context)!
-                                  .translate('TEAF_courses')!,
-                              style: TextStyle(
-                                color: const Color.fromARGB(255, 4, 60,
-                                    105), // Estilo para que parezca un enlace
-                              ),
+                                  .translate('result_info')!,
                             ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment
-                                .end, // Esto alineará el botón "Cerrar" a la derecha
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: Text('Cerrar'),
-                              ),
-                            ],
-                          ),
-                        ],
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context)!
+                                      .translate('visit_link_diagnosis')!,
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    _launchURL(
+                                        'https://cursoteaf.com/'); // Llama a la función para abrir el enlace
+                                  },
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('TEAF_courses')!,
+                                    style: TextStyle(
+                                      color: const Color.fromARGB(255, 4, 60,
+                                          105), // Estilo para que parezca un enlace
+                                    ),
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .end, // Esto alineará el botón "Cerrar" a la derecha
+                                  children: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                      child: Text('Cerrar'),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                    child: Container(
+                      width: 20,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('img/pregunta.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    );
-                  },
-                );
-              },
-              child: Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('img/pregunta.png'),
-                    fit: BoxFit.cover,
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             SizedBox(

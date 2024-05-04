@@ -13,7 +13,7 @@ class PatientDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 60, 152, 209),
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -85,7 +85,7 @@ class PatientDetailsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Icono de apagado
+                // Icono de idiomas
                 InkWell(
                   onTap: () {
                     Navigator.push(
