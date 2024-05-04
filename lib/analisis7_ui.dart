@@ -170,6 +170,10 @@ class SharedPreferencesHelper {
               },
               child: Text(
                 AppLocalizations.of(context)!.translate('edit')!,
+                style: TextStyle(
+                  color: Color(
+                      0xFF262f36), // Aquí puedes cambiar el color del texto
+                ),
               ),
             ),
             TextButton(
@@ -183,6 +187,10 @@ class SharedPreferencesHelper {
               },
               child: Text(
                 AppLocalizations.of(context)!.translate('continue')!,
+                style: TextStyle(
+                  color: Color(
+                      0xFF262f36), // Aquí puedes cambiar el color del texto
+                ),
               ),
             ),
           ],
@@ -291,7 +299,6 @@ class _Analisis6UIState extends State<Analisis7UI> {
                   // Icono de apagado
                   InkWell(
                     child: Container(
-                       
                       child: diagnosticoHelper.buildLanguageMenu(
                           context), // Llama a la función para construir el menú de idiomas
                     ),
@@ -367,7 +374,8 @@ class _Analisis6UIState extends State<Analisis7UI> {
                                         AppLocalizations.of(context)!
                                             .translate('yes')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color:
+                                              Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 22,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -403,7 +411,8 @@ class _Analisis6UIState extends State<Analisis7UI> {
                                         AppLocalizations.of(context)!
                                             .translate('no')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color:
+                                              Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 22,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',

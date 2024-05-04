@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:teaf_app/analisis1_ui.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'resumen_ui.dart';
-import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'diagnostico_helper.dart';

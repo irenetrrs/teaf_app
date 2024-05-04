@@ -160,6 +160,10 @@ class SharedPreferencesHelper {
               },
               child: Text(
                 AppLocalizations.of(context)!.translate('edit')!,
+                style: TextStyle(
+                  color: Color(
+                      0xFF262f36), // Aquí puedes cambiar el color del texto
+                ),
               ),
             ),
             TextButton(
@@ -173,6 +177,10 @@ class SharedPreferencesHelper {
               },
               child: Text(
                 AppLocalizations.of(context)!.translate('continue')!,
+                style: TextStyle(
+                  color: Color(
+                      0xFF262f36), // Aquí puedes cambiar el color del texto
+                ),
               ),
             ),
           ],
@@ -549,7 +557,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                         toastLength: Toast.LENGTH_LONG,
                         gravity: ToastGravity.CENTER,
                         timeInSecForIosWeb: 2,
-                        backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                        backgroundColor: Color(0xFF262f36),
                         textColor: Colors.white,
                         fontSize: 16.0,
                       );
@@ -557,7 +565,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF001254)),
+                        MaterialStateProperty.all(Color(0xFF262f36)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         side: BorderSide(color: Colors.white, width: 2.0),

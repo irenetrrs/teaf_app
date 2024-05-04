@@ -196,7 +196,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         AppLocalizations.of(context)!
                                             .translate('yes')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 22,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -231,7 +231,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         AppLocalizations.of(context)!
                                             .translate('no')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 22,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -299,7 +299,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         AppLocalizations.of(context)!
                                             .translate('yes')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 22,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -334,7 +334,7 @@ class _Analisis6UIState extends State<Analisis6UI> {
                                         AppLocalizations.of(context)!
                                             .translate('no')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 22,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',

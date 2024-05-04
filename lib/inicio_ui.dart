@@ -114,6 +114,7 @@ class InicioUI extends StatelessWidget {
                         MaterialStateProperty.all(Color(0xFFDFDFDF)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
+                        side: BorderSide(color: Color(0xFF262f36), width: 2.0),
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),

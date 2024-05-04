@@ -308,7 +308,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('yes')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 25,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -343,7 +343,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('no')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 25,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -417,7 +417,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('less24')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 16,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -453,7 +453,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('more24')!,
                                         style: TextStyle(
-                                          color: Color(0xFF68696C),
+                                          color: Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 16,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -505,7 +505,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                             toastLength: Toast.LENGTH_LONG,
                             gravity: ToastGravity.CENTER,
                             timeInSecForIosWeb: 2,
-                            backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                            backgroundColor: Color(0xFF262f36),
                             textColor: Colors.white,
                             fontSize: 16.0,
                           );
@@ -517,7 +517,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,
-                          backgroundColor: Color.fromARGB(255, 4, 0, 115),
+                          backgroundColor: Color(0xFF262f36),
                           textColor: Colors.white,
                           fontSize: 16.0,
                         );
@@ -525,7 +525,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Color(0xFF001254)),
+                          MaterialStateProperty.all( Color(0xFF262f36)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side: BorderSide(color: Colors.white, width: 2.0),

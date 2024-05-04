@@ -157,8 +157,7 @@ class PatientDetailsScreen extends StatelessWidget {
                                 _deletePatient(context, patientName);
                               },
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Color(
-                                    0xFF001254)), // Color de fondo del botón
+                                backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)), // Color de fondo del botón
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(

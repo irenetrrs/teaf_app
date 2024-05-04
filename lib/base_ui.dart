@@ -74,7 +74,7 @@ class BaseUI extends StatelessWidget {
                               },
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
-                                    Color(0xFF001254)),
+                                     Color(0xFF262f36)),
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(

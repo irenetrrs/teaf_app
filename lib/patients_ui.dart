@@ -117,7 +117,6 @@ class _PatientUIState extends State<PatientUI> {
                 // Icono de apagado
                 InkWell(
                   child: Container(
-                     
                     child: diagnosticoHelper.buildLanguageMenu(
                         context), // Llama a la función para construir el menú de idiomas
                   ),
@@ -150,15 +149,19 @@ class _PatientUIState extends State<PatientUI> {
                           vertical: 10), // Espacio entre elementos
                       decoration: BoxDecoration(
                         color:
-                            Color(0xFF001254), // Color de fondo del contenedor
+                            Color(0xFF262f36), // Color de fondo del contenedor
                         borderRadius:
-                            BorderRadius.circular(10), // Bordes redondeados
+                            BorderRadius.circular(20), // Bordes redondeados
+                        border: Border.all(
+                          color: Colors.white, // Color del borde
+                          width: 2, // Grosor del borde
+                        ),
                       ),
                       child: ListTile(
                         title: Text(
                           patient['name'],
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(206, 255, 255, 255),
                             fontSize: 20,
                             fontFamily: 'Inter',
                             fontWeight: FontWeight.w500,
@@ -168,7 +171,7 @@ class _PatientUIState extends State<PatientUI> {
                           patient[
                               'diagnostico'], // Aquí se muestra el diagnóstico
                           style: TextStyle(
-                            color: const Color.fromARGB(255, 255, 255, 255),
+                            color: Color.fromARGB(255, 255, 255, 255),
                             fontSize: 16,
                             fontFamily: 'Inter',
                           ),
