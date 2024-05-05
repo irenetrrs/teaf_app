@@ -40,10 +40,13 @@ class _Analisis3UIState extends State<Analisis3UI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 53, 133, 182),
-        body: Padding(
-          padding: EdgeInsets.all(20.0),
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Container(
+          width: MediaQuery.of(context).size.width,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // Encabezado
               Row(
@@ -145,210 +148,202 @@ class _Analisis3UIState extends State<Analisis3UI> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Positioned(
-                        top: 164,
-                        child: SizedBox(
-                          width: 303,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .translate('ethnicity')!,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
+                      SizedBox(
+                        width: 303,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .translate('ethnicity')!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botoncau = true;
+                                        botonafro = false;
+                                      });
+                                      _saveEtniaSelectionToPrefs(true);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botoncau
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      fixedSize: Size.fromHeight(50.0),
+                                    ),
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('caucasian')!,
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 64, 64, 66),
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Inter',
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "Sí"
-                                        setState(() {
-                                          botoncau = true;
-                                          botonafro = false;
-                                        });
-                                        _saveEtniaSelectionToPrefs(true);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botoncau
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
+                                SizedBox(width: 20),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botoncau = false;
+                                        botonafro = true;
+                                      });
+                                      _saveEtniaSelectionToPrefs(false);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonafro
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate('caucasian')!,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 64, 64, 66),
-                                          fontSize: 16,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
+                                      fixedSize: Size.fromHeight(50.0),
+                                    ),
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('african')!,
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 64, 64, 66),
+                                        fontSize: 13,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Inter',
+                                        height: 0,
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 20),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "Sí"
-                                        setState(() {
-                                          botoncau = false;
-                                          botonafro = true;
-                                        });
-                                        _saveEtniaSelectionToPrefs(false);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonafro
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
-                                      ),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate('african')!,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 64, 64, 66),
-                                          fontSize: 13,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(
                         height: 20,
                       ),
-                      Positioned(
-                        left: 3,
-                        top: 164,
-                        child: SizedBox(
-                          width: 303,
-                          height: 103.02,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .translate('gender')!,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
+                      SizedBox(
+                        width: 303,
+                        height: 103.02,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .translate('gender')!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w500,
+                                height: 0,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonhom = true;
+                                        botonmuj = false;
+                                      });
+                                      _saveGeneroSelectionToPrefs(true);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonhom
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                      fixedSize: Size.fromHeight(50.0),
+                                    ),
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('male')!,
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 64, 64, 66),
+                                        fontSize: 22,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Inter',
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "Sí"
-                                        setState(() {
-                                          botonhom = true;
-                                          botonmuj = false;
-                                        });
-                                        _saveGeneroSelectionToPrefs(true);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonhom
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
+                                SizedBox(width: 20),
+                                Expanded(
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      // Acción cuando se presiona el botón "Sí"
+                                      setState(() {
+                                        botonhom = false;
+                                        botonmuj = true;
+                                      });
+                                      _saveGeneroSelectionToPrefs(false);
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: botonmuj
+                                          ? Colors
+                                              .orange // Color cuando está botonado
+                                          : Color(0xFFDFDFDF),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20.0),
                                       ),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate('male')!,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 64, 64, 66),
-                                          fontSize: 22,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
+                                      fixedSize: Size.fromHeight(50.0),
+                                    ),
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('female')!,
+                                      style: TextStyle(
+                                        color: Color.fromARGB(255, 64, 64, 66),
+                                        fontSize: 22,
+                                        fontStyle: FontStyle.italic,
+                                        fontFamily: 'Inter',
+                                        height: 0,
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 20),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "Sí"
-                                        setState(() {
-                                          botonhom = false;
-                                          botonmuj = true;
-                                        });
-                                        _saveGeneroSelectionToPrefs(false);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonmuj
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
-                                      ),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate('female')!,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 64, 64, 66),
-                                          fontSize: 22,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
+                      ),
+                      SizedBox(
+                        height: 20,
                       ),
                     ],
                   ),
@@ -409,7 +404,9 @@ class _Analisis3UIState extends State<Analisis3UI> {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   //para guardar y cargar el estado de la seleccion del boton etnia

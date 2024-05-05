@@ -160,10 +160,6 @@ class SharedPreferencesHelper {
               },
               child: Text(
                 AppLocalizations.of(context)!.translate('edit')!,
-                style: TextStyle(
-                  color: Color(
-                      0xFF262f36), // Aquí puedes cambiar el color del texto
-                ),
               ),
             ),
             TextButton(
@@ -177,10 +173,6 @@ class SharedPreferencesHelper {
               },
               child: Text(
                 AppLocalizations.of(context)!.translate('continue')!,
-                style: TextStyle(
-                  color: Color(
-                      0xFF262f36), // Aquí puedes cambiar el color del texto
-                ),
               ),
             ),
           ],
@@ -205,7 +197,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
   late AppLanguageProvider appLanguage;
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late SharedPreferences prefs;
-  late bool isCaucasian = false;
+  late bool isCaucasian;
   late List<String> filtrumImages;
   late List<String> labioSuperiorImages;
   int imagenseleccionadafiltrum =
@@ -244,7 +236,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 53, 133, 182),
+      backgroundColor: Color.fromARGB(255, 60, 152, 209),
       body: Padding(
         padding: EdgeInsets.all(20.0),
         child: Column(
@@ -271,8 +263,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    width: 30.0,
-                    height: 30.0,
+                    width: 50.0,
+                    height: 50.0,
                   ),
                 ),
                 // Logo y nombre en una Columna
@@ -317,7 +309,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                     ),
                   ],
                 ),
-                // Icono de idiomas
+                // Icono de apagado
                 InkWell(
                   child: Container(
                     child: diagnosticoHelper.buildLanguageMenu(
@@ -523,6 +515,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Align(
               alignment: Alignment.bottomCenter,
               child: SizedBox(

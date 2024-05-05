@@ -167,7 +167,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                 AppLocalizations.of(context)!.translate('evaluation')!,
                 style: TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: MediaQuery.of(context).size.width * 0.03,
+                  fontSize: 50,
                   fontFamily: 'Inter',
                   fontWeight: FontWeight.w600,
                 ),
