@@ -34,8 +34,10 @@ class _WelcomeUIState extends State<WelcomeUI> {
           ),
           // Cuadrado y texto más abajo en el centro
           Positioned(
-            top: 380,
-            left: MediaQuery.of(context).size.width / 2 - 155,
+            key: UniqueKey(), // Agregar key único
+            top: 400,
+            left: (MediaQuery.of(context).size.width - 310) /
+                2, // Centrar horizontalmente
             child: Container(
               width: 310,
               height: 60,
@@ -69,6 +71,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
           ),
           // Idiomas
           Positioned(
+            key: UniqueKey(), // Agregar key único
             left: MediaQuery.of(context).size.width / 2 - 75,
             top: 500,
             child: SizedBox(
@@ -78,6 +81,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                 children: [
                   // Botón para seleccionar español
                   Positioned(
+                    key: UniqueKey(), // Agregar key único
                     left: 0,
                     top: 0,
                     child: GestureDetector(
@@ -99,6 +103,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
                   ),
                   // Botón para seleccionar inglés
                   Positioned(
+                    key: UniqueKey(), // Agregar key único
                     left: 100,
                     top: 0,
                     child: GestureDetector(
@@ -124,6 +129,7 @@ class _WelcomeUIState extends State<WelcomeUI> {
           ),
           // Texto "VisualTEAF" encima del fondo
           Positioned(
+            key: UniqueKey(), // Agregar key único
             left: MediaQuery.of(context).size.width / 2 - 120,
             top: MediaQuery.of(context).size.height / 2 -
                 250, // Aquí se centra verticalmente
