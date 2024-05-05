@@ -43,7 +43,7 @@ class _Analisis3UIState extends State<Analisis3UI> {
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
       body: Padding(
         padding: EdgeInsets.all(20.0),
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
