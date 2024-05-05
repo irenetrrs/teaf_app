@@ -220,271 +220,264 @@ class _Analisis6UIState extends State<Analisis7UI> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 53, 133, 182),
-        body: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              // Encabezado
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      // Acción a realizar cuando se hace clic en el botón
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Analisis5UI(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/atras.png'),
-                          fit: BoxFit.cover,
-                        ),
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Encabezado
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    // Acción a realizar cuando se hace clic en el botón
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Analisis5UI(),
                       ),
-                      // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 30.0,
-                      height: 30.0,
-                    ),
-                  ),
-                  // Logo y nombre en una Columna
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          // Acción a realizar cuando se hace clic en el botón
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WelcomeUI(),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/logo.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              // Puedes ajustar el tamaño del contenedor según tus necesidades
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              AppLocalizations.of(context)!
-                                  .translate('appName')!,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/atras.png'),
+                        fit: BoxFit.cover,
                       ),
-                    ],
-                  ),
-                  // Icono de idiomas
-                  InkWell(
-                    child: Container(
-                      child: diagnosticoHelper.buildLanguageMenu(
-                          context), // Llama a la función para construir el menú de idiomas
                     ),
+                    // Puedes ajustar el tamaño del contenedor según tus necesidades
+                    width: 30.0,
+                    height: 30.0,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Text(
-                AppLocalizations.of(context)!.translate('evaluation')!,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 50,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
                 ),
+                // Logo y nombre en una Columna
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        // Acción a realizar cuando se hace clic en el botón
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeUI(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('img/logo.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            // Puedes ajustar el tamaño del contenedor según tus necesidades
+                            width: 50.0,
+                            height: 50.0,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            AppLocalizations.of(context)!.translate('appName')!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                // Icono de idiomas
+                InkWell(
+                  child: Container(
+                    child: diagnosticoHelper.buildLanguageMenu(
+                        context), // Llama a la función para construir el menú de idiomas
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              AppLocalizations.of(context)!.translate('evaluation')!,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 50,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
               ),
-              SizedBox(
-                height: 50,
-              ),
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Positioned(
-                        top: 164,
-                        child: SizedBox(
-                          width: 303,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: 303,
+                      height: 103.02,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            AppLocalizations.of(context)!
+                                .translate('major_malformations')!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                              height: 0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
                             children: [
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .translate('major_malformations')!,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontFamily: 'Inter',
-                                  fontWeight: FontWeight.w500,
-                                  height: 0,
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // Acción cuando se presiona el botón "Sí"
+                                    setState(() {
+                                      botonmalformacionessi = true;
+                                      botonmalformacionesno = false;
+                                    });
+                                    _saveMalformacionesSelectionToPrefs(true);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: botonmalformacionessi
+                                        ? Colors
+                                            .orange // Color cuando está botonado
+                                        : Color(0xFFDFDFDF),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    fixedSize: Size.fromHeight(50.0),
+                                  ),
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('yes')!,
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 64, 64, 66),
+                                      fontSize: 22,
+                                      fontStyle: FontStyle.italic,
+                                      fontFamily: 'Inter',
+                                      height: 0,
+                                    ),
+                                  ),
                                 ),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "Sí"
-                                        setState(() {
-                                          botonmalformacionessi = true;
-                                          botonmalformacionesno = false;
-                                        });
-                                        _saveMalformacionesSelectionToPrefs(
-                                            true);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonmalformacionessi
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
-                                      ),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate('yes')!,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 64, 64, 66),
-                                          fontSize: 22,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
-                                      ),
+                              SizedBox(width: 20),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    // Acción cuando se presiona el botón "Sí"
+                                    setState(() {
+                                      botonmalformacionessi = false;
+                                      botonmalformacionesno = true;
+                                    });
+                                    _saveMalformacionesSelectionToPrefs(false);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: botonmalformacionesno
+                                        ? Colors
+                                            .orange // Color cuando está botonado
+                                        : Color(0xFFDFDFDF),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                    fixedSize: Size.fromHeight(50.0),
+                                  ),
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('no')!,
+                                    style: TextStyle(
+                                      color: Color.fromARGB(255, 64, 64, 66),
+                                      fontSize: 22,
+                                      fontStyle: FontStyle.italic,
+                                      fontFamily: 'Inter',
+                                      height: 0,
                                     ),
                                   ),
-                                  SizedBox(width: 20),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        // Acción cuando se presiona el botón "Sí"
-                                        setState(() {
-                                          botonmalformacionessi = false;
-                                          botonmalformacionesno = true;
-                                        });
-                                        _saveMalformacionesSelectionToPrefs(
-                                            false);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: botonmalformacionesno
-                                            ? Colors
-                                                .orange // Color cuando está botonado
-                                            : Color(0xFFDFDFDF),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20.0),
-                                        ),
-                                        fixedSize: Size.fromHeight(50.0),
-                                      ),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .translate('no')!,
-                                        style: TextStyle(
-                                          color:
-                                              Color.fromARGB(255, 64, 64, 66),
-                                          fontSize: 22,
-                                          fontStyle: FontStyle.italic,
-                                          fontFamily: 'Inter',
-                                          height: 0,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: SizedBox(
-                  width: 250,
-                  height: 60,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Manejar la acción de Siguiente
-                      if ((botonmalformacionessi || botonmalformacionesno)) {
-                        SharedPreferencesHelper.showResumenDialog(context);
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: AppLocalizations.of(context)!
-                              .translate('please')!,
-                          toastLength: Toast.LENGTH_LONG,
-                          gravity: ToastGravity.CENTER,
-                          timeInSecForIosWeb: 2,
-                          backgroundColor: Color(0xFF262f36),
-                          textColor: Colors.white,
-                          fontSize: 16.0,
-                        );
-                      }
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Color(0xFF262f36)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.white, width: 2.0),
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
+                        ],
                       ),
                     ),
-                    child: Text(
-                      AppLocalizations.of(context)!.translate('next')!,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 25,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: SizedBox(
+                width: 250,
+                height: 60,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Manejar la acción de Siguiente
+                    if ((botonmalformacionessi || botonmalformacionesno)) {
+                      SharedPreferencesHelper.showResumenDialog(context);
+                    } else {
+                      Fluttertoast.showToast(
+                        msg: AppLocalizations.of(context)!.translate('please')!,
+                        toastLength: Toast.LENGTH_LONG,
+                        gravity: ToastGravity.CENTER,
+                        timeInSecForIosWeb: 2,
+                        backgroundColor: Color(0xFF262f36),
+                        textColor: Colors.white,
+                        fontSize: 16.0,
+                      );
+                    }
+                  },
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Color(0xFF262f36)),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
                   ),
+                  child: Text(
+                    AppLocalizations.of(context)!.translate('next')!,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
-            ],
-          ),
-        ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   //para guardar y cargar el estado de la seleccion del boton anomalias

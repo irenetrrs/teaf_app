@@ -253,85 +253,81 @@ class ResumenUI extends StatelessWidget {
                     height: 74,
                     child: Stack(
                       children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          child: SizedBox(
-                            width: 145,
-                            height: 74,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
+                        SizedBox(
+                          width: 145,
+                          height: 74,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                left: 0,
+                                top: 0,
+                                child: Container(
+                                  width: 145,
+                                  height: 74,
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFFFFB35B),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                   ),
                                 ),
-                                Positioned(
-                                  left: 90,
-                                  top: 25,
-                                  child: Image.asset(
-                                    'img/altura.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                    width: 40,
+                              ),
+                              Positioned(
+                                left: 90,
+                                top: 25,
+                                child: Image.asset(
+                                  'img/altura.png',
+                                  fit: BoxFit.cover,
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              Positioned(
+                                left: 13,
+                                top: 10,
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .translate('height')!,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
                                   ),
                                 ),
-                                Positioned(
-                                  left: 13,
-                                  top: 10,
-                                  child: Text(
-                                    AppLocalizations.of(context)!
-                                        .translate('height')!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Font Awesome 5 Free',
-                                      fontWeight: FontWeight.w900,
-                                      height: 0,
-                                    ),
-                                  ),
+                              ),
+                              Positioned(
+                                left: 19,
+                                top: 40,
+                                child: FutureBuilder<String>(
+                                  future:
+                                      SharedPreferencesHelper.getTallaText(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return CircularProgressIndicator();
+                                    } else if (snapshot.hasError) {
+                                      return Text(
+                                        AppLocalizations.of(context)!
+                                            .translate('error')!,
+                                      );
+                                    } else {
+                                      return Text(
+                                        '${snapshot.data ?? 'N/A'} cm',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontFamily: 'Font Awesome 5 Free',
+                                          fontWeight: FontWeight.w900,
+                                          height: 0,
+                                        ),
+                                      );
+                                    }
+                                  },
                                 ),
-                                Positioned(
-                                  left: 19,
-                                  top: 40,
-                                  child: FutureBuilder<String>(
-                                    future:
-                                        SharedPreferencesHelper.getTallaText(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        return Text(
-                                          AppLocalizations.of(context)!
-                                              .translate('error')!,
-                                        );
-                                      } else {
-                                        return Text(
-                                          '${snapshot.data ?? 'N/A'} cm',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontFamily: 'Font Awesome 5 Free',
-                                            fontWeight: FontWeight.w900,
-                                            height: 0,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         Positioned(
@@ -426,82 +422,78 @@ class ResumenUI extends StatelessWidget {
                     height: 74,
                     child: Stack(
                       children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          child: SizedBox(
-                            width: 145,
-                            height: 74,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
+                        SizedBox(
+                          width: 145,
+                          height: 74,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                left: 0,
+                                top: 0,
+                                child: Container(
+                                  width: 145,
+                                  height: 74,
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFFFFB35B),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                   ),
                                 ),
-                                Positioned(
-                                  left: 17,
-                                  top: 37,
-                                  child: FutureBuilder<String>(
-                                    future: SharedPreferencesHelper
-                                        .getDistanciaPalpebralText(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        return Text('Error');
-                                      } else {
-                                        return Text(
-                                          '${snapshot.data ?? 'N/A'} cm',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontFamily: 'Font Awesome 5 Free',
-                                            fontWeight: FontWeight.w900,
-                                            height: 0,
-                                          ),
-                                        );
-                                      }
-                                    },
+                              ),
+                              Positioned(
+                                left: 17,
+                                top: 37,
+                                child: FutureBuilder<String>(
+                                  future: SharedPreferencesHelper
+                                      .getDistanciaPalpebralText(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return CircularProgressIndicator();
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error');
+                                    } else {
+                                      return Text(
+                                        '${snapshot.data ?? 'N/A'} cm',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontFamily: 'Font Awesome 5 Free',
+                                          fontWeight: FontWeight.w900,
+                                          height: 0,
+                                        ),
+                                      );
+                                    }
+                                  },
+                                ),
+                              ),
+                              Positioned(
+                                left: 90,
+                                top: 25,
+                                child: Image.asset(
+                                  'img/distancia.png',
+                                  fit: BoxFit.cover,
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              Positioned(
+                                left: 13,
+                                top: 10,
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .translate('palpebral_distance')!,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
                                   ),
                                 ),
-                                Positioned(
-                                  left: 90,
-                                  top: 25,
-                                  child: Image.asset(
-                                    'img/distancia.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                    width: 40,
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 13,
-                                  top: 10,
-                                  child: Text(
-                                    AppLocalizations.of(context)!
-                                        .translate('palpebral_distance')!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Font Awesome 5 Free',
-                                      fontWeight: FontWeight.w900,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         Positioned(
@@ -593,82 +585,77 @@ class ResumenUI extends StatelessWidget {
                     height: 74,
                     child: Stack(
                       children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          child: SizedBox(
-                            width: 145,
-                            height: 74,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
+                        SizedBox(
+                          width: 145,
+                          height: 74,
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                left: 0,
+                                top: 0,
+                                child: Container(
+                                  width: 145,
+                                  height: 74,
+                                  decoration: ShapeDecoration(
+                                    color: Color(0xFFFFB35B),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
                                     ),
                                   ),
                                 ),
-                                Positioned(
-                                  left: 90,
-                                  top: 14,
-                                  child: Image.asset(
-                                    'img/filtrum.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                    width: 40,
+                              ),
+                              Positioned(
+                                left: 90,
+                                top: 14,
+                                child: Image.asset(
+                                  'img/filtrum.png',
+                                  fit: BoxFit.cover,
+                                  height: 40,
+                                  width: 40,
+                                ),
+                              ),
+                              Positioned(
+                                left: 13,
+                                top: 10,
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .translate('filtrum')!,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 12,
+                                    fontFamily: 'Font Awesome 5 Free',
+                                    fontWeight: FontWeight.w900,
+                                    height: 0,
                                   ),
                                 ),
-                                Positioned(
-                                  left: 13,
-                                  top: 10,
-                                  child: Text(
-                                    AppLocalizations.of(context)!
-                                        .translate('filtrum')!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Font Awesome 5 Free',
-                                      fontWeight: FontWeight.w900,
-                                      height: 0,
-                                    ),
-                                  ),
+                              ),
+                              Positioned(
+                                left: 19,
+                                top: 40,
+                                child: FutureBuilder<int>(
+                                  future: SharedPreferencesHelper.getFiltrum(),
+                                  builder: (context, snapshot) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return CircularProgressIndicator();
+                                    } else if (snapshot.hasError) {
+                                      return Text('Error');
+                                    } else {
+                                      return Text(
+                                        '${snapshot.data ?? 'N/A'}',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 20,
+                                          fontFamily: 'Font Awesome 5 Free',
+                                          fontWeight: FontWeight.w900,
+                                          height: 0,
+                                        ),
+                                      );
+                                    }
+                                  },
                                 ),
-                                Positioned(
-                                  left: 19,
-                                  top: 40,
-                                  child: FutureBuilder<int>(
-                                    future:
-                                        SharedPreferencesHelper.getFiltrum(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        return Text('Error');
-                                      } else {
-                                        return Text(
-                                          '${snapshot.data ?? 'N/A'}',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontFamily: 'Font Awesome 5 Free',
-                                            fontWeight: FontWeight.w900,
-                                            height: 0,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                         Positioned(
@@ -924,7 +911,6 @@ class ResumenUI extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Row(),
                       ],
                     ),
                   ),
@@ -983,9 +969,6 @@ class ResumenUI extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              SizedBox(
-                width: 40,
               ),
               SizedBox(
                 width: 40,
