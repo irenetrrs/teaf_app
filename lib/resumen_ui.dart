@@ -1,8 +1,4 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
-import 'package:pdf/pdf.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'package:teaf_app/patient_details_ui.dart';
@@ -10,11 +6,9 @@ import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'diagnostico_helper.dart';
-import 'package:open_file/open_file.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'dialog.dart';
-import 'package:path_provider/path_provider.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -92,22 +86,6 @@ _launchURL(String url) async {
   } else {
     throw 'Could not launch $url0';
   }
-}
-
-Future<void> _saveAsFile(
-  BuildContext context,
-  Future<Uint8List> Function(PdfPageFormat) build, // Cambio aquí
-  PdfPageFormat pageFormat,
-) async {
-  final bytes =
-      await build(pageFormat); // Esperar a que se complete la función build
-
-  final appDocDir = await getApplicationDocumentsDirectory();
-  final appDocPath = appDocDir.path;
-  final file = File('$appDocPath/document.pdf');
-  print('Save as file ${file.path} ...');
-  await file.writeAsBytes(bytes);
-  await OpenFile.open(file.path);
 }
 
 // ignore: must_be_immutable
@@ -1008,33 +986,6 @@ class ResumenUI extends StatelessWidget {
               ),
               SizedBox(
                 width: 40,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _saveAsFile;
-                },
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 74,
-                      height: 74,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 176, 176, 176),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    Positioned(
-                      left: 12,
-                      top: 12,
-                      child: Image.asset(
-                        'img/descargar.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
-                ),
               ),
               SizedBox(
                 width: 40,

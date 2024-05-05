@@ -13,7 +13,7 @@
     "resetPassword": "Recuperar contraseña",
     "close": "Cerrar",
     "startAnalysis": "Empezar análisis",
-    "patient": "Paciente",
+    "patient": "Pacientes",
     "evaluation": "Evaluación",
     "age": "Edad",
     "infoAge": "Información sobre la edad",
@@ -78,5 +78,8 @@
     "head_circumference_short": "P. Craneal",
     "diagnosis_not_available": "Diagnóstico no disponible",
     "months": "Meses",
-    "please": "Por favor, rellene todos los campos"
+    "please": "Por favor, rellene todos los campos",
+    "details": "Detalles",
+    "delete": "Eliminar",
+    "error_details": "No se encontraron detalles para el paciente"
 }

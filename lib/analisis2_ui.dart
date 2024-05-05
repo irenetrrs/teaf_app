@@ -90,8 +90,8 @@ class _Analisis2UIState extends State<Analisis2UI> {
                         ),
                       ),
                       // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 50.0,
-                      height: 50.0,
+                      width: 30.0,
+                      height: 30.0,
                     ),
                   ),
                   // Logo y nombre en una Columna

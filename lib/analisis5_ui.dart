@@ -205,7 +205,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
   late AppLanguageProvider appLanguage;
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late SharedPreferences prefs;
-  late bool isCaucasian;
+  late bool isCaucasian = false;
   late List<String> filtrumImages;
   late List<String> labioSuperiorImages;
   int imagenseleccionadafiltrum =
@@ -271,8 +271,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    width: 50.0,
-                    height: 50.0,
+                    width: 30.0,
+                    height: 30.0,
                   ),
                 ),
                 // Logo y nombre en una Columna

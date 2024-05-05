@@ -13,7 +13,7 @@
     "resetPassword": "Reset password",
     "close": "Close",
     "startAnalysis": "Start analysis",
-    "patient": "Patient",
+    "patient": "Patients",
     "evaluation": "Evaluation",
     "age": "Age",
     "infoAge": "Information about age",
@@ -78,5 +78,8 @@
     "head_circumference_short": "Head Circumference",
     "diagnosis_not_available": "Diagnosis not available",
     "months": "Months",
-    "please": "Please, fill in all fields"
+    "please": "Please, fill in all fields",
+    "details": "Details",
+    "delete": "Delete",
+    "error_details": "No details found for the patient"
 }

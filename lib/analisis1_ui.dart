@@ -74,8 +74,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                         ),
                       ),
                       // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 50.0,
-                      height: 50.0,
+                      width: 30.0,
+                      height: 30.0,
                     ),
                   ),
                   // Logo y nombre en una Columna
@@ -125,7 +125,6 @@ class _Analisis1UIState extends State<Analisis1UI> {
                   // Icono de idiomas
                   InkWell(
                     child: Container(
-                       
                       child: diagnosticoHelper.buildLanguageMenu(
                           context), // Llama a la función para construir el menú de idiomas
                     ),
@@ -308,7 +307,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('yes')!,
                                         style: TextStyle(
-                                          color: Color.fromARGB(255, 64, 64, 66),
+                                          color:
+                                              Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 25,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -343,7 +343,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('no')!,
                                         style: TextStyle(
-                                          color: Color.fromARGB(255, 64, 64, 66),
+                                          color:
+                                              Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 25,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -417,7 +418,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('less24')!,
                                         style: TextStyle(
-                                          color: Color.fromARGB(255, 64, 64, 66),
+                                          color:
+                                              Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 16,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -453,7 +455,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                         AppLocalizations.of(context)!
                                             .translate('more24')!,
                                         style: TextStyle(
-                                          color: Color.fromARGB(255, 64, 64, 66),
+                                          color:
+                                              Color.fromARGB(255, 64, 64, 66),
                                           fontSize: 16,
                                           fontStyle: FontStyle.italic,
                                           fontFamily: 'Inter',
@@ -525,7 +528,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all( Color(0xFF262f36)),
+                          MaterialStateProperty.all(Color(0xFF262f36)),
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side: BorderSide(color: Colors.white, width: 2.0),

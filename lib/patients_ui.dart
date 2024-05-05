@@ -69,8 +69,8 @@ class _PatientUIState extends State<PatientUI> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    width: 50.0,
-                    height: 50.0,
+                    width: 30.0,
+                    height: 30.0,
                   ),
                 ),
                 // Logo y nombre
@@ -127,7 +127,7 @@ class _PatientUIState extends State<PatientUI> {
               height: 50,
             ),
             Text(
-              'Pacientes',
+              AppLocalizations.of(context)!.translate('patient')!,
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 50,

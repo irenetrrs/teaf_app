@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:teaf_app/patients_ui.dart';
 import 'welcome_ui.dart';
 import 'app_localizations.dart';
+import 'diagnostico_helper.dart';
 
 class PatientDetailsScreen extends StatelessWidget {
   final String patientName;
@@ -12,6 +13,7 @@ class PatientDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
       body: Padding(
@@ -40,8 +42,8 @@ class PatientDetailsScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    width: 50.0,
-                    height: 50.0,
+                    width: 30.0,
+                    height: 30.0,
                   ),
                 ),
                 // Logo y nombre
@@ -87,33 +89,18 @@ class PatientDetailsScreen extends StatelessWidget {
                 ),
                 // Icono de idiomas
                 InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WelcomeUI(),
-                      ),
-                    );
-                  },
                   child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('img/off.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    width: 50.0,
-                    height: 50.0,
+                    child: diagnosticoHelper.buildLanguageMenu(
+                        context), // Llama a la función para construir el menú de idiomas
                   ),
-                )
+                ),
               ],
             ),
             SizedBox(
               height: 50,
             ),
             Text(
-              'Detalles',
+              AppLocalizations.of(context)!.translate('details')!,
               style: TextStyle(
                 color: Color.fromARGB(255, 255, 255, 255),
                 fontSize: 50,
@@ -136,16 +123,20 @@ class PatientDetailsScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Expanded(
-                          child: Center(
-                            child: Text(
-                              snapshot.data!,
-                              style: TextStyle(
-                                color: Colors.white, // Color del texto
-                                fontSize: 20, // Tamaño de fuente
-                                fontFamily: 'Roboto', // Tipo de fuente
+                          child: SingleChildScrollView(
+                            child: Center(
+                              child: Text(
+                                snapshot.data!,
+                                style: TextStyle(
+                                  color: Colors.white, // Color del texto
+                                  fontSize: 20, // Tamaño de fuente
+                                ),
                               ),
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          height: 10,
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
@@ -157,7 +148,8 @@ class PatientDetailsScreen extends StatelessWidget {
                                 _deletePatient(context, patientName);
                               },
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)), // Color de fondo del botón
+                                backgroundColor: MaterialStateProperty.all(Color(
+                                    0xFF262f36)), // Color de fondo del botón
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
@@ -171,14 +163,13 @@ class PatientDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                               child: Text(
-                                'Eliminar',
+                                AppLocalizations.of(context)!
+                                    .translate('delete')!,
                                 style: TextStyle(
                                   color: Colors
                                       .white, // Color del texto en el botón
                                   fontSize:
                                       18, // Tamaño de fuente del texto en el botón
-                                  fontFamily:
-                                      'Roboto', // Tipo de fuente del texto en el botón
                                   fontWeight: FontWeight.bold, // Negrita
                                 ),
                               ),
@@ -192,11 +183,11 @@ class PatientDetailsScreen extends StatelessWidget {
                   } else {
                     return Center(
                       child: Text(
-                        'No se encontraron detalles para el paciente',
+                        AppLocalizations.of(context)!
+                            .translate('error_details')!,
                         style: TextStyle(
                           color: Colors.black, // Color del texto
                           fontSize: 20, // Tamaño de fuente
-                          fontFamily: 'Roboto', // Tipo de fuente
                           fontWeight: FontWeight.bold, // Negrita
                         ),
                       ),
@@ -230,23 +221,24 @@ class PatientDetailsScreen extends StatelessWidget {
     bool? recurrente = prefs.getBool('${patientName}_recurrente');
     bool? malformaciones = prefs.getBool('${patientName}_malformaciones');
     // Construir una cadena con los detalles del paciente
+
     return '''
     Name: $patientName
-    Age: $age
+    Age: $age years
     Gender: $gender
     Adopted: $adoptado
-    Tiempo Acogida: $tiempoacogida
+    Reception time: $tiempoacogida
     Alcohol: $alcohol
-    Peso: $peso
-    Talla: $talla
-    Dominios: $dominios
-    Perimetro: $perimetro
-    Distancia: $distancia
+    Weight: $peso kg
+    Height: $talla cm
+    Domains: $dominios
+    Head circumference: $perimetro cm
+    Palpebral distance: $distancia cm
     Filtrum: $filtrum
-    Labio: $labio
-    Anomalias: $anomalias
-    Recurrente: $recurrente
-    Malformaciones: $malformaciones
+    Upper lip: $labio
+    Cranial malformations: $anomalias
+    Recurrent fever: $recurrente
+    Major malformations: $malformaciones
   ''';
   }
 

@@ -628,8 +628,8 @@ class DiagnosticoHelper {
           children: [
             Image.asset(
               flagImage,
-              width: 24, // Ajusta el ancho de la bandera según sea necesario
-              height: 24, // Ajusta la altura de la bandera según sea necesario
+              width: 30, // Ajusta el ancho de la bandera según sea necesario
+              height: 30, // Ajusta la altura de la bandera según sea necesario
             ),
             SizedBox(width: 10), // Espacio entre la bandera y el texto
             Text(language),
