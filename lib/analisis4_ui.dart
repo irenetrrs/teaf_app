@@ -178,7 +178,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
               Expanded(
                 child: SingleChildScrollView(
                   child: SizedBox(
-                    width: 350,
+                    width: 310,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [

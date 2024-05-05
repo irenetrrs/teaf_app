@@ -120,77 +120,79 @@ class _SolucionUIState extends State<SolucionUI> {
               height: 50,
             ),
             Expanded(
-                child: SingleChildScrollView(
-              child: Container(
-                width: 200.0, // Diámetro del círculo
-                height: 200.0, // Diámetro del círculo
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle, // Forma circular
-                ),
-                child: Center(
-                  child: FutureBuilder<String>(
-                    future: diagnosticoHelper.diagnostico(),
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
-                      } else {
-                        if (snapshot.hasError) {
-                          return Text('Error: ${snapshot.error}');
+              child: SingleChildScrollView(
+                child: Container(
+                  width: 200.0, // Diámetro del círculo
+                  height: 200.0, // Diámetro del círculo
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle, // Forma circular
+                  ),
+                  child: Center(
+                    child: FutureBuilder<String>(
+                      future: diagnosticoHelper.diagnostico(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return CircularProgressIndicator();
                         } else {
-                          // Definir circleColor y cambiarlo según el resultado del diagnóstico
-                          Color circleColor = Colors.transparent;
-                          Color textColor = Colors.transparent;
-
-                          if (snapshot.data == 'Incomplete') {
-                            circleColor = Colors.orange;
-                            textColor = Color(0xFF262f36);
-                          } else if (snapshot.data == 'Error') {
-                            circleColor = Colors.black;
-                            textColor = Colors.white;
+                          if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
                           } else {
-                            circleColor = Color.fromARGB(255, 182, 223, 255);
-                            textColor = Color(0xFF262f36);
-                          }
+                            // Definir circleColor y cambiarlo según el resultado del diagnóstico
+                            Color circleColor = Colors.transparent;
+                            Color textColor = Colors.transparent;
 
-                          // Devolver el widget del círculo con el color cambiado
-                          return Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Container(
-                                width: 200,
-                                height: 200,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: circleColor,
-                                  border: Border.all(
-                                    color: Color(0xFF262f36),
-                                    width: 2,
+                            if (snapshot.data == 'Incomplete') {
+                              circleColor = Colors.orange;
+                              textColor = Color(0xFF262f36);
+                            } else if (snapshot.data == 'Error') {
+                              circleColor = Colors.black;
+                              textColor = Colors.white;
+                            } else {
+                              circleColor = Color.fromARGB(255, 182, 223, 255);
+                              textColor = Color(0xFF262f36);
+                            }
+
+                            // Devolver el widget del círculo con el color cambiado
+                            return Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Container(
+                                  width: 200,
+                                  height: 200,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: circleColor,
+                                    border: Border.all(
+                                      color: Color(0xFF262f36),
+                                      width: 2,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Text(
-                                snapshot.data ??
-                                    AppLocalizations.of(context)!
-                                        .translate('diagnosis_not_available')!,
-                                style: TextStyle(
-                                  color: textColor,
-                                  fontSize: 30.0,
-                                  fontWeight: FontWeight.bold,
+                                Text(
+                                  snapshot.data ??
+                                      AppLocalizations.of(context)!.translate(
+                                          'diagnosis_not_available')!,
+                                  style: TextStyle(
+                                    color: textColor,
+                                    fontSize: 45.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
+                              ],
+                            );
+                          }
                         }
-                      }
-                    },
+                      },
+                    ),
                   ),
                 ),
               ),
-            )),
+            ),
             SizedBox(
               width: 250,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   InkWell(
                     onTap: () {
