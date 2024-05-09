@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
 class InfoUI extends StatelessWidget {

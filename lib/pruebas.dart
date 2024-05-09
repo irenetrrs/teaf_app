@@ -49,6 +49,7 @@ Future<void> generatePDF(BuildContext context) async {
   // Muestra un mensaje al usuario con un botón para abrir manualmente el archivo
   // ignore: use_build_context_synchronously
   showDialog(
+    // ignore: use_build_context_synchronously
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(

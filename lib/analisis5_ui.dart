@@ -477,6 +477,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                       } else {
                         // ignore: use_build_context_synchronously
                         Navigator.push(
+                          // ignore: use_build_context_synchronously
                           context,
                           MaterialPageRoute(
                             builder: (context) => Analisis6UI(),

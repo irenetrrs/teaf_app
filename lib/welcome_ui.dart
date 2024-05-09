@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'info_ui.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
@@ -11,6 +10,7 @@ void main() {
 
 class MyApp extends StatefulWidget {
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
