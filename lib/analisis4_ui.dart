@@ -545,15 +545,16 @@ class _Analisis4UIState extends State<Analisis4UI> {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 10.0), // Espaciado interno
                               child: TextField(
-                                  controller: perimetroCranealController,
-                                  decoration: InputDecoration(
-                                    hintText: 'cm',
-                                  ),
-                                  keyboardType: TextInputType
-                                      .number, // Especificar el tipo de teclado como numérico
-                                  inputFormatters: <TextInputFormatter>[
-                                    FilteringTextInputFormatter.digitsOnly,
-                                  ]),
+                                controller: perimetroCranealController,
+                                decoration: InputDecoration(
+                                  hintText: 'cm',
+                                ),
+                                keyboardType: TextInputType
+                                    .number, // Especificar el tipo de teclado como numérico
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly,
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -742,6 +743,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                             );
                           } else {
                             _saveTextFieldsToPrefs();
+                            print(tallaController.text);
                             // ignore: use_build_context_synchronously
                             Navigator.push(
                               context,

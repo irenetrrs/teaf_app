@@ -197,7 +197,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
   late AppLanguageProvider appLanguage;
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late SharedPreferences prefs;
-  late bool isCaucasian;
+  late bool isCaucasian = false;
   late List<String> filtrumImages;
   late List<String> labioSuperiorImages;
   int imagenseleccionadafiltrum =
@@ -399,8 +399,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                         savePreferences();
                                       },
                                       child: Container(
-                                        height: 80,
-                                        width: 120,
+                                        height: 120,
+                                        width: 180,
                                         margin:
                                             EdgeInsets.symmetric(vertical: 5),
                                         decoration: BoxDecoration(
@@ -467,8 +467,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                         savePreferences();
                                       },
                                       child: Container(
-                                        height: 80,
-                                        width: 120,
+                                        height: 120,
+                                        width: 180,
                                         margin:
                                             EdgeInsets.symmetric(vertical: 5),
                                         decoration: BoxDecoration(
