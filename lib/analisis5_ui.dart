@@ -11,6 +11,7 @@ import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'image_popup.dart';
 
 class Analisis5UI extends StatefulWidget {
   @override
@@ -182,12 +183,10 @@ class SharedPreferencesHelper {
   }
 }
 
-_launchURL(String url) async {
+Future<void> _launchURL(String url) async {
   Uri url0 = Uri.parse(url);
-  // ignore: deprecated_member_use
-  if (await canLaunch(url0.toString())) {
-    // ignore: deprecated_member_use
-    await launch(url0.toString());
+  if (await launchUrl(url0)) {
+    await launchUrl(url0);
   } else {
     throw 'Could not launch $url0';
   }
@@ -197,9 +196,9 @@ class _Analisis5UIState extends State<Analisis5UI> {
   late AppLanguageProvider appLanguage;
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late SharedPreferences prefs;
-  late bool isCaucasian = false;
-  late List<String> filtrumImages;
-  late List<String> labioSuperiorImages;
+  late bool isCaucasian = true;
+  List<String> filtrumImages = []; // Inicializa directamente
+  List<String> labioSuperiorImages = []; // Inicializa directamente
   int imagenseleccionadafiltrum =
       -1; // Índice de la imagen seleccionada en la columna 1
   int imagenseleccionadalabio =
@@ -335,10 +334,12 @@ class _Analisis5UIState extends State<Analisis5UI> {
             ),
             GestureDetector(
               onTap: () {
-                // Aquí colocas la lógica para abrir el enlace
-                // Por ejemplo, puedes usar la función launch de 'url_launcher' package
-                // Asegúrate de haber importado 'package:url_launcher/url_launcher.dart'
-                _launchURL('https://fasdpn.org/');
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ImagePopup(imagePath: 'img/faciales.png');
+                  },
+                );
               },
               child: Image.asset(
                 'img/creditos.png',
@@ -360,6 +361,7 @@ class _Analisis5UIState extends State<Analisis5UI> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Column(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -399,8 +401,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                         savePreferences();
                                       },
                                       child: Container(
-                                        height: 120,
-                                        width: 180,
+                                        height: 100,
+                                        width: 150,
                                         margin:
                                             EdgeInsets.symmetric(vertical: 5),
                                         decoration: BoxDecoration(
@@ -467,8 +469,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                         savePreferences();
                                       },
                                       child: Container(
-                                        height: 120,
-                                        width: 180,
+                                        height: 100,
+                                        width: 150,
                                         margin:
                                             EdgeInsets.symmetric(vertical: 5),
                                         decoration: BoxDecoration(
