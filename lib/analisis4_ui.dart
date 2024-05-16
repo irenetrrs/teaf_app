@@ -54,12 +54,10 @@ class _Analisis4UIState extends State<Analisis4UI> {
     'https://vimeo.com/766536975', //distancia palpebral
   ];
 
-  _launchURL(String url) async {
+  Future<void> _launchURL(String url) async {
     Uri url0 = Uri.parse(url);
-    // ignore: deprecated_member_use
-    if (await canLaunch(url0.toString())) {
-      // ignore: deprecated_member_use
-      await launch(url0.toString());
+    if (await launchUrl(url0)) {
+      await launchUrl(url0);
     } else {
       throw 'Could not launch $url0';
     }

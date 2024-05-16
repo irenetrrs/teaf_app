@@ -27,12 +27,10 @@ class _Analisis2UIState extends State<Analisis2UI> {
   bool botonSi = false;
   bool botonNo = false;
 
-  _launchURL(String url) async {
+   Future<void> _launchURL(String url) async {
     Uri url0 = Uri.parse(url);
-    // ignore: deprecated_member_use
-    if (await canLaunch(url0.toString())) {
-      // ignore: deprecated_member_use
-      await launch(url0.toString());
+    if (await launchUrl(url0)) {
+      await launchUrl(url0);
     } else {
       throw 'Could not launch $url0';
     }
