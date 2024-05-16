@@ -79,13 +79,7 @@
     "diagnosis_not_available": "Diagnosis not available",
     "months": "Months",
     "please": "Please, fill in all fields",
-    "please0": "Please, enter a value greater than 0",
     "details": "Details",
     "delete": "Delete",
-    "error_details": "No details found for the patient",
-    "FAS": "FAS",
-    "pFAS": "pFAS",
-    "NO FASD": "NO FASD",
-    "ARND": "ARND",
-    "Incomplete": "Incomplete"
+    "error_details": "No details found for the patient"
 }

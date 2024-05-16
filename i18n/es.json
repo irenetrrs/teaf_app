@@ -79,13 +79,7 @@
     "diagnosis_not_available": "Diagnóstico no disponible",
     "months": "Meses",
     "please": "Por favor, rellene todos los campos",
-    "please0": "Por favor, introduce un valor mayor de 0",
     "details": "Detalles",
     "delete": "Eliminar",
-    "error_details": "No se encontraron detalles para el paciente",
-    "FAS": "SAF",
-    "pFAS": "SAF p",
-    "NO FASD": "NO TEAF",
-    "ARND": "ARND",
-    "Incomplete": "Incompleto"
+    "error_details": "No se encontraron detalles para el paciente"
 }

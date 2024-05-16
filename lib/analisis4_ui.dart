@@ -754,9 +754,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                           }
                         } else {
                           Fluttertoast.showToast(
-                            // ignore: use_build_context_synchronously
-                            msg: AppLocalizations.of(context)!
-                                .translate('please0')!,
+                            msg: "Por favor, introduce un valor mayor de 0",
                             toastLength: Toast.LENGTH_LONG,
                             gravity: ToastGravity.CENTER,
                             timeInSecForIosWeb: 2,
@@ -767,9 +765,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                         }
                       } else {
                         Fluttertoast.showToast(
-                          // ignore: use_build_context_synchronously
-                          msg: AppLocalizations.of(context)!
-                              .translate('please')!,
+                          msg: "Por favor, rellene todos los campos",
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,

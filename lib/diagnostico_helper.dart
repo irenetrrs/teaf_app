@@ -1,11 +1,9 @@
-// ignore: avoid_web_libraries_in_flutter
 import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
-import 'package:teaf_app/app_localizations.dart';
 import 'patients_ui.dart';
 import 'app_language_provider.dart';
 import 'package:provider/provider.dart';
@@ -449,8 +447,7 @@ class DiagnosticoHelper {
       double perimetroCranealTabla,
       bool malformaciones) {
     if (adoptado && tiempoAcogida) {
-      return AppLocalizations.of(context as BuildContext)!
-                                  .translate('Incomplete')!;
+      return 'Incomplete';
     } else {
       if (alcohol) {
         if (rasgos >= 2) {
@@ -458,19 +455,15 @@ class DiagnosticoHelper {
             if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
                 (perimetroCranealPaciente <= perimetroCranealTabla ||
                     percentiles >= 1)) {
-              return AppLocalizations.of(context as BuildContext)!
-                                  .translate('FAS')!;
+              return 'FAS';
             } else {
-              return AppLocalizations.of(context as BuildContext)!
-                                  .translate('pFAS')!;
+              return 'pFAS';
             }
           } else {
             if (malformaciones) {
-              return AppLocalizations.of(context as BuildContext)!
-                                  .translate('ARBD')!;
+              return 'ARBD';
             } else {
-              return AppLocalizations.of(context as BuildContext)!
-                                  .translate('NO FASD')!;
+              return 'NO FASD';
             }
           }
         } else {
