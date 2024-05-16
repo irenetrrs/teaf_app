@@ -401,8 +401,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                         savePreferences();
                                       },
                                       child: Container(
-                                        height: 100,
-                                        width: 150,
+                                        height: 80,
+                                        width: 120,
                                         margin:
                                             EdgeInsets.symmetric(vertical: 5),
                                         decoration: BoxDecoration(
@@ -469,8 +469,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                                         savePreferences();
                                       },
                                       child: Container(
-                                        height: 100,
-                                        width: 150,
+                                        height: 80,
+                                        width: 120,
                                         margin:
                                             EdgeInsets.symmetric(vertical: 5),
                                         decoration: BoxDecoration(

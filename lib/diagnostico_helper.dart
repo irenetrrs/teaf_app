@@ -418,7 +418,8 @@ class DiagnosticoHelper {
 
     // Convertir el perimetro craneal del usuario a un valor numérico
     double perimetroUsuarioNum = double.tryParse(perimetroUsuario) ?? 0;
-
+    print('perimetro en la funcion: $perimetroUsuarioNum');
+    print('perimetro tabla: $perimetroTabla');
     // Comparar el perimetro craneal del usuario con el de la tabla
     return perimetroUsuarioNum < perimetroTabla;
   }

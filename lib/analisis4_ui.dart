@@ -702,26 +702,24 @@ class _Analisis4UIState extends State<Analisis4UI> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () async {
-                      String perimetroUsuario = await SharedPreferencesHelper
-                          .getPerimetroCranealText();
                       String edad = await SharedPreferencesHelper.getEdadText();
                       String generoPaciente =
                           await SharedPreferencesHelper.getGeneroButtonState()
                               ? 'Hombre'
                               : 'Mujer';
-
-                      // Verificar el perímetro craneal del usuario
-                      bool perimetroValido =
-                          await diagnosticoHelper.verificarPerimetroCraneal(
-                              perimetroUsuario, edad, generoPaciente);
-                      print(perimetroUsuario);
-                      print(perimetroValido);
                       int? peso = int.tryParse(pesoController.text);
                       int? talla = int.tryParse(tallaController.text);
                       int? percra =
                           int.tryParse(perimetroCranealController.text);
+
                       int? distpal =
                           int.tryParse(distanciaPalpebralController.text);
+                      bool perimetroValido =
+                          await diagnosticoHelper.verificarPerimetroCraneal(
+                              perimetroCranealController.text,
+                              edad,
+                              generoPaciente);
+                      print(perimetroValido);
                       // Manejar la acción de Siguiente
                       if (pesoController.text.isNotEmpty &&
                           tallaController.text.isNotEmpty &&
@@ -739,8 +737,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                 builder: (context) => Analisis6UI(),
                               ),
                             );
-                          } else {
                             _saveTextFieldsToPrefs();
+                          } else {
                             print(tallaController.text);
                             // ignore: use_build_context_synchronously
                             Navigator.push(
@@ -749,6 +747,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                 builder: (context) => Analisis5UI(),
                               ),
                             );
+                            _saveTextFieldsToPrefs();
                           }
                         } else {
                           Fluttertoast.showToast(
@@ -806,7 +805,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
     prefs.setString(pesoText, pesoController.text);
     prefs.setString(tallaText, tallaController.text);
     prefs.setString(perimetroCranealText, perimetroCranealController.text);
-    prefs.setString(distanciaPalpebralText, distanciaPalpebralController.text);
+    prefs.setString(distanciaPalpebralText!, distanciaPalpebralController.text);
   }
 
   // Cargar datos introducidos desde Shared Preferences
