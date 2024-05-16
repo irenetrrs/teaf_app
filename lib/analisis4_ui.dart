@@ -805,7 +805,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
     prefs.setString(pesoText, pesoController.text);
     prefs.setString(tallaText, tallaController.text);
     prefs.setString(perimetroCranealText, perimetroCranealController.text);
-    prefs.setString(distanciaPalpebralText!, distanciaPalpebralController.text);
+    prefs.setString(distanciaPalpebralText, distanciaPalpebralController.text);
   }
 
   // Cargar datos introducidos desde Shared Preferences
