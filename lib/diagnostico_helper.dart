@@ -92,7 +92,9 @@ class DiagnosticoHelper {
 ////////////////FUNCIÓN PARA OBTENER LA ALTURA A PARTIR DEL CSV//////////////////
   String? getHeightFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
-
+    if (userAge > 240) {
+      userAge = 240;
+    }
     // Redondear la edad al siguiente más cercano por arriba que sea .5
     num roundedAge = roundToNearestHalf(userAge);
     //print('Edad getHeight $roundedAge');
@@ -114,7 +116,9 @@ class DiagnosticoHelper {
 ////////////////FUNCIÓN PARA OBTENER EL PESO A PARTIR DEL CSV//////////////////
   String? getWeightFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
-
+    if (userAge > 240) {
+          userAge = 240;
+        }
     // Redondear la edad al siguiente más cercano por arriba que sea .5
     num roundedAge = roundToNearestHalf(userAge);
     //print('Edad getWeight $roundedAge');
@@ -154,7 +158,9 @@ class DiagnosticoHelper {
 ///////////////////FUNCIÓN PARA OBTENER EL PER CRANEAL A PARTIR DEL CSV//////////////////
   String? getPerimeterFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
-
+    if (userAge > 240) {
+          userAge = 240;
+        }
     List<Map<String, dynamic>> selectedData = (gender.toLowerCase() == 'male')
         ? perimetroCranealHombresData
         : perimetroCranealMujeresData;

@@ -429,7 +429,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                     if (edadController.text.isNotEmpty &&
                         (botonSi || botonNo) &&
                         (botonmayor || botonmenor)) {
-                      if (edad! <= 240 && edad >= 24) {
+                      if (edad! >= 24) {
                         _saveTextFieldsToPrefs();
                         Navigator.push(
                           context,
@@ -440,7 +440,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                       } else {
                         Fluttertoast.showToast(
                           msg:
-                              'Por favor, introduce un valor entre 24 y 240 meses',
+                              'Por favor, introduce un valor mayor de 24 meses',
                           toastLength: Toast.LENGTH_LONG,
                           gravity: ToastGravity.CENTER,
                           timeInSecForIosWeb: 2,

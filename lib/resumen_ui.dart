@@ -530,9 +530,16 @@ class ResumenUI extends StatelessWidget {
                                         return CircularProgressIndicator();
                                       } else if (snapshot.hasError) {
                                         return Text('Error');
-                                      } else {
+                                      } else if (snapshot.hasData) {
+                                        // Asegurar que snapshot.data es un bool antes de usarlo
+                                        bool estado = snapshot.data!;
+                                        String respuesta = estado
+                                            ? AppLocalizations.of(context)!
+                                                .translate('yes')!
+                                            : AppLocalizations.of(context)!
+                                                .translate('no')!;
                                         return Text(
-                                          '${snapshot.data ?? 'N/A'}',
+                                          respuesta,
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 20,
@@ -541,6 +548,8 @@ class ResumenUI extends StatelessWidget {
                                             height: 0,
                                           ),
                                         );
+                                      } else {
+                                        return Text('N/A');
                                       }
                                     },
                                   ),
