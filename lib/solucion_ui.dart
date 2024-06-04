@@ -129,7 +129,7 @@ class _SolucionUIState extends State<SolucionUI> {
                   ),
                   child: Center(
                     child: FutureBuilder<String>(
-                      future: diagnosticoHelper.diagnostico(),
+                      future: diagnosticoHelper.diagnostico(context),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {

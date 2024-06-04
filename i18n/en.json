@@ -2,7 +2,7 @@
     "appName": "VisualTEAF",
     "start": "Start",
     "welcome": "Welcome!",
-    "introText": "This App is a tool to assist healthcare professionals in assessing the diagnostic criteria of Fetal Alcohol Spectrum Disorder (FASD) according to international guidelines (Hoyme, 2016).\n\nThis App is developed by VisualTEAF and the Research Group on Childhood and Environment (GRIE) at Hospital Clínic-Maternitat, ICGON, FCRB, IDIBAPS, BCNatal, RICORS (RD21/0012/0017), Barcelona.\n\n© Visual TEAF 2023",
+    "introText": "This App is a tool to assist healthcare professionals in assessing the diagnostic criteria of Fetal Alcohol Spectrum Disorder (FASD) according to international guidelines (Hoyme, 2016).\n\nThis App is developed by VisualTEAF and the Research Group on Childhood and Environment (GRIE) at Hospital Clínic-Maternitat, ICGON, FCRB, IDIBAPS, BCNatal, RICORS (RD21/0012/0017), Barcelona.\n\n© Visual TEAF 2024",
     "back": "Back",
     "next": "Next",
     "logIn": "Log In",
@@ -81,5 +81,9 @@
     "please": "Please, fill in all fields",
     "details": "Details",
     "delete": "Delete",
-    "error_details": "No details found for the patient"
+    "error_details": "No details found for the patient",
+    "SAF": "FAS",
+    "pFAS": "pFAS",
+    "NOTEAF": "NO FASD",
+    "ARND": "ARND"
 }

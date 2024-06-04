@@ -198,7 +198,7 @@ class ResumenUI extends StatelessWidget {
             height: 60,
             margin: EdgeInsets.symmetric(horizontal: 10),
             child: FutureBuilder<String>(
-              future: diagnosticoHelper.diagnostico(),
+              future: diagnosticoHelper.diagnostico(context),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   // Si el Future está en espera, muestra un indicador de carga

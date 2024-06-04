@@ -17,7 +17,7 @@ Future<void> main() async {
 
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-   final AppLanguageProvider appLanguage;
+  final AppLanguageProvider appLanguage;
 
   MyApp({required this.appLanguage});
 
@@ -30,10 +30,10 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'TeafAPP',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 53, 133, 182)),
             useMaterial3: true,
           ),
-          home: WelcomeUI(),
+          home: SafeArea(child: WelcomeUI()),
           locale: model.appLocal,
           supportedLocales: const [
             Locale('es', 'ES'),

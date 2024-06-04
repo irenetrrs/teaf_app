@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:csv/csv.dart';
+import 'package:teaf_app/app_localizations.dart';
 import 'patients_ui.dart';
 import 'app_language_provider.dart';
 import 'package:provider/provider.dart';
 
 class DiagnosticoHelper {
+  late AppLanguageProvider appLanguage;
   List<Map<String, dynamic>> maleHeightData = [];
   List<Map<String, dynamic>> femaleHeightData = [];
   List<Map<String, dynamic>> maleWeightData = [];
@@ -276,7 +278,7 @@ class DiagnosticoHelper {
   ///
   ////////////////////Método para obtener las respuestas//////////
 
-  Future<String> diagnostico() async {
+  Future<String> diagnostico(BuildContext context) async {
     // Obtener las respuestas del usuario
     String edad = await getEdadText();
     bool adoptado = await getAdoptadoButtonState();
@@ -344,7 +346,9 @@ class DiagnosticoHelper {
     print(perimetroCranealPaciente);
     print(perimetroCranealTabla);
 
+    // ignore: use_build_context_synchronously
     return realizarDiagnostico(
+        context,
         adoptado,
         tiempoAcogida,
         alcohol,
@@ -427,24 +431,28 @@ class DiagnosticoHelper {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
   // Función para realizar el diagnóstico basado en las respuestas obtenidas
   String realizarDiagnostico(
-      bool adoptado,
-      bool tiempoAcogida,
-      bool alcohol,
-      int rasgos,
-      int dominios,
-      double pesoPaciente,
-      double tallaPaciente,
-      double perimetroCranealPaciente,
-      int filtrum,
-      int labioSuperior,
-      bool recurrente,
-      bool anomalias,
-      int percentiles,
-      double pesoTabla,
-      double tallaTabla,
-      double distanciaPalpebralTabla,
-      double perimetroCranealTabla,
-      bool malformaciones) {
+    BuildContext context,
+    bool adoptado,
+    bool tiempoAcogida,
+    bool alcohol,
+    int rasgos,
+    int dominios,
+    double pesoPaciente,
+    double tallaPaciente,
+    double perimetroCranealPaciente,
+    int filtrum,
+    int labioSuperior,
+    bool recurrente,
+    bool anomalias,
+    int percentiles,
+    double pesoTabla,
+    double tallaTabla,
+    double distanciaPalpebralTabla,
+    double perimetroCranealTabla,
+    bool malformaciones,
+  ) {
+    final AppLocalizations localizations = AppLocalizations.of(context)!;
+
     if (adoptado && tiempoAcogida) {
       return 'Incomplete';
     } else {
@@ -454,7 +462,7 @@ class DiagnosticoHelper {
             if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
                 (perimetroCranealPaciente <= perimetroCranealTabla ||
                     percentiles >= 1)) {
-              return 'FAS';
+              return localizations.translate('SAF')!;
             } else {
               return 'pFAS';
             }
@@ -521,7 +529,12 @@ class DiagnosticoHelper {
     bool anomalias = await getAnomalias();
     bool recurrente = await getRecurrente();
     bool malformaciones = await getMalformaciones();
-    String resultadoDiagnostico = await diagnostico();
+    // Almacenar el contexto en una variable local
+    final BuildContext localContext = context;
+
+    // Ejecutar la operación asíncrona
+    // ignore: use_build_context_synchronously
+    String resultadoDiagnostico = await diagnostico(localContext);
 
     double pesoPaciente = double.tryParse(peso) ?? -1;
     double tallaPaciente = double.tryParse(talla) ?? -1;
