@@ -27,14 +27,12 @@ class _Analisis2UIState extends State<Analisis2UI> {
   bool botonSi = false;
   bool botonNo = false;
 
-   Future<void> _launchURL(String url) async {
-    Uri url0 = Uri.parse(url);
-    if (await launchUrl(url0)) {
-      await launchUrl(url0);
-    } else {
-      throw 'Could not launch $url0';
-    }
+Future<void> _launchURL(String url) async {
+  Uri url0 = Uri.parse(url);
+  if (!await launchUrl(url0)) {
+    throw 'Could not launch $url0';
   }
+}
 
   @override
   void initState() {
@@ -201,9 +199,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                                                       'https://vimeo.com/845544703');
                                                 },
                                                 child: Text(
-                                                  AppLocalizations.of(context)!
-                                                      .translate(
-                                                          'videoDomains')!,
+                                                  'https://vimeo.com/845544703',
                                                   style: TextStyle(
                                                     color: const Color.fromARGB(
                                                         255, 4, 60, 105),
@@ -472,8 +468,7 @@ class _Analisis2UIState extends State<Analisis2UI> {
                     }
                   },
                   style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all(Color(0xFF262f36)),
+                    backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         side: BorderSide(color: Colors.white, width: 2.0),

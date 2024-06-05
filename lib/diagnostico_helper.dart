@@ -677,7 +677,7 @@ class DiagnosticoHelper {
       itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
         buildMenuItem('Español',
             'img/esp.png'), // Ruta de la imagen de la bandera de Español
-        buildMenuItem('Inglés',
+        buildMenuItem('English',
             'img/ing.png'), // Ruta de la imagen de la bandera de Inglés
       ],
     );

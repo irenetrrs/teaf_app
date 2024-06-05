@@ -221,8 +221,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                   0]); // Llama a la función para abrir el enlace
                                             },
                                             child: Text(
-                                              AppLocalizations.of(context)!
-                                                  .translate('vimeo_weight')!,
+                                              'https://vimeo.com/766536749',
                                               style: TextStyle(
                                                 color: const Color.fromARGB(
                                                     255,
@@ -344,10 +343,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                         1]); // Llama a la función para abrir el enlace
                                                   },
                                                   child: Text(
-                                                    AppLocalizations.of(
-                                                            context)!
-                                                        .translate(
-                                                            'vimeo_height')!,
+                                                    'https://vimeo.com/766536770',
                                                     style: TextStyle(
                                                       color: const Color
                                                           .fromARGB(255, 4, 60,
@@ -475,10 +471,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                         2]); // Llama a la función para abrir el enlace
                                                   },
                                                   child: Text(
-                                                    AppLocalizations.of(
-                                                            context)!
-                                                        .translate(
-                                                            'vimeo_head_circumference')!,
+                                                    'https://vimeo.com/766536717',
                                                     style: TextStyle(
                                                       color: const Color
                                                           .fromARGB(255, 4, 60,
@@ -607,10 +600,7 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                                         3]); // Llama a la función para abrir el enlace
                                                   },
                                                   child: Text(
-                                                    AppLocalizations.of(
-                                                            context)!
-                                                        .translate(
-                                                            'vimeo_palpebral')!,
+                                                    'https://vimeo.com/766536975',
                                                     style: TextStyle(
                                                       color: const Color
                                                           .fromARGB(255, 4, 60,

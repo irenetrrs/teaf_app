@@ -219,8 +219,7 @@ class _SolucionUIState extends State<SolucionUI> {
                                         'https://cursoteaf.com/'); // Llama a la función para abrir el enlace
                                   },
                                   child: Text(
-                                    AppLocalizations.of(context)!
-                                        .translate('TEAF_courses')!,
+                                    "https://cursoteaf.com/",
                                     style: TextStyle(
                                       color: const Color.fromARGB(255, 4, 60,
                                           105), // Estilo para que parezca un enlace
