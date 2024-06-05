@@ -211,9 +211,9 @@ class ResumenUI extends StatelessWidget {
                       _launchURL('https://cursoteaf.com/');
                     },
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(
+                      backgroundColor: WidgetStateProperty.all(
                           Color.fromARGB(255, 182, 223, 255)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side:
                               BorderSide(color: Color(0xFF262f36), width: 2.0),

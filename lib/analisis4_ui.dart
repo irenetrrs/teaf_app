@@ -774,8 +774,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                     },
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(Color(0xFF262f36)),
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                          WidgetStateProperty.all(Color(0xFF262f36)),
+                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                         RoundedRectangleBorder(
                           side: BorderSide(color: Colors.white, width: 2.0),
                           borderRadius: BorderRadius.circular(20.0),
