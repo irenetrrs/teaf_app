@@ -22,13 +22,15 @@ dependencies:
   js: ^0.7.1
   cupertino_icons: ^1.0.2
   web: ^0.5.1
+  pdf: ^3.10.8
+  printing: ^5.7.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.11.0
+  flutter_launcher_icons: ^0.12.0
   flutter_lints: ^2.0.0
-  flutter_app_name: ^0.1.0
+  # flutter_app_name: ^0.1.0 # Eliminado para resolver conflicto
 
 flutter:
   uses-material-design: true
@@ -52,6 +54,3 @@ flutter_launcher_icons:
   macos:
     generate: true
     image_path: "img/logo.png"
-
-flutter_app_name:
-  name: "TEAF App"

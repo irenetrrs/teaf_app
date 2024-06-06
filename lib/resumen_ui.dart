@@ -9,6 +9,10 @@ import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'dialog.dart';
+import 'dart:io';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
+import 'package:path_provider/path_provider.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -77,15 +81,34 @@ class SharedPreferencesHelper {
   }
 }
 
-_launchURL(String url) async {
+Future<void> _launchURL(String url) async {
   Uri url0 = Uri.parse(url);
-  // ignore: deprecated_member_use
-  if (await canLaunch(url0.toString())) {
-    // ignore: deprecated_member_use
-    await launch(url0.toString());
+  if (await launchUrl(url0)) {
+    await launchUrl(url0);
   } else {
     throw 'Could not launch $url0';
   }
+}
+
+Future<pw.Document> _generatePdf() async {
+  final pdf = pw.Document();
+  pdf.addPage(
+    pw.Page(
+      build: (pw.Context context) => pw.Center(
+        child: pw.Text('¡Hola Mundo!'),
+      ),
+    ),
+  );
+  return pdf;
+}
+
+Future<void> _savePdf(pw.Document pdf) async {
+  final output = await getTemporaryDirectory();
+  final file = File("${output.path}/diagnostico.pdf");
+  await file.writeAsBytes(await pdf.save());
+
+  // Usar la biblioteca `printing` para manejar la descarga o impresión
+  await Printing.sharePdf(bytes: await pdf.save(), filename: 'Diagnostico.pdf');
 }
 
 // ignore: must_be_immutable
@@ -930,6 +953,9 @@ class ResumenUI extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -983,7 +1009,48 @@ class ResumenUI extends StatelessWidget {
                 width: 40,
               ),
               GestureDetector(
-                onTap: () {
+                onTap: () async {
+                  try {
+                    final pdf = await _generatePdf();
+                    await _savePdf(pdf);
+                  } catch (e) {
+                    print("Error: $e");
+                  }
+                  /*Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => InicioUI(),
+                    ),
+                  );*/
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 74,
+                      height: 74,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 176, 176, 176),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    Positioned(
+                      left: 12,
+                      top: 12,
+                      child: Image.asset(
+                        'img/papelera.png',
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 40,
+              ),
+              GestureDetector(
+                onTap: () async {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
