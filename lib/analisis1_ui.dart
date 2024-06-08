@@ -25,6 +25,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
   bool botonNo = false;
   bool botonmenor = false;
   bool botonmayor = false;
+  bool isAdopted = false;
   TextEditingController edadController = TextEditingController();
 
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
@@ -258,6 +259,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                       setState(() {
                                         botonSi = true;
                                         botonNo = false;
+                                        isAdopted = true;
                                       });
                                       _saveAdoptadoSelectionToPrefs(true);
                                     },
@@ -291,6 +293,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                       setState(() {
                                         botonSi = false;
                                         botonNo = true;
+                                        isAdopted = false;
                                       });
                                       _saveAdoptadoSelectionToPrefs(false);
                                     },
@@ -349,13 +352,16 @@ class _Analisis1UIState extends State<Analisis1UI> {
                               children: [
                                 Expanded(
                                   child: ElevatedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        botonmenor = true;
-                                        botonmayor = false;
-                                      });
-                                      _saveTiempoAcogidaSelectionToPrefs(true);
-                                    },
+                                    onPressed: isAdopted
+                                        ? () {
+                                            setState(() {
+                                              botonmenor = true;
+                                              botonmayor = false;
+                                            });
+                                            _saveTiempoAcogidaSelectionToPrefs(
+                                                true);
+                                          }
+                                        : null,
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonmenor
                                           ? Colors.orange
@@ -382,13 +388,16 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                 SizedBox(width: 20),
                                 Expanded(
                                   child: ElevatedButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        botonmayor = true;
-                                        botonmenor = false;
-                                      });
-                                      _saveTiempoAcogidaSelectionToPrefs(false);
-                                    },
+                                    onPressed: isAdopted
+                                        ? () {
+                                            setState(() {
+                                              botonmayor = true;
+                                              botonmenor = false;
+                                            });
+                                            _saveTiempoAcogidaSelectionToPrefs(
+                                                false);
+                                          }
+                                        : null,
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: botonmayor
                                           ? Colors.orange
