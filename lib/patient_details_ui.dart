@@ -145,7 +145,48 @@ class PatientDetailsScreen extends StatelessWidget {
                             height: 60,
                             child: ElevatedButton(
                               onPressed: () {
-                                _deletePatient(context, patientName);
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        AppLocalizations.of(context)!
+                                            .translate('delete')!,
+                                      ),
+                                      content: Text(
+                                        AppLocalizations.of(context)!.translate(
+                                            'sure')!,
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context)
+                                                .pop(); // Cerrar el cuadro de diálogo
+                                          },
+                                          child: Text(
+                                            AppLocalizations.of(context)!
+                                                .translate('cancel')!,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () {
+                                            _deletePatient(
+                                                context, patientName);
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PatientUI(),
+                                              ),
+                                            );
+                                            // Puedes navegar a la pantalla de inicio o hacer cualquier otra acción necesaria después de resetear
+                                          },
+                                          child: Text('Aceptar'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
                               style: ButtonStyle(
                                 backgroundColor: WidgetStateProperty.all(Color(

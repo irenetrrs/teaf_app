@@ -87,5 +87,6 @@
     "NOTEAF": "NO FASD",
     "ARND": "ARND",
     "higher": "Please enter a value greater than 24 months",
-    "name": "Name"
+    "name": "Name",
+    "sure": "Are you sure you want to delete the patient?"
 }

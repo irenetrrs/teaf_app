@@ -25,7 +25,7 @@ class _MyDialogState extends State<MyDialog> {
           },
           child: Text('Cancelar'),
         ),
-        ElevatedButton(
+        TextButton(
           onPressed: () {
             // Guarda el texto introducido en una variable o realiza alguna acción
             String nombre = _textEditingController.text;

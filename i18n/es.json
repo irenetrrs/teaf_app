@@ -87,5 +87,6 @@
     "NOTEAF": "NO TEAF",
     "ARND": "ARND",
     "higher": "Por favor, introduce un valor mayor de 24 meses",
-    "name": "Nombre"
+    "name": "Nombre",
+    "sure": "¿Está seguro que quiere eliminar al paciente?"
 }
