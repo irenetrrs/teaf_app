@@ -23,8 +23,8 @@
     "yes": "Yes",
     "no": "No",
     "receptionTime": "Reception time",
-    "less24": "<24 months",
-    "more24": "≥24 months",
+    "less24": "Less than 24 months",
+    "more24": "More than 24 months",
     "domains": "Number of affected domains",
     "infoDomains": "Information about the domains",
     "infoDomainsText": "Watch the following video for more information on the affected domains:",
@@ -85,5 +85,6 @@
     "SAF": "FAS",
     "pFAS": "pFAS",
     "NOTEAF": "NO FASD",
-    "ARND": "ARND"
+    "ARND": "ARND",
+    "higher": "Please enter a value greater than 24 months"
 }

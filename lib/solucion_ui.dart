@@ -37,373 +37,376 @@ class _SolucionUIState extends State<SolucionUI> {
   @override
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
-
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            // Encabezado
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: 50,
-                  height: 50,
-                ),
-                // Logo y nombre en una Columna
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        // Acción a realizar cuando se hace clic en el botón
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeUI(),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('img/logo.png'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            // Puedes ajustar el tamaño del contenedor según tus necesidades
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            AppLocalizations.of(context)!.translate('appName')!,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                // Icono de idiomas
-                InkWell(
-                  child: Container(
-                    child: diagnosticoHelper.buildLanguageMenu(
-                        context), // Llama a la función para construir el menú de idiomas
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              AppLocalizations.of(context)!.translate('diagnosis')!,
-              style: TextStyle(
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: 50,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  width: 200.0, // Diámetro del círculo
-                  height: 200.0, // Diámetro del círculo
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle, // Forma circular
-                  ),
-                  child: Center(
-                    child: FutureBuilder<String>(
-                      future: diagnosticoHelper.diagnostico(context),
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return CircularProgressIndicator();
-                        } else {
-                          if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else {
-                            // Definir circleColor y cambiarlo según el resultado del diagnóstico
-                            Color circleColor = Colors.transparent;
-                            Color textColor = Colors.transparent;
-
-                            if (snapshot.data == 'Incomplete') {
-                              circleColor = Colors.orange;
-                              textColor = Color(0xFF262f36);
-                            } else if (snapshot.data == 'Error') {
-                              circleColor = Colors.black;
-                              textColor = Colors.white;
-                            } else {
-                              circleColor = Color.fromARGB(255, 182, 223, 255);
-                              textColor = Color(0xFF262f36);
-                            }
-
-                            // Devolver el widget del círculo con el color cambiado
-                            return Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                Container(
-                                  width: 200,
-                                  height: 200,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: circleColor,
-                                    border: Border.all(
-                                      color: Color(0xFF262f36),
-                                      width: 2,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  snapshot.data ??
-                                      AppLocalizations.of(context)!.translate(
-                                          'diagnosis_not_available')!,
-                                  style: TextStyle(
-                                    color: textColor,
-                                    fontSize: 45.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            );
-                          }
-                        }
-                      },
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 250,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              // Encabezado
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(
-                    onTap: () {
-                      // Mostrar el pop-up al tocar la imagen
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text(
-                              AppLocalizations.of(context)!
-                                  .translate('result_info')!,
-                            ),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('visit_link_diagnosis')!,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    _launchURL(
-                                        'https://cursoteaf.com/'); // Llama a la función para abrir el enlace
-                                  },
-                                  child: Text(
-                                    "https://cursoteaf.com/",
-                                    style: TextStyle(
-                                      color: const Color.fromARGB(255, 4, 60,
-                                          105), // Estilo para que parezca un enlace
-                                    ),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .end, // Esto alineará el botón "Cerrar" a la derecha
-                                  children: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: Text('Cerrar'),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                  SizedBox(
+                    width: 50,
+                    height: 50,
+                  ),
+                  // Logo y nombre en una Columna
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          // Acción a realizar cuando se hace clic en el botón
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WelcomeUI(),
                             ),
                           );
                         },
-                      );
-                    },
-                    child: Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/pregunta.png'),
-                          fit: BoxFit.cover,
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('img/logo.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              // Puedes ajustar el tamaño del contenedor según tus necesidades
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
+                    ],
+                  ),
+                  // Icono de idiomas
+                  InkWell(
+                    child: Container(
+                      child: diagnosticoHelper.buildLanguageMenu(
+                          context), // Llama a la función para construir el menú de idiomas
                     ),
                   ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: 250,
-              height: 60,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton(
-                onPressed: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Analisis1UI(),
-                    ),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.translate('edit')!,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 25,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                  ),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                AppLocalizations.of(context)!.translate('diagnosis')!,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 50,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: 250,
-              height: 60,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Manejar la acción de Atrás
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ResumenUI(),
-                    ),
-                  );
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                ),
-                child: Text(
-                  AppLocalizations.of(context)!.translate('summary')!,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 25,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+              SizedBox(
+                height: 50,
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: 250,
-              height: 60,
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text(
-                          AppLocalizations.of(context)!
-                              .translate('back_to_home')!,
-                        ),
-                        content: Text(
-                          AppLocalizations.of(context)!
-                              .translate('data_loss_confirmation')!,
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context)
-                                  .pop(); // Cerrar el cuadro de diálogo
-                            },
-                            child: Text(
-                              AppLocalizations.of(context)!
-                                  .translate('cancel')!,
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              // Resetear los valores y cerrar el cuadro de diálogo
-                              DiagnosticoHelper.resetPreferences(context);
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => InicioUI(),
-                                ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    width: 200.0, // Diámetro del círculo
+                    height: 200.0, // Diámetro del círculo
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle, // Forma circular
+                    ),
+                    child: Center(
+                      child: FutureBuilder<String>(
+                        future: diagnosticoHelper.diagnostico(context),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return CircularProgressIndicator();
+                          } else {
+                            if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else {
+                              // Definir circleColor y cambiarlo según el resultado del diagnóstico
+                              Color circleColor = Colors.transparent;
+                              Color textColor = Colors.transparent;
+
+                              if (snapshot.data == 'Incomplete') {
+                                circleColor = Colors.orange;
+                                textColor = Color(0xFF262f36);
+                              } else if (snapshot.data == 'Error') {
+                                circleColor = Colors.black;
+                                textColor = Colors.white;
+                              } else {
+                                circleColor =
+                                    Color.fromARGB(255, 182, 223, 255);
+                                textColor = Color(0xFF262f36);
+                              }
+
+                              // Devolver el widget del círculo con el color cambiado
+                              return Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  Container(
+                                    width: 200,
+                                    height: 200,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: circleColor,
+                                      border: Border.all(
+                                        color: Color(0xFF262f36),
+                                        width: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    snapshot.data ??
+                                        AppLocalizations.of(context)!.translate(
+                                            'diagnosis_not_available')!,
+                                    style: TextStyle(
+                                      color: textColor,
+                                      fontSize: 45.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               );
-                              // Puedes navegar a la pantalla de inicio o hacer cualquier otra acción necesaria después de resetear
-                            },
-                            child: Text('Aceptar'),
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                  // Manejar la acción de Atrás
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.white, width: 2.0),
-                      borderRadius: BorderRadius.circular(20.0),
+                            }
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ),
-                child: Text(
-                  AppLocalizations.of(context)!.translate('home')!,
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 25,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w600,
+              ),
+              SizedBox(
+                width: 250,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        // Mostrar el pop-up al tocar la imagen
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Text(
+                                AppLocalizations.of(context)!
+                                    .translate('result_info')!,
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('visit_link_diagnosis')!,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      _launchURL(
+                                          'https://cursoteaf.com/'); // Llama a la función para abrir el enlace
+                                    },
+                                    child: Text(
+                                      "https://cursoteaf.com/",
+                                      style: TextStyle(
+                                        color: const Color.fromARGB(255, 4, 60,
+                                            105), // Estilo para que parezca un enlace
+                                      ),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment
+                                        .end, // Esto alineará el botón "Cerrar" a la derecha
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: Text('Cerrar'),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('img/pregunta.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 250,
+                height: 60,
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Analisis1UI(),
+                      ),
+                    );
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.translate('edit')!,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 25,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 250,
+                height: 60,
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Manejar la acción de Atrás
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ResumenUI(),
+                      ),
+                    );
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.translate('summary')!,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 25,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 250,
+                height: 60,
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                            AppLocalizations.of(context)!
+                                .translate('back_to_home')!,
+                          ),
+                          content: Text(
+                            AppLocalizations.of(context)!
+                                .translate('data_loss_confirmation')!,
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pop(); // Cerrar el cuadro de diálogo
+                              },
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .translate('cancel')!,
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // Resetear los valores y cerrar el cuadro de diálogo
+                                DiagnosticoHelper.resetPreferences(context);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => InicioUI(),
+                                  ),
+                                );
+                                // Puedes navegar a la pantalla de inicio o hacer cualquier otra acción necesaria después de resetear
+                              },
+                              child: Text('Aceptar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    // Manejar la acción de Atrás
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        side: BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    AppLocalizations.of(context)!.translate('home')!,
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 255, 255, 255),
+                      fontSize: 25,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

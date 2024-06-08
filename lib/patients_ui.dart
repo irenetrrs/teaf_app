@@ -43,154 +43,153 @@ class _PatientUIState extends State<PatientUI> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            // Encabezado
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Botón de regreso
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => InicioUI(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('img/atras.png'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    width: 30.0,
-                    height: 30.0,
-                  ),
-                ),
-                // Logo y nombre
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeUI(),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('img/logo.png'),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            AppLocalizations.of(context)!.translate('appName')!,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                // Icono de idiomas
-                InkWell(
-                  child: Container(
-                    child: diagnosticoHelper.buildLanguageMenu(
-                        context), // Llama a la función para construir el menú de idiomas
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              AppLocalizations.of(context)!.translate('patient')!,
-              style: TextStyle(
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: 50,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: patients.map((patient) {
-                    return Container(
-                      width: 303, // Ancho del contenedor
-                      margin: EdgeInsets.symmetric(
-                          vertical: 10), // Espacio entre elementos
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              // Encabezado
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InicioUI(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 182, 223,
-                            255), // Color de fondo del contenedor
-                        borderRadius:
-                            BorderRadius.circular(20), // Bordes redondeados
+                        image: DecorationImage(
+                          image: AssetImage('img/atras.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      child: ListTile(
-                        title: Text(
-                          patient['name'],
-                          style: TextStyle(
-                            color: Color(0xFF262f36),
-                            fontSize: 20,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        subtitle: Text(
-                          patient[
-                              'diagnostico'], // Aquí se muestra el diagnóstico
-                          style: TextStyle(
-                            color: Color(0xFF262f36),
-                            fontSize: 16,
-                            fontFamily: 'Inter',
-                          ),
-                        ),
+                      width: 50.0,
+                      height: 50.0,
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => PatientDetailsScreen(
-                                patientName: patient['name'],
+                              builder: (context) => WelcomeUI(),
+                            ),
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('img/logo.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                          ).then((value) {
-                            _loadPatientList();
-                          });
-                        },
+                          ],
+                        ),
                       ),
-                    );
-                  }).toList(),
+                    ],
+                  ),
+                  InkWell(
+                    child: Container(
+                      child: diagnosticoHelper.buildLanguageMenu(context),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                AppLocalizations.of(context)!.translate('patient')!,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 50,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            )
-          ],
+              SizedBox(
+                height: 30,
+              ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: patients.map((patient) {
+                      return Container(
+                        width: 303, // Ancho del contenedor
+                        margin: EdgeInsets.symmetric(
+                            vertical: 10), // Espacio entre elementos
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 182, 223,
+                              255), // Color de fondo del contenedor
+                          borderRadius:
+                              BorderRadius.circular(20), // Bordes redondeados
+                        ),
+                        child: ListTile(
+                          title: Text(
+                            patient['name'],
+                            style: TextStyle(
+                              color: Color(0xFF262f36),
+                              fontSize: 20,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          subtitle: Text(
+                            patient[
+                                'diagnostico'], // Aquí se muestra el diagnóstico
+                            style: TextStyle(
+                              color: Color(0xFF262f36),
+                              fontSize: 16,
+                              fontFamily: 'Inter',
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PatientDetailsScreen(
+                                  patientName: patient['name'],
+                                ),
+                              ),
+                            ).then((value) {
+                              _loadPatientList();
+                            });
+                          },
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -9,10 +9,7 @@ import 'diagnostico_helper.dart';
 import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'dialog.dart';
-import 'dart:io';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:printing/printing.dart';
-import 'package:path_provider/path_provider.dart';
+import 'pdfgenerator.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -90,702 +87,169 @@ Future<void> _launchURL(String url) async {
   }
 }
 
-Future<pw.Document> _generatePdf() async {
-  final pdf = pw.Document();
-  pdf.addPage(
-    pw.Page(
-      build: (pw.Context context) => pw.Center(
-        child: pw.Text('¡Hola Mundo!'),
-      ),
-    ),
-  );
-  return pdf;
-}
-
-Future<void> _savePdf(pw.Document pdf) async {
-  final output = await getTemporaryDirectory();
-  final file = File("${output.path}/diagnostico.pdf");
-  await file.writeAsBytes(await pdf.save());
-
-  // Usar la biblioteca `printing` para manejar la descarga o impresión
-  await Printing.sharePdf(bytes: await pdf.save(), filename: 'Diagnostico.pdf');
-}
-
 // ignore: must_be_immutable
 class ResumenUI extends StatelessWidget {
   late AppLanguageProvider appLanguage;
+
   @override
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
+    Future<String> diagnosticoPdf = diagnosticoHelper.diagnostico(context);
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(children: [
-          // Encabezado
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () {
-                  // Acción a realizar cuando se hace clic en el botón
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SolucionUI(),
-                    ),
-                  );
-                },
-                child: Container(
-                  padding: EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('img/atras.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  // Puedes ajustar el tamaño del contenedor según tus necesidades
-                  width: 50.0,
-                  height: 50.0,
-                ),
-              ),
-              // Logo y nombre en una Columna
-              Column(
-                mainAxisSize: MainAxisSize.min,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(children: [
+            // Encabezado
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   InkWell(
                     onTap: () {
-                      // Acción a realizar cuando se hace clic en el botón
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => WelcomeUI(),
+                          builder: (context) => SolucionUI(),
                         ),
                       );
                     },
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(10.0),
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('img/logo.png'),
-                              fit: BoxFit.cover,
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('img/atras.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      width: 50.0,
+                      height: 50.0,
+                    ),
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WelcomeUI(),
                             ),
-                          ),
-                          // Puedes ajustar el tamaño del contenedor según tus necesidades
-                          width: 50.0,
-                          height: 50.0,
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('img/logo.png'),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              width: 50.0,
+                              height: 50.0,
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          AppLocalizations.of(context)!.translate('appName')!,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
+                      ),
+                    ],
+                  ),
+                  InkWell(
+                    child: Container(
+                      child: diagnosticoHelper.buildLanguageMenu(context),
                     ),
                   ),
                 ],
               ),
-              // Icono de idiomas
-              InkWell(
-                child: Container(
-                  child: diagnosticoHelper.buildLanguageMenu(
-                      context), // Llama a la función para construir el menú de idiomas
-                ),
+              SizedBox(
+              height: 50,
+            ),
+            Text(
+              AppLocalizations.of(context)!.translate('summary')!,
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 50,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
               ),
-            ],
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          Text(
-            AppLocalizations.of(context)!.translate('summary')!,
-            style: TextStyle(
-              color: Color.fromARGB(255, 255, 255, 255),
-              fontSize: 50,
-              fontFamily: 'Inter',
-              fontWeight: FontWeight.w600,
             ),
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          Container(
-            width: 250,
-            height: 60,
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: FutureBuilder<String>(
-              future: diagnosticoHelper.diagnostico(context),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  // Si el Future está en espera, muestra un indicador de carga
-                  return CircularProgressIndicator();
-                } else {
-                  // Si la llamada al Future es exitosa, muestra el texto resultante
-                  // del diagnóstico sin cambiar la forma del botón
-                  return ElevatedButton(
-                    onPressed: () {
-                      _launchURL('https://cursoteaf.com/');
-                    },
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStateProperty.all(
-                          Color.fromARGB(255, 182, 223, 255)),
-                      shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          side:
-                              BorderSide(color: Color(0xFF262f36), width: 2.0),
-                          borderRadius: BorderRadius.circular(20.0),
+            SizedBox(
+              height: 40,
+            ),
+            Container(
+              width: 250,
+              height: 60,
+              margin: EdgeInsets.symmetric(horizontal: 10),
+              child: FutureBuilder<String>(
+                future: diagnosticoHelper.diagnostico(context),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    // Si el Future está en espera, muestra un indicador de carga
+                    return CircularProgressIndicator();
+                  } else {
+                    // Si la llamada al Future es exitosa, muestra el texto resultante
+                    // del diagnóstico sin cambiar la forma del botón
+                    return ElevatedButton(
+                      onPressed: () {
+                        _launchURL('https://cursoteaf.com/');
+                      },
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.all(
+                            Color.fromARGB(255, 182, 223, 255)),
+                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: Color(0xFF262f36), width: 2.0),
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
                         ),
                       ),
-                    ),
-                    child: Text(
-                      snapshot.data ??
-                          AppLocalizations.of(context)!
-                              .translate('diagnosis_not_available')!,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
+                      child: Text(
+                        snapshot.data ??
+                            AppLocalizations.of(context)!
+                                .translate('diagnosis_not_available')!,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontFamily: 'Inter',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
-                  );
-                }
-              },
+                    );
+                  }
+                },
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: 310,
-                    height: 74,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          width: 145,
-                          height: 74,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Container(
-                                  width: 145,
-                                  height: 74,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFFFFB35B),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 90,
-                                top: 25,
-                                child: Image.asset(
-                                  'img/altura.png',
-                                  fit: BoxFit.cover,
-                                  height: 40,
-                                  width: 40,
-                                ),
-                              ),
-                              Positioned(
-                                left: 13,
-                                top: 10,
-                                child: Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('height')!,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontFamily: 'Font Awesome 5 Free',
-                                    fontWeight: FontWeight.w900,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 19,
-                                top: 40,
-                                child: FutureBuilder<String>(
-                                  future:
-                                      SharedPreferencesHelper.getTallaText(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return CircularProgressIndicator();
-                                    } else if (snapshot.hasError) {
-                                      return Text(
-                                        AppLocalizations.of(context)!
-                                            .translate('error')!,
-                                      );
-                                    } else {
-                                      return Text(
-                                        '${snapshot.data ?? 'N/A'} cm',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontFamily: 'Font Awesome 5 Free',
-                                          fontWeight: FontWeight.w900,
-                                          height: 0,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 165,
-                          top: 0,
-                          child: SizedBox(
-                            width: 145,
-                            height: 74,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 17,
-                                  top: 37,
-                                  child: FutureBuilder<String>(
-                                    future:
-                                        SharedPreferencesHelper.getPesoText(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        return Text(
-                                          AppLocalizations.of(context)!
-                                              .translate('error')!,
-                                        );
-                                      } else {
-                                        return Text(
-                                          '${snapshot.data ?? 'N/A'} kg',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontFamily: 'Font Awesome 5 Free',
-                                            fontWeight: FontWeight.w900,
-                                            height: 0,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 90,
-                                  top: 14,
-                                  child: Image.asset(
-                                    'img/peso.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                    width: 40,
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 13,
-                                  top: 10,
-                                  child: Text(
-                                    AppLocalizations.of(context)!
-                                        .translate('weight')!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Font Awesome 5 Free',
-                                      fontWeight: FontWeight.w900,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 20,
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: 310,
-                    height: 74,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          width: 145,
-                          height: 74,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Container(
-                                  width: 145,
-                                  height: 74,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFFFFB35B),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 17,
-                                top: 37,
-                                child: FutureBuilder<String>(
-                                  future: SharedPreferencesHelper
-                                      .getDistanciaPalpebralText(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return CircularProgressIndicator();
-                                    } else if (snapshot.hasError) {
-                                      return Text('Error');
-                                    } else {
-                                      return Text(
-                                        '${snapshot.data ?? 'N/A'} cm',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontFamily: 'Font Awesome 5 Free',
-                                          fontWeight: FontWeight.w900,
-                                          height: 0,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                ),
-                              ),
-                              Positioned(
-                                left: 90,
-                                top: 25,
-                                child: Image.asset(
-                                  'img/distancia.png',
-                                  fit: BoxFit.cover,
-                                  height: 40,
-                                  width: 40,
-                                ),
-                              ),
-                              Positioned(
-                                left: 13,
-                                top: 10,
-                                child: Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('palpebral_distance')!,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontFamily: 'Font Awesome 5 Free',
-                                    fontWeight: FontWeight.w900,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 165,
-                          top: 0,
-                          child: SizedBox(
-                            width: 145,
-                            height: 74,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 17,
-                                  top: 37,
-                                  child: FutureBuilder<bool>(
-                                    future: SharedPreferencesHelper
-                                        .getAlcoholButtonState(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        return Text('Error');
-                                      } else if (snapshot.hasData) {
-                                        // Asegurar que snapshot.data es un bool antes de usarlo
-                                        bool estado = snapshot.data!;
-                                        String respuesta = estado
-                                            ? AppLocalizations.of(context)!
-                                                .translate('yes')!
-                                            : AppLocalizations.of(context)!
-                                                .translate('no')!;
-                                        return Text(
-                                          respuesta,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontFamily: 'Font Awesome 5 Free',
-                                            fontWeight: FontWeight.w900,
-                                            height: 0,
-                                          ),
-                                        );
-                                      } else {
-                                        return Text('N/A');
-                                      }
-                                    },
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 90,
-                                  top: 14,
-                                  child: Image.asset(
-                                    'img/alcohol.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                    width: 40,
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 13,
-                                  top: 10,
-                                  child: Text(
-                                    AppLocalizations.of(context)!
-                                        .translate('alcohol')!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Font Awesome 5 Free',
-                                      fontWeight: FontWeight.w900,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: 310,
-                    height: 74,
-                    child: Stack(
-                      children: [
-                        SizedBox(
-                          width: 145,
-                          height: 74,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 0,
-                                top: 0,
-                                child: Container(
-                                  width: 145,
-                                  height: 74,
-                                  decoration: ShapeDecoration(
-                                    color: Color(0xFFFFB35B),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 90,
-                                top: 14,
-                                child: Image.asset(
-                                  'img/filtrum.png',
-                                  fit: BoxFit.cover,
-                                  height: 40,
-                                  width: 40,
-                                ),
-                              ),
-                              Positioned(
-                                left: 13,
-                                top: 10,
-                                child: Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('filtrum')!,
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 12,
-                                    fontFamily: 'Font Awesome 5 Free',
-                                    fontWeight: FontWeight.w900,
-                                    height: 0,
-                                  ),
-                                ),
-                              ),
-                              Positioned(
-                                left: 19,
-                                top: 40,
-                                child: FutureBuilder<int>(
-                                  future: SharedPreferencesHelper.getFiltrum(),
-                                  builder: (context, snapshot) {
-                                    if (snapshot.connectionState ==
-                                        ConnectionState.waiting) {
-                                      return CircularProgressIndicator();
-                                    } else if (snapshot.hasError) {
-                                      return Text('Error');
-                                    } else {
-                                      return Text(
-                                        '${snapshot.data ?? 'N/A'}',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 20,
-                                          fontFamily: 'Font Awesome 5 Free',
-                                          fontWeight: FontWeight.w900,
-                                          height: 0,
-                                        ),
-                                      );
-                                    }
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          left: 165,
-                          top: 0,
-                          child: SizedBox(
-                            width: 145,
-                            height: 74,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 17,
-                                  top: 37,
-                                  child: FutureBuilder<int>(
-                                    future: SharedPreferencesHelper
-                                        .getLabioSuperior(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        return Text(
-                                          AppLocalizations.of(context)!
-                                              .translate('error')!,
-                                        );
-                                      } else {
-                                        return Text(
-                                          '${snapshot.data ?? 'N/A'}',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontFamily: 'Font Awesome 5 Free',
-                                            fontWeight: FontWeight.w900,
-                                            height: 0,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 90,
-                                  top: 14,
-                                  child: Image.asset(
-                                    'img/labio.png',
-                                    fit: BoxFit.cover,
-                                    height: 40,
-                                    width: 40,
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 13,
-                                  top: 10,
-                                  child: Text(
-                                    AppLocalizations.of(context)!
-                                        .translate('upper_lip')!,
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 12,
-                                      fontFamily: 'Font Awesome 5 Free',
-                                      fontWeight: FontWeight.w900,
-                                      height: 0,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SizedBox(
-                    width: 310,
-                    height: 74,
-                    child: Stack(
-                      children: [
-                        Positioned(
-                          left: 0,
-                          top: 0,
-                          child: SizedBox(
+                    SizedBox(
+                      width: 310,
+                      height: 74,
+                      child: Stack(
+                        children: [
+                          SizedBox(
                             width: 145,
                             height: 74,
                             child: Stack(
@@ -808,7 +272,7 @@ class ResumenUI extends StatelessWidget {
                                   left: 90,
                                   top: 25,
                                   child: Image.asset(
-                                    'img/cerebro.png',
+                                    'img/altura.png',
                                     fit: BoxFit.cover,
                                     height: 40,
                                     width: 40,
@@ -819,7 +283,7 @@ class ResumenUI extends StatelessWidget {
                                   top: 10,
                                   child: Text(
                                     AppLocalizations.of(context)!
-                                        .translate('neurobehavioral')!,
+                                        .translate('height')!,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 12,
@@ -832,64 +296,9 @@ class ResumenUI extends StatelessWidget {
                                 Positioned(
                                   left: 19,
                                   top: 40,
-                                  child: FutureBuilder<int>(
-                                    future: SharedPreferencesHelper.dominios(),
-                                    builder: (context, snapshot) {
-                                      if (snapshot.connectionState ==
-                                          ConnectionState.waiting) {
-                                        return CircularProgressIndicator();
-                                      } else if (snapshot.hasError) {
-                                        return Text(
-                                          AppLocalizations.of(context)!
-                                              .translate('error')!,
-                                        );
-                                      } else {
-                                        return Text(
-                                          '${snapshot.data ?? 'N/A'}',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontFamily: 'Font Awesome 5 Free',
-                                            fontWeight: FontWeight.w900,
-                                            height: 0,
-                                          ),
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          left: 165,
-                          top: 0,
-                          child: SizedBox(
-                            width: 145,
-                            height: 74,
-                            child: Stack(
-                              children: [
-                                Positioned(
-                                  left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  left: 17,
-                                  top: 37,
                                   child: FutureBuilder<String>(
-                                    future: SharedPreferencesHelper
-                                        .getPerimetroCranealText(),
+                                    future:
+                                        SharedPreferencesHelper.getTallaText(),
                                     builder: (context, snapshot) {
                                       if (snapshot.connectionState ==
                                           ConnectionState.waiting) {
@@ -914,11 +323,153 @@ class ResumenUI extends StatelessWidget {
                                     },
                                   ),
                                 ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            left: 165,
+                            top: 0,
+                            child: SizedBox(
+                              width: 145,
+                              height: 74,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    left: 0,
+                                    top: 0,
+                                    child: Container(
+                                      width: 145,
+                                      height: 74,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFFFFB35B),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 17,
+                                    top: 37,
+                                    child: FutureBuilder<String>(
+                                      future:
+                                          SharedPreferencesHelper.getPesoText(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            AppLocalizations.of(context)!
+                                                .translate('error')!,
+                                          );
+                                        } else {
+                                          return Text(
+                                            '${snapshot.data ?? 'N/A'} kg',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontFamily: 'Font Awesome 5 Free',
+                                              fontWeight: FontWeight.w900,
+                                              height: 0,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 90,
+                                    top: 14,
+                                    child: Image.asset(
+                                      'img/peso.png',
+                                      fit: BoxFit.cover,
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 13,
+                                    top: 10,
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('weight')!,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: 'Font Awesome 5 Free',
+                                        fontWeight: FontWeight.w900,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: 310,
+                      height: 74,
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            width: 145,
+                            height: 74,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 0,
+                                  top: 0,
+                                  child: Container(
+                                    width: 145,
+                                    height: 74,
+                                    decoration: ShapeDecoration(
+                                      color: Color(0xFFFFB35B),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 17,
+                                  top: 37,
+                                  child: FutureBuilder<String>(
+                                    future: SharedPreferencesHelper
+                                        .getDistanciaPalpebralText(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return CircularProgressIndicator();
+                                      } else if (snapshot.hasError) {
+                                        return Text('Error');
+                                      } else {
+                                        return Text(
+                                          '${snapshot.data ?? 'N/A'} cm',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontFamily: 'Font Awesome 5 Free',
+                                            fontWeight: FontWeight.w900,
+                                            height: 0,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ),
                                 Positioned(
                                   left: 90,
                                   top: 25,
                                   child: Image.asset(
-                                    'img/perimetro.png',
+                                    'img/distancia.png',
                                     fit: BoxFit.cover,
                                     height: 40,
                                     width: 40,
@@ -929,7 +480,7 @@ class ResumenUI extends StatelessWidget {
                                   top: 10,
                                   child: Text(
                                     AppLocalizations.of(context)!
-                                        .translate('head_circumference_short')!,
+                                        .translate('palpebral_distance')!,
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 12,
@@ -942,148 +493,567 @@ class ResumenUI extends StatelessWidget {
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            left: 165,
+                            top: 0,
+                            child: SizedBox(
+                              width: 145,
+                              height: 74,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    left: 0,
+                                    top: 0,
+                                    child: Container(
+                                      width: 145,
+                                      height: 74,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFFFFB35B),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 17,
+                                    top: 37,
+                                    child: FutureBuilder<bool>(
+                                      future: SharedPreferencesHelper
+                                          .getAlcoholButtonState(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text('Error');
+                                        } else if (snapshot.hasData) {
+                                          // Asegurar que snapshot.data es un bool antes de usarlo
+                                          bool estado = snapshot.data!;
+                                          String respuesta = estado
+                                              ? AppLocalizations.of(context)!
+                                                  .translate('yes')!
+                                              : AppLocalizations.of(context)!
+                                                  .translate('no')!;
+                                          return Text(
+                                            respuesta,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontFamily: 'Font Awesome 5 Free',
+                                              fontWeight: FontWeight.w900,
+                                              height: 0,
+                                            ),
+                                          );
+                                        } else {
+                                          return Text('N/A');
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 90,
+                                    top: 14,
+                                    child: Image.asset(
+                                      'img/alcohol.png',
+                                      fit: BoxFit.cover,
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 13,
+                                    top: 10,
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('alcohol')!,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: 'Font Awesome 5 Free',
+                                        fontWeight: FontWeight.w900,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: 310,
+                      height: 74,
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            width: 145,
+                            height: 74,
+                            child: Stack(
+                              children: [
+                                Positioned(
+                                  left: 0,
+                                  top: 0,
+                                  child: Container(
+                                    width: 145,
+                                    height: 74,
+                                    decoration: ShapeDecoration(
+                                      color: Color(0xFFFFB35B),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 90,
+                                  top: 14,
+                                  child: Image.asset(
+                                    'img/filtrum.png',
+                                    fit: BoxFit.cover,
+                                    height: 40,
+                                    width: 40,
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 13,
+                                  top: 10,
+                                  child: Text(
+                                    AppLocalizations.of(context)!
+                                        .translate('filtrum')!,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontFamily: 'Font Awesome 5 Free',
+                                      fontWeight: FontWeight.w900,
+                                      height: 0,
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 19,
+                                  top: 40,
+                                  child: FutureBuilder<int>(
+                                    future:
+                                        SharedPreferencesHelper.getFiltrum(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return CircularProgressIndicator();
+                                      } else if (snapshot.hasError) {
+                                        return Text('Error');
+                                      } else {
+                                        return Text(
+                                          '${snapshot.data ?? 'N/A'}',
+                                          style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 20,
+                                            fontFamily: 'Font Awesome 5 Free',
+                                            fontWeight: FontWeight.w900,
+                                            height: 0,
+                                          ),
+                                        );
+                                      }
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Positioned(
+                            left: 165,
+                            top: 0,
+                            child: SizedBox(
+                              width: 145,
+                              height: 74,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    left: 0,
+                                    top: 0,
+                                    child: Container(
+                                      width: 145,
+                                      height: 74,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFFFFB35B),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 17,
+                                    top: 37,
+                                    child: FutureBuilder<int>(
+                                      future: SharedPreferencesHelper
+                                          .getLabioSuperior(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            AppLocalizations.of(context)!
+                                                .translate('error')!,
+                                          );
+                                        } else {
+                                          return Text(
+                                            '${snapshot.data ?? 'N/A'}',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontFamily: 'Font Awesome 5 Free',
+                                              fontWeight: FontWeight.w900,
+                                              height: 0,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 90,
+                                    top: 14,
+                                    child: Image.asset(
+                                      'img/labio.png',
+                                      fit: BoxFit.cover,
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 13,
+                                    top: 10,
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('upper_lip')!,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: 'Font Awesome 5 Free',
+                                        fontWeight: FontWeight.w900,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    SizedBox(
+                      width: 310,
+                      height: 74,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 0,
+                            top: 0,
+                            child: SizedBox(
+                              width: 145,
+                              height: 74,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    left: 0,
+                                    top: 0,
+                                    child: Container(
+                                      width: 145,
+                                      height: 74,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFFFFB35B),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 90,
+                                    top: 25,
+                                    child: Image.asset(
+                                      'img/cerebro.png',
+                                      fit: BoxFit.cover,
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 13,
+                                    top: 10,
+                                    child: Text(
+                                      AppLocalizations.of(context)!
+                                          .translate('neurobehavioral')!,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: 'Font Awesome 5 Free',
+                                        fontWeight: FontWeight.w900,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 19,
+                                    top: 40,
+                                    child: FutureBuilder<int>(
+                                      future:
+                                          SharedPreferencesHelper.dominios(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            AppLocalizations.of(context)!
+                                                .translate('error')!,
+                                          );
+                                        } else {
+                                          return Text(
+                                            '${snapshot.data ?? 'N/A'}',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontFamily: 'Font Awesome 5 Free',
+                                              fontWeight: FontWeight.w900,
+                                              height: 0,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            left: 165,
+                            top: 0,
+                            child: SizedBox(
+                              width: 145,
+                              height: 74,
+                              child: Stack(
+                                children: [
+                                  Positioned(
+                                    left: 0,
+                                    top: 0,
+                                    child: Container(
+                                      width: 145,
+                                      height: 74,
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFFFFB35B),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 17,
+                                    top: 37,
+                                    child: FutureBuilder<String>(
+                                      future: SharedPreferencesHelper
+                                          .getPerimetroCranealText(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            AppLocalizations.of(context)!
+                                                .translate('error')!,
+                                          );
+                                        } else {
+                                          return Text(
+                                            '${snapshot.data ?? 'N/A'} cm',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20,
+                                              fontFamily: 'Font Awesome 5 Free',
+                                              fontWeight: FontWeight.w900,
+                                              height: 0,
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 90,
+                                    top: 25,
+                                    child: Image.asset(
+                                      'img/perimetro.png',
+                                      fit: BoxFit.cover,
+                                      height: 40,
+                                      width: 40,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    left: 13,
+                                    top: 10,
+                                    child: Text(
+                                      AppLocalizations.of(context)!.translate(
+                                          'head_circumference_short')!,
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 12,
+                                        fontFamily: 'Font Awesome 5 Free',
+                                        fontWeight: FontWeight.w900,
+                                        height: 0,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return MyDialog();
-                    },
-                  ).then((value) {
-                    // El cuadro de diálogo ha sido cerrado, puedes manejar el valor devuelto aquí
-                    if (value != null) {
-                      // Aquí puedes hacer algo con el valor devuelto, como guardarlo en algún lugar
-                      print('El nombre introducido es: $value');
-                      // Navegar a la página PatientDetails
-                      diagnosticoHelper.savePatient(context, value);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              PatientDetailsScreen(patientName: value),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return MyDialog();
+                      },
+                    ).then((value) {
+                      // El cuadro de diálogo ha sido cerrado, puedes manejar el valor devuelto aquí
+                      if (value != null) {
+                        // Aquí puedes hacer algo con el valor devuelto, como guardarlo en algún lugar
+                        print('El nombre introducido es: $value');
+                        // Navegar a la página PatientDetails
+                        diagnosticoHelper.savePatient(context, value);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                PatientDetailsScreen(patientName: value),
+                          ),
+                        );
+                      }
+                    });
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 74,
+                        height: 74,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 176, 176, 176),
+                          borderRadius: BorderRadius.circular(20),
                         ),
-                      );
-                    }
-                  });
-                },
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 74,
-                      height: 74,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 176, 176, 176),
-                        borderRadius: BorderRadius.circular(20),
                       ),
-                    ),
-                    Positioned(
-                      left: 12,
-                      top: 12,
-                      child: Image.asset(
-                        'img/save.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
+                      Positioned(
+                        left: 12,
+                        top: 12,
+                        child: Image.asset(
+                          'img/save.png',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: 40,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  try {
-                    final pdf = await _generatePdf();
-                    await _savePdf(pdf);
-                  } catch (e) {
-                    print("Error: $e");
-                  }
-                  /*Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => InicioUI(),
-                    ),
-                  );*/
-                },
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 74,
-                      height: 74,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 176, 176, 176),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                    ),
-                    Positioned(
-                      left: 12,
-                      top: 12,
-                      child: Image.asset(
-                        'img/papelera.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  width: 40,
                 ),
-              ),
-              SizedBox(
-                width: 40,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => InicioUI(),
-                    ),
-                  );
-                },
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 74,
-                      height: 74,
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 176, 176, 176),
-                        borderRadius: BorderRadius.circular(20),
+                GestureDetector(
+                  onTap: () async {
+                    PdfGenerator.generateAndSharePdf(context, diagnosticoPdf);
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 74,
+                        height: 74,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 176, 176, 176),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
                       ),
-                    ),
-                    Positioned(
-                      left: 12,
-                      top: 12,
-                      child: Image.asset(
-                        'img/papelera.png',
-                        width: 50,
-                        height: 50,
-                        fit: BoxFit.cover,
+                      Positioned(
+                        left: 12,
+                        top: 12,
+                        child: Image.asset(
+                          'img/descargar.png',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ]),
+                SizedBox(
+                  width: 40,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => InicioUI(),
+                      ),
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
+                        width: 74,
+                        height: 74,
+                        decoration: BoxDecoration(
+                          color: Color.fromARGB(255, 176, 176, 176),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                      ),
+                      Positioned(
+                        left: 12,
+                        top: 12,
+                        child: Image.asset(
+                          'img/papelera.png',
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ]),
+        ),
       ),
     );
   }

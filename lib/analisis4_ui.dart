@@ -73,8 +73,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 53, 133, 182),
-        body: Padding(
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
+      body: SafeArea(
+        child: Padding(
           padding: EdgeInsets.all(20.0),
           child: Column(
             children: [
@@ -84,7 +85,6 @@ class _Analisis4UIState extends State<Analisis4UI> {
                 children: [
                   InkWell(
                     onTap: () {
-                      // Acción a realizar cuando se hace clic en el botón
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -100,18 +100,15 @@ class _Analisis4UIState extends State<Analisis4UI> {
                           fit: BoxFit.cover,
                         ),
                       ),
-                      // Puedes ajustar el tamaño del contenedor según tus necesidades
-                      width: 30.0,
-                      height: 30.0,
+                      width: 50.0,
+                      height: 50.0,
                     ),
                   ),
-                  // Logo y nombre en una Columna
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       InkWell(
                         onTap: () {
-                          // Acción a realizar cuando se hace clic en el botón
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -129,7 +126,6 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              // Puedes ajustar el tamaño del contenedor según tus necesidades
                               width: 50.0,
                               height: 50.0,
                             ),
@@ -149,11 +145,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
                       ),
                     ],
                   ),
-                  // Icono de idiomas
                   InkWell(
                     child: Container(
-                      child: diagnosticoHelper.buildLanguageMenu(
-                          context), // Llama a la función para construir el menú de idiomas
+                      child: diagnosticoHelper.buildLanguageMenu(context),
                     ),
                   ),
                 ],
@@ -786,7 +780,9 @@ class _Analisis4UIState extends State<Analisis4UI> {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 
   // Guardar datos introducidos en Shared Preferences

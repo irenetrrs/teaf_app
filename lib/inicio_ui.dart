@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:teaf_app/info_ui.dart';
 import 'welcome_ui.dart';
 import 'analisis1_ui.dart';
 import 'app_language_provider.dart';
@@ -13,8 +14,9 @@ class InicioUI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 53, 133, 182),
-        body: Padding(
+      backgroundColor: Color.fromARGB(255, 53, 133, 182),
+      body: SafeArea(
+        child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
             children: [
@@ -22,17 +24,32 @@ class InicioUI extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
-                    width: 50,
-                    height: 50,
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => InfoUI(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('img/atras.png'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      width: 50.0,
+                      height: 50.0,
+                    ),
                   ),
-                  // Logo y nombre en una Columna
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       InkWell(
                         onTap: () {
-                          // Acción a realizar cuando se hace clic en el botón
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -50,7 +67,6 @@ class InicioUI extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              // Puedes ajustar el tamaño del contenedor según tus necesidades
                               width: 50.0,
                               height: 50.0,
                             ),
@@ -70,11 +86,9 @@ class InicioUI extends StatelessWidget {
                       ),
                     ],
                   ),
-                  // Icono de idiomas
                   InkWell(
                     child: Container(
-                      child: diagnosticoHelper.buildLanguageMenu(
-                          context), // Llama a la función para construir el menú de idiomas
+                      child: diagnosticoHelper.buildLanguageMenu(context),
                     ),
                   ),
                 ],
@@ -110,8 +124,7 @@ class InicioUI extends StatelessWidget {
                     );
                   },
                   style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all(Color(0xFFDFDFDF)),
+                    backgroundColor: WidgetStateProperty.all(Color(0xFFDFDFDF)),
                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         side: BorderSide(color: Color(0xFF262f36), width: 2.0),
@@ -148,8 +161,7 @@ class InicioUI extends StatelessWidget {
                     );
                   },
                   style: ButtonStyle(
-                    backgroundColor:
-                        WidgetStateProperty.all(Color(0xFF262f36)),
+                    backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
                     shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         side: BorderSide(color: Colors.white, width: 2.0),
@@ -170,6 +182,8 @@ class InicioUI extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

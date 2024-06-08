@@ -117,8 +117,8 @@ class DiagnosticoHelper {
   String? getWeightFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
     if (userAge > 240) {
-          userAge = 240;
-        }
+      userAge = 240;
+    }
     // Redondear la edad al siguiente más cercano por arriba que sea .5
     num roundedAge = roundToNearestHalf(userAge);
     //print('Edad getWeight $roundedAge');
@@ -159,8 +159,8 @@ class DiagnosticoHelper {
   String? getPerimeterFromAgeAndGender(String age, String gender) {
     double userAge = double.tryParse(age) ?? -1;
     if (userAge > 240) {
-          userAge = 240;
-        }
+      userAge = 240;
+    }
     List<Map<String, dynamic>> selectedData = (gender.toLowerCase() == 'male')
         ? perimetroCranealHombresData
         : perimetroCranealMujeresData;
@@ -633,6 +633,47 @@ class DiagnosticoHelper {
     }
 
     return {'rasgos': rasgos, 'dominios': dominios};
+  }
+
+//////////////texto pdf
+  static Future<String> diagnosticoPaciente(BuildContext context) async {
+    String edadText = await getEdadText();
+    bool adoptado = await getAdoptadoButtonState();
+    bool tiempoAcogida = await getTiempoAcogidaButtonState();
+    bool dominiosBoton0 = await getDominiosButtonState(0);
+    bool dominiosBoton1 = await getDominiosButtonState(1);
+    bool dominiosBoton2 = await getDominiosButtonState(2);
+    bool alcohol = await getAlcoholButtonState();
+    bool etnia = await getEtniaButtonState();
+    bool genero = await getGeneroButtonState();
+    String pesoText = await getPesoText();
+    String tallaText = await getTallaText();
+    String perimetroCranealText = await getPerimetroCranealText();
+    String distanciaPalpebralText = await getDistanciaPalpebralText();
+    int imagenseleccionadafiltrum = await getFiltrum();
+    int imagenseleccionadalabio = await getLabioSuperior();
+    bool anomalias = await getAnomalias();
+    bool recurrente = await getRecurrente();
+
+    // Construye el mensaje del popup
+    String popupMessage =
+        '${AppLocalizations.of(context)!.translate('age')}: $edadText ${AppLocalizations.of(context)!.translate('months')}\n'
+        '${AppLocalizations.of(context)!.translate('gender')}: ${genero ? '${AppLocalizations.of(context)!.translate('male')}' : '${AppLocalizations.of(context)!.translate('female')}'}\n'
+        '${AppLocalizations.of(context)!.translate('adopted')}: ${adoptado ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('receptionTime')}: ${tiempoAcogida ? '${AppLocalizations.of(context)!.translate('less24')}' : '${AppLocalizations.of(context)!.translate('more24')}'}\n'
+        '${AppLocalizations.of(context)!.translate('domains')}: ${dominiosBoton0 ? '${AppLocalizations.of(context)!.translate('0')}' : ''}${dominiosBoton1 ? '${AppLocalizations.of(context)!.translate('1')}' : ''}${dominiosBoton2 ? '${AppLocalizations.of(context)!.translate('2')}' : ''}\n'
+        '${AppLocalizations.of(context)!.translate('alcohol')}: ${alcohol ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('ethnicity')}: ${etnia ? '${AppLocalizations.of(context)!.translate('caucasian')}' : '${AppLocalizations.of(context)!.translate('african')}'}\n'
+        '${AppLocalizations.of(context)!.translate('weight')}: $pesoText kg\n'
+        '${AppLocalizations.of(context)!.translate('height')}: $tallaText cm\n'
+        '${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetroCranealText cm\n'
+        '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText cm\n'
+        '${AppLocalizations.of(context)!.translate('filtrum')}: $imagenseleccionadafiltrum \n'
+        '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n'
+        '${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n';
+
+    return popupMessage;
   }
 
 //////////////menu desplegable

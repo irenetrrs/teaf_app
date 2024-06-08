@@ -16,187 +16,186 @@ class PatientDetailsScreen extends StatelessWidget {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            // Encabezado
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Botón de regreso
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PatientUI(),
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              // Encabezado
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PatientUI(),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('img/atras.png'),
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    );
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(10.0),
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('img/atras.png'),
-                        fit: BoxFit.cover,
-                      ),
+                      width: 50.0,
+                      height: 50.0,
                     ),
-                    width: 30.0,
-                    height: 30.0,
                   ),
-                ),
-                // Logo y nombre
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => WelcomeUI(),
-                          ),
-                        );
-                      },
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(10.0),
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                image: AssetImage('img/logo.png'),
-                                fit: BoxFit.cover,
-                              ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WelcomeUI(),
                             ),
-                            width: 50.0,
-                            height: 50.0,
-                          ),
-                          SizedBox(height: 10),
-                          Text(
-                            AppLocalizations.of(context)!.translate('appName')!,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                // Icono de idiomas
-                InkWell(
-                  child: Container(
-                    child: diagnosticoHelper.buildLanguageMenu(
-                        context), // Llama a la función para construir el menú de idiomas
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              AppLocalizations.of(context)!.translate('details')!,
-              style: TextStyle(
-                color: Color.fromARGB(255, 255, 255, 255),
-                fontSize: 50,
-                fontFamily: 'Inter',
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: FutureBuilder<String>(
-                future: _loadPatientDetails(patientName),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  }
-                  if (snapshot.hasData) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            child: Center(
-                              child: Text(
-                                snapshot.data!,
-                                style: TextStyle(
-                                  color: Colors.white, // Color del texto
-                                  fontSize: 20, // Tamaño de fuente
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10.0),
+                              decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage('img/logo.png'),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
+                              width: 50.0,
+                              height: 50.0,
                             ),
-                          ),
+                            SizedBox(height: 10),
+                            Text(
+                              AppLocalizations.of(context)!
+                                  .translate('appName')!,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontFamily: 'Inter',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: SizedBox(
-                            width: 250,
-                            height: 60,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                _deletePatient(context, patientName);
-                              },
-                              style: ButtonStyle(
-                                backgroundColor: WidgetStateProperty.all(Color(
-                                    0xFF262f36)), // Color de fondo del botón
-                                shape: WidgetStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        20.0), // Bordes redondeados
-                                    side: BorderSide(
-                                        color: Colors.white,
-                                        width:
-                                            2.0), // Borde blanco con ancho 2.0
+                      ),
+                    ],
+                  ),
+                  InkWell(
+                    child: Container(
+                      child: diagnosticoHelper.buildLanguageMenu(context),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Text(
+                AppLocalizations.of(context)!.translate('details')!,
+                style: TextStyle(
+                  color: Color.fromARGB(255, 255, 255, 255),
+                  fontSize: 50,
+                  fontFamily: 'Inter',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Expanded(
+                child: FutureBuilder<String>(
+                  future: _loadPatientDetails(patientName),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+                    if (snapshot.hasData) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Center(
+                                child: Text(
+                                  snapshot.data!,
+                                  style: TextStyle(
+                                    color: Colors.white, // Color del texto
+                                    fontSize: 20, // Tamaño de fuente
                                   ),
                                 ),
                               ),
-                              child: Text(
-                                AppLocalizations.of(context)!
-                                    .translate('delete')!,
-                                style: TextStyle(
-                                  color: Colors
-                                      .white, // Color del texto en el botón
-                                  fontSize:
-                                      18, // Tamaño de fuente del texto en el botón
-                                  fontWeight: FontWeight.bold, // Negrita
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: SizedBox(
+                              width: 250,
+                              height: 60,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  _deletePatient(context, patientName);
+                                },
+                                style: ButtonStyle(
+                                  backgroundColor: WidgetStateProperty.all(Color(
+                                      0xFF262f36)), // Color de fondo del botón
+                                  shape: WidgetStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(
+                                          20.0), // Bordes redondeados
+                                      side: BorderSide(
+                                          color: Colors.white,
+                                          width:
+                                              2.0), // Borde blanco con ancho 2.0
+                                    ),
+                                  ),
+                                ),
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .translate('delete')!,
+                                  style: TextStyle(
+                                    color: Colors
+                                        .white, // Color del texto en el botón
+                                    fontSize:
+                                        18, // Tamaño de fuente del texto en el botón
+                                    fontWeight: FontWeight.bold, // Negrita
+                                  ),
                                 ),
                               ),
                             ),
                           ),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else {
+                      return Center(
+                        child: Text(
+                          AppLocalizations.of(context)!
+                              .translate('error_details')!,
+                          style: TextStyle(
+                            color: Colors.black, // Color del texto
+                            fontSize: 20, // Tamaño de fuente
+                            fontWeight: FontWeight.bold, // Negrita
+                          ),
                         ),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else {
-                    return Center(
-                      child: Text(
-                        AppLocalizations.of(context)!
-                            .translate('error_details')!,
-                        style: TextStyle(
-                          color: Colors.black, // Color del texto
-                          fontSize: 20, // Tamaño de fuente
-                          fontWeight: FontWeight.bold, // Negrita
-                        ),
-                      ),
-                    );
-                  }
-                },
-              ),
-            )
-          ],
+                      );
+                    }
+                  },
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

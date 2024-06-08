@@ -23,15 +23,15 @@
     "yes": "Sí",
     "no": "No",
     "receptionTime": "Tiempo de acogida",
-    "less24": "<24 meses",
-    "more24": "≥24 meses",
+    "less24": "Menos de 24 meses",
+    "more24": "Más de 24 meses",
     "domains": "Número de dominios afectados",
     "infoDomains": "Información sobre los dominios",
     "infoDomainsText": "Visualice el siguiente vídeo para obtener más información sobre los dominios afectados:",
     "videoDomains": "Vimeo - Dominios Afectados",
     "0": "0",
     "1": "1",
-    "2": "≥ 2",
+    "2": "Más de 2",
     "alcohol_consume": "Consumo de alcohol en el embarazo",
     "ethnicity": "Etnia",
 	"caucasian": "Caucásico",
@@ -85,5 +85,6 @@
     "SAF": "SAF",
     "pFAS": "SAF p",
     "NOTEAF": "NO TEAF",
-    "ARND": "ARND"
+    "ARND": "ARND",
+    "higher": "Por favor, introduce un valor mayor de 24 meses"
 }
