@@ -23,14 +23,17 @@
     "yes": "Yes",
     "no": "No",
     "receptionTime": "Reception time",
-    "less24": "Less than 24 months",
-    "more24": "More than 24 months",
+    "less24": "≥ 24 months",
+    "more24": "< 24 months",
+    "+24": "Less than 24 months",
+    "-24": "More than 24 months",
     "domains": "Number of affected domains",
     "infoDomains": "Information about the domains",
     "infoDomainsText": "Watch the following video for more information on the affected domains:",
     "videoDomains": "Vimeo - Affected Domains",
     "0": "0",
     "1": "1",
+    "more2": "More than 2",
     "2": "≥ 2",
     "alcohol_consume": "Alcohol consumption during pregnancy",
     "ethnicity": "Ethnicity",
@@ -88,5 +91,7 @@
     "ARND": "ARND",
     "higher": "Please enter a value greater than 24 months",
     "name": "Name",
-    "sure": "Are you sure you want to delete the patient?"
+    "sure": "Are you sure you want to delete the patient?",
+    "pdf_done": "Diagnosis performed by Visual TEAF",
+    "pdf_header": "PATIENT DIAGNOSIS"
 }

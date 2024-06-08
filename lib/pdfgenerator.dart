@@ -18,7 +18,7 @@ class PdfGenerator {
   static Future<pw.Document> _generatePdf(
       BuildContext context, String diagnosticoTexto) async {
     final pdf = pw.Document();
-    String diagnostico_texto =
+    String diagnosticoDetalles =
         await DiagnosticoHelper.diagnosticoPaciente(context);
 
     pdf.addPage(
@@ -59,7 +59,7 @@ class PdfGenerator {
                 ),
                 pw.SizedBox(height: 50),
                 pw.Text(
-                  diagnostico_texto,
+                  diagnosticoDetalles,
                   style: pw.TextStyle(
                     fontSize: 18,
                     lineSpacing: 2,
