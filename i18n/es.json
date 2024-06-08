@@ -86,5 +86,6 @@
     "pFAS": "SAF p",
     "NOTEAF": "NO TEAF",
     "ARND": "ARND",
-    "higher": "Por favor, introduce un valor mayor de 24 meses"
+    "higher": "Por favor, introduce un valor mayor de 24 meses",
+    "name": "Nombre"
 }

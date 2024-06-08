@@ -16,194 +16,198 @@ class PatientDetailsScreen extends StatelessWidget {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              // Encabezado
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PatientUI(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/atras.png'),
-                          fit: BoxFit.cover,
-                        ),
+      body: Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            // Encabezado
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Botón de regreso
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PatientUI(),
                       ),
-                      width: 50.0,
-                      height: 50.0,
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WelcomeUI(),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/logo.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              AppLocalizations.of(context)!
-                                  .translate('appName')!,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/atras.png'),
+                        fit: BoxFit.cover,
                       ),
-                    ],
-                  ),
-                  InkWell(
-                    child: Container(
-                      child: diagnosticoHelper.buildLanguageMenu(context),
                     ),
+                    width: 30.0,
+                    height: 30.0,
                   ),
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Text(
-                AppLocalizations.of(context)!.translate('details')!,
-                style: TextStyle(
-                  color: Color.fromARGB(255, 255, 255, 255),
-                  fontSize: 50,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w600,
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Expanded(
-                child: FutureBuilder<String>(
-                  future: _loadPatientDetails(patientName),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    if (snapshot.hasData) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                // Logo y nombre
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeUI(),
+                          ),
+                        );
+                      },
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: SingleChildScrollView(
-                              child: Center(
-                                child: Text(
-                                  snapshot.data!,
-                                  style: TextStyle(
-                                    color: Colors.white, // Color del texto
-                                    fontSize: 20, // Tamaño de fuente
-                                  ),
-                                ),
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('img/logo.png'),
+                                fit: BoxFit.cover,
                               ),
                             ),
+                            width: 50.0,
+                            height: 50.0,
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: SizedBox(
-                              width: 250,
-                              height: 60,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  _deletePatient(context, patientName);
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor: WidgetStateProperty.all(Color(
-                                      0xFF262f36)), // Color de fondo del botón
-                                  shape: WidgetStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(
-                                          20.0), // Bordes redondeados
-                                      side: BorderSide(
-                                          color: Colors.white,
-                                          width:
-                                              2.0), // Borde blanco con ancho 2.0
-                                    ),
-                                  ),
-                                ),
-                                child: Text(
-                                  AppLocalizations.of(context)!
-                                      .translate('delete')!,
-                                  style: TextStyle(
-                                    color: Colors
-                                        .white, // Color del texto en el botón
-                                    fontSize:
-                                        18, // Tamaño de fuente del texto en el botón
-                                    fontWeight: FontWeight.bold, // Negrita
-                                  ),
-                                ),
-                              ),
+                          SizedBox(height: 10),
+                          Text(
+                            AppLocalizations.of(context)!.translate('appName')!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
-                      );
-                    } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else {
-                      return Center(
-                        child: Text(
-                          AppLocalizations.of(context)!
-                              .translate('error_details')!,
-                          style: TextStyle(
-                            color: Colors.black, // Color del texto
-                            fontSize: 20, // Tamaño de fuente
-                            fontWeight: FontWeight.bold, // Negrita
+                      ),
+                    ),
+                  ],
+                ),
+                // Icono de idiomas
+                InkWell(
+                  child: Container(
+                    child: diagnosticoHelper.buildLanguageMenu(
+                        context), // Llama a la función para construir el menú de idiomas
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 50,
+            ),
+            Text(
+              AppLocalizations.of(context)!.translate('details')!,
+              style: TextStyle(
+                color: Color.fromARGB(255, 255, 255, 255),
+                fontSize: 50,
+                fontFamily: 'Inter',
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: FutureBuilder<String>(
+                future: _loadPatientDetails(context, patientName),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasData) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Center(
+                              child: Text(
+                                snapshot.data!,
+                                style: TextStyle(
+                                  color: Colors.white, // Color del texto
+                                  fontSize: 20, // Tamaño de fuente
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      );
-                    }
-                  },
-                ),
-              )
-            ],
-          ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: SizedBox(
+                            width: 250,
+                            height: 60,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _deletePatient(context, patientName);
+                              },
+                              style: ButtonStyle(
+                                backgroundColor: WidgetStateProperty.all(Color(
+                                    0xFF262f36)), // Color de fondo del botón
+                                shape: WidgetStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        20.0), // Bordes redondeados
+                                    side: BorderSide(
+                                        color: Colors.white,
+                                        width:
+                                            2.0), // Borde blanco con ancho 2.0
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .translate('delete')!,
+                                style: TextStyle(
+                                  color: Colors
+                                      .white, // Color del texto en el botón
+                                  fontSize:
+                                      18, // Tamaño de fuente del texto en el botón
+                                  fontWeight: FontWeight.bold, // Negrita
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else {
+                    return Center(
+                      child: Text(
+                        AppLocalizations.of(context)!
+                            .translate('error_details')!,
+                        style: TextStyle(
+                          color: Colors.black, // Color del texto
+                          fontSize: 20, // Tamaño de fuente
+                          fontWeight: FontWeight.bold, // Negrita
+                        ),
+                      ),
+                    );
+                  }
+                },
+              ),
+            )
+          ],
         ),
       ),
     );
   }
 
-  Future<String> _loadPatientDetails(String patientName) async {
+  Future<String> _loadPatientDetails(
+      BuildContext context, String patientName) async {
+    if (!context.mounted) return ''; // Check if the widget is still mounted
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // Recupera los detalles del paciente asociados al nombre
+    // Retrieve patient details associated with the name
     String? age = prefs.getString('${patientName}_age');
     bool? gender = prefs.getBool('${patientName}_gender');
     bool? adoptado = prefs.getBool('${patientName}_adoptado');
@@ -219,25 +223,24 @@ class PatientDetailsScreen extends StatelessWidget {
     bool? anomalias = prefs.getBool('${patientName}_anomalias');
     bool? recurrente = prefs.getBool('${patientName}_recurrente');
     bool? malformaciones = prefs.getBool('${patientName}_malformaciones');
-    // Construir una cadena con los detalles del paciente
-
+    // Build a string with the patient details
     return '''
-    Name: $patientName
-    Age: $age years
-    Gender: $gender
-    Adopted: $adoptado
-    Reception time: $tiempoacogida
-    Alcohol: $alcohol
-    Weight: $peso kg
-    Height: $talla cm
-    Domains: $dominios
-    Head circumference: $perimetro cm
-    Palpebral distance: $distancia cm
-    Filtrum: $filtrum
-    Upper lip: $labio
-    Cranial malformations: $anomalias
-    Recurrent fever: $recurrente
-    Major malformations: $malformaciones
+    ${AppLocalizations.of(context)!.translate('name')}: $patientName
+    ${AppLocalizations.of(context)!.translate('age')}: $age ${AppLocalizations.of(context)!.translate('years')}
+    ${AppLocalizations.of(context)!.translate('gender')}: ${gender != null ? (gender ? AppLocalizations.of(context)!.translate('male') : AppLocalizations.of(context)!.translate('female')) : ''}
+    ${AppLocalizations.of(context)!.translate('adopted')}: ${adoptado != null ? (adoptado ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('no')) : ''}
+    ${AppLocalizations.of(context)!.translate('receptionTime')}: ${tiempoacogida != null ? (tiempoacogida ? AppLocalizations.of(context)!.translate('less24') : AppLocalizations.of(context)!.translate('more24')) : ''}
+    ${AppLocalizations.of(context)!.translate('alcohol')}: ${alcohol != null ? (alcohol ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('no')) : ''}
+    ${AppLocalizations.of(context)!.translate('weight')}: $peso kg
+    ${AppLocalizations.of(context)!.translate('height')}: $talla cm
+    ${AppLocalizations.of(context)!.translate('domains')}: $dominios
+    ${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetro cm
+    ${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distancia cm
+    ${AppLocalizations.of(context)!.translate('filtrum')}: $filtrum
+    ${AppLocalizations.of(context)!.translate('upper_lip')}: $labio
+    ${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias != null ? (anomalias ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('no')) : ''}
+    ${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente != null ? (recurrente ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('no')) : ''}
+    ${AppLocalizations.of(context)!.translate('alcohol')}: ${malformaciones != null ? (malformaciones ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('no')) : ''}
   ''';
   }
 
