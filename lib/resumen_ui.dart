@@ -103,78 +103,77 @@ class ResumenUI extends StatelessWidget {
           child: Column(children: [
             // Encabezado
             Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SolucionUI(),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: EdgeInsets.all(10.0),
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage('img/atras.png'),
-                          fit: BoxFit.cover,
-                        ),
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SolucionUI(),
                       ),
-                      width: 50.0,
-                      height: 50.0,
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('img/atras.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
+                    width: 50.0,
+                    height: 50.0,
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WelcomeUI(),
-                            ),
-                          );
-                        },
-                        child: Column(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.all(10.0),
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage('img/logo.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              width: 50.0,
-                              height: 50.0,
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              AppLocalizations.of(context)!
-                                  .translate('appName')!,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontFamily: 'Inter',
-                                fontWeight: FontWeight.w600,
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeUI(),
+                          ),
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage('img/logo.png'),
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ],
-                        ),
+                            width: 50.0,
+                            height: 50.0,
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            AppLocalizations.of(context)!.translate('appName')!,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontFamily: 'Inter',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  InkWell(
-                    child: Container(
-                      child: diagnosticoHelper.buildLanguageMenu(context),
                     ),
+                  ],
+                ),
+                InkWell(
+                  child: Container(
+                    child: diagnosticoHelper.buildLanguageMenu(context),
                   ),
-                ],
-              ),
-              SizedBox(
+                ),
+              ],
+            ),
+            SizedBox(
               height: 50,
             ),
             Text(

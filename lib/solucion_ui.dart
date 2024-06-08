@@ -33,7 +33,7 @@ class _SolucionUIState extends State<SolucionUI> {
 
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late AppLanguageProvider appLanguage;
-
+  
   @override
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
