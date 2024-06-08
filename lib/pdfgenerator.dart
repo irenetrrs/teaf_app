@@ -5,6 +5,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:printing/printing.dart';
 import 'diagnostico_helper.dart';
+import 'app_localizations.dart';
 
 class PdfGenerator {
   static Future<void> generateAndSharePdf(
@@ -21,9 +22,13 @@ class PdfGenerator {
     String diagnosticoDetalles =
         await DiagnosticoHelper.diagnosticoPaciente(context);
 
+    // Retrieve localized strings outside of the pdf package's Context
+    final pdfHeader = AppLocalizations.of(context)!.translate('pdf_header')!;
+    final pdfDone = AppLocalizations.of(context)!.translate('pdf_done')!;
+
     pdf.addPage(
       pw.Page(
-        build: (pw.Context context) {
+        build: (pw.Context pdfContext) {
           return pw.Padding(
             padding: pw.EdgeInsets.all(32),
             child: pw.Column(
@@ -31,7 +36,7 @@ class PdfGenerator {
               children: [
                 pw.Center(
                   child: pw.Text(
-                    'DIAGNÓSTICO DEL PACIENTE',
+                    pdfHeader,
                     style: pw.TextStyle(
                       fontSize: 28,
                       fontWeight: pw.FontWeight.bold,
@@ -70,7 +75,7 @@ class PdfGenerator {
                 pw.Align(
                   alignment: pw.Alignment.centerRight,
                   child: pw.Text(
-                    'Diagnóstico realizado por Visual TEAF',
+                    pdfDone,
                     style: pw.TextStyle(
                       fontSize: 14,
                     ),
