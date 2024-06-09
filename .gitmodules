@@ -1,0 +1,3 @@
+[submodule "teaf_app"]
+	path = teaf_app
+	url = https://github.com/irenetrrs/teaf_app.git
