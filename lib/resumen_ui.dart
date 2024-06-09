@@ -134,19 +134,31 @@ class ResumenUI extends StatelessWidget {
     }
   }
 
-/*
-  Color _getColorTalla() {
-    return null;
+  Color _getColorComparacion(double valorpaciente, double? tabla) {
+    if (tabla == null) {
+      return Colors.white; // Color cuando no hay valor correspondiente
+    }
+
+    if (valorpaciente <= tabla) {
+      return Color(0xFFFFB35B);
+    } else {
+      return Colors.grey;
+    }
   }
 
-  Color _getColorPeso() {
-    return null;
+  Color _getColorDistancia(
+      double distanciaGuardada, double? distanciaCorrespondiente) {
+    if (distanciaCorrespondiente == null) {
+      return Colors.white; // Color cuando no hay distancia correspondiente
+    }
+
+    if (distanciaGuardada <= distanciaCorrespondiente) {
+      return Color(0xFFFFB35B);
+    } else {
+      return Colors.grey;
+    }
   }
 
-  Color _getColorDistancia() {
-    return null;
-  }
-*/
   Color _getColorPerimetro(bool data) {
     if (data) {
       return Color(
@@ -321,16 +333,70 @@ class ResumenUI extends StatelessWidget {
                               children: [
                                 Positioned(
                                   left: 0,
-                                  top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
+                                  top: 0, // Ajusta la posición según necesites
+                                  child: FutureBuilder<List<String>>(
+                                    future: Future.wait([
+                                      SharedPreferencesHelper.getEdadText(),
+                                      SharedPreferencesHelper
+                                              .getGeneroButtonState()
+                                          .then((genero) =>
+                                              genero ? "male" : "female"),
+                                      SharedPreferencesHelper.getTallaText(),
+                                    ]),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return CircularProgressIndicator();
+                                      } else if (snapshot.hasError) {
+                                        return Text('Error: ${snapshot.error}');
+                                      } else {
+                                        String edad = snapshot.data![0];
+                                        String genero = snapshot.data![1];
+                                        String tallaGuardada =
+                                            snapshot.data![2];
+
+                                        return FutureBuilder<double?>(
+                                          future: diagnosticoHelper
+                                              .obtenerTallaCorrespondiente(
+                                                  edad, genero),
+                                          builder: (context, snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return CircularProgressIndicator();
+                                            } else if (snapshot.hasError) {
+                                              return Text(
+                                                  'Error: ${snapshot.error}');
+                                            } else {
+                                              double? tallaCorrespondiente =
+                                                  snapshot.data;
+
+                                              double tallaGuardadaValue =
+                                                  double.tryParse(
+                                                          tallaGuardada) ??
+                                                      0;
+
+                                              Color tallaColor =
+                                                  _getColorComparacion(
+                                                      tallaGuardadaValue,
+                                                      tallaCorrespondiente);
+
+                                              return Container(
+                                                width: 145,
+                                                height: 74,
+                                                decoration: ShapeDecoration(
+                                                  color: tallaColor,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                  ),
+                                                ),
+                                              );
+                                            }
+                                          },
+                                        );
+                                      }
+                                    },
                                   ),
                                 ),
                                 Positioned(
@@ -402,16 +468,71 @@ class ResumenUI extends StatelessWidget {
                                   Positioned(
                                     left: 0,
                                     top: 0,
-                                    child: Container(
-                                      width: 145,
-                                      height: 74,
-                                      decoration: ShapeDecoration(
-                                        color: Color(0xFFFFB35B),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
+                                    child: FutureBuilder<List<String>>(
+                                      future: Future.wait([
+                                        SharedPreferencesHelper.getEdadText(),
+                                        SharedPreferencesHelper
+                                                .getGeneroButtonState()
+                                            .then((genero) =>
+                                                genero ? "male" : "female"),
+                                        SharedPreferencesHelper.getPesoText(),
+                                      ]),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                              'Error: ${snapshot.error}');
+                                        } else {
+                                          String edad = snapshot.data![0];
+                                          String genero = snapshot.data![1];
+                                          String pesoPaciente =
+                                              snapshot.data![2];
+
+                                          return FutureBuilder<double?>(
+                                            future: diagnosticoHelper
+                                                .obtenerPesoCorrespondiente(
+                                                    edad, genero),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return CircularProgressIndicator();
+                                              } else if (snapshot.hasError) {
+                                                return Text(
+                                                    'Error: ${snapshot.error}');
+                                              } else {
+                                                double? pesoTabla =
+                                                    snapshot.data;
+
+                                                double pesoPacienteValue =
+                                                    double.tryParse(
+                                                            pesoPaciente) ??
+                                                        0;
+
+                                                Color pesoColor =
+                                                    _getColorComparacion(
+                                                        pesoPacienteValue,
+                                                        pesoTabla);
+
+                                                return Container(
+                                                  width: 145,
+                                                  height: 74,
+                                                  decoration: ShapeDecoration(
+                                                    color: pesoColor,
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                   Positioned(
@@ -492,15 +613,84 @@ class ResumenUI extends StatelessWidget {
                                 Positioned(
                                   left: 0,
                                   top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
+                                  child: FutureBuilder<String>(
+                                    future: SharedPreferencesHelper
+                                        .getDistanciaPalpebralText(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return CircularProgressIndicator();
+                                      } else if (snapshot.hasError) {
+                                        return Text('Error: ${snapshot.error}');
+                                      } else {
+                                        Future<String> edad =
+                                            SharedPreferencesHelper
+                                                .getEdadText();
+                                        String distanciaPalpebralGuardada =
+                                            snapshot.data!;
+
+                                        return FutureBuilder<String>(
+                                          future: edad,
+                                          builder: (context, snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return CircularProgressIndicator();
+                                            } else if (snapshot.hasError) {
+                                              return Text(
+                                                  'Error: ${snapshot.error}');
+                                            } else {
+                                              String edadValue = snapshot.data!;
+
+                                              return FutureBuilder<double?>(
+                                                future: diagnosticoHelper
+                                                    .obtenerDistanciaPalpebralCorrespondiente(
+                                                        edadValue),
+                                                builder: (context, snapshot) {
+                                                  if (snapshot
+                                                          .connectionState ==
+                                                      ConnectionState.waiting) {
+                                                    return CircularProgressIndicator();
+                                                  } else if (snapshot
+                                                      .hasError) {
+                                                    return Text(
+                                                        'Error: ${snapshot.error}');
+                                                  } else {
+                                                    double?
+                                                        distanciaCorrespondiente =
+                                                        snapshot.data;
+                                                    double distanciaGuardada =
+                                                        double.tryParse(
+                                                                distanciaPalpebralGuardada) ??
+                                                            0;
+
+                                                    // Comparar las distancias y obtener el color correspondiente
+                                                    Color containerColor =
+                                                        _getColorDistancia(
+                                                            distanciaGuardada,
+                                                            distanciaCorrespondiente);
+
+                                                    return Container(
+                                                      width: 145,
+                                                      height: 74,
+                                                      decoration:
+                                                          ShapeDecoration(
+                                                        color: containerColor,
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(20),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                },
+                                              );
+                                            }
+                                          },
+                                        );
+                                      }
+                                    },
                                   ),
                                 ),
                                 Positioned(

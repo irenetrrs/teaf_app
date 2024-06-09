@@ -386,6 +386,7 @@ class DiagnosticoHelper {
       String edad, String generoPaciente) async {
     String? tallaCorrespondienteString =
         getHeightFromAgeAndGender(edad, generoPaciente);
+    print("talla tabla: $tallaCorrespondienteString");
     return tallaCorrespondienteString != null
         ? double.tryParse(tallaCorrespondienteString)
         : null;
@@ -396,6 +397,7 @@ class DiagnosticoHelper {
       String edad, String generoPaciente) async {
     String? pesoCorrespondienteString =
         getWeightFromAgeAndGender(edad, generoPaciente);
+    print("peso tabla: $pesoCorrespondienteString");
     return pesoCorrespondienteString != null
         ? double.tryParse(pesoCorrespondienteString)
         : null;
@@ -404,6 +406,7 @@ class DiagnosticoHelper {
 // Obtener la distancia palpebral según la edad del paciente
   Future<double?> obtenerDistanciaPalpebralCorrespondiente(String edad) async {
     String? distanciaPalpebralCorrespondienteString = getDistanceFromAge(edad);
+    print("distancia tabla: $distanciaPalpebralCorrespondienteString");
     return distanciaPalpebralCorrespondienteString != null
         ? double.tryParse(distanciaPalpebralCorrespondienteString)
         : null;
