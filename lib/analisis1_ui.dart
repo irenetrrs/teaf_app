@@ -33,6 +33,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
   @override
   void initState() {
     super.initState();
+    appLanguage = AppLanguageProvider();
     _loadAdoptadoSelectionFromPrefs();
     _loadTiempoAcogidaSelectionFromPrefs();
     _loadTextFieldsFromPrefs();
