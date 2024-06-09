@@ -33,7 +33,7 @@ class _SolucionUIState extends State<SolucionUI> {
 
   DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   late AppLanguageProvider appLanguage;
-  
+
   @override
   Widget build(BuildContext context) {
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
@@ -130,7 +130,8 @@ class _SolucionUIState extends State<SolucionUI> {
                     ),
                     child: Center(
                       child: FutureBuilder<String>(
-                        future: diagnosticoHelper.diagnostico(context),
+                        future: diagnosticoHelper.diagnostico(
+                            context), // Tu función para obtener los datos
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
@@ -142,20 +143,27 @@ class _SolucionUIState extends State<SolucionUI> {
                               // Definir circleColor y cambiarlo según el resultado del diagnóstico
                               Color circleColor = Colors.transparent;
                               Color textColor = Colors.transparent;
+                              double fontSize =
+                                  14.0; // Tamaño de letra predeterminado
 
-                              if (snapshot.data == 'Incomplete') {
+                              if (snapshot.data == AppLocalizations.of(context)!.translate(
+                                            'incomplete')!) {
                                 circleColor = Colors.orange;
                                 textColor = Color(0xFF262f36);
-                              } else if (snapshot.data == 'Error') {
+                                fontSize = 28.0;
+                              } else if (snapshot.data == AppLocalizations.of(context)!.translate(
+                                            'error')!) {
                                 circleColor = Colors.black;
                                 textColor = Colors.white;
+                                fontSize = 30.0;
                               } else {
                                 circleColor =
                                     Color.fromARGB(255, 182, 223, 255);
                                 textColor = Color(0xFF262f36);
+                                fontSize = 40.0;
                               }
 
-                              // Devolver el widget del círculo con el color cambiado
+                              // Devolver el widget del círculo con el color y el tamaño de letra cambiado
                               return Stack(
                                 alignment: Alignment.center,
                                 children: [
@@ -177,7 +185,7 @@ class _SolucionUIState extends State<SolucionUI> {
                                             'diagnosis_not_available')!,
                                     style: TextStyle(
                                       color: textColor,
-                                      fontSize: 45.0,
+                                      fontSize: fontSize,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),

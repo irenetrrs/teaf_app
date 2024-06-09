@@ -93,5 +93,6 @@
     "name": "Name",
     "sure": "Are you sure you want to delete the patient?",
     "pdf_done": "Diagnosis performed by Visual TEAF",
-    "pdf_header": "PATIENT DIAGNOSIS"
+    "pdf_header": "PATIENT DIAGNOSIS",
+    "incomplete": "Incomplete"
 }

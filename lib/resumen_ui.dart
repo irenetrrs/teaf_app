@@ -1433,6 +1433,7 @@ class ResumenUI extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () async {
+                    DiagnosticoHelper.resetPreferences(context);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
