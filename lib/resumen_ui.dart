@@ -12,6 +12,7 @@ import 'dialog.dart';
 import 'pdfgenerator.dart';
 
 class SharedPreferencesHelper {
+  DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
   //dominios - 0 1 2
   static Future<bool> getDominiosButtonState(int buttonNumber) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -33,6 +34,18 @@ class SharedPreferencesHelper {
       dominios = 2;
     }
     return dominios;
+  }
+
+  //edad
+  static Future<String> getEdadText() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('edad') ?? '';
+  }
+
+  //genero - hom muj
+  static Future<bool> getGeneroButtonState() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool('preguntaGenero-botonhom') ?? false;
   }
 
   //alcohol - si no
@@ -90,6 +103,59 @@ Future<void> _launchURL(String url) async {
 // ignore: must_be_immutable
 class ResumenUI extends StatelessWidget {
   late AppLanguageProvider appLanguage;
+  Color _getColorRasgos(int? data) {
+    if (data == null) {
+      return Colors.white; // Color para cuando no hay datos
+    }
+
+    if (data >= 4) {
+      return Color(0xFFFFB35B);
+    } else {
+      return Colors.grey;
+    }
+  }
+
+  Color _getColorAlcohol(bool? data) {
+    if (data == true) {
+      return Color(0xFFFFB35B);
+    } else {
+      return Colors.grey;
+    }
+  }
+
+  Color _getColorDominios(int? data) {
+    if (data == null) {
+      return Colors.white; // Color para cuando no hay datos
+    }
+    if (data >= 1) {
+      return Color(0xFFFFB35B);
+    } else {
+      return Colors.grey;
+    }
+  }
+
+/*
+  Color _getColorTalla() {
+    return null;
+  }
+
+  Color _getColorPeso() {
+    return null;
+  }
+
+  Color _getColorDistancia() {
+    return null;
+  }
+*/
+  Color _getColorPerimetro(bool data) {
+    if (data) {
+      return Color(
+          0xFFFFB35B); // Color cuando el perímetro craneal es menor al de la tabla
+    } else {
+      return Colors
+          .grey; // Color cuando el perímetro craneal es mayor al de la tabla
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -503,16 +569,35 @@ class ResumenUI extends StatelessWidget {
                                   Positioned(
                                     left: 0,
                                     top: 0,
-                                    child: Container(
-                                      width: 145,
-                                      height: 74,
-                                      decoration: ShapeDecoration(
-                                        color: Color(0xFFFFB35B),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
+                                    child: FutureBuilder<bool>(
+                                      future: SharedPreferencesHelper
+                                          .getAlcoholButtonState(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            'Error: ${snapshot.error}',
+                                          );
+                                        } else {
+                                          // Llamamos a la función _getColorRasgos con el dato
+                                          Color containerColor =
+                                              _getColorAlcohol(snapshot.data);
+
+                                          return Container(
+                                            width: 145,
+                                            height: 74,
+                                            decoration: ShapeDecoration(
+                                              color: containerColor,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                   Positioned(
@@ -599,15 +684,35 @@ class ResumenUI extends StatelessWidget {
                                 Positioned(
                                   left: 0,
                                   top: 0,
-                                  child: Container(
-                                    width: 145,
-                                    height: 74,
-                                    decoration: ShapeDecoration(
-                                      color: Color(0xFFFFB35B),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
+                                  child: FutureBuilder<int>(
+                                    future:
+                                        SharedPreferencesHelper.getFiltrum(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.waiting) {
+                                        return CircularProgressIndicator();
+                                      } else if (snapshot.hasError) {
+                                        return Text(
+                                          'Error: ${snapshot.error}',
+                                        );
+                                      } else {
+                                        // Llamamos a la función _getColorRasgos con el dato
+                                        Color containerColor =
+                                            _getColorRasgos(snapshot.data);
+
+                                        return Container(
+                                          width: 145,
+                                          height: 74,
+                                          decoration: ShapeDecoration(
+                                            color: containerColor,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(20),
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
                                   ),
                                 ),
                                 Positioned(
@@ -676,16 +781,35 @@ class ResumenUI extends StatelessWidget {
                                   Positioned(
                                     left: 0,
                                     top: 0,
-                                    child: Container(
-                                      width: 145,
-                                      height: 74,
-                                      decoration: ShapeDecoration(
-                                        color: Color(0xFFFFB35B),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
+                                    child: FutureBuilder<int>(
+                                      future: SharedPreferencesHelper
+                                          .getLabioSuperior(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            'Error: ${snapshot.error}',
+                                          );
+                                        } else {
+                                          // Llamamos a la función _getColorRasgos con el dato
+                                          Color containerColor =
+                                              _getColorRasgos(snapshot.data);
+
+                                          return Container(
+                                            width: 145,
+                                            height: 74,
+                                            decoration: ShapeDecoration(
+                                              color: containerColor,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                   Positioned(
@@ -769,16 +893,35 @@ class ResumenUI extends StatelessWidget {
                                   Positioned(
                                     left: 0,
                                     top: 0,
-                                    child: Container(
-                                      width: 145,
-                                      height: 74,
-                                      decoration: ShapeDecoration(
-                                        color: Color(0xFFFFB35B),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
+                                    child: FutureBuilder<int>(
+                                      future:
+                                          SharedPreferencesHelper.dominios(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            'Error: ${snapshot.error}',
+                                          );
+                                        } else {
+                                          // Llamamos a la función _getColorRasgos con el dato
+                                          Color containerColor =
+                                              _getColorDominios(snapshot.data);
+
+                                          return Container(
+                                            width: 145,
+                                            height: 74,
+                                            decoration: ShapeDecoration(
+                                              color: containerColor,
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(20),
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                   Positioned(
@@ -851,16 +994,97 @@ class ResumenUI extends StatelessWidget {
                                   Positioned(
                                     left: 0,
                                     top: 0,
-                                    child: Container(
-                                      width: 145,
-                                      height: 74,
-                                      decoration: ShapeDecoration(
-                                        color: Color(0xFFFFB35B),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                      ),
+                                    child: FutureBuilder<String>(
+                                      future: SharedPreferencesHelper
+                                          .getPerimetroCranealText(),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return CircularProgressIndicator();
+                                        } else if (snapshot.hasError) {
+                                          return Text(
+                                            'Error: ${snapshot.error}',
+                                          );
+                                        } else {
+                                          Future<String> edad =
+                                              SharedPreferencesHelper
+                                                  .getEdadText();
+                                          Future<String> perimetro =
+                                              SharedPreferencesHelper
+                                                  .getPerimetroCranealText();
+                                          Future<bool> genero =
+                                              SharedPreferencesHelper
+                                                  .getGeneroButtonState();
+
+                                          return FutureBuilder<List<dynamic>>(
+                                            future: Future.wait(
+                                                [edad, perimetro, genero]),
+                                            builder: (context, snapshot) {
+                                              if (snapshot.connectionState ==
+                                                  ConnectionState.waiting) {
+                                                return CircularProgressIndicator();
+                                              } else if (snapshot.hasError) {
+                                                return Text(
+                                                  'Error: ${snapshot.error}',
+                                                );
+                                              } else {
+                                                String edadValue =
+                                                    snapshot.data![0];
+                                                String perimetroValue =
+                                                    snapshot.data![1];
+                                                bool generoValue =
+                                                    snapshot.data![2];
+                                                String gender = generoValue
+                                                    ? "male"
+                                                    : "female";
+
+                                                return FutureBuilder<bool>(
+                                                  future: diagnosticoHelper
+                                                      .verificarPerimetroCraneal(
+                                                          perimetroValue,
+                                                          edadValue,
+                                                          gender),
+                                                  builder: (context, snapshot) {
+                                                    if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      return CircularProgressIndicator();
+                                                    } else if (snapshot
+                                                        .hasError) {
+                                                      return Text(
+                                                        'Error: ${snapshot.error}',
+                                                      );
+                                                    } else {
+                                                      bool perimetroValido =
+                                                          snapshot.data!;
+                                                      Color containerColor =
+                                                          _getColorPerimetro(
+                                                              perimetroValido);
+
+                                                      return Container(
+                                                        width: 145,
+                                                        height: 74,
+                                                        decoration:
+                                                            ShapeDecoration(
+                                                          color: containerColor,
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }
+                                                  },
+                                                );
+                                              }
+                                            },
+                                          );
+                                        }
+                                      },
                                     ),
                                   ),
                                   Positioned(
