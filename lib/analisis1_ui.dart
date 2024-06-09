@@ -445,8 +445,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                       edad = int.tryParse(texto);
                       print(edad);
                       if (edadController.text.isNotEmpty &&
-                          (botonSi || botonNo) &&
-                          (botonmayor || botonmenor)) {
+                          (botonSi || botonNo)) {
                         if (edad! >= 24) {
                           _saveTextFieldsToPrefs();
                           Navigator.push(
