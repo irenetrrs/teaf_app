@@ -97,6 +97,9 @@ class DiagnosticoHelper {
     }
     // Redondear la edad al siguiente más cercano por arriba que sea .5
     num roundedAge = roundToNearestHalf(userAge);
+    if (roundedAge >= 240.5) {
+      roundedAge = 240;
+    }
     //print('Edad getHeight $roundedAge');
     List<Map<String, dynamic>> selectedData =
         (gender.toLowerCase() == 'male') ? maleHeightData : femaleHeightData;
@@ -121,7 +124,10 @@ class DiagnosticoHelper {
     }
     // Redondear la edad al siguiente más cercano por arriba que sea .5
     num roundedAge = roundToNearestHalf(userAge);
-    //print('Edad getWeight $roundedAge');
+    print('Edad getWeight $roundedAge');
+    if (roundedAge >= 240.5) {
+      roundedAge = 240;
+    }
     List<Map<String, dynamic>> selectedData =
         (gender.toLowerCase() == 'male') ? maleWeightData : femaleWeightData;
     //print(selectedData);
@@ -395,6 +401,7 @@ class DiagnosticoHelper {
 // Obtener el peso según la edad y el género del paciente
   Future<double?> obtenerPesoCorrespondiente(
       String edad, String generoPaciente) async {
+    print(edad);
     String? pesoCorrespondienteString =
         getWeightFromAgeAndGender(edad, generoPaciente);
     print("peso tabla: $pesoCorrespondienteString");
