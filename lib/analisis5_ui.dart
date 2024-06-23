@@ -6,7 +6,7 @@ import 'solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 
 class Analisis5UI extends StatefulWidget {
   @override
@@ -498,8 +498,8 @@ class _Analisis5UIState extends State<Analisis5UI> {
                   },
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Color(0xFF001254)),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        WidgetStateProperty.all(Color(0xFF001254)),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         side: BorderSide(color: Colors.white, width: 2.0),
                         borderRadius: BorderRadius.circular(20.0),

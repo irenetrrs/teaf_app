@@ -149,15 +149,15 @@ class _SignUIState extends State<SignUI> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.resolveWith<Color>(
-                              (Set<MaterialState> states) {
+                                WidgetStateProperty.resolveWith<Color>(
+                              (Set<WidgetState> states) {
                                 // Si showLoginFields es true, el botón está pulsado, de lo contrario, está desactivado
                                 return showLoginFields
                                     ? Color(0xFF262f36)
                                     : Color(0xCC5C6EAD);
                               },
                             ),
-                            shape: MaterialStateProperty.all<
+                            shape: WidgetStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -183,15 +183,15 @@ class _SignUIState extends State<SignUI> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStateProperty.resolveWith<Color>(
-                              (Set<MaterialState> states) {
+                                WidgetStateProperty.resolveWith<Color>(
+                              (Set<WidgetState> states) {
                                 // Si showLoginFields es false, el botón está pulsado, de lo contrario, está desactivado
                                 return !showLoginFields
                                     ? Color(0xFF262f36)
                                     : Color.fromARGB(153, 38, 47, 54);
                               },
                             ),
-                            shape: MaterialStateProperty.all<
+                            shape: WidgetStateProperty.all<
                                 RoundedRectangleBorder>(
                               RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20.0),
@@ -308,12 +308,12 @@ class _SignUIState extends State<SignUI> {
                         }
                       },
                       style: ButtonStyle(
-                        minimumSize: MaterialStateProperty.all(
+                        minimumSize: WidgetStateProperty.all(
                             Size(double.infinity, 50)),
                         backgroundColor:
-                            MaterialStateProperty.all(Color(0xFF262f36)),
+                            WidgetStateProperty.all(Color(0xFF262f36)),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),

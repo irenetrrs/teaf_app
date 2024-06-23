@@ -7,7 +7,7 @@ import 'analisis5_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 
 
 // ignore: must_be_immutable
@@ -287,8 +287,8 @@ class _SolucionUIState extends State<SolucionUI> {
                   //generatePDF(context);
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       side: BorderSide(color: Colors.white, width: 2.0),
                       borderRadius: BorderRadius.circular(20.0),
@@ -324,8 +324,8 @@ class _SolucionUIState extends State<SolucionUI> {
                   );
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       side: BorderSide(color: Colors.white, width: 2.0),
                       borderRadius: BorderRadius.circular(20.0),
@@ -388,8 +388,8 @@ class _SolucionUIState extends State<SolucionUI> {
                   // Manejar la acción de Atrás
                 },
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF262f36)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                  backgroundColor: WidgetStateProperty.all(Color(0xFF262f36)),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       side: BorderSide(color: Colors.white, width: 2.0),
                       borderRadius: BorderRadius.circular(20.0),

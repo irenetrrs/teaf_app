@@ -6,7 +6,7 @@ import 'package:teaf_app/solucion_ui.dart';
 import 'welcome_ui.dart';
 import 'sign_ui.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'DiagnosticoHelper.dart';
+import 'diagnostico_helper.dart';
 
 class SharedPreferencesHelper {
   //dominios - 0 1 2
@@ -207,9 +207,9 @@ class ResumenUI extends StatelessWidget {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Colors.white),
+                            WidgetStateProperty.all(Colors.white),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
