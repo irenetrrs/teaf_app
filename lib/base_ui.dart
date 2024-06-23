@@ -105,7 +105,9 @@ class BaseUI extends StatelessWidget {
                               },
                               style: ButtonStyle(
                                 backgroundColor: WidgetStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(
                                     Color(0xCC5C6EAD)),
+                                shape: WidgetStateProperty.all<
                                 shape: WidgetStateProperty.all<
                                     RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
