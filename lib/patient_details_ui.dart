@@ -266,7 +266,6 @@ class PatientDetailsScreen extends StatelessWidget {
     int? dominios = prefs.getInt('${patientName}_dominios');
     bool? anomalias = prefs.getBool('${patientName}_anomalias');
     bool? recurrente = prefs.getBool('${patientName}_recurrente');
-    bool? malformaciones = prefs.getBool('${patientName}_malformaciones');
     // Build a string with the patient details
     return '''
     ${AppLocalizations.of(context)!.translate('name')}: $patientName
