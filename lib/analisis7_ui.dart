@@ -323,7 +323,7 @@ class _Analisis6UIState extends State<Analisis7UI> {
                     children: [
                       SizedBox(
                         width: 303,
-                        height: 103.02,
+                        height: 200,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

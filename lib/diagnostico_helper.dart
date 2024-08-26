@@ -358,8 +358,7 @@ class DiagnosticoHelper {
     print(perimetroCranealPaciente);
     print(perimetroCranealTabla);
 
-    // ignore: use_build_context_synchronously
-    return realizarDiagnostico(
+    String diagnostico = realizarDiagnostico(
         context,
         adoptado,
         tiempoAcogida,
@@ -379,6 +378,8 @@ class DiagnosticoHelper {
         distanciaPalpebralTabla,
         perimetroCranealTabla,
         malformaciones);
+    
+    return diagnostico;
   }
 
 // Convertir el valor booleano a una cadena 'male' o 'female'
@@ -480,13 +481,13 @@ class DiagnosticoHelper {
                     percentiles >= 1)) {
               return localizations.translate('SAF')!;
             } else {
-              return 'pFAS';
+              return localizations.translate('pFAS')!;
             }
           } else {
             if (malformaciones) {
               return 'ARBD';
             } else {
-              return 'NO FASD';
+              return localizations.translate('NOTEAF')!;
             }
           }
         } else {
@@ -494,7 +495,7 @@ class DiagnosticoHelper {
             if (malformaciones) {
               return 'ARBD';
             } else {
-              return 'NO FASD';
+              return localizations.translate('NOTEAF')!;
             }
           } else {
             return 'ARND';
@@ -511,15 +512,15 @@ class DiagnosticoHelper {
                     tallaPaciente > tallaTabla) &&
                 (perimetroCranealPaciente > perimetroCranealTabla ||
                     percentiles < 1)) {
-              return 'NO FASD';
+              return localizations.translate('NOTEAF')!;
             } else {
-              return 'pFAS';
+              return localizations.translate('pFAS')!;
             }
           } else {
-            return 'NO FASD';
+            return localizations.translate('NOTEAF')!;
           }
         } else {
-          return 'NO FASD';
+          return localizations.translate('NOTEAF')!;
         }
       }
     }

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'welcome_ui.dart';
@@ -5,12 +6,19 @@ import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-  Future<void> _launchURL(String url) async {
-    Uri url0 = Uri.parse(url);
-    if (!await launchUrl(url0)) {
-      throw 'Could not launch $url0';
-    }
+Future<void> _launchURL(String url) async {
+  Uri url0 = Uri.parse(url);
+  if (!await launchUrl(url0)) {
+    throw 'Could not launch $url0';
   }
+}
+
+// Dividiendo el texto en partes
+const String part1 =
+    'Esta App es una herramienta para ayudar a los profesionales sanitarios a realizar la valoración de los criterios diagnósticos del Trastorno del Espectro Alcohólico Fetal (TEAF) de acuerdo con las guías internacionales (';
+const String part2 = 'Hoyme, 2016';
+const String part3 =
+    ').\n\nEsta App está realizada por VisualTEAF y el Grup de Recerca Infància i Entorn (GRIE) del Hospital Clínic-Maternitat de Barcelona, ICGON, FCRB, IDIBAPS, BCNatal, Ricors SAMID (RD21/0012/0017), ISCIII (PI19/01853 y PI23/01220), AGAUR (2021-SGR-01290) e Irene Torres Gámez como su TFG en el marco de los programas ApS 2023/24 de la UC3M.\n\n© Visual TEAF 2024';
 
 // ignore: must_be_immutable
 class InfoUI extends StatelessWidget {
@@ -89,48 +97,58 @@ class InfoUI extends StatelessWidget {
                   ),
                   child: Column(
                     children: [
-                      Text(
-                        AppLocalizations.of(context)!.translate('introText')!,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
+                      RichText(
+                        text: TextSpan(
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: 'Inter',
+                            fontWeight: FontWeight.w600,
+                          ),
+                          children: [
+                            TextSpan(text: part1),
+                            TextSpan(
+                              text: part2,
+                              style: TextStyle(
+                                color: const Color.fromARGB(255, 4, 60, 105),
+                                decoration: TextDecoration.underline,
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  _launchURL(
+                                      'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4960726/');
+                                },
+                            ),
+                            TextSpan(text: part3),
+                          ],
                         ),
                         textAlign: TextAlign.justify,
                       ),
                       Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.spaceEvenly, // Espaciado uniforme
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           GestureDetector(
                             onTap: () {
-                              // Aquí colocas la lógica para abrir el enlace
-                              // Por ejemplo, puedes usar la función launch de 'url_launcher' package
-                              // Asegúrate de haber importado 'package:url_launcher/url_launcher.dart'
                               _launchURL('https://www.sanidad.gob.es/');
                             },
                             child: Image.asset(
-                              'img/ministerio.png', // Reemplaza con la ruta de tu primera imagen
-                              width: 150, // Ancho de la primera imagen
-                              height: 150, // Alto de la primera imagen
+                              'img/ministerio.png',
+                              width: 150,
+                              height: 150,
                             ),
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Aquí colocas la lógica para abrir el enlace
-                              // Por ejemplo, puedes usar la función launch de 'url_launcher' package
-                              // Asegúrate de haber importado 'package:url_launcher/url_launcher.dart'
                               _launchURL('https://www.uc3m.es/');
                             },
                             child: Image.asset(
-                              'img/uc3m.png', // Reemplaza con la ruta de tu segunda imagen
-                              width: 150, // Ancho de la segunda imagen
-                              height: 150, // Alto de la segunda imagen
+                              'img/uc3m.png',
+                              width: 150,
+                              height: 150,
                             ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),

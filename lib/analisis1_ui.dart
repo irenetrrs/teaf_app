@@ -37,12 +37,6 @@ class _Analisis1UIState extends State<Analisis1UI> {
     _loadAdoptadoSelectionFromPrefs();
     _loadTiempoAcogidaSelectionFromPrefs();
     _loadTextFieldsFromPrefs();
-    setState(() {
-      botonSi = false;
-      botonNo = false;
-      botonmenor = false;
-      botonmayor = false;
-    });
   }
 
   @override
@@ -439,14 +433,20 @@ class _Analisis1UIState extends State<Analisis1UI> {
                   height: 60,
                   child: ElevatedButton(
                     onPressed: () {
-                      int? edad;
                       String texto = edadController.text;
+                      int? edad = int.tryParse(
+                          texto); // Intenta convertir el texto a un entero
 
-                      edad = int.tryParse(texto);
-                      print(edad);
-                      if (edadController.text.isNotEmpty &&
-                          (botonSi || botonNo)) {
-                        if (edad! >= 24) {
+                      bool camposCompletos = edadController.text.isNotEmpty &&
+                          (botonSi || botonNo);
+
+                      if (botonSi) {
+                        camposCompletos =
+                            camposCompletos && (botonmayor || botonmenor);
+                      }
+                      if (edad != null && camposCompletos) {
+                        // Si la conversión fue exitosa y se cumplen las condiciones
+                        if (edad >= 24) {
                           _saveTextFieldsToPrefs();
                           Navigator.push(
                             context,
@@ -455,6 +455,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                             ),
                           );
                         } else {
+                          // Manejo si la edad es menor que 24
                           Fluttertoast.showToast(
                             msg: AppLocalizations.of(context)!
                                 .translate('higher')!,
@@ -467,6 +468,7 @@ class _Analisis1UIState extends State<Analisis1UI> {
                           );
                         }
                       } else {
+                        // Manejo si la conversión falló o no se cumplen las condiciones
                         Fluttertoast.showToast(
                           msg: AppLocalizations.of(context)!
                               .translate('please')!,
@@ -508,60 +510,72 @@ class _Analisis1UIState extends State<Analisis1UI> {
     );
   }
 
+  // Método para guardar el campo de edad en las preferencias
   _saveTextFieldsToPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(edadText!, edadController.text);
+    String texto = edadController.text;
+    if (texto.isNotEmpty) {
+      await prefs.setString(edadText!, texto);
+    } else {
+      // Manejo si el texto está vacío
+      print('El texto de edad está vacío');
+    }
   }
 
+// Método para cargar el campo de edad desde las preferencias
   _loadTextFieldsFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    setState(() {
-      edadController.text = prefs.getString(edadText!) ?? '';
-    });
-  }
-
-  _saveAdoptadoSelectionToPrefs(bool botonSi) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('$adoptado-botonSi', botonSi);
-  }
-
-  _loadAdoptadoSelectionFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? savedAdoptadoSelection = prefs.getBool('$adoptado-botonSi');
-
-    if (savedAdoptadoSelection != null) {
+    String? savedEdad = prefs.getString(edadText!);
+    if (savedEdad != null) {
       setState(() {
-        botonSi = savedAdoptadoSelection;
-        botonNo = !savedAdoptadoSelection;
+        edadController.text = savedEdad;
       });
     } else {
+      // Manejo si no se encuentra el valor en las preferencias
       setState(() {
-        botonSi = false;
-        botonNo = false;
+        edadController.text =
+            ''; // Asignar un valor por defecto o vaciar el campo
       });
     }
   }
 
-  _saveTiempoAcogidaSelectionToPrefs(bool botonmenor) async {
+// Método para cargar la selección de 'adoptado' desde las preferencias
+  _loadAdoptadoSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool('$tiempoacogida-botonmenor', botonmenor);
+    bool? savedAdoptadoSelection = prefs.getBool('$adoptado-botonSi');
+
+    setState(() {
+      botonSi = savedAdoptadoSelection ?? false;
+      botonNo =
+          savedAdoptadoSelection != null ? !savedAdoptadoSelection : false;
+      isAdopted =
+          botonSi; // Actualizar isAdopted basado en la selección guardada
+    });
   }
 
+  // Método para guardar la selección de 'adoptado' en las preferencias
+  _saveAdoptadoSelectionToPrefs(bool botonSi) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('$adoptado-botonSi', botonSi);
+  }
+
+  // Método para cargar la selección de 'tiempo de acogida' desde las preferencias
   _loadTiempoAcogidaSelectionFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? savedTiempoAcogidaSelection =
         prefs.getBool('$tiempoacogida-botonmenor');
 
-    if (savedTiempoAcogidaSelection != null) {
-      setState(() {
-        botonmenor = savedTiempoAcogidaSelection;
-        botonmayor = !savedTiempoAcogidaSelection;
-      });
-    } else {
-      setState(() {
-        botonmenor = false;
-        botonmayor = false;
-      });
-    }
+    setState(() {
+      botonmenor = savedTiempoAcogidaSelection ?? false;
+      botonmayor = savedTiempoAcogidaSelection != null
+          ? !savedTiempoAcogidaSelection
+          : false;
+    });
+  }
+
+  // Método para guardar la selección de 'tiempo de acogida' en las preferencias
+  _saveTiempoAcogidaSelectionToPrefs(bool botonmenor) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('$tiempoacogida-botonmenor', botonmenor);
   }
 }
