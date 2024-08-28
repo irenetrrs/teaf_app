@@ -36,6 +36,7 @@ class _SolucionUIState extends State<SolucionUI> {
 
   @override
   Widget build(BuildContext context) {
+    String? diagnosticoResult;
     DiagnosticoHelper diagnosticoHelper = DiagnosticoHelper();
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
@@ -140,18 +141,19 @@ class _SolucionUIState extends State<SolucionUI> {
                             if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else {
+                              diagnosticoResult = snapshot.data;
                               // Definir circleColor y cambiarlo según el resultado del diagnóstico
                               Color circleColor = Colors.transparent;
                               Color textColor = Colors.transparent;
                               double fontSize =
                                   14.0; // Tamaño de letra predeterminado
 
-                              if (snapshot.data == AppLocalizations.of(context)!.translate(
+                              if (diagnosticoResult == AppLocalizations.of(context)!.translate(
                                             'incomplete')!) {
                                 circleColor = Colors.orange;
                                 textColor = Color(0xFF262f36);
                                 fontSize = 28.0;
-                              } else if (snapshot.data == AppLocalizations.of(context)!.translate(
+                              } else if (diagnosticoResult == AppLocalizations.of(context)!.translate(
                                             'error')!) {
                                 circleColor = Colors.black;
                                 textColor = Colors.white;
@@ -317,7 +319,7 @@ class _SolucionUIState extends State<SolucionUI> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ResumenUI(),
+                        builder: (context) => ResumenUI(diagnosticoResult: diagnosticoResult),
                       ),
                     );
                   },

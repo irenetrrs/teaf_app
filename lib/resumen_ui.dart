@@ -102,6 +102,10 @@ Future<void> _launchURL(String url) async {
 
 // ignore: must_be_immutable
 class ResumenUI extends StatelessWidget {
+  final String? diagnosticoResult;
+
+  // Constructor que acepta el diagnóstico como parámetro
+  ResumenUI({required this.diagnosticoResult});
   late AppLanguageProvider appLanguage;
   Color _getColorRasgos(int? data) {
     if (data == null) {
@@ -270,44 +274,31 @@ class ResumenUI extends StatelessWidget {
               width: 250,
               height: 60,
               margin: EdgeInsets.symmetric(horizontal: 10),
-              child: FutureBuilder<String>(
-                future: diagnosticoHelper.diagnostico(context),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    // Si el Future está en espera, muestra un indicador de carga
-                    return CircularProgressIndicator();
-                  } else {
-                    // Si la llamada al Future es exitosa, muestra el texto resultante
-                    // del diagnóstico sin cambiar la forma del botón
-                    return ElevatedButton(
-                      onPressed: () {
-                        _launchURL('https://cursoteaf.com/');
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(
-                            Color.fromARGB(255, 182, 223, 255)),
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: Color(0xFF262f36), width: 2.0),
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                      ),
-                      child: Text(
-                        snapshot.data ??
-                            AppLocalizations.of(context)!
-                                .translate('diagnosis_not_available')!,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontFamily: 'Inter',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    );
-                  }
+              child: ElevatedButton(
+                onPressed: () {
+                  _launchURL('https://cursoteaf.com/');
                 },
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all(
+                      Color.fromARGB(255, 182, 223, 255)),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      side: BorderSide(color: Color(0xFF262f36), width: 2.0),
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                ),
+                child: Text(
+                  diagnosticoResult ??
+                      AppLocalizations.of(context)!
+                          .translate('diagnosis_not_available')!,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 25,
+                    fontFamily: 'Inter',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ),
             ),
             SizedBox(
