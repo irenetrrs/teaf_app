@@ -13,24 +13,21 @@ Future<void> _launchURL(String url) async {
   }
 }
 
-// Dividiendo el texto en partes
-const String part1 =
-    'Esta App es una herramienta para ayudar a los profesionales sanitarios a realizar la valoración de los criterios diagnósticos del Trastorno del Espectro Alcohólico Fetal (TEAF) de acuerdo con las guías internacionales (';
-const String part2 = 'Hoyme, 2016';
-const String part3 =
-    ').\n\nEsta App está realizada por VisualTEAF y el Grup de Recerca Infància i Entorn (GRIE) del Hospital Clínic-Maternitat de Barcelona, ICGON, FCRB, IDIBAPS, BCNatal, Ricors SAMID (RD21/0012/0017), ISCIII (PI19/01853 y PI23/01220), AGAUR (2021-SGR-01290) e Irene Torres Gámez como su TFG en el marco de los programas ApS 2023/24 de la UC3M.\n\n© Visual TEAF 2024';
-
 // ignore: must_be_immutable
 class InfoUI extends StatelessWidget {
-  late AppLanguageProvider appLanguage;
   @override
   Widget build(BuildContext context) {
+    // Dividiendo el texto en partes
+    final String part1 = AppLocalizations.of(context)!.translate('introText1')!;
+    final String part2 = AppLocalizations.of(context)!.translate('introText2')!;
+    final String part3 = AppLocalizations.of(context)!.translate('introText3')!;
+
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 53, 133, 182),
       body: SafeArea(
         child: Stack(
           children: [
-            //Logo
+            // Logo
             Positioned(
               top: 20,
               left: 0,
@@ -178,8 +175,9 @@ class InfoUI extends StatelessWidget {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            WidgetStateProperty.all(Color(0xFFDFDFDF)),
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                            MaterialStateProperty.all(Color(0xFFDFDFDF)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
@@ -202,7 +200,7 @@ class InfoUI extends StatelessWidget {
                     margin: EdgeInsets.symmetric(horizontal: 10),
                     child: ElevatedButton(
                       onPressed: () {
-                        // Manejar la acción de Atrás
+                        // Manejar la acción de Siguiente
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -212,8 +210,9 @@ class InfoUI extends StatelessWidget {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            WidgetStateProperty.all(Color(0xFFDFDFDF)),
-                        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                            MaterialStateProperty.all(Color(0xFFDFDFDF)),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
