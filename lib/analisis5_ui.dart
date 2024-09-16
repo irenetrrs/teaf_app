@@ -496,14 +496,23 @@ class _Analisis5UIState extends State<Analisis5UI> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            // Aquí colocas la lógica para abrir el enlace
-                            // Por ejemplo, puedes usar la función launch de 'url_launcher' package
-                            // Asegúrate de haber importado 'package:url_launcher/url_launcher.dart'
                             _launchURL('https://fasdpn.org/');
                           },
-                          child: Image.asset(
-                            'img/creditos2.png',
-                            width: 350,
+                          child: Container(
+                            padding: EdgeInsets.all(
+                                10), // Espacio alrededor de la imagen
+                            decoration: BoxDecoration(
+                              color: Color.fromARGB(136, 204, 204, 204), // Fondo de color (puedes cambiarlo)
+                              borderRadius: BorderRadius.circular(
+                                  10), // Esquinas redondeadas
+                              border: Border.all(
+                                  color: Colors.black,
+                                  width: 2), // Borde blanco (puedes cambiarlo)
+                            ),
+                            child: Image.asset(
+                              'img/creditos2.png',
+                              width: 350,
+                            ),
                           ),
                         ),
                         SizedBox(

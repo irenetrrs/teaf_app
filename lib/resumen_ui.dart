@@ -1331,6 +1331,18 @@ class ResumenUI extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.translate('explanation')!,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
                       height: 20,
                     ),
                   ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'app_language_provider.dart';
+import 'app_localizations.dart';
 
 class MyDialog extends StatefulWidget {
   @override
@@ -12,10 +14,11 @@ class _MyDialogState extends State<MyDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Introduce un nombre'),
+      title: Text(AppLocalizations.of(context)!.translate('introduce')!),
       content: TextField(
         controller: _textEditingController,
-        decoration: InputDecoration(hintText: 'Nombre'),
+        decoration: InputDecoration(
+            hintText: AppLocalizations.of(context)!.translate('name')!),
       ),
       actions: <Widget>[
         TextButton(

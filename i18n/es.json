@@ -96,5 +96,6 @@
     "sure": "¿Está seguro que quiere eliminar al paciente?",
     "pdf_done": "Diagnóstico realizado por Visual TEAF",
     "pdf_header": "DIAGNÓSTICO DEL PACIENTE",
-    "incomplete": "Incompleto"
+    "incomplete": "Incompleto",
+    "explanation": "Naranja = indicio de TEAF"
 }
