@@ -109,7 +109,7 @@ class ResumenUI extends StatelessWidget {
   late AppLanguageProvider appLanguage;
   Color _getColorRasgos(int? data) {
     if (data == null) {
-      return Colors.white; // Color para cuando no hay datos
+      return Colors.grey; // Color para cuando no hay datos
     }
 
     if (data >= 4) {
@@ -129,7 +129,7 @@ class ResumenUI extends StatelessWidget {
 
   Color _getColorDominios(int? data) {
     if (data == null) {
-      return Colors.white; // Color para cuando no hay datos
+      return Colors.grey; // Color para cuando no hay datos
     }
     if (data >= 1) {
       return Color(0xFFFFB35B);
@@ -140,7 +140,7 @@ class ResumenUI extends StatelessWidget {
 
   Color _getColorComparacion(double valorpaciente, double? tabla) {
     if (tabla == null) {
-      return Colors.white; // Color cuando no hay valor correspondiente
+      return Colors.grey; // Color cuando no hay valor correspondiente
     }
 
     if (valorpaciente <= tabla) {
@@ -153,7 +153,7 @@ class ResumenUI extends StatelessWidget {
   Color _getColorDistancia(
       double distanciaGuardada, double? distanciaCorrespondiente) {
     if (distanciaCorrespondiente == null) {
-      return Colors.white; // Color cuando no hay distancia correspondiente
+      return Colors.grey; // Color cuando no hay distancia correspondiente
     }
 
     if (distanciaGuardada <= distanciaCorrespondiente) {
@@ -310,7 +310,19 @@ class ResumenUI extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 20,
+                      height: 10,
+                    ),
+                    Text(
+                      AppLocalizations.of(context)!.translate('explanation')!,
+                      style: TextStyle(
+                        color: const Color.fromARGB(186, 255, 255, 255),
+                        fontSize: 15,
+                        fontFamily: 'Inter',
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     SizedBox(
                       width: 310,
@@ -1330,18 +1342,7 @@ class ResumenUI extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      AppLocalizations.of(context)!.translate('explanation')!,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    
                     SizedBox(
                       height: 20,
                     ),
