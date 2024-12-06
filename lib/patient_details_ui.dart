@@ -281,8 +281,8 @@ class PatientDetailsScreen extends StatelessWidget {
     ${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distancia cm
     ${AppLocalizations.of(context)!.translate('filtrum')}: $filtrum
     ${AppLocalizations.of(context)!.translate('upper_lip')}: $labio
-    ${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias != null ? (anomalias ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('no')) : ''}
-    ${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente != null ? (recurrente ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('no')) : ''}
+    ${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias != null ? (anomalias ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('na')) : ''}
+    ${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente != null ? (recurrente ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('na')) : ''}
   ''';
   }
 

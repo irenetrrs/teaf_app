@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'app_language_provider.dart';
 import 'app_localizations.dart';
 
 class MyDialog extends StatefulWidget {
