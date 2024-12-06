@@ -149,8 +149,8 @@ class SharedPreferencesHelper {
         '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText cm\n'
         '${AppLocalizations.of(context)!.translate('filtrum')}: $imagenseleccionadafiltrum \n'
         '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n'
-        '${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
-        '${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n'
+        '${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('na')}'}\n'
+        '${AppLocalizations.of(context)!.translate('recurrent_fever')}: ${recurrente ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('na')}'}\n'
         '${AppLocalizations.of(context)!.translate('major_malformations')}: ${malformaciones ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('no')}'}\n';
 
     // Muestra el diálogo con el mensaje

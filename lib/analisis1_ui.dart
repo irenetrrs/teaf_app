@@ -182,8 +182,8 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                     );
                                   },
                                   child: Container(
-                                    width: 20,
-                                    height: 20,
+                                    width: 22,
+                                    height: 22,
                                     decoration: BoxDecoration(
                                       image: DecorationImage(
                                         image: AssetImage('img/pregunta.png'),

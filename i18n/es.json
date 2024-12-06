@@ -98,7 +98,9 @@
     "pdf_header": "DIAGNÓSTICO DEL PACIENTE",
     "incomplete": "Incompleto",
     "explanation": "Naranja = indicio de TEAF",
+    "introduce": "Introduce un nombre",
+    "na": "N/A",
     "guide": "Guía del usuario",
-    "instructions": "Consejos de uso: \\n1. Se incluyen algunos enlaces a textos o videos explicativos: esquema diagnóstico del TEAF de Hoyme y símbolos “?” al lado de algunos apartados\\n2. Las cifras de los valores de las medidas físicas no admiten decimales\\n3. La página donde se muestran las imágenes de labio y filtrum incluye un enlace\\n4. En la página “Diagnóstico”:\\na. El botón “Editar” remite al principio de la evaluación en curso para revisar los datos introducidos\\nb. El botón “Resumen”\\nc. El botón “Inicia” remite a iniciar una nueva evaluación\\n5. En la página “Resumen”:\\na. El botón con un disquete deriva a guardar el paciente (de forma anónima)\\nb. El botón con una flecha deriva a enviar el cuadro resumen al e-mail\\nc. El botón con una papelera elimina los datos introducidos y lleva al principio de la App"
+    "instructions": "Consejos de uso: \n1. Se incluyen algunos enlaces a textos o videos explicativos: esquema diagnóstico del TEAF de Hoyme y símbolos “?” al lado de algunos apartados\n2. Las cifras de los valores de las medidas físicas no admiten decimales\n3. La página donde se muestran las imágenes de labio y filtrum incluye un enlace\n4. En la página “Diagnóstico”:\n\ta. El botón “Editar” remite al principio de la evaluación en curso para revisar los datos introducidos\n\tb. El botón “Resumen” muestra todos los datos registrados\n\tc. El botón “Inicia” remite a iniciar una nueva evaluación\n5. En la página “Resumen”:\n\ta. El botón con un disquete deriva a guardar el paciente (de forma anónima)\n\tb. El botón con una flecha deriva a enviar el cuadro resumen al e-mail\n\tc. El botón con una papelera elimina los datos introducidos y lleva al principio de la App."
 }
       

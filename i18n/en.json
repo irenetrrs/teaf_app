@@ -99,6 +99,8 @@
     "incomplete": "Incomplete",
     "explanation": "Orange = symptom of FASD",
     "introduce": "Enter a name",
+    "na": "N/A",
     "guide": "User Guide",
-    "instructions": "Consejos de uso: \\n1. Se incluyen algunos enlaces a textos o videos explicativos: esquema diagnóstico del TEAF de Hoyme y símbolos “?” al lado de algunos apartados\\n2. Las cifras de los valores de las medidas físicas no admiten decimales\\n3. La página donde se muestran las imágenes de labio y filtrum incluye un enlace\\n4. En la página “Diagnóstico”:\\na. El botón “Editar” remite al principio de la evaluación en curso para revisar los datos introducidos\\nb. El botón “Resumen”\\nc. El botón “Inicia” remite a iniciar una nueva evaluación\\n5. En la página “Resumen”:\\na. El botón con un disquete deriva a guardar el paciente (de forma anónima)\\nb. El botón con una flecha deriva a enviar el cuadro resumen al e-mail\\nc. El botón con una papelera elimina los datos introducidos y lleva al principio de la App"
-}
+    "instructions": "User guide: \n1. Some links to explanatory texts or videos are included: FASD diagnosis algorithm from Hoyme and symbols “?” beside some titles or paragraphs\n2. Figures of values of physical measurements don't admit decimals\n3. The page where the images of lips and filtrum are showed includes an external link\n4. In the page “Diagnosis”:\n\ta. The button “Edit” refers to the beginning of the assessment in progress for reviewing the introduced data\n\tb. The button “Summary” includes all registered data\n\tc. The button “Home” refers to start a new Evaluation\n5. In the page “Summary”:\n\ta. The button with a floppy disk refers to keep the patient (anonimously)\n\tb. The button with an arrow refers to send the summary text to the e-mail\n\tc. The button with a basket eliminates introduced data and refers to the home page of the App"
+      }
+      

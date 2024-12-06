@@ -2,7 +2,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:teaf_app/inicio_ui.dart';
 import 'welcome_ui.dart';
-import 'app_language_provider.dart';
 import 'app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -175,9 +174,9 @@ class InfoUI extends StatelessWidget {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Color(0xFFDFDFDF)),
+                            WidgetStateProperty.all(Color(0xFFDFDFDF)),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),
@@ -210,9 +209,9 @@ class InfoUI extends StatelessWidget {
                       },
                       style: ButtonStyle(
                         backgroundColor:
-                            MaterialStateProperty.all(Color(0xFFDFDFDF)),
+                            WidgetStateProperty.all(Color(0xFFDFDFDF)),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0),
                           ),

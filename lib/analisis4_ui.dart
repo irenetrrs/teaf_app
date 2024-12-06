@@ -246,8 +246,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                 );
                               },
                               child: Container(
-                                width: 20,
-                                height: 20,
+                                width: 22,
+                                height: 22,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
                                     image: AssetImage('img/pregunta.png'),
@@ -370,8 +370,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                       );
                                     },
                                     child: Container(
-                                      width: 20,
-                                      height: 20,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage('img/pregunta.png'),
@@ -498,8 +498,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                       );
                                     },
                                     child: Container(
-                                      width: 20,
-                                      height: 20,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage('img/pregunta.png'),
@@ -627,8 +627,8 @@ class _Analisis4UIState extends State<Analisis4UI> {
                                       );
                                     },
                                     child: Container(
-                                      width: 20,
-                                      height: 20,
+                                      width: 22,
+                                      height: 22,
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage('img/pregunta.png'),
