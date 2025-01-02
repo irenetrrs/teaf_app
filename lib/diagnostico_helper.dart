@@ -522,7 +522,7 @@ class DiagnosticoHelper {
   }
 
 /////////////Para guardar la info del paciente
-  Future<void> savePatient(BuildContext context, String name) async {
+  Future<void> savePatient(BuildContext context, String name, String diagnosticoResult) async {
     // Obtener las respuestas del usuario
     String edad = await getEdadText();
     bool adoptado = await getAdoptadoButtonState();
@@ -542,11 +542,6 @@ class DiagnosticoHelper {
     bool recurrente = await getRecurrente();
     bool malformaciones = await getMalformaciones();
     // Almacenar el contexto en una variable local
-    final BuildContext localContext = context;
-
-    // Ejecutar la operación asíncrona
-    // ignore: use_build_context_synchronously
-    String resultadoDiagnostico = await diagnostico(localContext);
 
     double pesoPaciente = double.tryParse(peso) ?? -1;
     double tallaPaciente = double.tryParse(talla) ?? -1;
@@ -572,7 +567,7 @@ class DiagnosticoHelper {
           patientList); // Guardar la lista de pacientes actualizada
 
       // Guardar los detalles del paciente usando el nombre como clave
-      await prefs.setString('${name}_diagnostico', resultadoDiagnostico);
+      await prefs.setString('${name}_diagnostico', diagnosticoResult);
       await prefs.setString('${name}_age', edad);
       await prefs.setBool('${name}_gender', genero);
       await prefs.setBool('${name}_adoptado', adoptado);

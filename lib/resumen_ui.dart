@@ -1369,7 +1369,7 @@ class ResumenUI extends StatelessWidget {
                         // Aquí puedes hacer algo con el valor devuelto, como guardarlo en algún lugar
                         print('El nombre introducido es: $value');
                         // Navegar a la página PatientDetails
-                        diagnosticoHelper.savePatient(context, value);
+                        diagnosticoHelper.savePatient(context, value, diagnosticoResult!);
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) =>
