@@ -146,7 +146,7 @@ class SharedPreferencesHelper {
         '${AppLocalizations.of(context)!.translate('weight')}: $pesoText kg\n'
         '${AppLocalizations.of(context)!.translate('height')}: $tallaText cm\n'
         '${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetroCranealText cm\n'
-        '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText cm\n'
+        '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText mm\n'
         '${AppLocalizations.of(context)!.translate('filtrum')}: $imagenseleccionadafiltrum \n'
         '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n'
         '${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('na')}'}\n'

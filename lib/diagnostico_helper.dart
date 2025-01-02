@@ -378,7 +378,7 @@ class DiagnosticoHelper {
         distanciaPalpebralTabla,
         perimetroCranealTabla,
         malformaciones);
-    
+
     return diagnostico;
   }
 
@@ -470,58 +470,53 @@ class DiagnosticoHelper {
   ) {
     final AppLocalizations localizations = AppLocalizations.of(context)!;
 
-    if (adoptado && tiempoAcogida) {
-      return 'Incomplete';
-    } else {
-      if (alcohol) {
-        if (rasgos >= 2) {
-          if (dominios >= 1) {
-            if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
-                (perimetroCranealPaciente <= perimetroCranealTabla ||
-                    percentiles >= 1)) {
-              return localizations.translate('SAF')!;
-            } else {
-              return localizations.translate('pFAS')!;
-            }
+    if (alcohol) {
+      if (rasgos >= 2) {
+        if (dominios >= 1) {
+          if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
+              (perimetroCranealPaciente <= perimetroCranealTabla ||
+                  percentiles >= 1)) {
+            return localizations.translate('SAF')!;
           } else {
-            if (malformaciones) {
-              return 'ARBD';
-            } else {
-              return localizations.translate('NOTEAF')!;
-            }
+            return localizations.translate('pFAS')!;
           }
         } else {
-          if (dominios < 2) {
-            if (malformaciones) {
-              return 'ARBD';
-            } else {
-              return localizations.translate('NOTEAF')!;
-            }
+          if (malformaciones) {
+            return 'ARBD';
           } else {
-            return 'ARND';
+            return localizations.translate('NOTEAF')!;
           }
         }
       } else {
-        if (rasgos >= 2) {
-          if (dominios >= 1) {
-            if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
-                (perimetroCranealPaciente <= perimetroCranealTabla ||
-                    percentiles >= 1)) {
-              return 'FAS';
-            } else if ((pesoPaciente > pesoTabla ||
-                    tallaPaciente > tallaTabla) &&
-                (perimetroCranealPaciente > perimetroCranealTabla ||
-                    percentiles < 1)) {
-              return localizations.translate('NOTEAF')!;
-            } else {
-              return localizations.translate('pFAS')!;
-            }
+        if (dominios < 2) {
+          if (malformaciones) {
+            return 'ARBD';
           } else {
             return localizations.translate('NOTEAF')!;
           }
         } else {
+          return 'ARND';
+        }
+      }
+    } else {
+      if (rasgos >= 2) {
+        if (dominios >= 1) {
+          if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
+              (perimetroCranealPaciente <= perimetroCranealTabla ||
+                  percentiles >= 1)) {
+            return 'FAS';
+          } else if ((pesoPaciente > pesoTabla || tallaPaciente > tallaTabla) &&
+              (perimetroCranealPaciente > perimetroCranealTabla ||
+                  percentiles < 1)) {
+            return localizations.translate('NOTEAF')!;
+          } else {
+            return localizations.translate('pFAS')!;
+          }
+        } else {
           return localizations.translate('NOTEAF')!;
         }
+      } else {
+        return localizations.translate('NOTEAF')!;
       }
     }
   }
@@ -678,7 +673,7 @@ class DiagnosticoHelper {
         '${AppLocalizations.of(context)!.translate('weight')}: $pesoText kg\n'
         '${AppLocalizations.of(context)!.translate('height')}: $tallaText cm\n'
         '${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetroCranealText cm\n'
-        '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText cm\n'
+        '${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distanciaPalpebralText mm\n'
         '${AppLocalizations.of(context)!.translate('filtrum')}: $imagenseleccionadafiltrum \n'
         '${AppLocalizations.of(context)!.translate('upper_lip')}: $imagenseleccionadalabio \n'
         '${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias ? '${AppLocalizations.of(context)!.translate('yes')}' : '${AppLocalizations.of(context)!.translate('na')}'}\n'

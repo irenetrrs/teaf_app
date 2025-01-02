@@ -183,7 +183,10 @@ class PatientDetailsScreen extends StatelessWidget {
                                               );
                                               // Puedes navegar a la pantalla de inicio o hacer cualquier otra acción necesaria después de resetear
                                             },
-                                            child: Text('Aceptar'),
+                                            child: Text(
+                                              AppLocalizations.of(context)!
+                                                  .translate('accept')!,
+                                            ),
                                           ),
                                         ],
                                       );
@@ -278,7 +281,7 @@ class PatientDetailsScreen extends StatelessWidget {
     ${AppLocalizations.of(context)!.translate('height')}: $talla cm
     ${AppLocalizations.of(context)!.translate('domains')}: $dominios
     ${AppLocalizations.of(context)!.translate('head_circumference')}: $perimetro cm
-    ${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distancia cm
+    ${AppLocalizations.of(context)!.translate('palpebral_distance')}: $distancia mm
     ${AppLocalizations.of(context)!.translate('filtrum')}: $filtrum
     ${AppLocalizations.of(context)!.translate('upper_lip')}: $labio
     ${AppLocalizations.of(context)!.translate('cranial_malformations')}: ${anomalias != null ? (anomalias ? AppLocalizations.of(context)!.translate('yes') : AppLocalizations.of(context)!.translate('na')) : ''}

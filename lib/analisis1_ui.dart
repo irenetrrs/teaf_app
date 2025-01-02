@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'inicio_ui.dart';
 import 'analisis2_ui.dart';
+import 'analisis0_ui.dart';
 import 'welcome_ui.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -174,7 +175,10 @@ class _Analisis1UIState extends State<Analisis1UI> {
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
-                                              child: Text('Aceptar'),
+                                              child: Text(
+                                                AppLocalizations.of(context)!
+                                                    .translate('accept')!,
+                                              ),
                                             ),
                                           ],
                                         );
@@ -448,6 +452,16 @@ class _Analisis1UIState extends State<Analisis1UI> {
                         // Si la conversión fue exitosa y se cumplen las condiciones
                         if (edad >= 24) {
                           _saveTextFieldsToPrefs();
+                          // Si el tiempo de acogida es menor de 24 meses
+                          if (botonmenor == true && botonSi == true) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Analisis0UI(),
+                              ),
+                            );
+                            return;
+                          }
                           Navigator.push(
                             context,
                             MaterialPageRoute(

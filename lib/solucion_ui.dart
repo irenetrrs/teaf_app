@@ -148,13 +148,15 @@ class _SolucionUIState extends State<SolucionUI> {
                               double fontSize =
                                   14.0; // Tamaño de letra predeterminado
 
-                              if (diagnosticoResult == AppLocalizations.of(context)!.translate(
-                                            'incomplete')!) {
+                              if (diagnosticoResult ==
+                                  AppLocalizations.of(context)!
+                                      .translate('incomplete')!) {
                                 circleColor = Colors.orange;
                                 textColor = Color(0xFF262f36);
                                 fontSize = 28.0;
-                              } else if (diagnosticoResult == AppLocalizations.of(context)!.translate(
-                                            'error')!) {
+                              } else if (diagnosticoResult ==
+                                  AppLocalizations.of(context)!
+                                      .translate('error')!) {
                                 circleColor = Colors.black;
                                 textColor = Colors.white;
                                 fontSize = 30.0;
@@ -319,7 +321,8 @@ class _SolucionUIState extends State<SolucionUI> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ResumenUI(diagnosticoResult: diagnosticoResult),
+                        builder: (context) =>
+                            ResumenUI(diagnosticoResult: diagnosticoResult),
                       ),
                     );
                   },
@@ -387,7 +390,10 @@ class _SolucionUIState extends State<SolucionUI> {
                                 );
                                 // Puedes navegar a la pantalla de inicio o hacer cualquier otra acción necesaria después de resetear
                               },
-                              child: Text('Aceptar'),
+                              child: Text(
+                                AppLocalizations.of(context)!
+                                    .translate('accept')!,
+                              ),
                             ),
                           ],
                         );

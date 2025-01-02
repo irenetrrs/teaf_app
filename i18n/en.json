@@ -101,6 +101,9 @@
     "introduce": "Enter a name",
     "na": "N/A",
     "guide": "User Guide",
-    "instructions": "User guide: \n1. Some links to explanatory texts or videos are included: FASD diagnosis algorithm from Hoyme and symbols “?” beside some titles or paragraphs\n2. Figures of values of physical measurements don't admit decimals\n3. The page where the images of lips and filtrum are showed includes an external link\n4. In the page “Diagnosis”:\n\ta. The button “Edit” refers to the beginning of the assessment in progress for reviewing the introduced data\n\tb. The button “Summary” includes all registered data\n\tc. The button “Home” refers to start a new Evaluation\n5. In the page “Summary”:\n\ta. The button with a floppy disk refers to keep the patient (anonimously)\n\tb. The button with an arrow refers to send the summary text to the e-mail\n\tc. The button with a basket eliminates introduced data and refers to the home page of the App"
+    "instructions": "User guide: \n1. Some links to explanatory texts or videos are included: FASD diagnosis algorithm from Hoyme and symbols “?” beside some titles or paragraphs\n2. Figures of values of physical measurements don't admit decimals\n3. The page where the images of lips and filtrum are showed includes an external link\n4. In the page “Diagnosis”:\n\ta. The button “Edit” refers to the beginning of the assessment in progress for reviewing the introduced data\n\tb. The button “Summary” includes all registered data\n\tc. The button “Home” refers to start a new Evaluation\n5. In the page “Summary”:\n\ta. The button with a floppy disk refers to keep the patient (anonimously)\n\tb. The button with an arrow refers to send the summary text to the e-mail\n\tc. The button with a basket eliminates introduced data and refers to the home page of the App",
+    "question0": "Have you been in a foster family where your native language was spoken?",
+    "notEvaluableTitle": "Not evaluable",
+    "notEvaluableMessage": "This user is no evaluable"
       }
       

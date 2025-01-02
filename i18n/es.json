@@ -56,10 +56,10 @@
     "head_circumference_info": "Información sobre el perímetro craneal",
     "measure_head_circumference": "Reducir al número entero anterior si hay un decimal inferior a ,5 y aumentar al número entero posterior si hay un decimal igual o superior a ,5. Use una cinta métrica que no se pueda estirar. Rodee firmemente la cabeza con la cinta métrica alrededor de la circunferencia más ancha posible. La parte más ancha de la frente encima de las cejas, por encima de las orejas, la parte más prominente de la nuca. Visualice el siguiente vídeo para obtener más información sobre cómo medir el perímetro craneal:",
     "vimeo_head_circumference": "Vimeo - Perímetro Craneal",
-    "palpebral_distance": "Distancia palpebral",
-    "palpebral_distance_info": "Información sobre la distancia palpebral",
-    "watch_palpebral_video": "Visualice el siguiente vídeo para obtener más información sobre cómo medir la distancia palpebral:",
-    "vimeo_palpebral": "Vimeo - Distancia Palpebral",
+    "palpebral_distance": "Hendidura palpebral",
+    "palpebral_distance_info": "Información sobre la hendidura palpebral",
+    "watch_palpebral_video": "Visualice el siguiente vídeo para obtener más información sobre cómo medir la hendidura palpebral:",
+    "vimeo_palpebral": "Vimeo - Hendidura Palpebral",
     "summary": "Resumen",
     "edit": "Editar",
     "continue": "Continuar",
@@ -101,6 +101,9 @@
     "introduce": "Introduce un nombre",
     "na": "N/A",
     "guide": "Guía del usuario",
-    "instructions": "Consejos de uso: \n1. Se incluyen algunos enlaces a textos o videos explicativos: esquema diagnóstico del TEAF de Hoyme y símbolos “?” al lado de algunos apartados\n2. Las cifras de los valores de las medidas físicas no admiten decimales\n3. La página donde se muestran las imágenes de labio y filtrum incluye un enlace\n4. En la página “Diagnóstico”:\n\ta. El botón “Editar” remite al principio de la evaluación en curso para revisar los datos introducidos\n\tb. El botón “Resumen” muestra todos los datos registrados\n\tc. El botón “Inicia” remite a iniciar una nueva evaluación\n5. En la página “Resumen”:\n\ta. El botón con un disquete deriva a guardar el paciente (de forma anónima)\n\tb. El botón con una flecha deriva a enviar el cuadro resumen al e-mail\n\tc. El botón con una papelera elimina los datos introducidos y lleva al principio de la App."
+    "instructions": "Consejos de uso: \n1. Se incluyen algunos enlaces a textos o videos explicativos: esquema diagnóstico del TEAF de Hoyme y símbolos “?” al lado de algunos apartados\n2. Las cifras de los valores de las medidas físicas no admiten decimales\n3. La página donde se muestran las imágenes de labio y filtrum incluye un enlace\n4. En la página “Diagnóstico”:\n\ta. El botón “Editar” remite al principio de la evaluación en curso para revisar los datos introducidos\n\tb. El botón “Resumen” muestra todos los datos registrados\n\tc. El botón “Inicia” remite a iniciar una nueva evaluación\n5. En la página “Resumen”:\n\ta. El botón con un disquete deriva a guardar el paciente (de forma anónima)\n\tb. El botón con una flecha deriva a enviar el cuadro resumen al e-mail\n\tc. El botón con una papelera elimina los datos introducidos y lleva al principio de la App.",
+    "question0": "¿Ha estado en una familia de acogida en la que se hablaba su idioma materno?",
+    "notEvaluableTitle": "No evaluable",
+    "notEvaluableMessage": "Este usuario no es evaluable"
 }
       

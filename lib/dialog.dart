@@ -35,7 +35,9 @@ class _MyDialogState extends State<MyDialog> {
             Navigator.of(context).pop(
                 nombre); // Cierra el cuadro de diálogo y devuelve el nombre
           },
-          child: Text('Aceptar'),
+          child: Text(
+            AppLocalizations.of(context)!.translate('accept')!,
+          ),
         ),
       ],
     );
