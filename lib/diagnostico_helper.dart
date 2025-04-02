@@ -16,7 +16,6 @@ class DiagnosticoHelper {
   List<Map<String, dynamic>> distanciaPalpebralData = [];
   List<Map<String, dynamic>> perimetroCranealHombresData = [];
   List<Map<String, dynamic>> perimetroCranealMujeresData = [];
-  int percentiles = 0;
   int rasgos = 0;
 
   DiagnosticoHelper() {
@@ -372,7 +371,6 @@ class DiagnosticoHelper {
         labioSuperior,
         recurrente,
         anomalias,
-        percentiles,
         pesoTabla,
         tallaTabla,
         distanciaPalpebralTabla,
@@ -461,7 +459,6 @@ class DiagnosticoHelper {
     int labioSuperior,
     bool recurrente,
     bool anomalias,
-    int percentiles,
     double pesoTabla,
     double tallaTabla,
     double distanciaPalpebralTabla,
@@ -474,8 +471,7 @@ class DiagnosticoHelper {
       if (rasgos >= 2) {
         if (dominios >= 1) {
           if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
-              (perimetroCranealPaciente <= perimetroCranealTabla ||
-                  percentiles >= 1)) {
+              (perimetroCranealPaciente <= perimetroCranealTabla)) {
             return localizations.translate('SAF')!;
           } else {
             return localizations.translate('pFAS')!;
@@ -502,12 +498,10 @@ class DiagnosticoHelper {
       if (rasgos >= 2) {
         if (dominios >= 1) {
           if ((pesoPaciente <= pesoTabla || tallaPaciente <= tallaTabla) &&
-              (perimetroCranealPaciente <= perimetroCranealTabla ||
-                  percentiles >= 1)) {
-            return 'FAS';
-          } else if ((pesoPaciente > pesoTabla || tallaPaciente > tallaTabla) &&
-              (perimetroCranealPaciente > perimetroCranealTabla ||
-                  percentiles < 1)) {
+              (perimetroCranealPaciente <= perimetroCranealTabla)) {
+            return localizations.translate('SAF')!;
+          } else if ((pesoPaciente > pesoTabla && tallaPaciente > tallaTabla) &&
+              (perimetroCranealPaciente > perimetroCranealTabla)) {
             return localizations.translate('NOTEAF')!;
           } else {
             return localizations.translate('pFAS')!;

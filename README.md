@@ -1,16 +1,11 @@
-# teaf_app
+TEAFF_APP
 
-A new Flutter project.
+Para generar la aplicación en Android, ejecutar los siguientes comandos:
 
-## Getting Started
+1. flutter clean
+2. flutter run
+3. flutter build apk --split-per-abi
 
-This project is a starting point for a Flutter application.
+Se genera un fichero: build\app\outputs\flutter-apk\app-arm64-v8a-release.apk
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Ese apk es el de la aplicación

@@ -1297,7 +1297,7 @@ class ResumenUI extends StatelessWidget {
                                           );
                                         } else {
                                           return Text(
-                                            '${snapshot.data ?? 'N/A'} mm',
+                                            '${snapshot.data ?? 'N/A'} cm',
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontSize: 20,
